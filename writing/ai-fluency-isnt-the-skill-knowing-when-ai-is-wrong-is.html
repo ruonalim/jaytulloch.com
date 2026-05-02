@@ -95,6 +95,10 @@
   .fc-claim { font-size: 14px; margin-bottom: 4px; color: rgba(255,255,255,0.7); }
   html[data-theme="light"] .fc-claim { color: rgba(0,0,0,0.7); }
   .fc-source { font-size: 13px; color: var(--muted); margin-bottom: 20px; padding-left: 16px; border-left: 2px solid var(--border); }
+  .fc-link { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; word-break: break-all; transition: color 0.15s; }
+  .fc-link:hover { color: var(--white); }
+  html[data-theme="light"] .fc-link { color: rgba(0,0,0,0.5); }
+  html[data-theme="light"] .fc-link:hover { color: var(--black); }
   .fc-unsourced { font-size: 13px; color: var(--muted); margin-top: 8px; font-style: italic; }
 </style>
 </head>
@@ -132,12 +136,12 @@
     <div class="fact-check">
     <h2 class="fact-check-heading">Fact Check</h2>
     <p class="fact-check-intro">Every factual claim in this article, with its source.</p>
-    <p class="fc-claim"><strong>Claim:</strong> NNGroup&#x27;s State of UX 2026 declares AI fluency essential for designers.
-Source: Nielsen Norman Group, State of UX 2026 report. Specific URL not captured at draft time. Verify before re-promotion.</p>
-    <p class="fc-claim"><strong>Claim:</strong> Over half of hiring managers say they won&#x27;t consider designers who can&#x27;t work with AI.
-Source: Nielsen Norman Group, State of UX 2026 report. Verify before re-promotion.</p>
-    <p class="fc-claim"><strong>Claim:</strong> Figma published a supporting piece on skills for the AI era.
-Source: Figma blog (2026). Specific URL not captured at draft time. Verify before re-promotion.</p>
+    <p class="fc-claim"><strong>Claim:</strong> NNGroup&#x27;s State of UX 2026 declares AI fluency essential for designers.</p>
+    <p class="fc-source">Nielsen Norman Group, State of UX 2026 report. Specific URL not captured at draft time. Verify before re-promotion.</p>
+    <p class="fc-claim"><strong>Claim:</strong> Over half of hiring managers say they won&#x27;t consider designers who can&#x27;t work with AI.</p>
+    <p class="fc-source">Nielsen Norman Group, State of UX 2026 report. Verify before re-promotion.</p>
+    <p class="fc-claim"><strong>Claim:</strong> Figma published a supporting piece on skills for the AI era.</p>
+    <p class="fc-source">Figma blog (2026). Specific URL not captured at draft time. Verify before re-promotion.</p>
     <p class="fc-unsourced">Unsourced statements (Jay&#x27;s opinion or lived experience): Metro Bank / Personetics UK retail banking AI project serving 2.4 million customers (2018); LLM-powered search at Careem across 14 million users and 10 markets; 70% reduction in design-to-production handoff using Claude and Figma MCP at a top-10 crypto exchange. These are Jay&#x27;s personal experience, not third-party data.</p>
     </div>
   </div>

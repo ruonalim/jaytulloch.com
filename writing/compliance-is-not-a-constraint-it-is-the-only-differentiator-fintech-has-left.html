@@ -95,6 +95,10 @@
   .fc-claim { font-size: 14px; margin-bottom: 4px; color: rgba(255,255,255,0.7); }
   html[data-theme="light"] .fc-claim { color: rgba(0,0,0,0.7); }
   .fc-source { font-size: 13px; color: var(--muted); margin-bottom: 20px; padding-left: 16px; border-left: 2px solid var(--border); }
+  .fc-link { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; word-break: break-all; transition: color 0.15s; }
+  .fc-link:hover { color: var(--white); }
+  html[data-theme="light"] .fc-link { color: rgba(0,0,0,0.5); }
+  html[data-theme="light"] .fc-link:hover { color: var(--black); }
   .fc-unsourced { font-size: 13px; color: var(--muted); margin-top: 8px; font-style: italic; }
 </style>
 </head>
@@ -148,18 +152,18 @@
     <div class="fact-check">
     <h2 class="fact-check-heading">Fact Check</h2>
     <p class="fact-check-intro">Every factual claim in this article, with its source.</p>
-    <p class="fc-claim"><strong>Claim:</strong> 70% of financial institutions worldwide lost clients in the last year due to slow or poor onboarding.
-Source: Industry onboarding research. Specific publication not cited in original draft. Verify exact source before re-promotion.</p>
-    <p class="fc-claim"><strong>Claim:</strong> Average fintech onboarding drop-off rate sits at 63%.
-Source: Industry onboarding research. Specific publication not cited in original draft. Verify exact source before re-promotion.</p>
-    <p class="fc-claim"><strong>Claim:</strong> KYC abandonment runs between 25% and 40% depending on product.
-Source: Industry KYC research. Specific publication not cited in original draft. Verify exact source before re-promotion.</p>
-    <p class="fc-claim"><strong>Claim:</strong> Monzo&#x27;s gambling block launched in 2018; blocked over 9 million pounds in gambling payments in 2024 alone; over 70,000 customers use it; average self-imposed cooldown grew from 3 months to 10 months.
-Source: Monzo public reporting on responsible gambling (Monzo blog, 2024-2025). Specific URL not captured in draft. Verify exact source before re-promotion.</p>
-    <p class="fc-claim"><strong>Claim:</strong> Monzo now meets 87% of GamCare&#x27;s recommendations for how banks can support customers at risk of gambling harm.
-Source: GamCare assessment of UK banks. Specific URL not captured in draft. Verify exact source before re-promotion.</p>
-    <p class="fc-claim"><strong>Claim:</strong> In January 2026 a UK ombudsman complaint resulted in 400 pounds compensation after Revolut repeatedly passed a vulnerable customer to teams unable to help.
-Source: UK Financial Ombudsman Service public record (January 2026). Specific URL not captured in draft. Verify exact source before re-promotion.</p>
+    <p class="fc-claim"><strong>Claim:</strong> 70% of financial institutions worldwide lost clients in the last year due to slow or poor onboarding.</p>
+    <p class="fc-source">Industry onboarding research. Specific publication not cited in original draft. Verify exact source before re-promotion.</p>
+    <p class="fc-claim"><strong>Claim:</strong> Average fintech onboarding drop-off rate sits at 63%.</p>
+    <p class="fc-source">Industry onboarding research. Specific publication not cited in original draft. Verify exact source before re-promotion.</p>
+    <p class="fc-claim"><strong>Claim:</strong> KYC abandonment runs between 25% and 40% depending on product.</p>
+    <p class="fc-source">Industry KYC research. Specific publication not cited in original draft. Verify exact source before re-promotion.</p>
+    <p class="fc-claim"><strong>Claim:</strong> Monzo&#x27;s gambling block launched in 2018; blocked over 9 million pounds in gambling payments in 2024 alone; over 70,000 customers use it; average self-imposed cooldown grew from 3 months to 10 months.</p>
+    <p class="fc-source">Monzo public reporting on responsible gambling (Monzo blog, 2024-2025). Specific URL not captured in draft. Verify exact source before re-promotion.</p>
+    <p class="fc-claim"><strong>Claim:</strong> Monzo now meets 87% of GamCare&#x27;s recommendations for how banks can support customers at risk of gambling harm.</p>
+    <p class="fc-source">GamCare assessment of UK banks. Specific URL not captured in draft. Verify exact source before re-promotion.</p>
+    <p class="fc-claim"><strong>Claim:</strong> In January 2026 a UK ombudsman complaint resulted in 400 pounds compensation after Revolut repeatedly passed a vulnerable customer to teams unable to help.</p>
+    <p class="fc-source">UK Financial Ombudsman Service public record (January 2026). Specific URL not captured in draft. Verify exact source before re-promotion.</p>
     <p class="fc-unsourced">Unsourced statements (Jay&#x27;s opinion or lived experience): RUONALIM Big Ticket responsible play work; Kraken consumer app KYC observations; the visual convergence claim about consumer fintech home screens; the three quarterly recommendations for product leaders. These are Jay&#x27;s points of view, not third-party data.</p>
     </div>
   </div>

@@ -331,6 +331,17 @@ function fromB64(b64) {
 // ─────────────────────────────────────────────────────────────────────────────
 // HTML GENERATION
 // ─────────────────────────────────────────────────────────────────────────────
+function linkify(text) {
+  const URL_RE = /(https?:\/\/\S+)/g;
+  const parts = text.split(URL_RE);
+  return parts.map((part, i) => {
+    if (i % 2 === 0) return esc(part);
+    const url = part.replace(/[.,;)]+$/, '');
+    const trailing = esc(part.slice(url.length));
+    return `<a href="${esc(url)}" target="_blank" rel="noopener" class="fc-link">${esc(url)}</a>${trailing}`;
+  }).join('');
+}
+
 function bodyToHtml(body, headings) {
   headings = headings || new Set();
   const parts = [];
@@ -350,16 +361,19 @@ function bodyToHtml(body, headings) {
       parts.push(`<p class="fact-check-intro">${esc(para)}</p>`); continue;
     }
 
-    const e = esc(para);
     if (inFC) {
-      if (para.startsWith('Claim:'))
-        parts.push(`<p class="fc-claim"><strong>Claim:</strong> ${esc(para.slice(6).trim())}</p>`);
-      else if (para.startsWith('Source:'))
-        parts.push(`<p class="fc-source"><strong>Source:</strong> ${esc(para.slice(7).trim())}</p>`);
-      else if (para.startsWith('Unsourced statements'))
-        parts.push(`<p class="fc-unsourced">${e}</p>`);
-      else
-        parts.push(`<p>${e}</p>`);
+      // Claim and Source may be on separate \n lines within the same \n\n block
+      const lines = para.split('\n').map(l => l.trim()).filter(Boolean);
+      for (const line of lines) {
+        if (line.startsWith('Claim:'))
+          parts.push(`<p class="fc-claim"><strong>Claim:</strong> ${esc(line.slice(6).trim())}</p>`);
+        else if (line.startsWith('Source:'))
+          parts.push(`<p class="fc-source">${linkify(line.slice(7).trim())}</p>`);
+        else if (line.startsWith('Unsourced statements'))
+          parts.push(`<p class="fc-unsourced">${esc(line)}</p>`);
+        else
+          parts.push(`<p class="fc-source">${esc(line)}</p>`);
+      }
     } else {
       parts.push(headings.has(para) ? `<h2>${e}</h2>` : `<p>${e}</p>`);
     }
@@ -471,6 +485,10 @@ ${cs}
   .fc-claim { font-size:14px; margin-bottom:4px; color:rgba(255,255,255,.7); }
   html[data-theme="light"] .fc-claim { color:rgba(0,0,0,.7); }
   .fc-source { font-size:13px; color:var(--muted); margin-bottom:20px; padding-left:16px; border-left:2px solid var(--border); }
+  .fc-link { color:var(--muted); text-decoration:underline; text-underline-offset:2px; word-break:break-all; transition:color 0.15s; }
+  .fc-link:hover { color:var(--white); }
+  html[data-theme="light"] .fc-link { color:rgba(0,0,0,0.5); }
+  html[data-theme="light"] .fc-link:hover { color:var(--black); }
   .fc-unsourced { font-size:13px; color:var(--muted); margin-top:8px; font-style:italic; }
 </style>
 </head>

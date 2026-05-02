@@ -95,6 +95,10 @@
   .fc-claim { font-size: 14px; margin-bottom: 4px; color: rgba(255,255,255,0.7); }
   html[data-theme="light"] .fc-claim { color: rgba(0,0,0,0.7); }
   .fc-source { font-size: 13px; color: var(--muted); margin-bottom: 20px; padding-left: 16px; border-left: 2px solid var(--border); }
+  .fc-link { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; word-break: break-all; transition: color 0.15s; }
+  .fc-link:hover { color: var(--white); }
+  html[data-theme="light"] .fc-link { color: rgba(0,0,0,0.5); }
+  html[data-theme="light"] .fc-link:hover { color: var(--black); }
   .fc-unsourced { font-size: 13px; color: var(--muted); margin-top: 8px; font-style: italic; }
 </style>
 </head>
@@ -150,12 +154,12 @@
     <div class="fact-check">
     <h2 class="fact-check-heading">Fact Check</h2>
     <p class="fact-check-intro">Every factual claim in this article, with its source.</p>
-    <p class="fc-claim"><strong>Claim:</strong> The number of fractional leaders roughly doubled from around 60,000 to 120,000 between 2022 and 2024.
-Source: Empirika (2025), fractional leader market research. Specific URL not captured at draft time. Verify before re-promotion.</p>
-    <p class="fc-claim"><strong>Claim:</strong> Job postings mentioning &quot;fractional&quot; grew 400% in the same window.
-Source: Empirika (2025), fractional leader market research. Verify before re-promotion.</p>
-    <p class="fc-claim"><strong>Claim:</strong> Gartner&#x27;s baseline projection has 30% of midsize enterprises running at least one fractional exec on retainer by 2027.
-Source: Gartner / 3Search projection cited in original draft notes. Specific URL not captured. Verify before re-promotion.</p>
+    <p class="fc-claim"><strong>Claim:</strong> The number of fractional leaders roughly doubled from around 60,000 to 120,000 between 2022 and 2024.</p>
+    <p class="fc-source">Empirika (2025), fractional leader market research. Specific URL not captured at draft time. Verify before re-promotion.</p>
+    <p class="fc-claim"><strong>Claim:</strong> Job postings mentioning &quot;fractional&quot; grew 400% in the same window.</p>
+    <p class="fc-source">Empirika (2025), fractional leader market research. Verify before re-promotion.</p>
+    <p class="fc-claim"><strong>Claim:</strong> Gartner&#x27;s baseline projection has 30% of midsize enterprises running at least one fractional exec on retainer by 2027.</p>
+    <p class="fc-source">Gartner / 3Search projection cited in original draft notes. Specific URL not captured. Verify before re-promotion.</p>
     <p class="fc-unsourced">Unsourced statements (Jay&#x27;s opinion or lived experience): RUONALIM billing structure and work pattern; Kraken calendar analysis (70/30 ceremony-to-decision ratio); Figma comment behaviour change on the consumer app. These are Jay&#x27;s personal observations, not third-party data.</p>
     </div>
   </div>

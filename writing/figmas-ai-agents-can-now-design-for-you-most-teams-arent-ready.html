@@ -95,6 +95,10 @@
   .fc-claim { font-size: 14px; margin-bottom: 4px; color: rgba(255,255,255,0.7); }
   html[data-theme="light"] .fc-claim { color: rgba(0,0,0,0.7); }
   .fc-source { font-size: 13px; color: var(--muted); margin-bottom: 20px; padding-left: 16px; border-left: 2px solid var(--border); }
+  .fc-link { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; word-break: break-all; transition: color 0.15s; }
+  .fc-link:hover { color: var(--white); }
+  html[data-theme="light"] .fc-link { color: rgba(0,0,0,0.5); }
+  html[data-theme="light"] .fc-link:hover { color: var(--black); }
   .fc-unsourced { font-size: 13px; color: var(--muted); margin-top: 8px; font-style: italic; }
 </style>
 </head>
@@ -134,10 +138,10 @@
     <div class="fact-check">
     <h2 class="fact-check-heading">Fact Check</h2>
     <p class="fact-check-intro">Every factual claim in this article, with its source.</p>
-    <p class="fc-claim"><strong>Claim:</strong> Figma announced that AI agents can now write directly to Figma files via the Figma MCP server.
-Source: Figma blog announcement around March 24, 2026. Specific URL not captured at draft time. Verify before re-promotion.</p>
-    <p class="fc-claim"><strong>Claim:</strong> Tools like GitHub Copilot can push rendered UI to the Figma canvas and pull design context back into code via the Figma MCP server.
-Source: Figma MCP server documentation and GitHub Copilot integration announcement. Verify before re-promotion.</p>
+    <p class="fc-claim"><strong>Claim:</strong> Figma announced that AI agents can now write directly to Figma files via the Figma MCP server.</p>
+    <p class="fc-source">Figma blog announcement around March 24, 2026. Specific URL not captured at draft time. Verify before re-promotion.</p>
+    <p class="fc-claim"><strong>Claim:</strong> Tools like GitHub Copilot can push rendered UI to the Figma canvas and pull design context back into code via the Figma MCP server.</p>
+    <p class="fc-source">Figma MCP server documentation and GitHub Copilot integration announcement. Verify before re-promotion.</p>
     <p class="fc-unsourced">Unsourced statements (Jay&#x27;s opinion or lived experience): Krak neobank MVP at 7 million dollars in eight weeks with 30,000 card orders in first weeks post-launch; RUONALIM Dubai client engagement approach; observations on design system hygiene and agentic tooling. These are Jay&#x27;s professional experience, not third-party data.</p>
     </div>
   </div>

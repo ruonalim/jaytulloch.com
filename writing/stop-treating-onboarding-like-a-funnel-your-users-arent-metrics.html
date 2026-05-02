@@ -95,6 +95,10 @@
   .fc-claim { font-size: 14px; margin-bottom: 4px; color: rgba(255,255,255,0.7); }
   html[data-theme="light"] .fc-claim { color: rgba(0,0,0,0.7); }
   .fc-source { font-size: 13px; color: var(--muted); margin-bottom: 20px; padding-left: 16px; border-left: 2px solid var(--border); }
+  .fc-link { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; word-break: break-all; transition: color 0.15s; }
+  .fc-link:hover { color: var(--white); }
+  html[data-theme="light"] .fc-link { color: rgba(0,0,0,0.5); }
+  html[data-theme="light"] .fc-link:hover { color: var(--black); }
   .fc-unsourced { font-size: 13px; color: var(--muted); margin-top: 8px; font-style: italic; }
 </style>
 </head>
@@ -145,14 +149,14 @@
     <div class="fact-check">
     <h2 class="fact-check-heading">Fact Check</h2>
     <p class="fact-check-intro">Every factual claim in this article, with its source.</p>
-    <p class="fc-claim"><strong>Claim:</strong> The average fintech product loses 63% of new users during onboarding.
-Source: Stated in article as recent 2026 analysis across European markets. Specific publication URL not cited in original draft. Verify before re-promotion.</p>
-    <p class="fc-claim"><strong>Claim:</strong> The 63% drop-off represents 5.7 billion euros in wasted acquisition spend annually in European markets.
-Source: Derived figure applied across European markets. Calculation source not specified. Verify before re-promotion.</p>
-    <p class="fc-claim"><strong>Claim:</strong> Regulators in the UAE, the UK, and across the EU are increasingly scrutinising whether users were adequately informed before taking financial actions.
-Source: General regulatory direction across multi-jurisdiction consumer fintech. No specific regulator publication cited in draft. Verify before re-promotion.</p>
-    <p class="fc-claim"><strong>Claim:</strong> Monzo in their early years, N26 at their peak, and some better-designed crypto exchanges built retention by making users feel genuinely competent.
-Source: Jay&#x27;s professional observation across fintech UX. Unsourced.</p>
+    <p class="fc-claim"><strong>Claim:</strong> The average fintech product loses 63% of new users during onboarding.</p>
+    <p class="fc-source">Stated in article as recent 2026 analysis across European markets. Specific publication URL not cited in original draft. Verify before re-promotion.</p>
+    <p class="fc-claim"><strong>Claim:</strong> The 63% drop-off represents 5.7 billion euros in wasted acquisition spend annually in European markets.</p>
+    <p class="fc-source">Derived figure applied across European markets. Calculation source not specified. Verify before re-promotion.</p>
+    <p class="fc-claim"><strong>Claim:</strong> Regulators in the UAE, the UK, and across the EU are increasingly scrutinising whether users were adequately informed before taking financial actions.</p>
+    <p class="fc-source">General regulatory direction across multi-jurisdiction consumer fintech. No specific regulator publication cited in draft. Verify before re-promotion.</p>
+    <p class="fc-claim"><strong>Claim:</strong> Monzo in their early years, N26 at their peak, and some better-designed crypto exchanges built retention by making users feel genuinely competent.</p>
+    <p class="fc-source">Jay&#x27;s professional observation across fintech UX. Unsourced.</p>
     <p class="fc-unsourced">Unsourced statements (Jay&#x27;s opinion or lived experience): All claims about onboarding audits across neo-banking, crypto, and regulated consumer products; the comprehension rate at key decision points metric framing; the pushback rebuttals; the leadership P&amp;L framing at the close. These are Jay&#x27;s points of view, not third-party data.</p>
     </div>
   </div>
