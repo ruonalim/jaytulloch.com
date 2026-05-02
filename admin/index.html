@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Article Admin · Jay Tulloch</title>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #080808;
+    --surface: rgba(255,255,255,0.03);
+    --surface-hover: rgba(255,255,255,0.06);
+    --border: rgba(255,255,255,0.08);
+    --white: #ffffff;
+    --muted: rgba(255,255,255,0.4);
+    --accent: #0044E4;
+    --success: #4ade80;
+    --danger: #e63329;
+  }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--white);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  #app-nav {
+    position: sticky; top: 0; z-index: 100;
+    padding: 0 32px;
+    height: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(8,8,8,0.96);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(20px);
+  }
+  .nav-brand { display: flex; align-items: center; gap: 14px; }
+  .nav-logo { font-size: 11px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; }
+  .nav-sep { width: 1px; height: 14px; background: var(--border); }
+  .nav-sub { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  .nav-right { display: flex; align-items: center; gap: 10px; }
+
+  /* BUTTONS */
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 7px 14px; border: none; cursor: pointer; font-family: inherit;
+    transition: all 0.15s; border-radius: 3px;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover:not(:disabled) { background: #0035b8; }
+  .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; }
+  .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+  .btn-ghost:hover { color: var(--white); border-color: rgba(255,255,255,0.25); }
+  .btn-sm { font-size: 10px; padding: 5px 10px; }
+
+  /* VIEWS */
+  [hidden] { display: none !important; }
+
+  /* LOGIN */
+  #login-view {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; padding: 32px;
+  }
+  .login-card {
+    width: 100%; max-width: 400px;
+    padding: 40px; border: 1px solid var(--border); border-radius: 4px;
+    background: var(--surface);
+  }
+  .login-eyebrow {
+    font-size: 10px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 24px; display: block;
+  }
+  .login-card h1 { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; }
+  .login-card p { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 28px; }
+  label.field-label {
+    display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 7px;
+  }
+  input.field {
+    width: 100%; padding: 10px 12px;
+    background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 3px;
+    color: var(--white); font-size: 13px; font-family: 'SF Mono', monospace;
+    outline: none; transition: border-color 0.15s;
+  }
+  input.field:focus { border-color: var(--accent); }
+  .field-hint { font-size: 11px; color: var(--muted); margin-top: 7px; }
+  .login-submit { width: 100%; margin-top: 20px; padding: 10px; justify-content: center; font-size: 12px; }
+  #login-error { font-size: 12px; color: var(--danger); margin-top: 12px; display: none; }
+
+  /* LIST */
+  #list-view { max-width: 800px; margin: 0 auto; padding: 36px 32px; }
+  .view-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 24px; }
+  .view-head h2 { font-size: 16px; font-weight: 800; letter-spacing: -0.01em; }
+  .view-head-count { font-size: 12px; color: var(--muted); }
+  .article-list { display: flex; flex-direction: column; gap: 2px; }
+  .article-row {
+    display: flex; align-items: center; gap: 16px;
+    padding: 14px 18px; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 3px;
+    cursor: pointer; transition: background 0.12s;
+  }
+  .article-row:hover { background: var(--surface-hover); }
+  .article-row-body { flex: 1; min-width: 0; }
+  .article-row-title {
+    font-size: 14px; font-weight: 600; letter-spacing: -0.01em;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px;
+  }
+  .article-row-meta { display: flex; align-items: center; gap: 10px; }
+  .article-row-date { font-size: 11px; color: var(--muted); }
+  .topic-chip {
+    font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 2px 7px; border-radius: 20px; border: 1px solid var(--border); color: var(--muted);
+  }
+  .article-row-cta {
+    flex-shrink: 0; font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--accent); opacity: 0; transition: opacity 0.12s;
+  }
+  .article-row:hover .article-row-cta { opacity: 1; }
+
+  /* EDIT */
+  #edit-view { max-width: 800px; margin: 0 auto; padding: 36px 32px; }
+  .edit-head { margin-bottom: 28px; }
+  .edit-title { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.25; margin-bottom: 6px; }
+  .edit-meta { font-size: 12px; color: var(--muted); }
+  .editor-label {
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 9px;
+  }
+  .editor-stats { font-weight: 400; letter-spacing: 0; text-transform: none; font-size: 11px; }
+  #body-editor {
+    width: 100%; min-height: 580px;
+    padding: 18px; background: rgba(255,255,255,0.025);
+    border: 1px solid var(--border); border-radius: 3px;
+    color: rgba(255,255,255,0.88); font-size: 13px; line-height: 1.85;
+    font-family: 'SF Mono', 'Fira Code', 'Menlo', monospace;
+    resize: vertical; outline: none; transition: border-color 0.15s;
+  }
+  #body-editor:focus { border-color: rgba(255,255,255,0.18); }
+  .edit-footer { display: flex; align-items: center; gap: 14px; margin-top: 14px; }
+  #save-status { font-size: 12px; color: var(--muted); }
+  #save-status.ok { color: var(--success); }
+  #save-status.err { color: var(--danger); }
+  .edit-note { font-size: 11px; color: var(--muted); margin-top: 10px; line-height: 1.6; }
+
+  /* SPINNER */
+  .spin {
+    display: inline-block; width: 12px; height: 12px;
+    border: 2px solid rgba(255,255,255,0.2); border-top-color: #fff;
+    border-radius: 50%; animation: s 0.55s linear infinite;
+  }
+  @keyframes s { to { transform: rotate(360deg); } }
+
+  /* LOADING */
+  #loading {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 200px; color: var(--muted); font-size: 13px;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV (hidden on login) -->
+<nav id="app-nav" hidden>
+  <div class="nav-brand">
+    <span class="nav-logo">Jay Tulloch</span>
+    <div class="nav-sep"></div>
+    <span class="nav-sub" id="nav-sub">Articles</span>
+  </div>
+  <div class="nav-right">
+    <button class="btn btn-ghost btn-sm" id="nav-back-btn" hidden onclick="showList()">← All articles</button>
+    <button class="btn btn-ghost btn-sm" onclick="handleLogout()">Log out</button>
+  </div>
+</nav>
+
+<!-- LOGIN -->
+<div id="login-view">
+  <div class="login-card">
+    <span class="login-eyebrow">Jay Tulloch · Admin</span>
+    <h1>Article editor</h1>
+    <p>Enter your GitHub Personal Access Token to edit and publish articles. Token is stored for this session only.</p>
+    <label class="field-label" for="tok">GitHub Token</label>
+    <input type="password" id="tok" class="field" placeholder="ghp_..." autocomplete="off"/>
+    <p class="field-hint">Needs read/write access to the ruonalim org repos.</p>
+    <p id="login-error">Invalid token or network error. Try again.</p>
+    <button class="btn btn-primary login-submit" id="login-btn" onclick="doLogin()">Continue →</button>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app-view" hidden>
+  <!-- LIST -->
+  <div id="list-view">
+    <div class="view-head">
+      <h2>Articles</h2>
+      <span class="view-head-count" id="article-count"></span>
+    </div>
+    <div id="loading"><span class="spin"></span>&nbsp; Loading…</div>
+    <div class="article-list" id="article-list"></div>
+  </div>
+
+  <!-- EDIT -->
+  <div id="edit-view" hidden>
+    <div class="edit-head">
+      <div class="edit-title" id="edit-title"></div>
+      <div class="edit-meta" id="edit-meta"></div>
+    </div>
+    <div class="editor-label">
+      Body
+      <span class="editor-stats" id="editor-stats"></span>
+    </div>
+    <textarea id="body-editor" oninput="updateStats()" spellcheck="true"></textarea>
+    <div class="edit-footer">
+      <button class="btn btn-primary" id="save-btn" onclick="doSave()">Save &amp; publish</button>
+      <span id="save-status"></span>
+    </div>
+    <p class="edit-note">Saves update <strong>posts.json</strong> (ruonalim.com) and regenerate the <strong>article HTML</strong> (jaytulloch.com). Both sites deploy automatically via Vercel.</p>
+  </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────────────────────────────────────
+let tok = sessionStorage.getItem('jt-admin-tok') || '';
+let posts = [];
+let currentId = '';
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ARTICLE METADATA (id → slug + topic)
+// ─────────────────────────────────────────────────────────────────────────────
+const ARTICLES = [
+  { id:'34ebe893657181e58192d2348ef88f33', slug:'the-hidden-cost-of-hiring-a-full-time-design-lead-before-youre-ready', topic:'Fractional Work' },
+  { id:'34fbe893657181e58c16f29c22f7880d', slug:'why-most-designers-will-never-become-director-and-it-has-nothing-to-do-with-skill', topic:'Design Leadership' },
+  { id:'34ebe893657181e48d64d44a12fcb215', slug:'stop-treating-onboarding-like-a-funnel-your-users-arent-metrics', topic:'Product Strategy' },
+  { id:'34fbe8936571813381c0c8b2c41bac26', slug:'neo-banks-didnt-lose-to-banks-they-lost-to-themselves', topic:'Product Strategy' },
+  { id:'333be893657181e88959c4be2d7893ea', slug:'google-declared-war-on-figma-the-wrong-people-are-worried', topic:'AI & Design' },
+  { id:'349be8936571812e80f1f0dae2b23736', slug:'compliance-is-not-a-constraint-it-is-the-only-differentiator-fintech-has-left', topic:'Product Strategy' },
+  { id:'349be893657181038a3acc6d37dd1199', slug:'what-running-an-agency-taught-me-about-director-level-clarity', topic:'Design Leadership' },
+  { id:'32ebe893657181dab15ec2b490526201', slug:'the-ai-hiring-bet-thats-already-going-wrong', topic:'Design Leadership' },
+  { id:'341be8936571810592d8e2d4ba64952d', slug:'the-rise-of-the-super-ic-why-the-best-senior-designers-dont-want-your-management-title', topic:'Design Leadership' },
+  { id:'335be893657181a2b0c1e6da652763d1', slug:'the-figma-canvas-is-now-open-to-ai-agents-most-design-teams-arent-ready', topic:'AI & Design' },
+  { id:'341be89365718189aa49d54a855e6435', slug:'your-design-system-isnt-a-library-anymore-its-your-ais-operating-manual', topic:'AI & Design' },
+  { id:'32cbe893657181909007dabf72e3f967', slug:'vibe-design-is-real-it-wont-replace-designers-it-will-expose-them', topic:'AI & Design' },
+  { id:'32ebe893657181a99a3bf683fc457a8b', slug:'figmas-ai-agents-can-now-design-for-you-most-teams-arent-ready', topic:'AI & Design' },
+  { id:'32bbe8936571817bbb55c7ba62f8936f', slug:'ai-fluency-isnt-the-skill-knowing-when-ai-is-wrong-is', topic:'AI & Design' },
+];
+const META = Object.fromEntries(ARTICLES.map(a => [a.id, a]));
+
+// ─────────────────────────────────────────────────────────────────────────────
+// HEADINGS MAP (which paragraphs render as <h2> in the article HTML)
+// ─────────────────────────────────────────────────────────────────────────────
+const H2 = {
+  'the-hidden-cost-of-hiring-a-full-time-design-lead-before-youre-ready': new Set([
+    'The market just got loud about this for a reason.',
+    "Three signs you're not ready to hire a full-time design lead.",
+    'What a premature hire actually costs.',
+    'What fractional or embedded leadership actually delivers.',
+    'When you ARE ready for the full-time lead.',
+  ]),
+  'why-most-designers-will-never-become-director-and-it-has-nothing-to-do-with-skill': new Set([
+    "The structural problem nobody's naming.",
+    'The two-person problem.',
+    "What to do if you're the IC.",
+    'What design leaders need to stop doing.',
+  ]),
+  'compliance-is-not-a-constraint-it-is-the-only-differentiator-fintech-has-left': new Set([
+    'The moment most teams are still treating as overhead.',
+    'The brands getting it right are not just moving faster. They are designing the moment.',
+    'Real work looks like this.',
+    'Three things product leaders should do this quarter.',
+    'The next decade of fintech competition will not be won at the home screen.',
+  ]),
+  'what-running-an-agency-taught-me-about-director-level-clarity': new Set([
+    'The fractional market is shouting a message in-house leaders keep ignoring.',
+    'What agency work forces you to do differently.',
+    'The three things agency work actually teaches you.',
+    'What this means for the next director role you hire into.',
+    'The quiet shift.',
+  ]),
+  'the-rise-of-the-super-ic-why-the-best-senior-designers-dont-want-your-management-title': new Set([
+    'What a Super IC actually is.',
+    "Why the best ones don't want your management job.",
+    'The compensation reality has caught up.',
+    'Where this leaves design leaders.',
+    "What this means if you're the senior designer.",
+  ]),
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// HELPERS
+// ─────────────────────────────────────────────────────────────────────────────
+const esc = s => String(s)
+  .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+  .replace(/"/g,'&quot;').replace(/'/g,'&#x27;');
+
+const wc = t => t.split(/\s+/).filter(Boolean).length;
+const rt = t => Math.max(1, Math.ceil(wc(t) / 150));
+
+function fmtDate(iso) {
+  const M = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const [y,m,d] = iso.split('-').map(Number);
+  return `${M[m-1]} ${d}, ${y}`;
+}
+
+function excerpt(body, max=160) {
+  const f = body.split('\n\n')[0].trim();
+  if (f.length <= max) return f;
+  const t = f.slice(0,max), ls = t.lastIndexOf(' ');
+  return (ls>0 ? t.slice(0,ls) : t) + '...';
+}
+
+function toB64(str) {
+  const bytes = new TextEncoder().encode(str);
+  let b = '';
+  for (const x of bytes) b += String.fromCharCode(x);
+  return btoa(b);
+}
+
+function fromB64(b64) {
+  const bin = atob(b64.replace(/\n/g,''));
+  const bytes = new Uint8Array(bin.length);
+  for (let i=0;i<bin.length;i++) bytes[i]=bin.charCodeAt(i);
+  return new TextDecoder().decode(bytes);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// HTML GENERATION
+// ─────────────────────────────────────────────────────────────────────────────
+function bodyToHtml(body, headings) {
+  headings = headings || new Set();
+  const parts = [];
+  let inFC = false;
+
+  for (let para of body.split('\n\n')) {
+    para = para.trim();
+    if (!para || para === '---') continue;
+
+    if (para === 'Fact Check') {
+      inFC = true;
+      parts.push('<div class="fact-check">');
+      parts.push('<h2 class="fact-check-heading">Fact Check</h2>');
+      continue;
+    }
+    if (inFC && para === 'Every factual claim in this article, with its source.') {
+      parts.push(`<p class="fact-check-intro">${esc(para)}</p>`); continue;
+    }
+
+    const e = esc(para);
+    if (inFC) {
+      if (para.startsWith('Claim:'))
+        parts.push(`<p class="fc-claim"><strong>Claim:</strong> ${esc(para.slice(6).trim())}</p>`);
+      else if (para.startsWith('Source:'))
+        parts.push(`<p class="fc-source"><strong>Source:</strong> ${esc(para.slice(7).trim())}</p>`);
+      else if (para.startsWith('Unsourced statements'))
+        parts.push(`<p class="fc-unsourced">${e}</p>`);
+      else
+        parts.push(`<p>${e}</p>`);
+    } else {
+      parts.push(headings.has(para) ? `<h2>${e}</h2>` : `<p>${e}</p>`);
+    }
+  }
+  if (inFC) parts.push('</div>');
+  return parts.join('\n    ');
+}
+
+function genHTML(post, slug, topic) {
+  const headings = H2[slug] || new Set();
+  const bHtml = bodyToHtml(post.body, headings);
+  const readT = rt(post.body);
+  const dateFmt = fmtDate(post.date);
+  const desc = excerpt(post.body);
+  const url = `https://www.jaytulloch.com/writing/${slug}.html`;
+  const uEnc = encodeURIComponent(url);
+  const tEnc = encodeURIComponent(`${post.title} by @jaytulloch`);
+  const tEsc = esc(post.title);
+  const dEsc = esc(desc);
+  const topEsc = esc(topic);
+  // Safe closing tag — prevents browser from terminating this script prematurely
+  const cs = '<' + '/script>';
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>${tEsc} · Jay Tulloch</title>
+<meta name="description" content="${dEsc}"/>
+<link rel="canonical" href="${url}"/>
+<meta property="og:title" content="${tEsc}"/>
+<meta property="og:description" content="${dEsc}"/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="${url}"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "${tEsc}",
+  "description": "${dEsc}",
+  "author": {"@type":"Person","name":"Jay Tulloch","url":"https://www.jaytulloch.com"},
+  "publisher": {"@type":"Person","name":"Jay Tulloch","url":"https://www.jaytulloch.com"},
+  "datePublished": "${post.date}",
+  "dateModified": "${post.date}",
+  "url": "${url}"
+}
+${cs}
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --black: #080808; --white: #ffffff; --accent: #e63329; --muted: rgba(255,255,255,0.45); --border: rgba(255,255,255,0.06); }
+  html[data-theme="light"] { --black: #f5f4f1; --white: #0a0a0a; --muted: rgba(0,0,0,0.45); --border: rgba(0,0,0,0.07); }
+  html[data-theme="light"] body { background: #f5f4f1; color: #0a0a0a; }
+  html[data-theme="light"] nav { background: rgba(245,244,241,0.92); border-bottom-color: rgba(0,0,0,0.07); }
+  html[data-theme="light"] .article-body { color: rgba(0,0,0,0.8); }
+  html[data-theme="light"] .footer-links a { color: rgba(0,0,0,0.35); }
+  html[data-theme="light"] .footer-links a:hover { color: #0a0a0a; }
+  html[data-theme="light"] .share-btn { border-color: rgba(0,0,0,0.12); color: rgba(0,0,0,0.5); }
+  html[data-theme="light"] .share-btn:hover { border-color: rgba(0,0,0,0.4); color: #0a0a0a; }
+  body { font-family: 'Inter',-apple-system,sans-serif; background: var(--black); color: var(--white); -webkit-font-smoothing: antialiased; transition: background .2s,color .2s; }
+  nav { position: fixed; top:0; left:0; right:0; z-index:1000; padding: 24px clamp(24px,4vw,64px); display:flex; justify-content:space-between; align-items:center; background: rgba(8,8,8,.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); transition: background .2s; }
+  .nav-left { display:flex; align-items:center; gap:20px; }
+  .nav-logo { font-size:12px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; text-decoration:none; color:var(--white); }
+  .nav-back { font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; text-decoration:none; color:var(--muted); transition:color .2s; }
+  .nav-back:hover { color:var(--white); }
+  .nav-right { display:flex; align-items:center; gap:14px; }
+  .nav-contact { font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; border:1px solid rgba(255,255,255,.3); padding:8px 18px; transition:background .25s,color .25s; color:var(--white); text-decoration:none; }
+  .nav-contact:hover { background:var(--white); color:var(--black); }
+  html[data-theme="light"] .nav-contact { color:#0a0a0a; border-color:rgba(0,0,0,.3); }
+  html[data-theme="light"] .nav-contact:hover { background:#0a0a0a; color:#fff; }
+  .nav-theme-toggle { background:none; border:none; cursor:pointer; padding:4px; display:flex; align-items:center; color:var(--muted); transition:color .2s; }
+  .nav-theme-toggle:hover { color:var(--white); }
+  .nav-theme-toggle svg { width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+  .icon-sun { display:none; } .icon-moon { display:block; }
+  html[data-theme="light"] .icon-sun { display:block; } html[data-theme="light"] .icon-moon { display:none; }
+  .article-wrap { max-width:720px; margin:0 auto; padding:140px clamp(24px,5vw,48px) 100px; }
+  .article-meta { display:flex; gap:16px; align-items:center; flex-wrap:wrap; margin-bottom:32px; }
+  .topic-tag { font-size:10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); border:1px solid rgba(230,51,41,.3); padding:4px 10px; border-radius:4px; }
+  .article-date { font-size:12px; color:var(--muted); }
+  .article-read-time { font-size:12px; color:var(--muted); }
+  h1 { font-size:clamp(28px,4vw,48px); font-weight:800; letter-spacing:-.03em; line-height:1.1; margin-bottom:32px; }
+  .article-body { font-size:17px; line-height:1.8; color:rgba(255,255,255,.85); }
+  .article-body p { margin-bottom:24px; }
+  .article-body h2 { font-size:22px; font-weight:700; margin:48px 0 16px; color:var(--white); letter-spacing:-.01em; }
+  .article-body h3 { font-size:18px; font-weight:700; margin:36px 0 12px; color:var(--white); }
+  html[data-theme="light"] .article-body { color:rgba(0,0,0,.8); }
+  html[data-theme="light"] .article-body h2, html[data-theme="light"] .article-body h3 { color:#0a0a0a; }
+  .article-divider { border:none; border-top:1px solid var(--border); margin:56px 0; }
+  .article-footer { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:24px; }
+  .back-link { font-size:13px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color .2s; }
+  .back-link:hover { color:var(--white); }
+  .share-bar { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+  .share-bar-label { font-size:10px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); margin-right:2px; }
+  .share-btn { display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:6px 12px; border:1px solid rgba(255,255,255,.14); color:var(--muted); background:transparent; cursor:pointer; font-family:inherit; transition:border-color .2s,color .2s; border-radius:3px; text-decoration:none; }
+  .share-btn:hover { border-color:rgba(255,255,255,.45); color:var(--white); }
+  .share-btn svg { width:12px; height:12px; stroke:currentColor; fill:none; stroke-width:2; flex-shrink:0; }
+  .share-btn.x-btn svg { fill:currentColor; stroke:none; }
+  .share-btn.copied { color:#4ade80; border-color:#4ade80; }
+  footer { border-top:1px solid var(--border); padding:40px clamp(24px,5vw,64px); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:24px; }
+  .footer-logo { font-size:12px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; }
+  .footer-links { display:flex; gap:24px; }
+  .footer-links a { font-size:12px; color:rgba(255,255,255,.35); text-decoration:none; transition:color .2s; }
+  .footer-links a:hover { color:var(--white); }
+  .fact-check { margin-top:48px; padding:32px; border:1px solid var(--border); border-radius:4px; background:rgba(255,255,255,.02); }
+  html[data-theme="light"] .fact-check { background:rgba(0,0,0,.02); border-color:rgba(0,0,0,.08); }
+  .fact-check-heading { font-size:11px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:12px; }
+  .fact-check-intro { font-size:14px; color:var(--muted); margin-bottom:20px; }
+  .fc-claim { font-size:14px; margin-bottom:4px; color:rgba(255,255,255,.7); }
+  html[data-theme="light"] .fc-claim { color:rgba(0,0,0,.7); }
+  .fc-source { font-size:13px; color:var(--muted); margin-bottom:20px; padding-left:16px; border-left:2px solid var(--border); }
+  .fc-unsourced { font-size:13px; color:var(--muted); margin-top:8px; font-style:italic; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-left">
+    <a class="nav-logo" href="../index.html">Jay Tulloch</a>
+    <a class="nav-back" href="../writing.html">← Writing</a>
+  </div>
+  <div class="nav-right">
+    <button class="nav-theme-toggle" id="nav-theme-toggle" aria-label="Toggle theme">
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+    <a href="../contact.html" class="nav-contact">Let's Talk</a>
+  </div>
+</nav>
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="topic-tag">${topEsc}</span>
+    <span class="article-date">${dateFmt}</span>
+    <span class="article-read-time">${readT} min read</span>
+  </div>
+  <h1>${tEsc}</h1>
+  <div class="article-body">
+    ${bHtml}
+  </div>
+  <hr class="article-divider"/>
+  <div class="article-footer">
+    <a class="back-link" href="../writing.html">← All articles</a>
+    <div class="share-bar">
+      <span class="share-bar-label">Share</span>
+      <a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=${uEnc}" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+      <a class="share-btn x-btn" href="https://twitter.com/intent/tweet?url=${uEnc}&text=${tEnc}" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        X
+      </a>
+      <button class="share-btn" id="copy-article-link">
+        <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        Copy link
+      </button>
+    </div>
+  </div>
+</div>
+<footer>
+  <span class="footer-logo">Jay Tulloch</span>
+  <div class="footer-links">
+    <a href="../index.html">Portfolio</a>
+    <a href="../writing.html">Writing</a>
+    <a href="https://substack.com/@jaytulloch" target="_blank">Substack</a>
+    <a href="https://www.linkedin.com/in/jaytulloch/" target="_blank">LinkedIn</a>
+  </div>
+</footer>
+<script>
+  (function(){
+    var h=document.documentElement,b=document.getElementById('nav-theme-toggle');
+    if(localStorage.getItem('jt-theme')==='light') h.setAttribute('data-theme','light');
+    if(b) b.addEventListener('click',function(){
+      var n=h.getAttribute('data-theme')==='light'?'dark':'light';
+      if(n==='dark'){h.removeAttribute('data-theme');localStorage.removeItem('jt-theme');}
+      else{h.setAttribute('data-theme','light');localStorage.setItem('jt-theme','light');}
+    });
+  })();
+  var cb=document.getElementById('copy-article-link');
+  if(cb) cb.addEventListener('click',function(){
+    navigator.clipboard.writeText(window.location.href).then(function(){
+      cb.classList.add('copied'); cb.textContent='Copied!';
+      setTimeout(function(){
+        cb.classList.remove('copied');
+        cb.innerHTML='<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> Copy link';
+      },2000);
+    });
+  });
+${cs}
+</body>
+</html>`;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GITHUB API
+// ─────────────────────────────────────────────────────────────────────────────
+async function ghGet(path) {
+  const r = await fetch(`https://api.github.com/repos/${path}`, {
+    headers: { Authorization: `Bearer ${tok}`, Accept: 'application/vnd.github.v3+json' }
+  });
+  if (!r.ok) throw new Error(`GET ${path} → ${r.status}`);
+  return r.json();
+}
+
+async function ghPut(path, content, sha, msg) {
+  const r = await fetch(`https://api.github.com/repos/${path}`, {
+    method: 'PUT',
+    headers: { Authorization: `Bearer ${tok}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: msg, content: toB64(content), sha })
+  });
+  if (!r.ok) throw new Error(`PUT ${path} → ${r.status}: ${await r.text()}`);
+  return r.json();
+}
+
+async function loadPosts() {
+  const f = await ghGet('ruonalim/ruonalim-site/contents/public/posts.json');
+  return { posts: JSON.parse(fromB64(f.content)), sha: f.sha };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// VIEWS
+// ─────────────────────────────────────────────────────────────────────────────
+function setView(v) {
+  const isLogin = v === 'login';
+  document.getElementById('login-view').hidden = !isLogin;
+  document.getElementById('app-view').hidden = isLogin;
+  document.getElementById('app-nav').hidden = isLogin;
+  document.getElementById('list-view').hidden = v !== 'list';
+  document.getElementById('edit-view').hidden = v !== 'edit';
+  document.getElementById('nav-back-btn').hidden = v !== 'edit';
+  document.getElementById('nav-sub').textContent = v === 'edit' ? 'Edit article' : 'Articles';
+}
+
+function showList() {
+  setView('list');
+  renderList();
+}
+
+function renderList() {
+  const el = document.getElementById('article-list');
+  const cnt = document.getElementById('article-count');
+  document.getElementById('loading').hidden = true;
+  cnt.textContent = `${posts.length} articles`;
+
+  const sorted = [...posts].sort((a,b) => b.date.localeCompare(a.date));
+  el.innerHTML = sorted.map(p => {
+    const m = META[p.id];
+    const topic = m ? m.topic : (p.topic || '');
+    return `<div class="article-row" onclick="showEdit('${p.id}')">
+      <div class="article-row-body">
+        <div class="article-row-title">${esc(p.title)}</div>
+        <div class="article-row-meta">
+          <span class="article-row-date">${p.date}</span>
+          <span class="topic-chip">${esc(topic)}</span>
+        </div>
+      </div>
+      <span class="article-row-cta">Edit →</span>
+    </div>`;
+  }).join('');
+}
+
+function showEdit(id) {
+  currentId = id;
+  const p = posts.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('edit-title').textContent = p.title;
+  document.getElementById('edit-meta').textContent = `${p.date} · ${rt(p.body)} min read`;
+  document.getElementById('body-editor').value = p.body;
+  setStatus('', '');
+  setView('edit');
+  updateStats();
+  document.getElementById('body-editor').scrollTop = 0;
+}
+
+function updateStats() {
+  const v = document.getElementById('body-editor').value;
+  document.getElementById('editor-stats').textContent = `${wc(v).toLocaleString()} words · ${rt(v)} min read`;
+}
+
+function setStatus(msg, cls) {
+  const el = document.getElementById('save-status');
+  el.textContent = msg;
+  el.className = cls;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// AUTH
+// ─────────────────────────────────────────────────────────────────────────────
+async function doLogin() {
+  const input = document.getElementById('tok');
+  const err = document.getElementById('login-error');
+  const btn = document.getElementById('login-btn');
+  const t = input.value.trim();
+  if (!t) return;
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin"></span> Connecting…';
+  err.style.display = 'none';
+
+  try {
+    tok = t;
+    const res = await loadPosts();
+    posts = res.posts;
+    sessionStorage.setItem('jt-admin-tok', t);
+    showList();
+  } catch(e) {
+    err.style.display = 'block';
+    tok = '';
+    btn.disabled = false;
+    btn.textContent = 'Continue →';
+  }
+}
+
+function handleLogout() {
+  sessionStorage.removeItem('jt-admin-tok');
+  tok = ''; posts = [];
+  document.getElementById('tok').value = '';
+  setView('login');
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SAVE
+// ─────────────────────────────────────────────────────────────────────────────
+async function doSave() {
+  const btn = document.getElementById('save-btn');
+  const newBody = document.getElementById('body-editor').value.trim();
+  if (!newBody) return;
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin"></span> Saving…';
+  setStatus('', '');
+
+  try {
+    const post = posts.find(p => p.id === currentId);
+    const meta = META[currentId];
+    if (!post || !meta) throw new Error('Article metadata not found');
+
+    // Update in memory
+    post.body = newBody;
+    post.wordCount = wc(newBody);
+
+    // 1 — Commit posts.json to ruonalim.com repo
+    setStatus('Updating posts.json…', '');
+    const postsFile = await ghGet('ruonalim/ruonalim-site/contents/public/posts.json');
+    await ghPut(
+      'ruonalim/ruonalim-site/contents/public/posts.json',
+      JSON.stringify(posts, null, 2),
+      postsFile.sha,
+      `Update: ${post.title}`
+    );
+
+    // 2 — Generate + commit article HTML to jaytulloch.com repo
+    setStatus('Regenerating article page…', '');
+    const htmlFile = await ghGet(`ruonalim/jaytulloch.com/contents/writing/${meta.slug}.html`);
+    const newHtml = genHTML(post, meta.slug, meta.topic);
+    await ghPut(
+      `ruonalim/jaytulloch.com/contents/writing/${meta.slug}.html`,
+      newHtml,
+      htmlFile.sha,
+      `Update article: ${post.title}`
+    );
+
+    setStatus('Saved ✓  Both sites deploying now', 'ok');
+
+  } catch(e) {
+    setStatus(`Error: ${e.message}`, 'err');
+    console.error(e);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Save & publish';
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────────────────────────────────────
+(async () => {
+  if (tok) {
+    try {
+      const res = await loadPosts();
+      posts = res.posts;
+      showList();
+    } catch {
+      sessionStorage.removeItem('jt-admin-tok');
+      tok = '';
+      setView('login');
+    }
+  } else {
+    setView('login');
+  }
+  document.getElementById('tok').addEventListener('keydown', e => {
+    if (e.key === 'Enter') doLogin();
+  });
+})();
+</script>
+</body>
+</html>
