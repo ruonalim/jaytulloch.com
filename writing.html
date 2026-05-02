@@ -18,152 +18,58 @@
   <meta property="og:type" content="website"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-      --bg: #FFFFFF;
-      --text: #111111;
-      --text-muted: #6B6E74;
-      --text-body: #141414;
-      --border: #E8E8EC;
-      --border-strong: #D0D0D0;
-      --black: #000000;
+      --bg: #FAFAFA;
+      --ink: #0A0A0A;
+      --ink-secondary: #6B6E74;
+      --ink-tertiary: #ABABAB;
+      --border: #E2E2E6;
+      --border-light: #EFEFEF;
       --white: #FFFFFF;
-      --tag-bg: #EAF0FF;
-      --accent: #0044E4;
-      --gray-dark: #F5F5F7;
-      --gray-mid: #E8E8EC;
-      --gray-light: #6B6E74;
+      --accent-blue: #0044E4;
+      --accent-red: #E63329;
+      --accent-green: #059669;
+      --accent-amber: #D97706;
+      --font-display: 'Abril Fatface', Georgia, serif;
       --font: 'Switzer', -apple-system, Helvetica Neue, Arial, sans-serif;
+      --hero-bg: #080808;
     }
+
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 16px; line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
     a { color: inherit; text-decoration: none; }
 
     /* ── Nav ── */
-
-    /* ── Hero ── */
-    .writing-hero { padding: 160px clamp(32px, 5vw, 80px) 80px; border-bottom: 1px solid #E8E8EC; }
-    .writing-hero-inner { max-width: 1100px; }
-    .writing-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; }
-    .writing-title { font-size: clamp(48px, 7vw, 96px); font-weight: 800; letter-spacing: -0.04em; line-height: 0.95; margin-bottom: 32px; }
-    .writing-title em { font-style: normal; color: var(--accent); }
-    .writing-desc { font-size: clamp(16px, 1.5vw, 20px); color: var(--text-muted); max-width: 580px; line-height: 1.65; margin-bottom: 48px; }
-    .writing-meta { display: flex; gap: 32px; flex-wrap: wrap; }
-    .writing-meta-item { display: flex; flex-direction: column; gap: 4px; }
-    .writing-meta-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); }
-    .writing-meta-value { font-size: 14px; font-weight: 600; color: var(--text); }
-
-    /* ── Topics filter ── */
-    .topics-bar { padding: 32px clamp(32px, 5vw, 80px); border-bottom: 1px solid #E8E8EC; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
-    .topic-pill { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 16px; border: 1px solid var(--border); border-radius: 2px; cursor: pointer; transition: background 0.2s, border-color 0.2s, color 0.2s; color: var(--text-muted); background: transparent; font-family: inherit; }
-    .topic-pill:hover { border-color: var(--text-muted); color: var(--text); }
-    .topic-pill.active { background: var(--white); color: var(--black); border-color: var(--text); }
-
-    /* ── Article grid ── */
-    .articles-section { padding: 80px clamp(32px, 5vw, 80px); }
-    .articles-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin-bottom: 2px; }
-    .article-card { display: flex; flex-direction: column; padding: 48px 40px; background: var(--bg-elevated, #F5F5F7); border: 1px solid var(--border); transition: background 0.2s, box-shadow 0.3s, transform 0.3s; cursor: pointer; position: relative; overflow: hidden; }
-    .article-card::before { display: none; }
-    .article-card:hover { background: #ffffff; box-shadow: 0 12px 40px rgba(0,0,0,0.08); transform: translateY(-2px); }
-    .article-card.featured { grid-column: 1 / -1; flex-direction: row; gap: 64px; align-items: flex-start; }
-    .article-card-meta { display: flex; gap: 16px; align-items: center; margin-bottom: 20px; flex-wrap: wrap; }
-    .article-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
-    .article-date { font-size: 11px; color: var(--text-muted); font-weight: 500; }
-    .article-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border-strong); }
-    .article-read-time { font-size: 11px; color: var(--text-muted); }
-    .article-title { font-size: clamp(20px, 2.2vw, 28px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 16px; color: var(--text); transition: color 0.2s; }
-    .article-card:hover .article-title { color: var(--text); }
-    .article-card.featured .article-title { font-size: clamp(28px, 3.5vw, 42px); }
-    .article-excerpt { font-size: 14px; color: var(--text-body); line-height: 1.7; flex: 1; }
-    .article-card.featured .article-excerpt { font-size: 16px; }
-    .article-card-footer { margin-top: 32px; display: flex; align-items: center; justify-content: space-between; }
-    .article-read-link { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
-    .article-card-body { flex: 1; display: flex; flex-direction: column; }
-    .article-card-left { flex: 0 0 320px; }
-
-    /* ── Coming soon state ── */
-    .coming-soon-card { padding: 48px 40px; background: var(--bg-elevated); border: 1px dashed var(--border); display: flex; align-items: center; justify-content: center; min-height: 200px; }
-    .coming-soon-text { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
-
-    /* ── Subscribe strip ── */
-    .subscribe-strip { margin: 2px 0; padding: 48px clamp(32px, 5vw, 80px); background: var(--bg-elevated, #F5F5F7); border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 48px; flex-wrap: wrap; }
-    .subscribe-strip-copy h3 { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; }
-    .subscribe-strip-copy p { font-size: 14px; color: var(--text-muted); max-width: 440px; line-height: 1.6; }
-    .subscribe-btn { display: inline-block; background: var(--white); color: var(--black); font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; padding: 16px 32px; text-decoration: none; transition: background 0.2s; white-space: nowrap; }
-    .subscribe-btn:hover { background: var(--accent-light); color: var(--text); }
-
-    /* ── Footer ── */
-    footer { padding: 48px clamp(32px, 5vw, 80px); border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
-    .footer-logo { font-size: 13px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
-    .footer-links { display: flex; gap: 28px; }
-    .footer-links a { font-size: 12px; color: var(--text-muted); transition: color 0.2s; }
-    .footer-links a:hover { color: var(--text); }
-
-    /* ── Responsive ── */
-    @media (max-width: 900px) {
-      .articles-grid { grid-template-columns: 1fr; }
-      .article-card.featured { flex-direction: column; gap: 0; }
-      .article-card-left { flex: none; }
-    }
-    @media (max-width: 600px) {
-      .subscribe-strip { flex-direction: column; align-items: flex-start; }
-    }
-
-    /* ── Light mode ── */
-
-    /* ── Nav right group ── */
-
-    /* ── Theme toggle ── */
-
-    /* ── Share buttons ── */
-    .share-bar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .share-bar-label { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); margin-right: 4px; }
-    .share-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 7px 14px; border: 1px solid var(--border); color: var(--text-muted); background: transparent; cursor: pointer; font-family: inherit; transition: border-color 0.2s, color 0.2s; border-radius: 2px; text-decoration: none; }
-    .share-btn:hover { border-color: var(--text-muted); color: var(--text); }
-    .share-btn svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; flex-shrink: 0; }
-    .share-btn.copied { color: #4ade80; border-color: #4ade80; }
-
-    /* ── Reveal animations ── */
-    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  
-    /* ─── Playfair Display callout accent ──────────────────────────── */
-    h1 em, h2 em {
-      font-family: 'Abril Fatface', Georgia, serif;
-      font-weight: 400;
-      font-style: normal;
-      font-size: 1em;
-      letter-spacing: 0;
-    }
-    .pod-stat-value em {
-      font-family: var(--font);
-      font-weight: inherit;
-      font-style: normal;
-      letter-spacing: inherit;
-    }
-        /* ─── Navigation ───────────────────────────────────────────── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 20px clamp(32px, 5vw, 80px);
-      background: rgba(255,255,255,0.95);
+      background: rgba(250,250,250,0.96);
       backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid #E8E8EC;
+      border-bottom: 1px solid var(--border);
     }
-    .nav-logo { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #111111; flex-shrink: 0; }
+    .nav-logo { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); flex-shrink: 0; }
     .nav-right { display: flex; align-items: center; }
     .nav-links { display: flex; gap: 32px; align-items: center; list-style: none; margin-right: 48px; }
-    .nav-links li a { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #6B6E74; transition: color 0.2s; }
-    .nav-links li a:hover, .nav-links li a.active { color: #111111; }
-    .nav-cta { pointer-events: all; }
-    .nav-cta a { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #111111; border: 1px solid #111111; border-radius: 2px; padding: 10px 22px; transition: background 0.25s, color 0.25s; display: inline-block; }
-    .nav-cta a:hover { background: #111111; color: #fff; }
-    .nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 6px; width: 32px; height: 32px; cursor: pointer; background: none; border: none; padding: 0; pointer-events: all; }
-    .nav-hamburger span { display: block; width: 100%; height: 1.5px; background: #111111; transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.25s; transform-origin: center; }
+    .nav-links li a { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-secondary); transition: color 0.2s; }
+    .nav-links li a:hover, .nav-links li a.active { color: var(--ink); }
+    .nav-cta a { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); border: 1px solid var(--ink); border-radius: 2px; padding: 10px 22px; transition: background 0.25s, color 0.25s; display: inline-block; }
+    .nav-cta a:hover { background: var(--ink); color: #fff; }
+    .nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 6px; width: 32px; height: 32px; cursor: pointer; background: none; border: none; padding: 0; }
+    .nav-hamburger span { display: block; width: 100%; height: 1.5px; background: var(--ink); transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.25s; transform-origin: center; }
     .nav-hamburger.open span:nth-child(1) { transform: translateY(3.75px) rotate(45deg); }
     .nav-hamburger.open span:nth-child(2) { opacity: 0; }
     .nav-hamburger.open span:nth-child(3) { transform: translateY(-3.75px) rotate(-45deg); }
-    .mobile-drawer { position: fixed; inset: 0; z-index: 10000; background: rgba(0,0,0,0.95); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 40px; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+    .mobile-drawer { position: fixed; inset: 0; z-index: 10000; background: rgba(0,0,0,0.96); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 40px; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
     .mobile-drawer.open { opacity: 1; pointer-events: all; }
     .mobile-drawer a { font-size: clamp(28px, 6vw, 42px); font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 0.4s ease, color 0.2s; }
     .mobile-drawer.open a { opacity: 1; transform: translateY(0); }
@@ -172,27 +78,399 @@
     .mobile-drawer.open a:nth-child(3) { transition-delay: 0.2s, 0.2s, 0s; }
     .mobile-drawer.open a:nth-child(4) { transition-delay: 0.25s, 0.25s, 0s; }
     .mobile-drawer.open a:nth-child(5) { transition-delay: 0.3s, 0.3s, 0s; }
-    .mobile-drawer.open a:nth-child(6) { transition-delay: 0.35s, 0.35s, 0s; }
-    .mobile-drawer a:hover { color: #0044E4; }
+    .mobile-drawer a:hover { color: var(--accent-blue); }
     @media (max-width: 900px) {
       nav { padding: 20px 24px; }
       .nav-hamburger { display: flex; }
       .nav-links { display: none; }
       .nav-cta { display: none; }
     }
-    </style>
+
+    /* ── Hero ── */
+    .writing-hero {
+      background: var(--hero-bg);
+      padding: 140px clamp(32px, 5vw, 80px) 72px;
+      position: relative;
+      overflow: hidden;
+    }
+    .writing-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 80% 20%, rgba(0,68,228,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(230,51,41,0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .writing-hero::after {
+      content: 'WRITING';
+      position: absolute;
+      right: clamp(24px, 4vw, 60px);
+      bottom: -0.15em;
+      font-family: var(--font-display);
+      font-size: clamp(120px, 18vw, 240px);
+      color: rgba(255,255,255,0.04);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.03em;
+    }
+    .writing-hero-inner { max-width: 1100px; position: relative; z-index: 1; }
+    .writing-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--accent-blue); margin-bottom: 28px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .writing-eyebrow::before {
+      content: '';
+      display: block; width: 24px; height: 1px; background: var(--accent-blue);
+    }
+    .writing-title {
+      font-family: var(--font-display);
+      font-size: clamp(56px, 9vw, 112px);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 0.92;
+      color: #FFFFFF;
+      margin-bottom: 36px;
+    }
+    .writing-title .accent { color: var(--accent-blue); }
+    .writing-desc {
+      font-size: clamp(15px, 1.4vw, 18px);
+      color: rgba(255,255,255,0.5);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+    .writing-stats {
+      display: flex; gap: 0; flex-wrap: wrap;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 3px;
+      width: fit-content;
+    }
+    .writing-stat {
+      padding: 16px 28px;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+    .writing-stat:last-child { border-right: none; }
+    .writing-stat-value { font-size: 22px; font-weight: 800; color: #FFFFFF; letter-spacing: -0.02em; line-height: 1; }
+    .writing-stat-label { font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-top: 4px; }
+
+    /* ── Filter bar ── */
+    .topics-bar {
+      padding: 0 clamp(32px, 5vw, 80px);
+      border-bottom: 1px solid var(--border);
+      display: flex; gap: 0; align-items: stretch;
+      overflow-x: auto;
+      background: var(--white);
+      scrollbar-width: none;
+    }
+    .topics-bar::-webkit-scrollbar { display: none; }
+    .topic-pill {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 16px 20px;
+      border: none; border-bottom: 2px solid transparent;
+      cursor: pointer;
+      color: var(--ink-secondary);
+      background: transparent;
+      font-family: inherit;
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+    .topic-pill:hover { color: var(--ink); }
+    .topic-pill.active { color: var(--ink); border-bottom-color: var(--ink); }
+    .topic-pill[data-topic="ai"].active { color: var(--accent-blue); border-bottom-color: var(--accent-blue); }
+    .topic-pill[data-topic="leadership"].active { color: var(--accent-red); border-bottom-color: var(--accent-red); }
+    .topic-pill[data-topic="product"].active { color: var(--accent-green); border-bottom-color: var(--accent-green); }
+    .topic-pill[data-topic="fractional"].active { color: var(--accent-amber); border-bottom-color: var(--accent-amber); }
+
+    /* ── Article section ── */
+    .articles-section {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 clamp(32px, 5vw, 80px) 80px;
+    }
+
+    /* ── Featured card ── */
+    .article-card-featured {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      background: var(--hero-bg);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-top: none;
+      margin-bottom: 2px;
+      transition: border-color 0.3s;
+      cursor: pointer;
+      color: #fff;
+    }
+    .article-card-featured:hover { border-color: rgba(255,255,255,0.2); }
+    .featured-left {
+      padding: 56px 48px;
+      border-right: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .featured-right {
+      padding: 56px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .featured-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 10px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 0;
+    }
+    .featured-label::before {
+      content: '';
+      display: inline-block;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent-blue);
+      animation: pulse-dot 2s ease infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.7); }
+    }
+    .featured-number {
+      font-family: var(--font-display);
+      font-size: clamp(80px, 12vw, 160px);
+      line-height: 1;
+      color: rgba(255,255,255,0.06);
+      letter-spacing: -0.04em;
+      margin-top: auto;
+      margin-bottom: -0.1em;
+      user-select: none;
+    }
+    .featured-meta {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 20px; flex-wrap: wrap;
+    }
+    .featured-tag {
+      font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 2px;
+    }
+    [data-topic="ai"] .featured-tag, .featured-tag[data-cat="ai"] { background: rgba(0,68,228,0.2); color: #6B9FFF; }
+    [data-topic="leadership"] .featured-tag, .featured-tag[data-cat="leadership"] { background: rgba(230,51,41,0.2); color: #FF8A84; }
+    [data-topic="product"] .featured-tag, .featured-tag[data-cat="product"] { background: rgba(5,150,105,0.2); color: #6ECBA8; }
+    [data-topic="fractional"] .featured-tag, .featured-tag[data-cat="fractional"] { background: rgba(217,119,6,0.2); color: #FBBB6B; }
+    .featured-date { font-size: 12px; color: rgba(255,255,255,0.3); font-weight: 500; }
+    .featured-read-time { font-size: 12px; color: rgba(255,255,255,0.3); font-weight: 500; }
+    .featured-dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.2); }
+    .featured-title {
+      font-family: var(--font);
+      font-size: clamp(24px, 3vw, 40px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.12;
+      color: #FFFFFF;
+      margin-bottom: 20px;
+      transition: color 0.2s;
+    }
+    .article-card-featured:hover .featured-title { color: #fff; }
+    .featured-excerpt {
+      font-size: 15px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+      margin-bottom: 32px;
+      flex: 1;
+    }
+    .featured-cta {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--accent-blue);
+      transition: gap 0.2s;
+    }
+    .article-card-featured:hover .featured-cta { gap: 16px; }
+    .featured-cta-line {
+      width: 32px; height: 1px; background: currentColor;
+      transition: width 0.2s;
+    }
+    .article-card-featured:hover .featured-cta-line { width: 48px; }
+
+    /* ── Article Grid ── */
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      counter-reset: article-counter 1;
+    }
+    .article-card {
+      display: flex; flex-direction: column;
+      padding: 36px 40px 36px 0;
+      border-bottom: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      transition: background 0.2s;
+      cursor: pointer;
+      position: relative;
+      counter-increment: article-counter;
+      padding-left: 40px;
+      background: transparent;
+    }
+    .article-card:nth-child(even) { border-right: none; }
+    .article-card:hover { background: var(--white); }
+    .article-card::before {
+      content: counter(article-counter, decimal-leading-zero);
+      position: absolute;
+      top: 32px; right: 32px;
+      font-family: var(--font-display);
+      font-size: 56px;
+      line-height: 1;
+      color: rgba(0,0,0,0.04);
+      letter-spacing: -0.02em;
+      user-select: none;
+      transition: color 0.2s;
+    }
+    .article-card:hover::before { color: rgba(0,0,0,0.07); }
+    .article-card-meta {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 14px; flex-wrap: wrap;
+    }
+    .article-tag {
+      font-size: 10px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;
+      padding: 3px 8px; border-radius: 2px;
+    }
+    [data-topic="ai"] .article-tag { background: #EEF4FF; color: var(--accent-blue); }
+    [data-topic="leadership"] .article-tag { background: #FFF0EF; color: var(--accent-red); }
+    [data-topic="product"] .article-tag { background: #ECFDF5; color: var(--accent-green); }
+    [data-topic="fractional"] .article-tag { background: #FFFBEB; color: var(--accent-amber); }
+    .article-date { font-size: 11px; color: var(--ink-tertiary); font-weight: 500; }
+    .article-dot { width: 2px; height: 2px; border-radius: 50%; background: var(--border); flex-shrink: 0; }
+    .article-read-time { font-size: 11px; color: var(--ink-tertiary); font-weight: 500; }
+    .article-title {
+      font-size: clamp(17px, 1.8vw, 22px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 12px;
+      color: var(--ink);
+      flex: 1;
+      transition: color 0.2s;
+    }
+    .article-card:hover .article-title { color: var(--accent-blue); }
+    [data-topic="leadership"]:hover .article-title { color: var(--accent-red); }
+    [data-topic="product"]:hover .article-title { color: var(--accent-green); }
+    [data-topic="fractional"]:hover .article-title { color: var(--accent-amber); }
+    .article-excerpt {
+      font-size: 13px;
+      color: var(--ink-secondary);
+      line-height: 1.65;
+      margin-bottom: 20px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .article-card-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: auto;
+    }
+    .article-topic-tag {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--ink-tertiary);
+    }
+    .article-arrow {
+      font-size: 14px; color: var(--ink-tertiary);
+      transition: transform 0.2s, color 0.2s;
+    }
+    .article-card:hover .article-arrow {
+      transform: translateX(4px);
+      color: var(--ink);
+    }
+
+    /* ── Subscribe strip ── */
+    .subscribe-strip {
+      background: var(--hero-bg);
+      padding: 64px clamp(32px, 5vw, 80px);
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 48px; flex-wrap: wrap;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .subscribe-strip-copy h3 {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: 10px;
+      line-height: 1.1;
+    }
+    .subscribe-strip-copy p {
+      font-size: 15px; color: rgba(255,255,255,0.45); max-width: 420px; line-height: 1.65;
+    }
+    .subscribe-btn {
+      display: inline-block;
+      background: var(--accent-blue); color: #fff;
+      font-size: 11px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase;
+      padding: 16px 32px; text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+      white-space: nowrap;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .subscribe-btn:hover { background: #0035b8; transform: translateY(-1px); }
+
+    /* ── Share bar ── */
+    .share-bar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 24px; }
+    .share-bar-label { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-right: 4px; }
+    .share-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 7px 14px; border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.4); background: transparent; cursor: pointer; font-family: inherit; transition: border-color 0.2s, color 0.2s; border-radius: 2px; text-decoration: none; }
+    .share-btn:hover { border-color: rgba(255,255,255,0.4); color: #fff; }
+    .share-btn svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; flex-shrink: 0; }
+    .share-btn.x-btn svg { fill: currentColor; stroke: none; }
+    .share-btn.copied { color: #4ade80; border-color: #4ade80; }
+
+    /* ── Footer ── */
+    footer {
+      padding: 40px clamp(32px, 5vw, 80px);
+      border-top: 1px solid var(--border);
+      background: var(--white);
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 24px; flex-wrap: wrap;
+    }
+    .footer-logo { font-size: 13px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+    .footer-links { display: flex; gap: 28px; }
+    .footer-links a { font-size: 12px; color: var(--ink-secondary); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--ink); }
+
+    /* ── Reveal animations ── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .article-card-featured { grid-template-columns: 1fr; }
+      .featured-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); padding: 40px 32px; }
+      .featured-right { padding: 40px 32px; }
+      .featured-number { display: none; }
+      .articles-grid { grid-template-columns: 1fr; }
+      .article-card { border-right: none; }
+      .article-card::before { font-size: 40px; top: 24px; right: 20px; }
+    }
+    @media (max-width: 600px) {
+      .writing-stats { width: 100%; }
+      .writing-stat { flex: 1; }
+      .subscribe-strip { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
 </head>
 <body>
 
-    <nav>
+  <nav>
     <a href="./" class="nav-logo">Jay Tulloch</a>
     <div class="nav-right">
       <ul class="nav-links">
-      <li><a href="./#about">About</a></li>
-      <li><a href="./#work">Work</a></li>
-      <li><a href="./writing.html" class="active">Writing</a></li>
-      <li><a href="./#podcast">Podcast</a></li>
-      <li><a href="./contact.html">Contact</a></li>
+        <li><a href="./#about">About</a></li>
+        <li><a href="./#work">Work</a></li>
+        <li><a href="./writing.html" class="active">Writing</a></li>
+        <li><a href="./#podcast">Podcast</a></li>
+        <li><a href="./contact.html">Contact</a></li>
       </ul>
       <div class="nav-cta"><a href="./contact.html">Let's Talk</a></div>
       <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
@@ -201,51 +479,91 @@
     </div>
   </nav>
 
+  <div id="mobile-drawer" class="mobile-drawer">
+    <a href="./#about">About</a>
+    <a href="./#work">Work</a>
+    <a href="./writing.html">Writing</a>
+    <a href="./#podcast">Podcast</a>
+    <a href="./contact.html">Contact</a>
+    <a href="./contact.html">Let's Talk</a>
+  </div>
+
   <!-- Hero -->
   <div class="writing-hero">
     <div class="writing-hero-inner">
-      <p class="writing-eyebrow">Writing</p>
-      <h1 class="writing-title">Design.<br/><em>AI.</em><br/>Leadership.</h1>
-      <p class="writing-desc">Unfiltered takes on AI product design, building and leading design teams, and what it actually takes to ship things that matter.</p>
+      <p class="writing-eyebrow reveal">Perspectives</p>
+      <h1 class="writing-title reveal reveal-delay-1">
+        No safe<br/>takes.<br/><span class="accent">No filler.</span>
+      </h1>
+      <p class="writing-desc reveal reveal-delay-2">AI product design, design leadership, and what it actually takes to ship things that matter. 16 years of opinions. Unfiltered.</p>
+      <div class="writing-stats reveal reveal-delay-3">
+        <div class="writing-stat">
+          <div class="writing-stat-value">14</div>
+          <div class="writing-stat-label">Articles</div>
+        </div>
+        <div class="writing-stat">
+          <div class="writing-stat-value">4</div>
+          <div class="writing-stat-label">Topics</div>
+        </div>
+        <div class="writing-stat">
+          <div class="writing-stat-value">16<span style="font-size:14px;font-weight:600;letter-spacing:0">yrs</span></div>
+          <div class="writing-stat-label">Experience</div>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- Topic filters -->
   <div class="topics-bar">
     <button class="topic-pill active" data-topic="all">All</button>
-    <button class="topic-pill" data-topic="ai">AI & Design</button>
+    <button class="topic-pill" data-topic="ai">AI &amp; Design</button>
     <button class="topic-pill" data-topic="leadership">Design Leadership</button>
     <button class="topic-pill" data-topic="product">Product Strategy</button>
     <button class="topic-pill" data-topic="fractional">Fractional Work</button>
   </div>
 
-  <!-- Articles -->
+  <!-- Featured article -->
+  <div id="featured-wrapper">
+    <!-- ARTICLE:the-hidden-cost-of-hiring-a-full-time-design-lead-before-youre-ready -->
+    <a class="article-card-featured" href="./writing/the-hidden-cost-of-hiring-a-full-time-design-lead-before-youre-ready.html" data-topic="fractional" id="featured-card">
+      <div class="featured-left">
+        <div class="featured-label">Latest</div>
+        <div class="featured-number">01</div>
+      </div>
+      <div class="featured-right">
+        <div class="featured-meta">
+          <span class="featured-tag" data-cat="fractional">Fractional Work</span>
+          <span class="featured-dot"></span>
+          <span class="featured-date">May 1, 2026</span>
+          <span class="featured-dot"></span>
+          <span class="featured-read-time">10 min read</span>
+        </div>
+        <h2 class="featured-title">The Hidden Cost of Hiring a Full-Time Design Lead Before You're Ready</h2>
+        <p class="featured-excerpt">Most companies I've watched hire a full-time design director in the last three years didn't need one. They needed a sharp founding designer and adult supervision — not an expensive leader without a team to lead.</p>
+        <span class="featured-cta">
+          <span class="featured-cta-line"></span>
+          Read article
+        </span>
+      </div>
+    </a>
+    <!-- /ARTICLE:the-hidden-cost-of-hiring-a-full-time-design-lead-before-youre-ready -->
+  </div>
+
+  <!-- Articles grid -->
   <div class="articles-section">
     <div class="articles-grid" id="articles-grid">
-      <!-- Articles injected here by the publishing pipeline -->
-      <!-- ARTICLE:the-hidden-cost-of-hiring-a-full-time-design-lead-before-youre-ready -->
-<a class="article-card" href="./writing/the-hidden-cost-of-hiring-a-full-time-design-lead-before-youre-ready.html" data-topic="fractional">
-  <div class="article-card-meta">
-    <span class="article-date">May 1, 2026</span>
-    <span class="article-read-time">10 min read</span>
-  </div>
-  <h3 class="article-title">The Hidden Cost of Hiring a Full-Time Design Lead Before You&#x27;re Ready</h3>
-  <p class="article-excerpt">Most companies I&#x27;ve watched hire a full-time design director in the last three years didn&#x27;t need one. They needed a sharp founding designer and adult...</p>
-  <div class="article-card-footer">
-    <span class="article-topic-tag">Fractional Work</span>
-    <span class="article-arrow">→</span>
-  </div>
-</a>
-<!-- /ARTICLE:the-hidden-cost-of-hiring-a-full-time-design-lead-before-youre-ready -->
 
 <!-- ARTICLE:why-most-designers-will-never-become-director-and-it-has-nothing-to-do-with-skill -->
 <a class="article-card" href="./writing/why-most-designers-will-never-become-director-and-it-has-nothing-to-do-with-skill.html" data-topic="leadership">
   <div class="article-card-meta">
+    <span class="article-tag">Design Leadership</span>
+    <span class="article-dot"></span>
     <span class="article-date">April 29, 2026</span>
+    <span class="article-dot"></span>
     <span class="article-read-time">7 min read</span>
   </div>
   <h3 class="article-title">Why Most Designers Will Never Become Director. And It Has Nothing To Do With Skill.</h3>
-  <p class="article-excerpt">Here&#x27;s something most design leaders won&#x27;t say out loud: if you&#x27;re a senior designer who hasn&#x27;t been promoted in two years, stop reviewing your own...</p>
+  <p class="article-excerpt">Here's something most design leaders won't say out loud: if you're a senior designer who hasn't been promoted in two years, stop reviewing your own work.</p>
   <div class="article-card-footer">
     <span class="article-topic-tag">Design Leadership</span>
     <span class="article-arrow">→</span>
@@ -256,11 +574,14 @@
 <!-- ARTICLE:stop-treating-onboarding-like-a-funnel-your-users-arent-metrics -->
 <a class="article-card" href="./writing/stop-treating-onboarding-like-a-funnel-your-users-arent-metrics.html" data-topic="product">
   <div class="article-card-meta">
+    <span class="article-tag">Product Strategy</span>
+    <span class="article-dot"></span>
     <span class="article-date">April 28, 2026</span>
+    <span class="article-dot"></span>
     <span class="article-read-time">7 min read</span>
   </div>
-  <h3 class="article-title">Stop Treating Onboarding Like a Funnel. Your Users Aren&#x27;t Metrics.</h3>
-  <p class="article-excerpt">The average fintech product loses 63% of new users during onboarding. That statistic, from recent 2026 analysis across European markets, represents 5.7...</p>
+  <h3 class="article-title">Stop Treating Onboarding Like a Funnel. Your Users Aren't Metrics.</h3>
+  <p class="article-excerpt">The average fintech product loses 63% of new users during onboarding. That statistic represents 5.7 million people walking away from a product that failed them in their first sixty seconds.</p>
   <div class="article-card-footer">
     <span class="article-topic-tag">Product Strategy</span>
     <span class="article-arrow">→</span>
@@ -271,11 +592,14 @@
 <!-- ARTICLE:neo-banks-didnt-lose-to-banks-they-lost-to-themselves -->
 <a class="article-card" href="./writing/neo-banks-didnt-lose-to-banks-they-lost-to-themselves.html" data-topic="product">
   <div class="article-card-meta">
+    <span class="article-tag">Product Strategy</span>
+    <span class="article-dot"></span>
     <span class="article-date">April 27, 2026</span>
+    <span class="article-dot"></span>
     <span class="article-read-time">7 min read</span>
   </div>
-  <h3 class="article-title">Neo-banks Didn&#x27;t Lose to Banks. They Lost to Themselves.</h3>
-  <p class="article-excerpt">Only 15% of neo-banks are profitable in 2026. Twenty-seven percent of new users go inactive within their first year. Thirty-nine percent of customers hold...</p>
+  <h3 class="article-title">Neo-banks Didn't Lose to Banks. They Lost to Themselves.</h3>
+  <p class="article-excerpt">Only 15% of neo-banks are profitable in 2026. Twenty-seven percent of new users go inactive within their first year. Thirty-nine percent of customers hold accounts at both a neo-bank and a traditional bank.</p>
   <div class="article-card-footer">
     <span class="article-topic-tag">Product Strategy</span>
     <span class="article-arrow">→</span>
@@ -286,11 +610,14 @@
 <!-- ARTICLE:google-declared-war-on-figma-the-wrong-people-are-worried -->
 <a class="article-card" href="./writing/google-declared-war-on-figma-the-wrong-people-are-worried.html" data-topic="ai">
   <div class="article-card-meta">
+    <span class="article-tag">AI &amp; Design</span>
+    <span class="article-dot"></span>
     <span class="article-date">April 24, 2026</span>
+    <span class="article-dot"></span>
     <span class="article-read-time">6 min read</span>
   </div>
   <h3 class="article-title">Google Declared War on Figma. The Wrong People Are Worried.</h3>
-  <p class="article-excerpt">Google relaunched Stitch on March 19th. Multi-screen generation from a single natural language prompt. An AI-native infinite canvas. Voice commands....</p>
+  <p class="article-excerpt">Google relaunched Stitch on March 19th. Multi-screen generation from a single natural language prompt. An AI-native infinite canvas. Voice commands. The Figma product managers are relaxed. The designers are panicking.</p>
   <div class="article-card-footer">
     <span class="article-topic-tag">AI &amp; Design</span>
     <span class="article-arrow">→</span>
@@ -301,11 +628,14 @@
 <!-- ARTICLE:compliance-is-not-a-constraint-it-is-the-only-differentiator-fintech-has-left -->
 <a class="article-card" href="./writing/compliance-is-not-a-constraint-it-is-the-only-differentiator-fintech-has-left.html" data-topic="product">
   <div class="article-card-meta">
+    <span class="article-tag">Product Strategy</span>
+    <span class="article-dot"></span>
     <span class="article-date">April 22, 2026</span>
+    <span class="article-dot"></span>
     <span class="article-read-time">8 min read</span>
   </div>
   <h3 class="article-title">Compliance Is Not a Constraint. It Is the Only Differentiator Fintech Has Left.</h3>
-  <p class="article-excerpt">Open every consumer fintech app on your phone in dark mode. Gradient cards. AI assistant tiles. Apple Wallet-style transaction lists. Round-up savings....</p>
+  <p class="article-excerpt">Open every consumer fintech app on your phone in dark mode. Gradient cards. AI assistant tiles. Apple Wallet-style transaction lists. They all look identical — because they all copied the same three references.</p>
   <div class="article-card-footer">
     <span class="article-topic-tag">Product Strategy</span>
     <span class="article-arrow">→</span>
@@ -316,11 +646,14 @@
 <!-- ARTICLE:what-running-an-agency-taught-me-about-director-level-clarity -->
 <a class="article-card" href="./writing/what-running-an-agency-taught-me-about-director-level-clarity.html" data-topic="leadership">
   <div class="article-card-meta">
+    <span class="article-tag">Design Leadership</span>
+    <span class="article-dot"></span>
     <span class="article-date">April 20, 2026</span>
+    <span class="article-dot"></span>
     <span class="article-read-time">7 min read</span>
   </div>
   <h3 class="article-title">What Running an Agency Taught Me About Director-Level Clarity</h3>
-  <p class="article-excerpt">The best thing I ever did for my director-level work was stop being a director.</p>
+  <p class="article-excerpt">The best thing I ever did for my director-level work was stop being a director. Leaving the structure of a big org and running client delivery from scratch stripped away every comfort blanket I'd been hiding behind.</p>
   <div class="article-card-footer">
     <span class="article-topic-tag">Design Leadership</span>
     <span class="article-arrow">→</span>
@@ -331,11 +664,14 @@
 <!-- ARTICLE:the-ai-hiring-bet-thats-already-going-wrong -->
 <a class="article-card" href="./writing/the-ai-hiring-bet-thats-already-going-wrong.html" data-topic="leadership">
   <div class="article-card-meta">
+    <span class="article-tag">Design Leadership</span>
+    <span class="article-dot"></span>
     <span class="article-date">April 17, 2026</span>
+    <span class="article-dot"></span>
     <span class="article-read-time">6 min read</span>
   </div>
-  <h3 class="article-title">The AI Hiring Bet That&#x27;s Already Going Wrong</h3>
-  <p class="article-excerpt">Fortune published the numbers last week, and they&#x27;re worth sitting with. Sixty-six percent of CEOs plan to freeze or cut hiring through the rest of 2026....</p>
+  <h3 class="article-title">The AI Hiring Bet That's Already Going Wrong</h3>
+  <p class="article-excerpt">Sixty-six percent of CEOs plan to freeze or cut hiring through the rest of 2026. The assumption: AI will absorb the output. What they haven't accounted for is the quality gap no model can close.</p>
   <div class="article-card-footer">
     <span class="article-topic-tag">Design Leadership</span>
     <span class="article-arrow">→</span>
@@ -346,11 +682,14 @@
 <!-- ARTICLE:the-rise-of-the-super-ic-why-the-best-senior-designers-dont-want-your-management-title -->
 <a class="article-card" href="./writing/the-rise-of-the-super-ic-why-the-best-senior-designers-dont-want-your-management-title.html" data-topic="leadership">
   <div class="article-card-meta">
+    <span class="article-tag">Design Leadership</span>
+    <span class="article-dot"></span>
     <span class="article-date">April 15, 2026</span>
+    <span class="article-dot"></span>
     <span class="article-read-time">7 min read</span>
   </div>
-  <h3 class="article-title">The Rise of the Super IC: Why the Best Senior Designers Don&#x27;t Want Your Management Title</h3>
-  <p class="article-excerpt">Two numbers to start with.</p>
+  <h3 class="article-title">The Rise of the Super IC: Why the Best Senior Designers Don't Want Your Management Title</h3>
+  <p class="article-excerpt">The most dangerous thing happening in design right now isn't AI. It's the quiet exodus of the best senior designers away from management and into deep, autonomous craft work.</p>
   <div class="article-card-footer">
     <span class="article-topic-tag">Design Leadership</span>
     <span class="article-arrow">→</span>
@@ -361,11 +700,14 @@
 <!-- ARTICLE:the-figma-canvas-is-now-open-to-ai-agents-most-design-teams-arent-ready -->
 <a class="article-card" href="./writing/the-figma-canvas-is-now-open-to-ai-agents-most-design-teams-arent-ready.html" data-topic="ai">
   <div class="article-card-meta">
+    <span class="article-tag">AI &amp; Design</span>
+    <span class="article-dot"></span>
     <span class="article-date">April 13, 2026</span>
+    <span class="article-dot"></span>
     <span class="article-read-time">5 min read</span>
   </div>
-  <h3 class="article-title">The Figma Canvas Is Now Open to AI Agents. Most Design Teams Aren&#x27;t Ready.</h3>
-  <p class="article-excerpt">Figma just gave AI agents write access to your design files. Not read access. Write. Through the Figma MCP server, agents can now create frames, build...</p>
+  <h3 class="article-title">The Figma Canvas Is Now Open to AI Agents. Most Design Teams Aren't Ready.</h3>
+  <p class="article-excerpt">Figma just gave AI agents write access to your design files. Not read access. Write. Through the Figma MCP server, agents can now create frames, build components, and modify live designs.</p>
   <div class="article-card-footer">
     <span class="article-topic-tag">AI &amp; Design</span>
     <span class="article-arrow">→</span>
@@ -376,11 +718,14 @@
 <!-- ARTICLE:your-design-system-isnt-a-library-anymore-its-your-ais-operating-manual -->
 <a class="article-card" href="./writing/your-design-system-isnt-a-library-anymore-its-your-ais-operating-manual.html" data-topic="ai">
   <div class="article-card-meta">
+    <span class="article-tag">AI &amp; Design</span>
+    <span class="article-dot"></span>
     <span class="article-date">April 10, 2026</span>
+    <span class="article-dot"></span>
     <span class="article-read-time">7 min read</span>
   </div>
-  <h3 class="article-title">Your Design System Isn&#x27;t a Library Anymore. It&#x27;s Your AI&#x27;s Operating Manual.</h3>
-  <p class="article-excerpt">I have spent the last decade building, scaling, and maintaining design systems. Tokens, components, documentation, governance. The whole machine.</p>
+  <h3 class="article-title">Your Design System Isn't a Library Anymore. It's Your AI's Operating Manual.</h3>
+  <p class="article-excerpt">I have spent the last decade building, scaling, and maintaining design systems. Tokens, components, documentation, governance. The whole machine. AI just changed what all of it is for.</p>
   <div class="article-card-footer">
     <span class="article-topic-tag">AI &amp; Design</span>
     <span class="article-arrow">→</span>
@@ -391,11 +736,14 @@
 <!-- ARTICLE:vibe-design-is-real-it-wont-replace-designers-it-will-expose-them -->
 <a class="article-card" href="./writing/vibe-design-is-real-it-wont-replace-designers-it-will-expose-them.html" data-topic="ai">
   <div class="article-card-meta">
+    <span class="article-tag">AI &amp; Design</span>
+    <span class="article-dot"></span>
     <span class="article-date">April 8, 2026</span>
+    <span class="article-dot"></span>
     <span class="article-read-time">6 min read</span>
   </div>
-  <h3 class="article-title">Vibe Design Is Real. It Won&#x27;t Replace Designers. It Will Expose Them.</h3>
-  <p class="article-excerpt">Last week, Google redesigned Stitch. The pitch: describe a business goal or an emotional direction, and an AI agent builds you high-fidelity UI. They&#x27;re...</p>
+  <h3 class="article-title">Vibe Design Is Real. It Won't Replace Designers. It Will Expose Them.</h3>
+  <p class="article-excerpt">Last week, Google redesigned Stitch. The pitch: describe a business goal or an emotional direction, and an AI agent builds you high-fidelity UI. The designers who are worried about this are the wrong ones to be worried.</p>
   <div class="article-card-footer">
     <span class="article-topic-tag">AI &amp; Design</span>
     <span class="article-arrow">→</span>
@@ -406,11 +754,14 @@
 <!-- ARTICLE:figmas-ai-agents-can-now-design-for-you-most-teams-arent-ready -->
 <a class="article-card" href="./writing/figmas-ai-agents-can-now-design-for-you-most-teams-arent-ready.html" data-topic="ai">
   <div class="article-card-meta">
+    <span class="article-tag">AI &amp; Design</span>
+    <span class="article-dot"></span>
     <span class="article-date">April 3, 2026</span>
+    <span class="article-dot"></span>
     <span class="article-read-time">5 min read</span>
   </div>
-  <h3 class="article-title">Figma&#x27;s AI Agents Can Now Design For You. Most Teams Aren&#x27;t Ready.</h3>
-  <p class="article-excerpt">Yesterday, Figma announced that AI agents can now write directly to your Figma files. Not generate images and paste them in. Not suggest layout options...</p>
+  <h3 class="article-title">Figma's AI Agents Can Now Design For You. Most Teams Aren't Ready.</h3>
+  <p class="article-excerpt">Yesterday, Figma announced that AI agents can now write directly to your Figma files. Not generate images and paste them in. Not suggest layout options in a sidebar. Write. To your actual canvas.</p>
   <div class="article-card-footer">
     <span class="article-topic-tag">AI &amp; Design</span>
     <span class="article-arrow">→</span>
@@ -421,11 +772,14 @@
 <!-- ARTICLE:ai-fluency-isnt-the-skill-knowing-when-ai-is-wrong-is -->
 <a class="article-card" href="./writing/ai-fluency-isnt-the-skill-knowing-when-ai-is-wrong-is.html" data-topic="ai">
   <div class="article-card-meta">
+    <span class="article-tag">AI &amp; Design</span>
+    <span class="article-dot"></span>
     <span class="article-date">March 23, 2026</span>
+    <span class="article-dot"></span>
     <span class="article-read-time">4 min read</span>
   </div>
-  <h3 class="article-title">AI fluency isn&#x27;t the skill. Knowing when AI is wrong is.</h3>
-  <p class="article-excerpt">The industry just caught up to something I&#x27;ve known for seven years. NNGroup&#x27;s State of UX 2026 landed this week with a headline already circulating...</p>
+  <h3 class="article-title">AI Fluency Isn't the Skill. Knowing When AI Is Wrong Is.</h3>
+  <p class="article-excerpt">The industry just caught up to something I've known for seven years. NNGroup's State of UX 2026 landed this week and the headline is already circulating through every design Slack I'm in.</p>
   <div class="article-card-footer">
     <span class="article-topic-tag">AI &amp; Design</span>
     <span class="article-arrow">→</span>
@@ -433,22 +787,21 @@
 </a>
 <!-- /ARTICLE:ai-fluency-isnt-the-skill-knowing-when-ai-is-wrong-is -->
 
-
     </div>
   </div>
 
   <!-- Subscribe -->
   <div class="subscribe-strip">
     <div class="subscribe-strip-copy">
-      <h3>Stay in the loop.</h3>
-      <p>New articles on AI design, leadership, and product strategy. No noise, no filler. Straight to your inbox when it's worth reading.</p>
-      <div class="share-bar" style="margin-top:20px;">
+      <h3>Worth reading.<br/>Worth sharing.</h3>
+      <p>New articles on AI design, leadership, and product strategy. No noise, no filler. Straight to your inbox when it matters.</p>
+      <div class="share-bar">
         <span class="share-bar-label">Share</span>
         <a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fwww.jaytulloch.com%2Fwriting.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">
           <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
           LinkedIn
         </a>
-        <a class="share-btn" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.jaytulloch.com%2Fwriting.html&text=Design%20leadership%2C%20AI%2C%20and%20fintech%20UX%20%E2%80%94%20by%20%40jaytulloch" target="_blank" rel="noopener" aria-label="Share on X">
+        <a class="share-btn x-btn" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.jaytulloch.com%2Fwriting.html&text=Design%20leadership%2C%20AI%2C%20and%20fintech%20UX%20%E2%80%94%20by%20%40jaytulloch" target="_blank" rel="noopener" aria-label="Share on X">
           <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
           X
         </a>
@@ -458,7 +811,7 @@
         </button>
       </div>
     </div>
-    <a class="subscribe-btn" href="https://jaytulloch.substack.com/subscribe" target="_blank" rel="noopener">Subscribe on Substack</a>
+    <a class="subscribe-btn" href="https://jaytulloch.substack.com/subscribe" target="_blank" rel="noopener">Subscribe on Substack →</a>
   </div>
 
   <!-- Footer -->
@@ -474,36 +827,37 @@
   </footer>
 
   <script>
-    // Theme toggle
-    (function() {
-      var html = document.documentElement;
-      if (btn) btn.addEventListener('click', function() {
-      });
-    })();
-
     // Copy link
     var copyBtn = document.getElementById('copy-writing-link');
     if (copyBtn) copyBtn.addEventListener('click', function() {
       navigator.clipboard.writeText(window.location.href).then(function() {
         copyBtn.classList.add('copied');
         copyBtn.textContent = 'Copied!';
-        setTimeout(function() { copyBtn.classList.remove('copied'); copyBtn.innerHTML = '<svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> Copy link'; }, 2000);
+        setTimeout(function() {
+          copyBtn.classList.remove('copied');
+          copyBtn.innerHTML = '<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> Copy link';
+        }, 2000);
       });
     });
 
-    // Topic filter
+    // Topic filter — handles both featured card and grid cards
     document.querySelectorAll('.topic-pill').forEach(function(pill) {
       pill.addEventListener('click', function() {
         document.querySelectorAll('.topic-pill').forEach(function(p) { p.classList.remove('active'); });
         this.classList.add('active');
         var topic = this.dataset.topic;
+
+        // Grid cards
         document.querySelectorAll('.article-card[data-topic]').forEach(function(card) {
-          if (topic === 'all' || card.dataset.topic === topic) {
-            card.style.display = '';
-          } else {
-            card.style.display = 'none';
-          }
+          card.style.display = (topic === 'all' || card.dataset.topic === topic) ? '' : 'none';
         });
+
+        // Featured card
+        var featured = document.getElementById('featured-wrapper');
+        var featuredCard = document.getElementById('featured-card');
+        if (featured && featuredCard) {
+          featured.style.display = (topic === 'all' || featuredCard.dataset.topic === topic) ? '' : 'none';
+        }
       });
     });
 
@@ -511,13 +865,12 @@
     var reveals = document.querySelectorAll('.reveal');
     var observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
-        if (entry.isIntersecting) { entry.target.classList.add('visible'); }
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
       });
     }, { threshold: 0.1 });
     reveals.forEach(function(el) { observer.observe(el); });
-  </script>
 
-  <script>
+    // Hamburger
     (function() {
       var btn = document.getElementById('nav-hamburger');
       var drawer = document.getElementById('mobile-drawer');
