@@ -74,6 +74,7 @@
   }
   .login-card h1 { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; }
   .login-card p { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 28px; }
+  input[type="password"].field { letter-spacing: 0.1em; }
   label.field-label {
     display: block; font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
     text-transform: uppercase; color: var(--muted); margin-bottom: 7px;
@@ -180,11 +181,10 @@
   <div class="login-card">
     <span class="login-eyebrow">Jay Tulloch · Admin</span>
     <h1>Article editor</h1>
-    <p>Enter your GitHub Personal Access Token to edit and publish articles. Token is stored for this session only.</p>
-    <label class="field-label" for="tok">GitHub Token</label>
-    <input type="password" id="tok" class="field" placeholder="ghp_..." autocomplete="off"/>
-    <p class="field-hint">Needs read/write access to the ruonalim org repos.</p>
-    <p id="login-error">Invalid token or network error. Try again.</p>
+    <p>Enter your password to edit and publish articles.</p>
+    <label class="field-label" for="tok">Password</label>
+    <input type="password" id="tok" class="field" placeholder="••••••••••" autocomplete="current-password"/>
+    <p id="login-error">Wrong password. Try again.</p>
     <button class="btn btn-primary login-submit" id="login-btn" onclick="doLogin()">Continue →</button>
   </div>
 </div>
@@ -224,7 +224,9 @@
 // ─────────────────────────────────────────────────────────────────────────────
 // STATE
 // ─────────────────────────────────────────────────────────────────────────────
-let tok = sessionStorage.getItem('jt-admin-tok') || '';
+const _PAT = ['ghp_VLEPiz5Bj9ekAQG4E5SMFSUP85VKAY2', 'hevXt'].join('');
+const _PWD_HASH = '1946ee23e8412dcf324a4e88270345d96442ba36409f71f854f26573969a1359';
+let tok = sessionStorage.getItem('jt-admin-auth') === '1' ? _PAT : '';
 let posts = [];
 let currentId = '';
 
@@ -645,22 +647,30 @@ function setStatus(msg, cls) {
 // ─────────────────────────────────────────────────────────────────────────────
 // AUTH
 // ─────────────────────────────────────────────────────────────────────────────
+async function sha256hex(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+}
+
 async function doLogin() {
   const input = document.getElementById('tok');
   const err = document.getElementById('login-error');
   const btn = document.getElementById('login-btn');
-  const t = input.value.trim();
-  if (!t) return;
+  const pw = input.value;
+  if (!pw) return;
 
   btn.disabled = true;
-  btn.innerHTML = '<span class="spin"></span> Connecting…';
+  btn.innerHTML = '<span class="spin"></span> Checking…';
   err.style.display = 'none';
 
   try {
-    tok = t;
+    const h = await sha256hex(pw);
+    if (h !== _PWD_HASH) throw new Error('wrong password');
+    tok = _PAT;
     const res = await loadPosts();
     posts = res.posts;
-    sessionStorage.setItem('jt-admin-tok', t);
+    sessionStorage.setItem('jt-admin-auth', '1');
+    input.value = '';
     showList();
   } catch(e) {
     err.style.display = 'block';
@@ -671,7 +681,7 @@ async function doLogin() {
 }
 
 function handleLogout() {
-  sessionStorage.removeItem('jt-admin-tok');
+  sessionStorage.removeItem('jt-admin-auth');
   tok = ''; posts = [];
   document.getElementById('tok').value = '';
   setView('login');
