@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png"/>
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png"/>
+  <title>404 · Jay Tulloch</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #FFFFFF; --bg-card: #FFFFFF; --bg-elevated: #F5F5F7;
+      --text: #111111; --text-muted: #6B6E74; --text-body: #141414;
+      --border: #E8E8EC; --border-strong: #D0D0D0;
+      --tag-bg: #EAF0FF; --accent: #0044E4;
+      --font: 'Instrument Sans', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+      --black: #000000; --white: #FFFFFF;
+      --gray-dark: #F5F5F7; --gray-mid: #E0E0E4; --gray-light: #6B6E74;
+    }
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      background: var(--black);
+      color: var(--text);
+      font-family: var(--font);
+      -webkit-font-smoothing: antialiased;
+      cursor: crosshair;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── Particle canvas (background) ─────────────────────────── */
+    #particles {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+    }
+
+    /* ─── Scene container ──────────────────────────────────────── */
+    .scene {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      perspective: 1200px;
+    }
+
+    /* ─── 3D number block ──────────────────────────────────────── */
+    .number-wrap {
+      transform-style: preserve-3d;
+      will-change: transform;
+      transition: transform 0.08s ease-out;
+    }
+
+    .four-oh-four {
+      font-size: clamp(120px, 22vw, 280px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      line-height: 0.85;
+      text-transform: uppercase;
+      color: var(--text);
+      position: relative;
+      transform-style: preserve-3d;
+      user-select: none;
+    }
+
+    /* ─── 3D depth layers ──────────────────────────────────────── */
+    .four-oh-four .layer {
+      display: block;
+    }
+    .four-oh-four .layer-front {
+      position: relative;
+      z-index: 3;
+      background: linear-gradient(180deg, var(--white) 0%, #c0c0c0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .four-oh-four .layer-shadow {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      color: var(--accent);
+      transform: translateZ(-40px) translateX(4px) translateY(4px);
+      opacity: 0.5;
+      filter: blur(1px);
+    }
+    .four-oh-four .layer-deep {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      color: #1a0000;
+      transform: translateZ(-80px) translateX(8px) translateY(8px);
+      opacity: 0.3;
+      filter: blur(3px);
+    }
+
+    /* ─── Glitch effect ────────────────────────────────────────── */
+    .four-oh-four .glitch-1,
+    .four-oh-four .glitch-2 {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .four-oh-four .glitch-1 {
+      color: #00ffff;
+      animation: glitch1 4s infinite;
+    }
+    .four-oh-four .glitch-2 {
+      color: var(--accent);
+      animation: glitch2 4s infinite;
+    }
+    @keyframes glitch1 {
+      0%, 90%, 100% { opacity: 0; transform: translate(0); clip-path: inset(0 0 100% 0); }
+      91% { opacity: 0.7; transform: translate(-6px, -2px); clip-path: inset(20% 0 40% 0); }
+      92% { opacity: 0; }
+      93% { opacity: 0.5; transform: translate(4px, 1px); clip-path: inset(60% 0 10% 0); }
+      94% { opacity: 0; }
+      95% { opacity: 0.6; transform: translate(-3px, 2px); clip-path: inset(10% 0 70% 0); }
+      96% { opacity: 0; }
+    }
+    @keyframes glitch2 {
+      0%, 88%, 100% { opacity: 0; transform: translate(0); clip-path: inset(0 0 100% 0); }
+      89% { opacity: 0.6; transform: translate(5px, -1px); clip-path: inset(40% 0 20% 0); }
+      90% { opacity: 0; }
+      91.5% { opacity: 0.4; transform: translate(-4px, 3px); clip-path: inset(70% 0 5% 0); }
+      92.5% { opacity: 0; }
+    }
+
+    /* ─── Horizontal scan line ─────────────────────────────────── */
+    .scanline {
+      position: fixed;
+      left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(230,51,41,0.4) 20%, rgba(230,51,41,0.6) 50%, rgba(230,51,41,0.4) 80%, transparent);
+      z-index: 5;
+      animation: scan 3.5s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes scan {
+      0% { top: -2px; }
+      100% { top: 100%; }
+    }
+
+    /* ─── Grain overlay ────────────────────────────────────────── */
+    .grain {
+      position: fixed;
+      inset: 0;
+      z-index: 6;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23g)' opacity='1'/%3E%3C/svg%3E");
+      background-size: 220px 220px;
+      opacity: 0.04;
+      mix-blend-mode: overlay;
+      animation: grain-shift 0.5s steps(1) infinite;
+    }
+    @keyframes grain-shift {
+      0%   { background-position:   0px   0px; }
+      20%  { background-position: -44px -28px; }
+      40%  { background-position:  28px  48px; }
+      60%  { background-position: -60px  18px; }
+      80%  { background-position:  40px -52px; }
+      100% { background-position:   0px   0px; }
+    }
+
+    /* ─── Subtitle + CTA ───────────────────────────────────────── */
+    .error-sub {
+      margin-top: 32px;
+      text-align: center;
+      z-index: 2;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fade-up 0.7s cubic-bezier(0.16,1,0.3,1) 0.6s forwards;
+    }
+    .error-sub .tagline {
+      font-size: clamp(13px, 1.8vw, 17px);
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      margin-bottom: 36px;
+    }
+    .error-sub .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 16px 36px;
+      transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
+      position: relative;
+      overflow: hidden;
+    }
+    .cta::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--accent);
+      transform: translateX(-101%);
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+      z-index: -1;
+    }
+    .cta:hover::before {
+      transform: translateX(0);
+    }
+    .cta:hover {
+      border-color: var(--accent);
+      color: var(--text);
+      gap: 16px;
+    }
+    .cta .arrow {
+      transition: transform 0.3s ease;
+    }
+    .cta:hover .arrow {
+      transform: translateX(4px);
+    }
+
+    @keyframes fade-up {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── Nav (minimal) ────────────────────────────────────────── */
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 10;
+      padding: 28px clamp(32px, 5vw, 80px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fade-up 0.5s ease 0.2s forwards;
+    }
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      opacity: 0;
+      animation: fade-up 0.5s ease 0.3s forwards;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: blink 1.5s ease infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+
+    /* ─── Floating geometry ────────────────────────────────────── */
+    .geo {
+      position: fixed;
+      z-index: 0;
+      border: 1px solid rgba(230,51,41,0.12);
+      pointer-events: none;
+      animation: float 20s ease-in-out infinite;
+    }
+    .geo-1 {
+      width: 200px; height: 200px;
+      top: 10%; left: 8%;
+      transform: rotate(45deg);
+      animation-duration: 18s;
+    }
+    .geo-2 {
+      width: 120px; height: 120px;
+      bottom: 15%; right: 12%;
+      border-radius: 50%;
+      animation-duration: 22s;
+      animation-delay: -5s;
+    }
+    .geo-3 {
+      width: 80px; height: 80px;
+      top: 25%; right: 20%;
+      animation-duration: 15s;
+      animation-delay: -8s;
+    }
+    @keyframes float {
+      0%, 100% { transform: rotate(0deg) translateY(0); opacity: 0.4; }
+      25% { transform: rotate(90deg) translateY(-20px); opacity: 0.7; }
+      50% { transform: rotate(180deg) translateY(10px); opacity: 0.3; }
+      75% { transform: rotate(270deg) translateY(-15px); opacity: 0.6; }
+    }
+
+    /* ─── Entry animation for the 404 ──────────────────────────── */
+    .number-wrap {
+      opacity: 0;
+      animation: number-enter 1s cubic-bezier(0.16,1,0.3,1) 0.15s forwards;
+    }
+    @keyframes number-enter {
+      from {
+        opacity: 0;
+        transform: perspective(1200px) rotateX(25deg) translateY(60px) scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: perspective(1200px) rotateX(0deg) translateY(0) scale(1);
+      }
+    }
+
+    /* ─── Responsive ───────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .geo { display: none; }
+    }
+  
+    /* ─── Playfair Display callout accent ──────────────────────────── */
+    h1 em, h2 em {
+      font-family: 'Abril Fatface', Georgia, serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 1em;
+      letter-spacing: 0;
+    }
+    .pod-stat-value em {
+      font-family: var(--font);
+      font-weight: inherit;
+      font-style: normal;
+      letter-spacing: inherit;
+    }
+        /* ─── Navigation ───────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px clamp(32px, 5vw, 80px);
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid #E8E8EC;
+    }
+    .nav-logo { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #111111; flex-shrink: 0; }
+    .nav-right { display: flex; align-items: center; }
+    .nav-links { display: flex; gap: 32px; align-items: center; list-style: none; margin-right: 48px; }
+    .nav-links li a { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #6B6E74; transition: color 0.2s; }
+    .nav-links li a:hover, .nav-links li a.active { color: #111111; }
+    .nav-cta { pointer-events: all; }
+    .nav-cta a { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #111111; border: 1px solid #111111; border-radius: 2px; padding: 10px 22px; transition: background 0.25s, color 0.25s; display: inline-block; }
+    .nav-cta a:hover { background: #111111; color: #fff; }
+    .nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 6px; width: 32px; height: 32px; cursor: pointer; background: none; border: none; padding: 0; pointer-events: all; }
+    .nav-hamburger span { display: block; width: 100%; height: 1.5px; background: #111111; transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.25s; transform-origin: center; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(3.75px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-3.75px) rotate(-45deg); }
+    .mobile-drawer { position: fixed; inset: 0; z-index: 10000; background: rgba(0,0,0,0.95); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 40px; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+    .mobile-drawer.open { opacity: 1; pointer-events: all; }
+    .mobile-drawer a { font-size: clamp(28px, 6vw, 42px); font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 0.4s ease, color 0.2s; }
+    .mobile-drawer.open a { opacity: 1; transform: translateY(0); }
+    .mobile-drawer.open a:nth-child(1) { transition-delay: 0.1s, 0.1s, 0s; }
+    .mobile-drawer.open a:nth-child(2) { transition-delay: 0.15s, 0.15s, 0s; }
+    .mobile-drawer.open a:nth-child(3) { transition-delay: 0.2s, 0.2s, 0s; }
+    .mobile-drawer.open a:nth-child(4) { transition-delay: 0.25s, 0.25s, 0s; }
+    .mobile-drawer.open a:nth-child(5) { transition-delay: 0.3s, 0.3s, 0s; }
+    .mobile-drawer.open a:nth-child(6) { transition-delay: 0.35s, 0.35s, 0s; }
+    .mobile-drawer a:hover { color: #0044E4; }
+    @media (max-width: 900px) {
+      nav { padding: 20px 24px; }
+      .nav-hamburger { display: flex; }
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+    }
+    </style>
+</head>
+<body>
+  <canvas id="particles"></canvas>
+  <div class="grain"></div>
+  <div class="scanline"></div>
+
+  <div class="geo geo-1"></div>
+  <div class="geo geo-2"></div>
+  <div class="geo geo-3"></div>
+
+  <nav class="nav-404">
+    <a href="./" class="logo">Jay Tulloch</a>
+    <div class="status">Error 404</div>
+  </nav>
+
+  <div class="scene">
+    <div class="number-wrap" id="number-wrap">
+      <div class="four-oh-four" aria-label="404">
+        <span class="layer layer-deep" aria-hidden="true">404</span>
+        <span class="layer layer-shadow" aria-hidden="true">404</span>
+        <span class="layer layer-front">404</span>
+        <span class="glitch-1" aria-hidden="true">404</span>
+        <span class="glitch-2" aria-hidden="true">404</span>
+      </div>
+    </div>
+
+    <div class="error-sub">
+      <p class="tagline">This page doesn't exist. The work does.</p>
+      <a href="./" class="cta">
+        Back to portfolio <span class="arrow">›</span>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // ── Particle starfield ────────────────────────────────────────
+    (function() {
+      var canvas = document.getElementById('particles');
+      var ctx = canvas.getContext('2d');
+      var W, H, particles = [], mouseX = 0, mouseY = 0;
+      var PARTICLE_COUNT = 120;
+
+      function resize() {
+        W = canvas.width  = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      for (var i = 0; i < PARTICLE_COUNT; i++) {
+        particles.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          z: Math.random() * 2 + 0.5,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3,
+          r: Math.random() * 1.5 + 0.5,
+          o: Math.random() * 0.4 + 0.1,
+          red: Math.random() > 0.85
+        });
+      }
+
+      document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      }, { passive: true });
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+
+        for (var i = 0; i < particles.length; i++) {
+          var p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+
+          // Parallax from mouse
+          var px = p.x + (mouseX - W/2) * 0.01 * p.z;
+          var py = p.y + (mouseY - H/2) * 0.01 * p.z;
+
+          // Wrap
+          if (p.x < -10) p.x = W + 10;
+          if (p.x > W + 10) p.x = -10;
+          if (p.y < -10) p.y = H + 10;
+          if (p.y > H + 10) p.y = -10;
+
+          ctx.beginPath();
+          ctx.arc(px, py, p.r * p.z, 0, Math.PI * 2);
+          if (p.red) {
+            ctx.fillStyle = 'rgba(230, 51, 41, ' + (p.o * 0.8) + ')';
+          } else {
+            ctx.fillStyle = 'rgba(255, 255, 255, ' + p.o + ')';
+          }
+          ctx.fill();
+        }
+
+        // Draw subtle connection lines between nearby particles
+        for (var i = 0; i < particles.length; i++) {
+          for (var j = i + 1; j < particles.length; j++) {
+            var dx = particles[i].x - particles[j].x;
+            var dy = particles[i].y - particles[j].y;
+            var dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 100) {
+              ctx.beginPath();
+              ctx.moveTo(
+                particles[i].x + (mouseX - W/2) * 0.01 * particles[i].z,
+                particles[i].y + (mouseY - H/2) * 0.01 * particles[i].z
+              );
+              ctx.lineTo(
+                particles[j].x + (mouseX - W/2) * 0.01 * particles[j].z,
+                particles[j].y + (mouseY - H/2) * 0.01 * particles[j].z
+              );
+              var lineOpacity = (1 - dist / 100) * 0.06;
+              ctx.strokeStyle = 'rgba(230, 51, 41, ' + lineOpacity + ')';
+              ctx.lineWidth = 0.5;
+              ctx.stroke();
+            }
+          }
+        }
+
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    // ── 3D mouse-tracking tilt on 404 number ──────────────────────
+    (function() {
+      var wrap = document.getElementById('number-wrap');
+      if (!wrap) return;
+
+      document.addEventListener('mousemove', function(e) {
+        var x = (e.clientX / window.innerWidth  - 0.5) * 2;
+        var y = (e.clientY / window.innerHeight - 0.5) * 2;
+        var rotY =  x * 18;
+        var rotX = -y * 12;
+        wrap.style.transform = 'perspective(1200px) rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg)';
+      }, { passive: true });
+
+      // Reset on mouse leave
+      document.addEventListener('mouseleave', function() {
+        wrap.style.transition = 'transform 0.8s cubic-bezier(0.16,1,0.3,1)';
+        wrap.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg)';
+        setTimeout(function() { wrap.style.transition = 'transform 0.08s ease-out'; }, 800);
+      });
+    })();
+
+    // ── Gyroscope for mobile ──────────────────────────────────────
+    (function() {
+      var wrap = document.getElementById('number-wrap');
+      if (!wrap) return;
+      window.addEventListener('deviceorientation', function(e) {
+        if (e.gamma === null) return;
+        var rotY = (e.gamma / 45) * 18;  // left-right tilt
+        var rotX = ((e.beta - 45) / 45) * 12; // forward-back tilt
+        wrap.style.transform = 'perspective(1200px) rotateX(' + (-rotX) + 'deg) rotateY(' + rotY + 'deg)';
+      }, { passive: true });
+    })();
+
+    // ── Magnetic CTA button ───────────────────────────────────────
+    (function() {
+      var btn = document.querySelector('.cta');
+      if (!btn || !window.matchMedia('(pointer: fine)').matches) return;
+      btn.addEventListener('mousemove', function(e) {
+        var r = btn.getBoundingClientRect();
+        var x = e.clientX - r.left - r.width / 2;
+        var y = e.clientY - r.top  - r.height / 2;
+        btn.style.transform = 'translate(' + (x * 0.15) + 'px, ' + (y * 0.2) + 'px)';
+      }, { passive: true });
+      btn.addEventListener('mouseleave', function() {
+        btn.style.transform = '';
+      });
+    })();
+  </script>
+  <script>
+    (function() {
+      var btn = document.getElementById('nav-hamburger');
+      var drawer = document.getElementById('mobile-drawer');
+      if (!btn || !drawer) return;
+      btn.addEventListener('click', function() {
+        btn.classList.toggle('open');
+        drawer.classList.toggle('open');
+        document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+      });
+      drawer.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+          btn.classList.remove('open');
+          drawer.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

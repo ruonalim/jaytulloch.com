@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png"/>
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png"/>
+  <title>AI Voice Biometrics | Telephony Authentication &middot; Jay Tulloch</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #FFFFFF; --bg-card: #FFFFFF; --bg-elevated: #F5F5F7;
+      --text: #111111; --text-muted: #6B6E74; --text-body: #141414;
+      --border: #E8E8EC; --border-strong: #D0D0D0;
+      --tag-bg: #EAF0FF; --accent: #0044E4;
+      --font: 'Instrument Sans', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+      --black: #000000; --white: #FFFFFF;
+      --gray-dark: #F5F5F7; --gray-mid: #E0E0E4; --gray-light: #6B6E74;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 16px; line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+
+
+    .cs-hero {
+      padding: 160px clamp(32px, 5vw, 80px) 100px;
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+    .cs-hero::before {
+      content: '';
+      position: absolute; top: -200px; right: -200px;
+      width: 900px; height: 900px;
+      background: none;
+      pointer-events: none;
+      animation: heroGlowDrift 10s ease-in-out infinite;
+      will-change: transform;
+    }
+        .cs-hero::after {
+      content: '';
+      position: absolute; bottom: -150px; left: -150px;
+      width: 700px; height: 700px;
+      background: none;
+      pointer-events: none;
+      animation: heroGlowDrift2 13s ease-in-out infinite;
+      will-change: transform;
+    }
+    .cs-hero-inner { max-width: 1100px; margin: 0; }
+    .cs-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; }
+    .cs-title { font-size: clamp(42px, 6vw, 80px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.0; text-transform: uppercase; margin-bottom: 32px; }
+    .cs-title em { font-style: normal; color: var(--accent); }
+    .cs-desc { font-size: clamp(16px, 1.5vw, 20px); color: var(--text-body); max-width: 680px; line-height: 1.6; margin-bottom: 60px; }
+    .cs-meta { display: flex; gap: 48px; flex-wrap: wrap; }
+    .cs-meta-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+    .cs-meta-value { font-size: 14px; font-weight: 600; color: var(--text); }
+
+    .metrics-banner { background: var(--bg-elevated); padding: 64px clamp(32px, 5vw, 80px); border-bottom: 1px solid var(--border); }
+    .metrics-banner-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .metric-block { padding: 40px 32px; background: rgba(200,16,46,0.06); border: 1px solid rgba(200,16,46,0.15); text-align: center; }
+    .metric-value { font-size: clamp(36px, 4vw, 54px); font-weight: 800; letter-spacing: -0.03em; color: var(--accent); line-height: 1; margin-bottom: 12px; }
+    .metric-label { font-size: 12px; font-weight: 500; letter-spacing: 0.06em; color: var(--text-muted); text-transform: uppercase; }
+
+    .cs-section { padding: 96px clamp(32px, 5vw, 80px); border-bottom: 1px solid var(--border); }
+    .cs-section:last-of-type { border-bottom: none; }
+    .cs-section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 48px; }
+    .two-col { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
+    .col-heading { font-size: clamp(28px, 3vw, 40px); font-weight: 800; letter-spacing: -0.02em; text-transform: uppercase; line-height: 1.1; position: sticky; top: 100px; }
+    .col-heading em { font-style: normal; color: var(--accent); }
+    .col-body p { font-size: 17px; color: #2D2D30; line-height: 1.75; margin-bottom: 24px; }
+    .col-body p:last-child { margin-bottom: 0; }
+    .col-body strong { color: var(--text); font-weight: 700; }
+
+    .deliverables { margin-top: 40px; display: flex; flex-direction: column; gap: 0; }
+    .deliverable-item { padding: 20px 0; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 32px 1fr; gap: 16px; align-items: start; }
+    .deliverable-item:last-child { border-bottom: none; }
+    .d-num { font-size: 11px; font-weight: 700; color: var(--accent); padding-top: 3px; }
+    .d-text { font-size: 16px; color: #2D2D30; line-height: 1.6; }
+    .d-text strong { color: var(--text); }
+
+    .highlight-block {
+      margin-top: 40px; padding: 40px 40px;
+      background: rgba(200,16,46,0.08);
+      border-left: 4px solid var(--accent);
+    }
+    .highlight-block p { font-size: 20px; font-weight: 600; color: var(--text); line-height: 1.5; font-style: italic; }
+
+    .outcomes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin-top: 48px; }
+    .outcome-card { padding: 40px 36px; background: var(--bg-elevated); border-left: 3px solid var(--accent); }
+    .outcome-card h4 { font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .outcome-card p { font-size: 16px; color: #2D2D30; line-height: 1.6; }
+    .outcome-card p strong { color: var(--text); }
+
+    .next-cs { padding: 96px clamp(32px, 5vw, 80px); background: var(--bg-elevated); }
+    .next-cs-inner { max-width: 1100px; margin: 0 auto; }
+    .next-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; }
+    .next-title { font-size: clamp(24px, 3vw, 36px); font-weight: 800; letter-spacing: -0.02em; text-transform: uppercase; }
+    .next-arrow { font-size: 48px; color: var(--accent); flex-shrink: 0; transition: transform 0.3s; }
+    .next-cs a { display: flex; align-items: center; gap: 40px; width: 100%; }
+    .next-cs a:hover .next-arrow { transform: translateX(8px); }
+
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      .cs-hero { padding: 120px 24px 72px; }
+      .cs-meta { gap: 28px; }
+      .metrics-banner { padding: 48px 24px; }
+      .metrics-banner-inner { grid-template-columns: 1fr; }
+      .cs-section { padding: 64px 24px; }
+      .two-col { grid-template-columns: 1fr; gap: 40px; }
+      .col-heading { position: static; }
+      .outcomes-grid { grid-template-columns: 1fr; }
+      .next-cs { padding: 64px 24px; }
+    }
+
+  /* Password Gate */
+  .cs-gate { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(28px) saturate(160%); -webkit-backdrop-filter: blur(28px) saturate(160%); background: rgba(0,0,0,0.75); transition: opacity 0.5s ease; }
+  .cs-gate.unlocking { opacity: 0; pointer-events: none; }
+  .cs-gate-card { background: rgba(10,10,10,0.97); border: 1px solid rgba(255,255,255,0.14); border-radius: 4px; padding: 52px 48px; width: 100%; max-width: 420px; text-align: center; box-shadow: 0 40px 100px rgba(0,0,0,0.8); }
+  .cs-gate-icon { display: none; }
+  .cs-gate-title { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: #fff; margin-bottom: 12px; line-height: 1.2; }
+  .cs-gate-sub { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.65; margin-bottom: 6px; }
+  .cs-gate-input-wrap { display: flex; gap: 0; border: 1px solid rgba(255,255,255,0.15); border-radius: 2px; overflow: hidden; transition: border-color 0.2s; }
+  .cs-gate-input-wrap:focus-within { border-color: rgba(255,255,255,0.4); }
+  .cs-gate-input-wrap.error { border-color: #0044E4; animation: gate-shake 0.4s ease; }
+  @keyframes gate-shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-8px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-6px); } 80% { transform: translateX(4px); } }
+  .cs-gate-input { flex: 1; background: transparent; border: none; outline: none; padding: 14px 18px; font-size: 13px; font-family: inherit; font-weight: 600; letter-spacing: 0.12em; color: var(--text); text-transform: uppercase; }
+  .cs-gate-input::placeholder { color: rgba(255,255,255,0.25); text-transform: none; letter-spacing: 0; font-weight: 400; }
+  .cs-gate-btn { background: #0044E4; border: none; color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; padding: 0 20px; cursor: pointer; font-family: inherit; transition: background 0.2s; }
+  .cs-gate-btn:hover { background: #c4271e; }
+  .cs-gate-back { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; background: none; border: none; color: var(--text-muted); font-size: 13px; font-family: inherit; cursor: pointer; padding: 0; letter-spacing: 0.02em; transition: color 0.2s; }
+  .cs-gate-back:hover { color: rgba(255,255,255,0.8); }
+  .cs-gate-earn { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 32px; border-radius: 40px; border: none; background: #fff; color: #0a0a0a; font-size: 13px; font-weight: 700; letter-spacing: 0.01em; text-decoration: none; font-family: inherit; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; width: 100%; box-sizing: border-box; }
+  .cs-gate-earn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,255,255,0.15); }
+  .cs-gate-earn-sub { font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 28px; }
+  .cs-gate-actions { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; }
+  .cs-gate-or { display: flex; align-items: center; gap: 12px; width: 100%; margin: 4px 0; }
+  .cs-gate-or::before, .cs-gate-or::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .cs-gate-or span { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+  .cs-gate-pwd-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 32px; border-radius: 40px; border: 1px solid var(--border); background: transparent; color: var(--text-muted); font-size: 13px; font-weight: 700; letter-spacing: 0.01em; text-decoration: none; font-family: inherit; cursor: pointer; transition: border-color 0.2s, color 0.2s, background 0.2s; width: 100%; box-sizing: border-box; }
+  .cs-gate-pwd-btn:hover { border-color: rgba(255,255,255,0.25); color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.03); }
+  .cs-gate-pwd-section { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.3s; opacity: 0; width: 100%; }
+  .cs-gate-pwd-section.open { max-height: 200px; opacity: 1; }
+  .cs-gate-hint { margin-top: 16px; font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 0.06em; }
+
+    /* Case Study Image Containers */
+    .cs-image-block { padding: 0 clamp(32px, 5vw, 80px); background: var(--black); }
+    .cs-image-block.on-dark { background: var(--bg-elevated); }
+    .cs-image-block-inner { max-width: 1100px; margin: 0 auto; padding: 64px 0; }
+    .cs-image-container {
+      width: 100%; border-radius: 12px; overflow: hidden;
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+      position: relative; min-height: 280px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cs-image-container img {
+      width: 100%; height: auto; display: block; border-radius: 12px;
+    }
+    .cs-image-placeholder {
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+      color: rgba(255,255,255,0.15); padding: 60px 24px; text-align: center;
+    }
+    .cs-image-placeholder .placeholder-icon { font-size: 32px; opacity: 0.4; }
+    .cs-image-placeholder .placeholder-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; opacity: 0.5;
+    }
+    .cs-image-placeholder .placeholder-desc {
+      font-size: 13px; font-weight: 400; letter-spacing: 0; max-width: 400px;
+      opacity: 0.35; text-transform: none;
+    }
+    .cs-image-full-width { padding: 0; }
+    .cs-image-full-width .cs-image-block-inner { max-width: 100%; padding: 0; }
+    .cs-image-full-width .cs-image-container { border-radius: 0; border: none; min-height: 400px; }
+
+    @media (max-width: 768px) {
+      .cs-image-block { padding: 0 24px; }
+      .cs-image-block-inner { padding: 40px 0; }
+      .cs-image-container { min-height: 200px; border-radius: 8px; }
+    }
+
+    /* Process Flow Visuals */
+    .pf-canvas { width: 100%; padding: 48px 40px; border-radius: 12px; overflow: hidden; }
+    .pf-canvas.dark-neutral { background: var(--bg-elevated); }
+    .pf-title-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 32px; }
+    .pf-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .pf-title-bar span { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+    .pf-voice-flow { display: flex; align-items: stretch; gap: 0; justify-content: center; max-width: 800px; margin: 0 auto; }
+    .pf-voice-step { flex: 1; text-align: center; position: relative; padding: 0 8px; }
+    .pf-voice-step-inner { border-radius: 12px; padding: 24px 16px; min-height: 160px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+    .pf-voice-step .pf-vs-icon { font-size: 28px; margin-bottom: 4px; }
+    .pf-voice-step .pf-vs-title { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+    .pf-voice-step .pf-vs-desc { font-size: 9px; line-height: 1.4; max-width: 120px; }
+    .pf-voice-step .pf-vs-time { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; margin-top: 4px; }
+    .pf-voice-arrow { display: flex; align-items: center; font-size: 14px; color: rgba(200,16,46,0.3); flex-shrink: 0; padding: 0 2px; }
+    .pf-voice-stat-row { display: flex; gap: 12px; justify-content: center; margin-top: 28px; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .pf-voice-stat { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; text-align: center; flex: 1; }
+    .pf-voice-stat .pvs-val { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 2px; }
+    .pf-voice-stat .pvs-lbl { font-size: 9px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+    @media (max-width: 768px) {
+      .pf-canvas { padding: 32px 20px; }
+      .pf-voice-flow { flex-direction: column; gap: 8px; }
+      .pf-voice-arrow { transform: rotate(90deg); justify-content: center; padding: 4px 0; }
+      .pf-voice-stat-row { flex-direction: column; }
+    }
+  
+    @keyframes heroGlowDrift {
+      0%   { transform: translate(0, 0) scale(1);    opacity: 0.6; }
+      25%  { transform: translate(-160px, 120px) scale(1.25); opacity: 1; }
+      50%  { transform: translate(120px, -80px) scale(0.85);  opacity: 0.75; }
+      75%  { transform: translate(-80px, -120px) scale(1.15); opacity: 0.9; }
+      100% { transform: translate(0, 0) scale(1);    opacity: 0.6; }
+    }
+    @keyframes heroGlowDrift2 {
+      0%   { transform: translate(0, 0) scale(1);    opacity: 0.5; }
+      30%  { transform: translate(140px, -100px) scale(1.2);  opacity: 0.95; }
+      60%  { transform: translate(-100px, 80px) scale(0.8);   opacity: 0.65; }
+      85%  { transform: translate(80px, 100px) scale(1.1);    opacity: 0.85; }
+      100% { transform: translate(0, 0) scale(1);    opacity: 0.5; }
+    }
+  
+    /* ─── Playfair Display callout accent ──────────────────────────── */
+    h1 em, h2 em {
+      font-family: 'Abril Fatface', Georgia, serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 1em;
+      letter-spacing: 0;
+    }
+    .pod-stat-value em {
+      font-family: var(--font);
+      font-weight: inherit;
+      font-style: normal;
+      letter-spacing: inherit;
+    }
+        /* ─── Navigation ───────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px clamp(32px, 5vw, 80px);
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid #E8E8EC;
+    }
+    .nav-logo { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #111111; flex-shrink: 0; }
+    .nav-right { display: flex; align-items: center; }
+    .nav-links { display: flex; gap: 32px; align-items: center; list-style: none; margin-right: 48px; }
+    .nav-links li a { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #6B6E74; transition: color 0.2s; }
+    .nav-links li a:hover, .nav-links li a.active { color: #111111; }
+    .nav-cta { pointer-events: all; }
+    .nav-cta a { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #111111; border: 1px solid #111111; border-radius: 2px; padding: 10px 22px; transition: background 0.25s, color 0.25s; display: inline-block; }
+    .nav-cta a:hover { background: #111111; color: #fff; }
+    .nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 6px; width: 32px; height: 32px; cursor: pointer; background: none; border: none; padding: 0; pointer-events: all; }
+    .nav-hamburger span { display: block; width: 100%; height: 1.5px; background: #111111; transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.25s; transform-origin: center; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(3.75px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-3.75px) rotate(-45deg); }
+    .mobile-drawer { position: fixed; inset: 0; z-index: 10000; background: rgba(0,0,0,0.95); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 40px; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+    .mobile-drawer.open { opacity: 1; pointer-events: all; }
+    .mobile-drawer a { font-size: clamp(28px, 6vw, 42px); font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 0.4s ease, color 0.2s; }
+    .mobile-drawer.open a { opacity: 1; transform: translateY(0); }
+    .mobile-drawer.open a:nth-child(1) { transition-delay: 0.1s, 0.1s, 0s; }
+    .mobile-drawer.open a:nth-child(2) { transition-delay: 0.15s, 0.15s, 0s; }
+    .mobile-drawer.open a:nth-child(3) { transition-delay: 0.2s, 0.2s, 0s; }
+    .mobile-drawer.open a:nth-child(4) { transition-delay: 0.25s, 0.25s, 0s; }
+    .mobile-drawer.open a:nth-child(5) { transition-delay: 0.3s, 0.3s, 0s; }
+    .mobile-drawer.open a:nth-child(6) { transition-delay: 0.35s, 0.35s, 0s; }
+    .mobile-drawer a:hover { color: #0044E4; }
+    @media (max-width: 900px) {
+      nav { padding: 20px 24px; }
+      .nav-hamburger { display: flex; }
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+    }
+    </style>
+
+</head>
+<body>
+
+    <nav>
+    <a href="./" class="nav-logo">Jay Tulloch</a>
+    <div class="nav-right">
+      <ul class="nav-links">
+      <li><a href="./#about">About</a></li>
+      <li><a href="./#work">Work</a></li>
+      <li><a href="./writing.html">Writing</a></li>
+      <li><a href="./#podcast">Podcast</a></li>
+      <li><a href="./contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-cta"><a href="./contact.html">Let's Talk</a></div>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <section class="cs-hero">
+    <div class="cs-hero-inner">
+      <p class="cs-eyebrow">Metro Bank &middot; AI Voice Biometrics &middot; 2019</p>
+      <h1 class="cs-title"><em>AI</em> Voice<br/>Biometrics</h1>
+      <p class="cs-desc">Designed the end-to-end experience for AI-powered voice authentication in Metro Bank's telephony channel, replacing forgotten credentials with conversational identity verification, reducing authentication time by 81% and saving £1.2M annually.</p>
+      <div class="cs-meta">
+        <div class="cs-meta-item"><p class="cs-meta-label">Role</p><p class="cs-meta-value">Head of Product Design</p></div><div class="cs-meta-item"><p class="cs-meta-label">Timeline</p><p class="cs-meta-value">2019</p></div><div class="cs-meta-item"><p class="cs-meta-label">Cross-functional</p><p class="cs-meta-value">CX, Operations, Fraud, Compliance</p></div><div class="cs-meta-item"><p class="cs-meta-label">Customer Impact</p><p class="cs-meta-value">40K+ calls/week</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="metrics-banner">
+    <div class="metrics-banner-inner">
+      <div class="metric-block reveal">
+        <div class="metric-value">81%</div>
+        <div class="metric-label">Reduction in auth time</div>
+      </div>
+      <div class="metric-block reveal">
+        <div class="metric-value">76%</div>
+        <div class="metric-label">Customer enrolment rate</div>
+      </div>
+      <div class="metric-block reveal">
+        <div class="metric-value">£1.2M</div>
+        <div class="metric-label">Annual saving</div>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <p class="section-label">The Challenge</p>
+      <div class="two-col">
+        <div><h2 class="col-heading">Forgotten<br/>credentials.<br/><em>Frustrated</em><br/>customers.</h2></div>
+        <div class="col-body reveal">
+          
+          <p>Metro Bank's call centre handled <strong>40,000+ calls per week</strong>. Our data revealed that <strong>38% of callers could not complete traditional credential-based verification</strong> on their first attempt. Customers needed their Customer ID, password, and security number, but with only 1–2 logins per week, these were frequently forgotten.</p>
+          <p>Even fallback methods had a <strong>22% failure rate</strong>. The result: frustrated customers locked out of their accounts, call handling times averaging 6+ minutes, and a measurable impact on NPS. AI-powered voice biometrics was brought to the table as a potential solution. I took ownership of evaluating the concept, got aligned on the direction, and led the full experience design, machine learning that could build a unique voiceprint from natural conversation and passively authenticate the customer without them knowing it was happening.</p>
+          <p>The design challenge was enormous: <strong>trust and transparency</strong> (consent to voice recording without perception of surveillance), <strong>regulatory compliance</strong> (FCA, GDPR), and a <strong>layered fallback architecture</strong> that didn't rely solely on a single authentication factor.</p>
+    
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cs-image-block reveal">
+    <div class="cs-image-block-inner">
+      <div class="cs-image-container">
+        <div class="pf-canvas dark-neutral" style="border-radius: 12px;">
+          <div class="pf-title-bar">
+            <div class="pf-dot" style="background: #c8102e;"></div>
+            <div class="pf-dot" style="background: #ff4d6a;"></div>
+            <span>Authentication Pipeline, Voice Biometrics System</span>
+          </div>
+
+          <!-- Compliance Badges -->
+          <div style="display: flex; gap: 8px; margin-bottom: 20px; padding: 0 4px; flex-wrap: wrap; align-items: center;">
+            <div style="display: flex; align-items: center; gap: 4px; background: rgba(107,209,100,0.1); border: 1px solid rgba(107,209,100,0.2); border-radius: 4px; padding: 4px 8px;">
+              <span style="font-size: 10px;">✓</span>
+              <span style="font-size: 8px; font-weight: 600; color: #6bd164;">FCA Approved</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 4px; background: rgba(107,209,100,0.1); border: 1px solid rgba(107,209,100,0.2); border-radius: 4px; padding: 4px 8px;">
+              <span style="font-size: 10px;">🔒</span>
+              <span style="font-size: 8px; font-weight: 600; color: #6bd164;">GDPR Compliant</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 4px; background: rgba(107,209,100,0.1); border: 1px solid rgba(107,209,100,0.2); border-radius: 4px; padding: 4px 8px;">
+              <span style="font-size: 10px;">🛡️</span>
+              <span style="font-size: 8px; font-weight: 600; color: #6bd164;">Anti-Spoofing</span>
+            </div>
+          </div>
+
+          <!-- Enrolment Flow -->
+          <div style="background: rgba(200,16,46,0.06); border: 1px solid rgba(200,16,46,0.12); border-radius: 10px; padding: 16px; margin-bottom: 24px;">
+            <div style="font-size: 9px; font-weight: 700; color: #ff4d6a; text-transform: uppercase; margin-bottom: 12px; letter-spacing: 0.04em;">Enrolment Flow (First-time Setup)</div>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+              <div style="background: rgba(0,0,0,0.2); border-radius: 6px; padding: 10px; text-align: center;">
+                <div style="font-size: 9px; font-weight: 700; color: #ff4d6a; margin-bottom: 6px;">Step 1</div>
+                <div style="font-size: 8px; color: rgba(255,255,255,0.6); line-height: 1.4;">Customer opts in, gives consent via app</div>
+                <div style="font-size: 7px; color: rgba(255,255,255,0.4); margin-top: 4px;">12s avg</div>
+              </div>
+              <div style="color: rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center;">›</div>
+              <div style="background: rgba(0,0,0,0.2); border-radius: 6px; padding: 10px; text-align: center;">
+                <div style="font-size: 9px; font-weight: 700; color: #ff4d6a; margin-bottom: 6px;">Step 2</div>
+                <div style="font-size: 8px; color: rgba(255,255,255,0.6); line-height: 1.4;">3–5 training calls recorded, voiceprint created</div>
+                <div style="font-size: 7px; color: rgba(255,255,255,0.4); margin-top: 4px;">~2-4 calls</div>
+              </div>
+              <div style="color: rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center;">›</div>
+              <div style="background: rgba(0,0,0,0.2); border-radius: 6px; padding: 10px; text-align: center;">
+                <div style="font-size: 9px; font-weight: 700; color: #ff4d6a; margin-bottom: 6px;">Step 3</div>
+                <div style="font-size: 8px; color: rgba(255,255,255,0.6); line-height: 1.4;">Voice model stored securely, testing begins</div>
+                <div style="font-size: 7px; color: rgba(255,255,255,0.4); margin-top: 4px;">Ready in 24h</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Authentication Pipeline -->
+          <div style="background: rgba(200,16,46,0.06); border: 1px solid rgba(200,16,46,0.12); border-radius: 10px; padding: 16px; margin-bottom: 24px;">
+            <div style="font-size: 9px; font-weight: 700; color: #ff4d6a; text-transform: uppercase; margin-bottom: 12px; letter-spacing: 0.04em;">Authentication &amp; Matching Algorithm</div>
+
+            <!-- Matching Pipeline -->
+            <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 16px;">
+              <div style="background: rgba(0,0,0,0.2); border-radius: 6px; padding: 8px; text-align: center;">
+                <div style="font-size: 8px; font-weight: 700; color: #ff4d6a; margin-bottom: 4px;">Audio Capture</div>
+                <div style="font-size: 7px; color: var(--text-muted);">Extract voice during call</div>
+                <div style="font-size: 7px; color: #ff4d6a; margin-top: 3px; font-weight: 600;">t+0–20s</div>
+              </div>
+              <div style="color: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 12px;">›</div>
+              <div style="background: rgba(0,0,0,0.2); border-radius: 6px; padding: 8px; text-align: center;">
+                <div style="font-size: 8px; font-weight: 700; color: #ff4d6a; margin-bottom: 4px;">Feature Extraction</div>
+                <div style="font-size: 7px; color: var(--text-muted);">MFCCs, spectral patterns</div>
+                <div style="font-size: 7px; color: #ff4d6a; margin-top: 3px; font-weight: 600;">t+20–45ms</div>
+              </div>
+              <div style="color: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 12px;">›</div>
+              <div style="background: rgba(0,0,0,0.2); border-radius: 6px; padding: 8px; text-align: center;">
+                <div style="font-size: 8px; font-weight: 700; color: #ff4d6a; margin-bottom: 4px;">Model Matching</div>
+                <div style="font-size: 7px; color: var(--text-muted);">Compare to voiceprint</div>
+                <div style="font-size: 7px; color: #ff4d6a; margin-top: 3px; font-weight: 600;">t+45–120ms</div>
+              </div>
+              <div style="color: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 12px;">›</div>
+              <div style="background: rgba(0,0,0,0.2); border-radius: 6px; padding: 8px; text-align: center;">
+                <div style="font-size: 8px; font-weight: 700; color: #ff4d6a; margin-bottom: 4px;">Decision Output</div>
+                <div style="font-size: 7px; color: var(--text-muted);">Confidence score (%)</div>
+                <div style="font-size: 7px; color: #ff4d6a; margin-top: 3px; font-weight: 600;">t+120–150ms</div>
+              </div>
+            </div>
+
+            <!-- Confidence Thresholds -->
+            <div style="background: rgba(0,0,0,0.2); border-radius: 6px; padding: 10px;">
+              <div style="font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.8); margin-bottom: 8px;">Confidence Thresholds &amp; Actions</div>
+              <div style="font-size: 8px; color: rgba(255,255,255,0.6); line-height: 1.7;">
+                <div style="margin-bottom: 6px;"><span style="color: #ff4d6a; font-weight: 600;">95%+ confidence:</span> Immediate authentication, proceed</div>
+                <div style="margin-bottom: 6px;"><span style="color: #ff4d6a; font-weight: 600;">85–94% confidence:</span> Request one-time PIN for extra verification</div>
+                <div style="margin-bottom: 6px;"><span style="color: #ff4d6a; font-weight: 600;">75–84% confidence:</span> Fallback to security questions + phone verification</div>
+                <div><span style="color: #ff4d6a; font-weight: 600;">&lt;75% confidence:</span> Manual agent review, retry with full PIN</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Edge Cases & Fraud Prevention -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px;">
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 8px; padding: 12px;">
+              <div style="font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.8); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.04em;">Edge Cases Handled</div>
+              <div style="font-size: 8px; color: rgba(255,255,255,0.6); line-height: 1.6;">
+                • Noisy environments (noise filtering)<br/>
+                • Cold, hoarse, emotional voices<br/>
+                • Accents &amp; speech variations<br/>
+                • Aging effects on voice (retraining)<br/>
+                • Multiple calls to build confidence
+              </div>
+            </div>
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 8px; padding: 12px;">
+              <div style="font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.8); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.04em;">Fraud &amp; Anti-Spoofing</div>
+              <div style="font-size: 8px; color: rgba(255,255,255,0.6); line-height: 1.6;">
+                • Liveness detection (breathing, speech patterns)<br/>
+                • Speech synthesis detection<br/>
+                • Replay attack prevention<br/>
+                • Anomaly scoring per call<br/>
+                • Fallback to additional verification
+              </div>
+            </div>
+          </div>
+
+          <!-- Performance & Business Impact -->
+          <div class="pf-stat-row">
+            <div class="pf-stat-card">
+              <div class="pf-stat-val" style="color: #ff4d6a;">76%</div>
+              <div class="pf-stat-lbl">Enrolment Rate</div>
+            </div>
+            <div class="pf-stat-card">
+              <div class="pf-stat-val" style="color: #ff4d6a;">23s</div>
+              <div class="pf-stat-lbl">Auth Time (vs 120s)</div>
+            </div>
+            <div class="pf-stat-card">
+              <div class="pf-stat-val" style="color: #ff4d6a;">98.7%</div>
+              <div class="pf-stat-lbl">Match Accuracy</div>
+            </div>
+            <div class="pf-stat-card">
+              <div class="pf-stat-val" style="color: #ff4d6a;">40K+</div>
+              <div class="pf-stat-lbl">Auth Calls/Week</div>
+            </div>
+            <div class="pf-stat-card">
+              <div class="pf-stat-val" style="color: #ff4d6a;">£1.2M</div>
+              <div class="pf-stat-lbl">Annual Saving</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="cs-section" style="background: var(--bg-elevated);">
+    <div class="cs-section-inner">
+      <p class="section-label">The Approach</p>
+      <div class="two-col">
+        <div><h2 class="col-heading">Consent.<br/>Confidence.<br/><em>Fallback.</em></h2></div>
+        <div class="col-body">
+          
+          <p>I owned the end-to-end experience design, working directly with the Director of CX, Head of Customer Operations, and Fraud & Compliance leadership. The approach balanced invisible AI with visible trust.</p>
+    
+          <div class="deliverables">
+            <div class="deliverable-item reveal">
+              <span class="d-num">01</span>
+              <p class="d-text"><strong>Customer journey mapping</strong>, Mapped every telephony authentication pathway, identifying 14 distinct failure points and their root causes across the call centre operation.</p>
+            </div>
+            <div class="deliverable-item reveal">
+              <span class="d-num">02</span>
+              <p class="d-text"><strong>Transparent enrolment experience</strong>, Designed the opt-in flow for voice biometrics. Key insight from testing: customers were significantly more willing to enrol when framed as "your voice is your password" rather than "we will record your voice."</p>
+            </div>
+            <div class="deliverable-item reveal">
+              <span class="d-num">03</span>
+              <p class="d-text"><strong>Passive voice sampling architecture</strong>, Designed the implementation so sampling initiated immediately when a representative picked up. No script changes, no awkward prompts. The AI analysed natural conversation in the first 15–20 seconds.</p>
+            </div>
+            <div class="deliverable-item reveal">
+              <span class="d-num">04</span>
+              <p class="d-text"><strong>2FA safety net</strong>, Even with 95%+ confidence voice match, the system prompted for one lightweight confirmation (last 4 digits of phone, or recent transaction amount), ensuring no single-factor reliance.</p>
+            </div>
+            <div class="deliverable-item reveal">
+              <span class="d-num">05</span>
+              <p class="d-text"><strong>60+ moderated research sessions</strong>, Tested enrolment, passive authentication, and edge cases (background noise, illness, third-party callers) across call simulations to validate customer trust and accuracy.</p>
+            </div>
+          </div>
+          <div class="highlight-block reveal">
+            <p>"Customers described the experience as 'effortless' and 'like they already know me.' Removing authentication friction didn't just save time, it changed the relationship between customer and bank."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <p class="section-label">The Outcomes</p>
+      <div class="two-col">
+        <div><h2 class="col-heading">Effortless<br/>authentication.<br/><em>Measurable</em><br/>savings.</h2></div>
+        <div class="col-body reveal">
+          <p>Voice biometrics transformed telephony from Metro Bank's biggest friction point into a competitive advantage, with enrolled customers reporting the highest NPS scores across all banking channels.</p>
+          <div class="outcomes-grid">
+            <div class="outcome-card">
+              <h4>Authentication Speed</h4>
+              <p><strong>81% reduction in average auth time</strong>, from 97 seconds to 18 seconds for enrolled customers.</p>
+            </div>
+            <div class="outcome-card">
+              <h4>Adoption</h4>
+              <p><strong>76% of eligible customers enrolled</strong> within 6 months, exceeding the 30% target by 2.5x.</p>
+            </div>
+            <div class="outcome-card">
+              <h4>Resolution Rate</h4>
+              <p><strong>92% first-call resolution</strong> for voice-authenticated customers, up from 61%.</p>
+            </div>
+            <div class="outcome-card">
+              <h4>Cost Savings</h4>
+              <p><strong>£1.2M estimated annual saving</strong> in reduced call handling time and failed authentication rework.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="next-cs">
+    <div class="next-cs-inner">
+      <a href="./casestudy-almosafer.html">
+        <div>
+          <p class="next-label">Next Case Study</p>
+          <h3 class="next-title">Almosafer:<br/>MENA's First AI Travel Experience</h3>
+        </div>
+        <span class="next-arrow">&rarr;</span>
+      </a>
+    </div>
+  </section>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+  <!-- Password Gate -->
+  <div class="cs-gate" id="cs-gate">
+    <div class="cs-gate-card">
+      <div class="cs-gate-icon"></div>
+      <p class="cs-gate-title">Want in?</p>
+      <p class="cs-gate-sub">Score 100% on the Design Eye test to earn access. Or enter the password if you have it.</p>
+      <p class="cs-gate-earn-sub">4 rounds. No partial credit.</p>
+      <div class="cs-gate-actions">
+        <a class="cs-gate-earn" id="cs-earn" href="./game.html?return=./casestudy-metro-voice.html">
+          Take the Design Eye test
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <div class="cs-gate-or"><span>or</span></div>
+        <button class="cs-gate-pwd-btn" id="cs-pwd-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Enter password
+        </button>
+      </div>
+      <div class="cs-gate-pwd-section" id="cs-pwd-section">
+        <div style="padding-top:16px">
+          <div class="cs-gate-input-wrap" id="cs-input-wrap">
+            <input class="cs-gate-input" id="cs-pwd" type="password" placeholder="Enter password" autocomplete="off" spellcheck="false" />
+            <button class="cs-gate-btn" id="cs-submit">Enter</button>
+          </div>
+          <p class="cs-gate-hint" id="cs-hint">&nbsp;</p>
+        </div>
+      </div>
+      <button class="cs-gate-back" onclick="history.back()">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.5 2.5L4 7L8.5 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Go back
+      </button>
+    </div>
+  </div>
+  <script>
+  (function() {
+    var KEY = 'jt_cs_unlocked';
+    var gate = document.getElementById('cs-gate');
+    if (!gate) return;
+    if (sessionStorage.getItem(KEY) === '1') { gate.style.display = 'none'; return; }
+    var pwdBtn = document.getElementById('cs-pwd-btn');
+    var section = document.getElementById('cs-pwd-section');
+    if (pwdBtn && section) {
+      pwdBtn.addEventListener('click', function() {
+        section.classList.toggle('open');
+        if (section.classList.contains('open')) {
+          pwdBtn.style.display = 'none';
+          setTimeout(function() { document.getElementById('cs-pwd').focus(); }, 300);
+        }
+      });
+    }
+    function attempt() {
+      var val = document.getElementById('cs-pwd').value.trim().toUpperCase().replace(/\s/g, '');
+      var wrap = document.getElementById('cs-input-wrap');
+      var hint = document.getElementById('cs-hint');
+      if (val === 'OPENSAYSME') {
+        sessionStorage.setItem(KEY, '1');
+        gate.classList.add('unlocking');
+        setTimeout(function() { gate.style.display = 'none'; }, 500);
+      } else {
+        wrap.classList.remove('error');
+        void wrap.offsetWidth;
+        wrap.classList.add('error');
+        hint.textContent = 'Incorrect password.';
+        document.getElementById('cs-pwd').value = '';
+        setTimeout(function() { wrap.classList.remove('error'); }, 500);
+      }
+    }
+    document.getElementById('cs-submit').addEventListener('click', attempt);
+    document.getElementById('cs-pwd').addEventListener('keydown', function(e) { if (e.key === 'Enter') attempt(); });
+  })();
+  </script>
+
+  <script>
+    (function() {
+      var btn = document.getElementById('nav-hamburger');
+      var drawer = document.getElementById('mobile-drawer');
+      if (!btn || !drawer) return;
+      btn.addEventListener('click', function() {
+        btn.classList.toggle('open');
+        drawer.classList.toggle('open');
+        document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+      });
+      drawer.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+          btn.classList.remove('open');
+          drawer.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

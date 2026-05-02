@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png"/>
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png"/>
+  <title>Design Leadership Writing | Jay Tulloch — AI, Fintech UX & Product Strategy</title>
+  <meta name="description" content="Jay Tulloch writes on AI product design, scaling design teams, fintech UX, and product leadership. Unfiltered perspective from 16 years in the industry."/>
+  <link rel="canonical" href="https://www.jaytulloch.com/writing.html"/>
+  <meta property="og:title" content="Writing by Jay Tulloch — Design Leadership, AI & Fintech UX"/>
+  <meta property="og:description" content="Unfiltered perspective on AI product design, design leadership, and building products that matter."/>
+  <meta property="og:type" content="website"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #FFFFFF;
+      --text: #111111;
+      --text-muted: #6B6E74;
+      --text-body: #141414;
+      --border: #E8E8EC;
+      --border-strong: #D0D0D0;
+      --black: #000000;
+      --white: #FFFFFF;
+      --tag-bg: #EAF0FF;
+      --accent: #0044E4;
+      --gray-dark: #F5F5F7;
+      --gray-mid: #E8E8EC;
+      --gray-light: #6B6E74;
+      --font: 'Switzer', -apple-system, Helvetica Neue, Arial, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 16px; line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Nav ── */
+
+    /* ── Hero ── */
+    .writing-hero { padding: 160px clamp(32px, 5vw, 80px) 80px; border-bottom: 1px solid #E8E8EC; }
+    .writing-hero-inner { max-width: 1100px; }
+    .writing-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; }
+    .writing-title { font-size: clamp(48px, 7vw, 96px); font-weight: 800; letter-spacing: -0.04em; line-height: 0.95; margin-bottom: 32px; }
+    .writing-title em { font-style: normal; color: var(--accent); }
+    .writing-desc { font-size: clamp(16px, 1.5vw, 20px); color: var(--text-muted); max-width: 580px; line-height: 1.65; margin-bottom: 48px; }
+    .writing-meta { display: flex; gap: 32px; flex-wrap: wrap; }
+    .writing-meta-item { display: flex; flex-direction: column; gap: 4px; }
+    .writing-meta-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); }
+    .writing-meta-value { font-size: 14px; font-weight: 600; color: var(--text); }
+
+    /* ── Topics filter ── */
+    .topics-bar { padding: 32px clamp(32px, 5vw, 80px); border-bottom: 1px solid #E8E8EC; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .topic-pill { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 16px; border: 1px solid var(--border); border-radius: 2px; cursor: pointer; transition: background 0.2s, border-color 0.2s, color 0.2s; color: var(--text-muted); background: transparent; font-family: inherit; }
+    .topic-pill:hover { border-color: var(--text-muted); color: var(--text); }
+    .topic-pill.active { background: var(--white); color: var(--black); border-color: var(--text); }
+
+    /* ── Article grid ── */
+    .articles-section { padding: 80px clamp(32px, 5vw, 80px); }
+    .articles-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin-bottom: 2px; }
+    .article-card { display: flex; flex-direction: column; padding: 48px 40px; background: var(--bg-elevated, #F5F5F7); border: 1px solid var(--border); transition: background 0.2s, box-shadow 0.3s, transform 0.3s; cursor: pointer; position: relative; overflow: hidden; }
+    .article-card::before { display: none; }
+    .article-card:hover { background: #ffffff; box-shadow: 0 12px 40px rgba(0,0,0,0.08); transform: translateY(-2px); }
+    .article-card.featured { grid-column: 1 / -1; flex-direction: row; gap: 64px; align-items: flex-start; }
+    .article-card-meta { display: flex; gap: 16px; align-items: center; margin-bottom: 20px; flex-wrap: wrap; }
+    .article-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+    .article-date { font-size: 11px; color: var(--text-muted); font-weight: 500; }
+    .article-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border-strong); }
+    .article-read-time { font-size: 11px; color: var(--text-muted); }
+    .article-title { font-size: clamp(20px, 2.2vw, 28px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 16px; color: var(--text); transition: color 0.2s; }
+    .article-card:hover .article-title { color: var(--text); }
+    .article-card.featured .article-title { font-size: clamp(28px, 3.5vw, 42px); }
+    .article-excerpt { font-size: 14px; color: var(--text-body); line-height: 1.7; flex: 1; }
+    .article-card.featured .article-excerpt { font-size: 16px; }
+    .article-card-footer { margin-top: 32px; display: flex; align-items: center; justify-content: space-between; }
+    .article-read-link { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+    .article-card-body { flex: 1; display: flex; flex-direction: column; }
+    .article-card-left { flex: 0 0 320px; }
+
+    /* ── Coming soon state ── */
+    .coming-soon-card { padding: 48px 40px; background: var(--bg-elevated); border: 1px dashed var(--border); display: flex; align-items: center; justify-content: center; min-height: 200px; }
+    .coming-soon-text { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
+
+    /* ── Subscribe strip ── */
+    .subscribe-strip { margin: 2px 0; padding: 48px clamp(32px, 5vw, 80px); background: var(--bg-elevated, #F5F5F7); border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 48px; flex-wrap: wrap; }
+    .subscribe-strip-copy h3 { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; }
+    .subscribe-strip-copy p { font-size: 14px; color: var(--text-muted); max-width: 440px; line-height: 1.6; }
+    .subscribe-btn { display: inline-block; background: var(--white); color: var(--black); font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; padding: 16px 32px; text-decoration: none; transition: background 0.2s; white-space: nowrap; }
+    .subscribe-btn:hover { background: var(--accent-light); color: var(--text); }
+
+    /* ── Footer ── */
+    footer { padding: 48px clamp(32px, 5vw, 80px); border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .footer-logo { font-size: 13px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+    .footer-links { display: flex; gap: 28px; }
+    .footer-links a { font-size: 12px; color: var(--text-muted); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text); }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .articles-grid { grid-template-columns: 1fr; }
+      .article-card.featured { flex-direction: column; gap: 0; }
+      .article-card-left { flex: none; }
+    }
+    @media (max-width: 600px) {
+      .subscribe-strip { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ── Light mode ── */
+
+    /* ── Nav right group ── */
+
+    /* ── Theme toggle ── */
+
+    /* ── Share buttons ── */
+    .share-bar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .share-bar-label { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); margin-right: 4px; }
+    .share-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 7px 14px; border: 1px solid var(--border); color: var(--text-muted); background: transparent; cursor: pointer; font-family: inherit; transition: border-color 0.2s, color 0.2s; border-radius: 2px; text-decoration: none; }
+    .share-btn:hover { border-color: var(--text-muted); color: var(--text); }
+    .share-btn svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; flex-shrink: 0; }
+    .share-btn.copied { color: #4ade80; border-color: #4ade80; }
+
+    /* ── Reveal animations ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  
+    /* ─── Playfair Display callout accent ──────────────────────────── */
+    h1 em, h2 em {
+      font-family: 'Abril Fatface', Georgia, serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 1em;
+      letter-spacing: 0;
+    }
+    .pod-stat-value em {
+      font-family: var(--font);
+      font-weight: inherit;
+      font-style: normal;
+      letter-spacing: inherit;
+    }
+        /* ─── Navigation ───────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px clamp(32px, 5vw, 80px);
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid #E8E8EC;
+    }
+    .nav-logo { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #111111; flex-shrink: 0; }
+    .nav-right { display: flex; align-items: center; }
+    .nav-links { display: flex; gap: 32px; align-items: center; list-style: none; margin-right: 48px; }
+    .nav-links li a { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #6B6E74; transition: color 0.2s; }
+    .nav-links li a:hover, .nav-links li a.active { color: #111111; }
+    .nav-cta { pointer-events: all; }
+    .nav-cta a { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #111111; border: 1px solid #111111; border-radius: 2px; padding: 10px 22px; transition: background 0.25s, color 0.25s; display: inline-block; }
+    .nav-cta a:hover { background: #111111; color: #fff; }
+    .nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 6px; width: 32px; height: 32px; cursor: pointer; background: none; border: none; padding: 0; pointer-events: all; }
+    .nav-hamburger span { display: block; width: 100%; height: 1.5px; background: #111111; transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.25s; transform-origin: center; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(3.75px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-3.75px) rotate(-45deg); }
+    .mobile-drawer { position: fixed; inset: 0; z-index: 10000; background: rgba(0,0,0,0.95); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 40px; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+    .mobile-drawer.open { opacity: 1; pointer-events: all; }
+    .mobile-drawer a { font-size: clamp(28px, 6vw, 42px); font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 0.4s ease, color 0.2s; }
+    .mobile-drawer.open a { opacity: 1; transform: translateY(0); }
+    .mobile-drawer.open a:nth-child(1) { transition-delay: 0.1s, 0.1s, 0s; }
+    .mobile-drawer.open a:nth-child(2) { transition-delay: 0.15s, 0.15s, 0s; }
+    .mobile-drawer.open a:nth-child(3) { transition-delay: 0.2s, 0.2s, 0s; }
+    .mobile-drawer.open a:nth-child(4) { transition-delay: 0.25s, 0.25s, 0s; }
+    .mobile-drawer.open a:nth-child(5) { transition-delay: 0.3s, 0.3s, 0s; }
+    .mobile-drawer.open a:nth-child(6) { transition-delay: 0.35s, 0.35s, 0s; }
+    .mobile-drawer a:hover { color: #0044E4; }
+    @media (max-width: 900px) {
+      nav { padding: 20px 24px; }
+      .nav-hamburger { display: flex; }
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+    }
+    </style>
+</head>
+<body>
+
+    <nav>
+    <a href="./" class="nav-logo">Jay Tulloch</a>
+    <div class="nav-right">
+      <ul class="nav-links">
+      <li><a href="./#about">About</a></li>
+      <li><a href="./#work">Work</a></li>
+      <li><a href="./writing.html" class="active">Writing</a></li>
+      <li><a href="./#podcast">Podcast</a></li>
+      <li><a href="./contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-cta"><a href="./contact.html">Let's Talk</a></div>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div class="writing-hero">
+    <div class="writing-hero-inner">
+      <p class="writing-eyebrow">Writing</p>
+      <h1 class="writing-title">Design.<br/><em>AI.</em><br/>Leadership.</h1>
+      <p class="writing-desc">Unfiltered takes on AI product design, building and leading design teams, and what it actually takes to ship things that matter.</p>
+    </div>
+  </div>
+
+  <!-- Topic filters -->
+  <div class="topics-bar">
+    <button class="topic-pill active" data-topic="all">All</button>
+    <button class="topic-pill" data-topic="ai">AI & Design</button>
+    <button class="topic-pill" data-topic="leadership">Design Leadership</button>
+    <button class="topic-pill" data-topic="product">Product Strategy</button>
+    <button class="topic-pill" data-topic="fractional">Fractional Work</button>
+  </div>
+
+  <!-- Articles -->
+  <div class="articles-section">
+    <div class="articles-grid" id="articles-grid">
+      <!-- Articles injected here by the publishing pipeline -->
+      <!-- ARTICLE:ai-fluency-isnt-the-skill-knowing-when-ai-is-wrong-is -->
+<a class="article-card" href="./writing/ai-fluency-isnt-the-skill-knowing-when-ai-is-wrong-is.html" data-topic="ai-design">
+  <div class="article-card-meta">
+    <span class="topic-tag">AI &amp; Design</span>
+    <span class="article-date">March 23, 2026</span>
+    <span class="article-read-time">3 min read</span>
+  </div>
+  <h3 class="article-title">AI fluency isn't the skill. Knowing when AI is wrong is.</h3>
+  <p class="article-excerpt">The industry just caught up to something I've known for seven years. NNGroup's State of UX 2026 landed this week with a headline already circulating across every...</p>
+  <div class="article-card-footer">
+    <span class="article-read-more">Read article</span>
+  </div>
+</a>
+<!-- /ARTICLE:ai-fluency-isnt-the-skill-knowing-when-ai-is-wrong-is -->
+      <!-- ARTICLES_PLACEHOLDER -->
+    </div>
+  </div>
+
+  <!-- Subscribe -->
+  <div class="subscribe-strip">
+    <div class="subscribe-strip-copy">
+      <h3>Stay in the loop.</h3>
+      <p>New articles on AI design, leadership, and product strategy. No noise, no filler. Straight to your inbox when it's worth reading.</p>
+      <div class="share-bar" style="margin-top:20px;">
+        <span class="share-bar-label">Share</span>
+        <a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fwww.jaytulloch.com%2Fwriting.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a class="share-btn" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.jaytulloch.com%2Fwriting.html&text=Design%20leadership%2C%20AI%2C%20and%20fintech%20UX%20%E2%80%94%20by%20%40jaytulloch" target="_blank" rel="noopener" aria-label="Share on X">
+          <svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          X
+        </a>
+        <button class="share-btn" id="copy-writing-link" aria-label="Copy link">
+          <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          Copy link
+        </button>
+      </div>
+    </div>
+    <a class="subscribe-btn" href="https://jaytulloch.substack.com/subscribe" target="_blank" rel="noopener">Subscribe on Substack</a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <span class="footer-logo">Jay Tulloch</span>
+    <div class="footer-links">
+      <a href="./index.html">Portfolio</a>
+      <a href="./index.html#services">Services</a>
+      <a href="https://substack.com/@jaytulloch" target="_blank">Substack</a>
+      <a href="https://www.linkedin.com/in/jaytulloch/" target="_blank">LinkedIn</a>
+      <a href="./contact.html">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    // Theme toggle
+    (function() {
+      var html = document.documentElement;
+      if (btn) btn.addEventListener('click', function() {
+      });
+    })();
+
+    // Copy link
+    var copyBtn = document.getElementById('copy-writing-link');
+    if (copyBtn) copyBtn.addEventListener('click', function() {
+      navigator.clipboard.writeText(window.location.href).then(function() {
+        copyBtn.classList.add('copied');
+        copyBtn.textContent = 'Copied!';
+        setTimeout(function() { copyBtn.classList.remove('copied'); copyBtn.innerHTML = '<svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> Copy link'; }, 2000);
+      });
+    });
+
+    // Topic filter
+    document.querySelectorAll('.topic-pill').forEach(function(pill) {
+      pill.addEventListener('click', function() {
+        document.querySelectorAll('.topic-pill').forEach(function(p) { p.classList.remove('active'); });
+        this.classList.add('active');
+        var topic = this.dataset.topic;
+        document.querySelectorAll('.article-card[data-topic]').forEach(function(card) {
+          if (topic === 'all' || card.dataset.topic === topic) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Reveal on scroll
+    var reveals = document.querySelectorAll('.reveal');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) { entry.target.classList.add('visible'); }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(function(el) { observer.observe(el); });
+  </script>
+
+  <script>
+    (function() {
+      var btn = document.getElementById('nav-hamburger');
+      var drawer = document.getElementById('mobile-drawer');
+      if (!btn || !drawer) return;
+      btn.addEventListener('click', function() {
+        btn.classList.toggle('open');
+        drawer.classList.toggle('open');
+        document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+      });
+      drawer.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+          btn.classList.remove('open');
+          drawer.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

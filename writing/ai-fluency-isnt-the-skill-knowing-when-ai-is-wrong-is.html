@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AI fluency isn't the skill. Knowing when AI is wrong is. · Jay Tulloch</title>
+<meta name="description" content="AI fluency is now table stakes. But the real skill for senior designers in 2026 isn't prompting — it's knowing when the AI is wrong. From 7 years delivering AI products in fintech and crypto."/>
+<link rel="canonical" href="https://www.jaytulloch.com/writing/ai-fluency-isnt-the-skill-knowing-when-ai-is-wrong-is.html"/>
+<meta property="og:title" content="AI fluency isn't the skill. Knowing when AI is wrong is."/>
+<meta property="og:description" content="The real competitive edge in AI product design isn't tool adoption — it's judgment. By Jay Tulloch."/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="https://www.jaytulloch.com/writing/ai-fluency-isnt-the-skill-knowing-when-ai-is-wrong-is.html"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "AI fluency isn't the skill. Knowing when AI is wrong is.",
+  "description": "AI fluency is now table stakes. The real competitive edge for senior designers is knowing when the output is wrong — and the experience to say why.",
+  "author": {
+    "@type": "Person",
+    "name": "Jay Tulloch",
+    "url": "https://www.jaytulloch.com"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Jay Tulloch",
+    "url": "https://www.jaytulloch.com"
+  },
+  "datePublished": "2026-03-23",
+  "dateModified": "2026-03-23",
+  "url": "https://www.jaytulloch.com/writing/ai-fluency-isnt-the-skill-knowing-when-ai-is-wrong-is.html",
+  "keywords": ["AI product design", "design leadership", "fintech UX", "LLM design", "product design 2026"]
+}
+</script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --black: #080808; --white: #ffffff; --accent: #e63329; --muted: rgba(255,255,255,0.45); --border: rgba(255,255,255,0.06); }
+  html[data-theme="light"] { --black: #f5f4f1; --white: #0a0a0a; --muted: rgba(0,0,0,0.45); --border: rgba(0,0,0,0.07); }
+  html[data-theme="light"] body { background: #f5f4f1; color: #0a0a0a; }
+  html[data-theme="light"] nav { background: rgba(245,244,241,0.92); border-bottom-color: rgba(0,0,0,0.07); }
+  html[data-theme="light"] .article-body { color: rgba(0,0,0,0.8); }
+  html[data-theme="light"] .footer-links a { color: rgba(0,0,0,0.35); }
+  html[data-theme="light"] .footer-links a:hover { color: #0a0a0a; }
+  html[data-theme="light"] .share-btn { border-color: rgba(0,0,0,0.12); color: rgba(0,0,0,0.5); }
+  html[data-theme="light"] .share-btn:hover { border-color: rgba(0,0,0,0.4); color: #0a0a0a; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: var(--black); color: var(--white); -webkit-font-smoothing: antialiased; transition: background 0.2s, color 0.2s; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 24px clamp(24px,4vw,64px); display: flex; justify-content: space-between; align-items: center; background: rgba(8,8,8,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); transition: background 0.2s; }
+  .nav-left { display: flex; align-items: center; gap: 20px; }
+  .nav-logo { font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: var(--white); }
+  .nav-back { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; color: var(--muted); transition: color 0.2s; }
+  .nav-back:hover { color: var(--white); }
+  .nav-right { display: flex; align-items: center; gap: 14px; }
+  .nav-contact { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.3); padding: 8px 18px; transition: background 0.25s, color 0.25s; color: var(--white); }
+  .nav-contact:hover { background: var(--white); color: var(--black); }
+  html[data-theme="light"] .nav-contact { color: #0a0a0a; border-color: rgba(0,0,0,0.3); }
+  html[data-theme="light"] .nav-contact:hover { background: #0a0a0a; color: #fff; }
+  .nav-theme-toggle { background: none; border: none; cursor: pointer; padding: 4px; display: flex; align-items: center; color: var(--muted); transition: color 0.2s; }
+  .nav-theme-toggle:hover { color: var(--white); }
+  .nav-theme-toggle svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .icon-sun { display: none; } .icon-moon { display: block; }
+  html[data-theme="light"] .icon-sun { display: block; } html[data-theme="light"] .icon-moon { display: none; }
+  .article-wrap { max-width: 720px; margin: 0 auto; padding: 140px clamp(24px,5vw,48px) 100px; }
+  .article-meta { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin-bottom: 32px; }
+  .topic-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(230,51,41,0.3); padding: 4px 10px; border-radius: 4px; }
+  .article-date { font-size: 12px; color: var(--muted); }
+  .article-read-time { font-size: 12px; color: var(--muted); }
+  h1 { font-size: clamp(28px,4vw,48px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 32px; }
+  .article-body { font-size: 17px; line-height: 1.8; color: rgba(255,255,255,0.85); }
+  .article-body p { margin-bottom: 24px; }
+  .article-divider { border: none; border-top: 1px solid var(--border); margin: 56px 0; }
+  .article-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
+  .back-link { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .back-link:hover { color: var(--white); }
+  .share-bar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .share-bar-label { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-right: 2px; }
+  .share-btn { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 12px; border: 1px solid rgba(255,255,255,0.14); color: var(--muted); background: transparent; cursor: pointer; font-family: inherit; transition: border-color 0.2s, color 0.2s; border-radius: 3px; text-decoration: none; }
+  .share-btn:hover { border-color: rgba(255,255,255,0.45); color: var(--white); }
+  .share-btn svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; flex-shrink: 0; }
+  .share-btn.x-btn svg { fill: currentColor; stroke: none; }
+  .share-btn.copied { color: #4ade80; border-color: #4ade80; }
+  footer { border-top: 1px solid var(--border); padding: 40px clamp(24px,5vw,64px); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
+  .footer-logo { font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { font-size: 12px; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--white); }
+
+    /* ─── Playfair Display callout accent ──────────────────────────── */
+    h1 em, h2 em {
+      font-family: 'Abril Fatface', Georgia, serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 1em;
+      letter-spacing: 0;
+    }
+    .pod-stat-value em {
+      font-family: var(--font);
+      font-weight: inherit;
+      font-style: normal;
+      letter-spacing: inherit;
+    }
+    </style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="../index.html">Jay Tulloch</a>
+  <a class="nav-back" href="../writing.html">← Writing</a>
+  <div class="nav-right">
+    <button class="nav-theme-toggle" id="nav-theme-toggle" aria-label="Toggle theme">
+      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+    <a href="../contact.html" class="nav-contact">Let's Talk</a>
+  </div>
+</nav>
+
+<div class="article-wrap">
+  <div class="article-meta">
+    <span class="topic-tag">AI &amp; Design</span>
+    <span class="article-date">March 23, 2026</span>
+    <span class="article-read-time">3 min read</span>
+  </div>
+  <h1>AI fluency isn't the skill. Knowing when AI is wrong is.</h1>
+  <div class="article-body">
+    <p>The industry just caught up to something I've known for seven years. NNGroup's State of UX 2026 landed this week with a headline already circulating across every design Slack: AI fluency is now essential. Over half of hiring managers say they won't consider designers who can't work with AI. Figma followed with their own piece on skills for the AI era. The message is clear — learn to use the tools or get left behind.</p>
+    <p>I agree with the premise. I disagree with the framing.</p>
+    <p>In 2018, I was designing the UK's first AI application in retail banking — Personetics' behavioural analytics platform inside Metro Bank. The AI generated financial insights for 2.4 million customers. I spent more time reviewing what the AI got wrong than designing what it got right. That pattern repeated at Careem, where I led design on LLM-powered search across 14 million users and 10 markets. And again at a top-10 crypto exchange, where we used Claude and Figma MCP to compress design-to-production handoff time by 70%. In every case, the critical skill wasn't prompting. It wasn't knowing which model to use. It was the judgment to know when the output was off — and the experience to say why.</p>
+    <p>The industry is running at AI fluency like it's a new certification. Get comfortable with the tools. Learn the prompts. Add it to your LinkedIn. Fine as far as it goes. But fluency without taste is just fast mediocrity.</p>
+    <p>What actually separates senior designers in the AI era isn't how much they use the technology. It's that they've seen enough bad product decisions — designed, built, shipped, and measured — to know when AI is optimising for the wrong thing. The model doesn't know that your fintech users in MENA distrust 'no fees' positioning because they've been burned before. It doesn't know that the insight it generated sounds helpful but will trigger a compliance review. It doesn't know that the onboarding flow it suggested is technically sound and experientially awful.</p>
+    <p>You know. Because you've been in the room.</p>
+    <p>The shift worth making isn't about tool adoption. It's about building the kind of critical eye that makes you valuable precisely because AI can't replicate it. That means shipping more, not just prompting more. It means forming strong opinions about what good looks like, then testing them against reality. It means treating AI output the way you'd treat work from a junior designer — a useful starting point that needs your judgment on top.</p>
+    <p>AI fluency is table stakes now. The right call. But the designers who build durable careers in this era won't be the ones who used AI the most. They'll be the ones who knew when not to.</p>
+  </div>
+  <hr class="article-divider"/>
+  <div class="article-footer">
+    <a class="back-link" href="../writing.html">← All articles</a>
+    <div class="share-bar">
+      <span class="share-bar-label">Share</span>
+      <a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fwww.jaytulloch.com%2Fwriting%2Fai-fluency-isnt-the-skill-knowing-when-ai-is-wrong-is.html" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+      <a class="share-btn x-btn" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.jaytulloch.com%2Fwriting%2Fai-fluency-isnt-the-skill-knowing-when-ai-is-wrong-is.html&text=AI%20fluency%20isn%27t%20the%20skill.%20Knowing%20when%20AI%20is%20wrong%20is.%20%E2%80%94%20by%20%40jaytulloch" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        X
+      </a>
+      <button class="share-btn" id="copy-article-link">
+        <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        Copy link
+      </button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="footer-logo">Jay Tulloch</span>
+  <div class="footer-links">
+    <a href="../index.html">Portfolio</a>
+    <a href="../writing.html">Writing</a>
+    <a href="https://substack.com/@jaytulloch" target="_blank">Substack</a>
+    <a href="https://www.linkedin.com/in/jaytulloch/" target="_blank">LinkedIn</a>
+  </div>
+</footer>
+<script>
+  // Theme toggle
+  (function() {
+    var html = document.documentElement;
+    var btn = document.getElementById('nav-theme-toggle');
+    if (localStorage.getItem('jt-theme') === 'light') html.setAttribute('data-theme', 'light');
+    if (btn) btn.addEventListener('click', function() {
+      var next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      if (next === 'dark') { html.removeAttribute('data-theme'); localStorage.removeItem('jt-theme'); }
+      else { html.setAttribute('data-theme', 'light'); localStorage.setItem('jt-theme', 'light'); }
+    });
+  })();
+  // Copy link
+  var copyBtn = document.getElementById('copy-article-link');
+  if (copyBtn) copyBtn.addEventListener('click', function() {
+    navigator.clipboard.writeText(window.location.href).then(function() {
+      copyBtn.classList.add('copied');
+      copyBtn.textContent = 'Copied!';
+      setTimeout(function() {
+        copyBtn.classList.remove('copied');
+        copyBtn.innerHTML = '<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> Copy link';
+      }, 2000);
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png"/>
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png"/>
+  <title>Cross-Service Discovery Engine | Jay Tulloch</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #FFFFFF; --bg-card: #FFFFFF; --bg-elevated: #F5F5F7;
+      --text: #111111; --text-muted: #6B6E74; --text-body: #141414;
+      --border: #E8E8EC; --border-strong: #D0D0D0;
+      --tag-bg: #EAF0FF; --accent: #0044E4;
+      --font: 'Instrument Sans', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+      --black: #000000; --white: #FFFFFF;
+      --gray-dark: #F5F5F7; --gray-mid: #E0E0E4; --gray-light: #6B6E74;
+    }
+
+    /* Media showcase */
+    .cs-video-feature { background: var(--bg-elevated); padding: 64px clamp(32px, 5vw, 80px); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .cs-video-feature video { width: 100%; max-width: 1100px; height: auto; display: block; margin: 0 auto; border-radius: 12px; box-shadow: 0 16px 32px rgba(0,0,0,0.06); }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 16px; line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+
+
+    .cs-hero {
+      padding: 160px clamp(32px, 5vw, 80px) 100px;
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+    .cs-hero::before {
+      content: '';
+      position: absolute; top: -200px; right: -200px;
+      width: 900px; height: 900px;
+      background: none;
+      pointer-events: none;
+      animation: heroGlowDrift 10s ease-in-out infinite;
+      will-change: transform;
+    }
+        .cs-hero::after {
+      content: '';
+      position: absolute; bottom: -150px; left: -150px;
+      width: 700px; height: 700px;
+      background: none;
+      pointer-events: none;
+      animation: heroGlowDrift2 13s ease-in-out infinite;
+      will-change: transform;
+    }
+    .cs-hero-inner { max-width: 1100px; margin: 0; }
+    .cs-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; }
+    .cs-title { font-size: clamp(42px, 6vw, 80px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.0; text-transform: uppercase; margin-bottom: 32px; }
+    .cs-title em { font-style: normal; color: var(--accent); }
+    .cs-desc { font-size: clamp(16px, 1.5vw, 20px); color: var(--text-body); max-width: 680px; line-height: 1.6; margin-bottom: 60px; }
+    .cs-meta { display: flex; gap: 48px; flex-wrap: wrap; }
+    .cs-meta-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+    .cs-meta-value { font-size: 14px; font-weight: 600; color: var(--text); }
+
+    .metrics-banner { background: var(--bg-elevated); padding: 64px clamp(32px, 5vw, 80px); border-bottom: 1px solid var(--border); }
+    .metrics-banner-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .metric-block { padding: 40px 32px; background: rgba(0,0,0,0.2); border: 1px solid var(--border); text-align: center; }
+    .metric-value { font-size: clamp(36px, 4vw, 54px); font-weight: 800; letter-spacing: -0.03em; color: var(--accent); line-height: 1; margin-bottom: 12px; }
+    .metric-label { font-size: 12px; font-weight: 500; letter-spacing: 0.06em; color: var(--text-muted); text-transform: uppercase; }
+
+    .cs-section { padding: 96px clamp(32px, 5vw, 80px); border-bottom: 1px solid var(--border); }
+    .cs-section:last-of-type { border-bottom: none; }
+    .cs-section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 48px; }
+    .two-col { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
+    .col-heading { font-size: clamp(28px, 3vw, 40px); font-weight: 800; letter-spacing: -0.02em; text-transform: uppercase; line-height: 1.1; position: sticky; top: 100px; }
+    .col-heading em { font-style: normal; color: var(--accent); }
+    .col-body p { font-size: 17px; color: #2D2D30; line-height: 1.75; margin-bottom: 24px; }
+    .col-body p:last-child { margin-bottom: 0; }
+    .col-body strong { color: var(--text); font-weight: 700; }
+
+    .deliverables { margin-top: 40px; display: flex; flex-direction: column; gap: 0; }
+    .deliverable-item { padding: 20px 0; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 32px 1fr; gap: 16px; align-items: start; }
+    .deliverable-item:last-child { border-bottom: none; }
+    .d-num { font-size: 11px; font-weight: 700; color: var(--accent); padding-top: 3px; }
+    .d-text { font-size: 16px; color: #2D2D30; line-height: 1.6; }
+    .d-text strong { color: var(--text); }
+
+    .highlight-block {
+      margin-top: 40px; padding: 40px 40px;
+      background: rgba(0,0,0,0.3);
+      border-left: 4px solid var(--accent);
+    }
+    .highlight-block p { font-size: 20px; font-weight: 600; color: var(--text); line-height: 1.5; font-style: italic; }
+
+    .outcomes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; margin-top: 48px; }
+    .outcome-card { padding: 40px 36px; background: var(--bg-elevated); border-left: 3px solid var(--accent); }
+    .outcome-card h4 { font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .outcome-card p { font-size: 16px; color: #2D2D30; line-height: 1.6; }
+    .outcome-card p strong { color: var(--text); }
+
+    .next-cs { padding: 96px clamp(32px, 5vw, 80px); background: var(--bg-elevated); }
+    .next-cs-inner { max-width: 1100px; margin: 0 auto; }
+    .next-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; }
+    .next-title { font-size: clamp(24px, 3vw, 36px); font-weight: 800; letter-spacing: -0.02em; text-transform: uppercase; }
+    .next-arrow { font-size: 48px; color: var(--accent); flex-shrink: 0; transition: transform 0.3s; }
+    .next-cs a { display: flex; align-items: center; gap: 40px; width: 100%; }
+    .next-cs a:hover .next-arrow { transform: translateX(8px); }
+
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      .cs-hero { padding: 120px 24px 72px; }
+      .cs-meta { gap: 28px; }
+      .metrics-banner { padding: 48px 24px; }
+      .metrics-banner-inner { grid-template-columns: 1fr; }
+      .cs-section { padding: 64px 24px; }
+      .two-col { grid-template-columns: 1fr; gap: 40px; }
+      .col-heading { position: static; }
+      .outcomes-grid { grid-template-columns: 1fr; }
+      .next-cs { padding: 64px 24px; }
+    }
+
+  /* Password Gate */
+  .cs-gate { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(28px) saturate(160%); -webkit-backdrop-filter: blur(28px) saturate(160%); background: rgba(0,0,0,0.75); transition: opacity 0.5s ease; }
+  .cs-gate.unlocking { opacity: 0; pointer-events: none; }
+  .cs-gate-card { background: rgba(10,10,10,0.97); border: 1px solid rgba(255,255,255,0.14); border-radius: 4px; padding: 52px 48px; width: 100%; max-width: 420px; text-align: center; box-shadow: 0 40px 100px rgba(0,0,0,0.8); }
+  .cs-gate-icon { display: none; }
+  .cs-gate-title { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: #fff; margin-bottom: 12px; line-height: 1.2; }
+  .cs-gate-sub { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.65; margin-bottom: 6px; }
+  .cs-gate-input-wrap { display: flex; gap: 0; border: 1px solid rgba(255,255,255,0.15); border-radius: 2px; overflow: hidden; transition: border-color 0.2s; }
+  .cs-gate-input-wrap:focus-within { border-color: rgba(255,255,255,0.4); }
+  .cs-gate-input-wrap.error { border-color: #0044E4; animation: gate-shake 0.4s ease; }
+  @keyframes gate-shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-8px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-6px); } 80% { transform: translateX(4px); } }
+  .cs-gate-input { flex: 1; background: transparent; border: none; outline: none; padding: 14px 18px; font-size: 13px; font-family: inherit; font-weight: 600; letter-spacing: 0.12em; color: var(--text); text-transform: uppercase; }
+  .cs-gate-input::placeholder { color: rgba(255,255,255,0.25); text-transform: none; letter-spacing: 0; font-weight: 400; }
+  .cs-gate-btn { background: #0044E4; border: none; color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; padding: 0 20px; cursor: pointer; font-family: inherit; transition: background 0.2s; }
+  .cs-gate-btn:hover { background: #c4271e; }
+  .cs-gate-back { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; background: none; border: none; color: var(--text-muted); font-size: 13px; font-family: inherit; cursor: pointer; padding: 0; letter-spacing: 0.02em; transition: color 0.2s; }
+  .cs-gate-back:hover { color: rgba(255,255,255,0.8); }
+  .cs-gate-earn { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 32px; border-radius: 40px; border: none; background: #fff; color: #0a0a0a; font-size: 13px; font-weight: 700; letter-spacing: 0.01em; text-decoration: none; font-family: inherit; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; width: 100%; box-sizing: border-box; }
+  .cs-gate-earn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,255,255,0.15); }
+  .cs-gate-earn-sub { font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 28px; }
+  .cs-gate-actions { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; }
+  .cs-gate-or { display: flex; align-items: center; gap: 12px; width: 100%; margin: 4px 0; }
+  .cs-gate-or::before, .cs-gate-or::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .cs-gate-or span { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+  .cs-gate-pwd-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 32px; border-radius: 40px; border: 1px solid var(--border); background: transparent; color: var(--text-muted); font-size: 13px; font-weight: 700; letter-spacing: 0.01em; text-decoration: none; font-family: inherit; cursor: pointer; transition: border-color 0.2s, color 0.2s, background 0.2s; width: 100%; box-sizing: border-box; }
+  .cs-gate-pwd-btn:hover { border-color: rgba(255,255,255,0.25); color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.03); }
+  .cs-gate-pwd-section { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.3s; opacity: 0; width: 100%; }
+  .cs-gate-pwd-section.open { max-height: 200px; opacity: 1; }
+  .cs-gate-hint { margin-top: 16px; font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 0.06em; }
+
+    /* Case Study Image Containers */
+    .cs-image-block { padding: 0 clamp(32px, 5vw, 80px); background: var(--black); }
+    .cs-image-block.on-dark { background: var(--bg-elevated); }
+    .cs-image-block-inner { max-width: 1100px; margin: 0 auto; padding: 64px 0; }
+    .cs-image-container {
+      width: 100%; border-radius: 12px; overflow: hidden;
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+      position: relative; min-height: 280px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cs-image-container img {
+      width: 100%; height: auto; display: block; border-radius: 12px;
+    }
+    .cs-image-placeholder {
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+      color: rgba(255,255,255,0.15); padding: 60px 24px; text-align: center;
+    }
+    .cs-image-placeholder .placeholder-icon { font-size: 32px; opacity: 0.4; }
+    .cs-image-placeholder .placeholder-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; opacity: 0.5;
+    }
+    .cs-image-placeholder .placeholder-desc {
+      font-size: 13px; font-weight: 400; letter-spacing: 0; max-width: 400px;
+      opacity: 0.35; text-transform: none;
+    }
+    .cs-image-full-width { padding: 0; }
+    .cs-image-full-width .cs-image-block-inner { max-width: 100%; padding: 0; }
+    .cs-image-full-width .cs-image-container { border-radius: 0; border: none; min-height: 400px; }
+
+    @media (max-width: 768px) {
+      .cs-image-block { padding: 0 24px; }
+      .cs-image-block-inner { padding: 40px 0; }
+      .cs-image-container { min-height: 200px; border-radius: 8px; }
+    }
+
+    /* Process Flow Visuals */
+    .pf-canvas { width: 100%; padding: 48px 40px; background: #faf9f7; border-radius: 12px; overflow: hidden; }
+    .pf-canvas.dark { background: var(--bg-elevated); }
+    .pf-canvas.dark-neutral { background: var(--bg-elevated); }
+    .pf-title-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 32px; }
+    .pf-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .pf-title-bar span { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #555559; }
+    .pf-canvas.dark .pf-title-bar span,
+    .pf-canvas.dark-neutral .pf-title-bar span { color: rgba(255,255,255,0.3); }
+
+    /* Sticky note clusters */
+    .pf-clusters { display: flex; gap: 20px; margin-bottom: 32px; flex-wrap: wrap; justify-content: center; }
+    .pf-cluster { display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1; min-width: 140px; }
+    .pf-cluster-label { font-size: 9px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #555559; margin-bottom: 4px; }
+    .pf-stickies { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; max-width: 160px; }
+    .pf-sticky { width: 28px; height: 28px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+
+    /* Decision cards */
+    .pf-decisions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .pf-decision { background: #fff; border-radius: 8px; padding: 16px 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); min-width: 180px; flex: 1; max-width: 240px; position: relative; }
+    .pf-decision h5 { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #333; margin-bottom: 8px; }
+    .pf-decision ul { list-style: none; padding: 0; }
+    .pf-decision li { font-size: 10px; color: #666; line-height: 1.5; padding: 2px 0; }
+    .pf-decision li::before { content: '•'; margin-right: 6px; color: #2D2D30; }
+    .pf-selected-dot { position: absolute; top: 12px; right: 12px; width: 10px; height: 10px; border-radius: 50%; }
+
+    /* Connector lines */
+    .pf-connectors { display: flex; justify-content: center; padding: 12px 0; }
+    .pf-connector-line { width: 1px; height: 20px; background: rgba(0,0,0,0.12); position: relative; }
+    .pf-connector-line::after { content: '▾'; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); font-size: 8px; color: #6B6E74; }
+
+    /* Journey stages */
+    .pf-journey { display: flex; gap: 0; align-items: flex-start; overflow: hidden; padding-bottom: 8px; }
+    .pf-stage { flex: 1; min-width: 140px; display: flex; flex-direction: column; align-items: center; position: relative; }
+    .pf-stage-card { background: #fff; border-radius: 12px; padding: 20px 14px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); width: 100%; margin: 0 6px; }
+    .pf-stage-icon { font-size: 24px; margin-bottom: 8px; }
+    .pf-stage-name { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #222; }
+    .pf-stage-arrow { position: absolute; right: -8px; top: 50%; transform: translateY(-50%); font-size: 14px; color: #6B6E74; z-index: 1; }
+    .pf-triggers { display: flex; flex-direction: column; gap: 4px; margin-top: 10px; width: 100%; padding: 0 6px; }
+    .pf-trigger { font-size: 9px; padding: 5px 8px; border-radius: 6px; text-align: center; font-weight: 500; }
+    .pf-pulse { width: 6px; height: 6px; border-radius: 50%; margin: 6px auto 0; }
+    .pf-insight { background: #fff; border-radius: 8px; padding: 14px 20px; margin-top: 24px; box-shadow: 0 1px 6px rgba(0,0,0,0.04); border-left: 3px solid; }
+    .pf-insight p { font-size: 11px; color: #555; line-height: 1.5; font-style: italic; }
+
+    /* Wireframe comparison */
+    .pf-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; }
+    .pf-option { border-radius: 10px; overflow: hidden; border: 2px solid rgba(0,0,0,0.06); }
+    .pf-option.winner { border-color: #49a942; }
+    .pf-option-header { padding: 10px 14px; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+    .pf-wireframe { padding: 16px; background: #f5f5f5; min-height: 120px; display: flex; flex-direction: column; gap: 6px; }
+    .pf-wf-bar { height: 6px; border-radius: 3px; background: #ddd; }
+    .pf-wf-block { height: 32px; border-radius: 4px; background: #e8e8e8; }
+    .pf-wf-row { display: flex; gap: 6px; }
+    .pf-wf-circle { width: 20px; height: 20px; border-radius: 50%; background: #e0e0e0; flex-shrink: 0; }
+    .pf-wf-lines { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+    .pf-wf-line { height: 4px; border-radius: 2px; background: #e0e0e0; }
+    .pf-annotation { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 4px; font-size: 9px; font-weight: 600; margin: 8px 14px; }
+    .pf-test-strip { background: #fff; border-radius: 8px; padding: 12px 16px; text-align: center; font-size: 10px; color: #555; font-weight: 500; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+
+    /* Dark flow diagrams */
+    .pf-flow { display: flex; align-items: center; gap: 12px; justify-content: center; flex-wrap: wrap; padding: 16px 0; }
+    .pf-node { border-radius: 10px; padding: 14px 18px; text-align: center; min-width: 100px; }
+    .pf-node h6 { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+    .pf-node p { font-size: 9px; opacity: 0.6; line-height: 1.3; }
+    .pf-arrow-r { font-size: 16px; opacity: 0.3; color: #fff; flex-shrink: 0; }
+    .pf-canvas.dark .pf-arrow-r { color: #fff; }
+    .pf-stat-row { display: flex; gap: 12px; justify-content: center; margin-top: 24px; }
+    .pf-stat-card { background: var(--border); border: 1px solid var(--border); border-radius: 8px; padding: 14px 20px; text-align: center; }
+    .pf-stat-card .pf-stat-val { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 2px; }
+    .pf-stat-card .pf-stat-lbl { font-size: 9px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+
+    /* Data streams */
+    .pf-streams { display: flex; align-items: stretch; gap: 0; justify-content: center; margin: 16px 0; }
+    .pf-stream-col { display: flex; flex-direction: column; gap: 8px; justify-content: center; min-width: 120px; }
+    .pf-stream-item { padding: 10px 14px; border-radius: 8px; font-size: 10px; font-weight: 600; text-align: center; }
+    .pf-engine { border-radius: 12px; padding: 24px 20px; text-align: center; margin: 0 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 120px; }
+    .pf-engine h6 { font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+    .pf-engine-icon { font-size: 28px; margin-bottom: 8px; }
+    .pf-arrows-col { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 0 8px; }
+
+    /* Radial diagram */
+    .pf-radial { position: relative; width: 100%; max-width: 500px; margin: 0 auto; min-height: 300px; }
+    .pf-radial-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--border); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; text-align: center; z-index: 2; }
+    .pf-radial-center p { font-size: 12px; font-weight: 600; color: #fff; }
+    .pf-radial-item { position: absolute; border-radius: 8px; padding: 10px 14px; text-align: center; min-width: 140px; }
+    .pf-radial-item .pf-conf { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; }
+    .pf-radial-item .pf-rlbl { font-size: 9px; font-weight: 600; letter-spacing: 0.04em; margin-top: 2px; }
+
+    /* Split infographic */
+    .pf-split { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-radius: 12px; overflow: hidden; }
+    .pf-split-side { padding: 32px 28px; display: flex; flex-direction: column; gap: 12px; }
+    .pf-split-label { font-size: 10px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px; }
+    .pf-split-metric { display: flex; align-items: center; gap: 10px; }
+    .pf-split-metric .pf-sm-icon { font-size: 18px; flex-shrink: 0; }
+    .pf-split-metric .pf-sm-text { font-size: 11px; font-weight: 600; }
+    .pf-split-divider { width: 2px; background: var(--border); }
+    .pf-split-quote { grid-column: 1 / -1; padding: 16px 28px; text-align: center; border-top: 1px solid var(--border); }
+    .pf-split-quote p { font-size: 10px; color: rgba(255,255,255,0.4); font-style: italic; letter-spacing: 0.02em; }
+
+    /* WhatsApp + backend split */
+    .pf-wa-split { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .pf-wa-side { border-radius: 12px; overflow: hidden; }
+    .pf-wa-header { padding: 10px 16px; display: flex; align-items: center; gap: 8px; }
+    .pf-wa-header .pf-wa-avatar { width: 28px; height: 28px; border-radius: 50%; }
+    .pf-wa-header span { font-size: 12px; font-weight: 700; }
+    .pf-wa-msgs { padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+    .pf-wa-msg { max-width: 85%; padding: 8px 12px; border-radius: 8px; font-size: 10px; line-height: 1.5; }
+    .pf-wa-msg.user { align-self: flex-end; }
+    .pf-wa-msg.ai { align-self: flex-start; }
+    .pf-wa-booking { border-radius: 6px; padding: 10px 12px; margin: 4px 0; }
+    .pf-backend { display: flex; flex-direction: column; gap: 0; align-items: center; padding: 16px; }
+    .pf-backend-step { padding: 10px 16px; border-radius: 8px; text-align: center; font-size: 10px; font-weight: 600; width: 80%; }
+    .pf-backend-arrow { font-size: 12px; padding: 4px 0; }
+
+    /* System architecture */
+    .pf-arch { display: flex; align-items: stretch; gap: 16px; justify-content: center; }
+    .pf-arch-col { display: flex; flex-direction: column; gap: 8px; justify-content: center; }
+    .pf-arch-node { padding: 10px 16px; border-radius: 8px; font-size: 10px; font-weight: 600; text-align: center; border: 1px solid; }
+    .pf-arch-center { border-radius: 12px; padding: 20px 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; min-width: 140px; }
+    .pf-arch-center h6 { font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; }
+    .pf-arch-center .pf-arch-sub { font-size: 9px; margin-top: 4px; }
+    .pf-arch-process { display: flex; gap: 8px; margin-top: 20px; justify-content: center; flex-wrap: wrap; }
+    .pf-arch-step { padding: 8px 14px; border-radius: 20px; font-size: 9px; font-weight: 600; letter-spacing: 0.04em; }
+    .pf-arch-step-arrow { color: rgba(255,255,255,0.2); font-size: 12px; display: flex; align-items: center; }
+
+    @media (max-width: 768px) {
+      .pf-canvas { padding: 32px 20px; }
+      .pf-clusters { gap: 12px; }
+      .pf-options { grid-template-columns: 1fr; }
+      .pf-split { grid-template-columns: 1fr; }
+      .pf-wa-split { grid-template-columns: 1fr; }
+      .pf-arch { flex-direction: column; align-items: center; }
+      .pf-streams { flex-direction: column; align-items: center; }
+      .pf-journey { flex-direction: column; align-items: stretch; }
+      .pf-stage-arrow { display: none; }
+      .pf-radial { min-height: auto; }
+      .pf-radial-item { position: static !important; transform: none !important; margin: 4px auto; }
+      .pf-radial-center { position: static; transform: none; margin: 12px auto; }
+    }
+  
+    @keyframes heroGlowDrift {
+      0%   { transform: translate(0, 0) scale(1);    opacity: 0.6; }
+      25%  { transform: translate(-160px, 120px) scale(1.25); opacity: 1; }
+      50%  { transform: translate(120px, -80px) scale(0.85);  opacity: 0.75; }
+      75%  { transform: translate(-80px, -120px) scale(1.15); opacity: 0.9; }
+      100% { transform: translate(0, 0) scale(1);    opacity: 0.6; }
+    }
+    @keyframes heroGlowDrift2 {
+      0%   { transform: translate(0, 0) scale(1);    opacity: 0.5; }
+      30%  { transform: translate(140px, -100px) scale(1.2);  opacity: 0.95; }
+      60%  { transform: translate(-100px, 80px) scale(0.8);   opacity: 0.65; }
+      85%  { transform: translate(80px, 100px) scale(1.1);    opacity: 0.85; }
+      100% { transform: translate(0, 0) scale(1);    opacity: 0.5; }
+    }
+  
+    /* ─── Playfair Display callout accent ──────────────────────────── */
+    h1 em, h2 em {
+      font-family: 'Abril Fatface', Georgia, serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 1em;
+      letter-spacing: 0;
+    }
+    .pod-stat-value em {
+      font-family: var(--font);
+      font-weight: inherit;
+      font-style: normal;
+      letter-spacing: inherit;
+    }
+        /* ─── Navigation ───────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px clamp(32px, 5vw, 80px);
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid #E8E8EC;
+    }
+    .nav-logo { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #111111; flex-shrink: 0; }
+    .nav-right { display: flex; align-items: center; }
+    .nav-links { display: flex; gap: 32px; align-items: center; list-style: none; margin-right: 48px; }
+    .nav-links li a { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #6B6E74; transition: color 0.2s; }
+    .nav-links li a:hover, .nav-links li a.active { color: #111111; }
+    .nav-cta { pointer-events: all; }
+    .nav-cta a { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #111111; border: 1px solid #111111; border-radius: 2px; padding: 10px 22px; transition: background 0.25s, color 0.25s; display: inline-block; }
+    .nav-cta a:hover { background: #111111; color: #fff; }
+    .nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 6px; width: 32px; height: 32px; cursor: pointer; background: none; border: none; padding: 0; pointer-events: all; }
+    .nav-hamburger span { display: block; width: 100%; height: 1.5px; background: #111111; transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.25s; transform-origin: center; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(3.75px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-3.75px) rotate(-45deg); }
+    .mobile-drawer { position: fixed; inset: 0; z-index: 10000; background: rgba(0,0,0,0.95); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 40px; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+    .mobile-drawer.open { opacity: 1; pointer-events: all; }
+    .mobile-drawer a { font-size: clamp(28px, 6vw, 42px); font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 0.4s ease, color 0.2s; }
+    .mobile-drawer.open a { opacity: 1; transform: translateY(0); }
+    .mobile-drawer.open a:nth-child(1) { transition-delay: 0.1s, 0.1s, 0s; }
+    .mobile-drawer.open a:nth-child(2) { transition-delay: 0.15s, 0.15s, 0s; }
+    .mobile-drawer.open a:nth-child(3) { transition-delay: 0.2s, 0.2s, 0s; }
+    .mobile-drawer.open a:nth-child(4) { transition-delay: 0.25s, 0.25s, 0s; }
+    .mobile-drawer.open a:nth-child(5) { transition-delay: 0.3s, 0.3s, 0s; }
+    .mobile-drawer.open a:nth-child(6) { transition-delay: 0.35s, 0.35s, 0s; }
+    .mobile-drawer a:hover { color: #0044E4; }
+    @media (max-width: 900px) {
+      nav { padding: 20px 24px; }
+      .nav-hamburger { display: flex; }
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+    }
+    </style>
+
+</head>
+<body>
+
+    <nav>
+    <a href="./" class="nav-logo">Jay Tulloch</a>
+    <div class="nav-right">
+      <ul class="nav-links">
+      <li><a href="./#about">About</a></li>
+      <li><a href="./#work">Work</a></li>
+      <li><a href="./writing.html">Writing</a></li>
+      <li><a href="./#podcast">Podcast</a></li>
+      <li><a href="./contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-cta"><a href="./contact.html">Let's Talk</a></div>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <section class="cs-hero">
+    <div class="cs-hero-inner">
+      <p class="cs-eyebrow">Careem (Uber) &middot; Super App &middot; Platform Growth &middot; 2024</p>
+      <h1 class="cs-title">Cross-Service<br/><em>Discovery</em><br/>Engine</h1>
+      <p class="cs-desc">Twenty-two services. Eighty percent of customers using one. The problem wasn't the product, it was that nobody knew the rest of it existed. I built the business case from raw data, got buy-in across Food, Groceries, and Engineering, and designed a contextual cross-sell system embedded in the ride journey that shifted average service usage from 1.5 to 2.7 per user and doubled weekly food order frequency.</p>
+      <div class="cs-meta">
+        <div class="cs-meta-item"><p class="cs-meta-label">Role</p><p class="cs-meta-value">Head of Design, Platform</p></div><div class="cs-meta-item"><p class="cs-meta-label">Timeline</p><p class="cs-meta-value">2024</p></div><div class="cs-meta-item"><p class="cs-meta-label">Focus</p><p class="cs-meta-value">Cross-Service Growth & Ride-Journey Integration</p></div><div class="cs-meta-item"><p class="cs-meta-label">Impact</p><p class="cs-meta-value">2× weekly food order frequency</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="metrics-banner">
+    <div class="metrics-banner-inner">
+      <div class="metric-block reveal">
+        <div class="metric-value">1.5 → 2.7</div>
+        <div class="metric-label">Average services used per customer</div>
+      </div>
+      <div class="metric-block reveal">
+        <div class="metric-value">2×</div>
+        <div class="metric-label">Weekly food order frequency</div>
+      </div>
+      <div class="metric-block reveal">
+        <div class="metric-value">+20%</div>
+        <div class="metric-label">Food orders within 3 days of first exposure</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-image-block cs-image-full-width reveal">
+    <div class="cs-image-block-inner">
+      <div class="cs-image-container" id="img-ride-waiting-screen-with-cross-sell-expe">
+        <div class="pf-canvas" style="border-radius: 12px;">
+          <div class="pf-title-bar">
+            <div class="pf-dot" style="background: #49a942;"></div>
+            <div class="pf-dot" style="background: #6bd164;"></div>
+            <span>Wireframe Comparison, 3 Cross-Service Discovery Patterns · 12 Users Tested</span>
+          </div>
+
+          <!-- Three Options -->
+          <div class="pf-options">
+            <!-- Option A -->
+            <div class="pf-option">
+              <div class="pf-option-header" style="background: #fef0f0; color: #c0392b; display: flex; justify-content: space-between; align-items: center;">
+                <span>Option A – Full-Screen Modal</span>
+                <span style="font-size: 9px; color: #6B6E74;">V1</span>
+              </div>
+              <div class="pf-wireframe" style="gap: 8px;">
+                <!-- Status bar -->
+                <div style="height: 28px; background: linear-gradient(90deg, #e85d5d 0%, #e85d5d 20%, #f5f5f5 20%, #f5f5f5 100%); border-radius: 3px; display: flex; align-items: center; padding: 0 8px;">
+                  <div style="font-size: 6px; color: #fff; font-weight: 700; letter-spacing: 0.1em;">RIDE BLOCKED</div>
+                </div>
+                <!-- Discovery content -->
+                <div class="pf-wf-block" style="height: 60px; background: #e0e0e0;"></div>
+                <div style="display: flex; gap: 6px;">
+                  <div class="pf-wf-bar" style="flex: 1; width: auto; height: 20px;"></div>
+                  <div class="pf-wf-bar" style="flex: 1; width: auto; height: 20px;"></div>
+                </div>
+                <div class="pf-wf-row">
+                  <div class="pf-wf-block" style="flex: 1; height: 28px;"></div>
+                  <div class="pf-wf-block" style="flex: 1; height: 28px;"></div>
+                </div>
+              </div>
+              <div style="padding: 8px 10px; background: #fef0f0; border-radius: 4px; font-size: 8px; color: #c0392b; font-weight: 600; margin-top: 6px; text-align: center;">
+                ✗ Anxiety spike, ride invisible<br/>
+                <span style="font-size: 7px; color: #6B6E74;">Anxiety: 8.2/10 | Browse: 12s | Conv: 18%</span>
+              </div>
+            </div>
+
+            <!-- Option B (Winner) -->
+            <div class="pf-option winner" style="border-color: #49a942;">
+              <div class="pf-option-header" style="background: #edf7ec; color: #27863a; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #49a942;">
+                <span style="font-weight: 700;">Option B – Bottom Sheet (Selected)</span>
+                <span style="font-size: 9px; color: #49a942; font-weight: 700;">V2 → V3</span>
+              </div>
+              <div class="pf-wireframe" style="gap: 8px; background: var(--bg-elevated);">
+                <!-- Map with ride -->
+                <div style="height: 80px; background: var(--bg-elevated); border-radius: 4px; position: relative; overflow: hidden;">
+                  <div style="position: absolute; top: 12px; left: 12px; width: 24px; height: 24px; background: #49a942; border-radius: 50%; border: 2px solid #fff;"></div>
+                  <div style="position: absolute; bottom: 8px; right: 8px; font-size: 18px;">📍</div>
+                </div>
+                <!-- Persistent ride bar -->
+                <div style="height: 24px; background: #49a942; border-radius: 4px; display: flex; align-items: center; padding: 0 8px; gap: 4px;">
+                  <div style="width: 6px; height: 6px; background: #fff; border-radius: 50%;"></div>
+                  <div style="font-size: 7px; color: #fff; font-weight: 600;">3 min away • Driver 4.8★</div>
+                </div>
+                <!-- Bottom sheet content -->
+                <div style="background: #fff; border-radius: 8px 8px 0 0; padding: 8px; border: 1px solid #e0e0e0; border-bottom: none;">
+                  <div class="pf-wf-bar" style="width: 80%;"></div>
+                  <div class="pf-wf-row" style="margin-top: 6px;">
+                    <div class="pf-wf-block" style="flex: 1; height: 32px;"></div>
+                    <div class="pf-wf-block" style="flex: 1; height: 32px;"></div>
+                  </div>
+                </div>
+              </div>
+              <div style="padding: 8px 10px; background: #edf7ec; border-radius: 4px; font-size: 8px; color: #27863a; font-weight: 600; margin-top: 6px; text-align: center; border: 1px solid #d9f0d7;">
+                ✓ Winner, ride context preserved<br/>
+                <span style="font-size: 7px; color: #49a942; font-weight: 700;">Anxiety: 2.1/10 | Browse: 48s | Conv: 34%</span>
+              </div>
+            </div>
+
+            <!-- Option C -->
+            <div class="pf-option">
+              <div class="pf-option-header" style="background: #fef8ec; color: #b8860b; display: flex; justify-content: space-between; align-items: center;">
+                <span>Option C – Push Notification</span>
+                <span style="font-size: 9px; color: #6B6E74;">V0</span>
+              </div>
+              <div class="pf-wireframe" style="gap: 8px;">
+                <!-- Map -->
+                <div style="height: 100px; background: var(--bg-elevated); border-radius: 4px;"></div>
+                <!-- Notification -->
+                <div style="background: #f0e6c8; border-radius: 6px; border: 1px solid #d4c4a0; padding: 8px;">
+                  <div class="pf-wf-bar" style="width: 70%; background: #d4c4a0;"></div>
+                  <div class="pf-wf-bar" style="width: 50%; background: #d4c4a0; margin-top: 4px;"></div>
+                </div>
+              </div>
+              <div style="padding: 8px 10px; background: #fef8ec; border-radius: 4px; font-size: 8px; color: #b8860b; font-weight: 600; margin-top: 6px; text-align: center;">
+                ~ Low engagement, easily dismissed<br/>
+                <span style="font-size: 7px; color: #6B6E74;">Anxiety: 3.5/10 | Browse: 6s | Conv: 8%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scoring Matrix -->
+          <div style="margin-top: 20px; padding: 12px; background: rgba(73,169,66,0.04); border-radius: 8px; border: 1px solid rgba(73,169,66,0.08);">
+            <div style="font-size: 8px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(73,169,66,0.6); margin-bottom: 10px;">Comparative Scoring Matrix</div>
+            <table style="width: 100%; font-size: 9px; border-collapse: collapse;">
+              <tr style="border-bottom: 1px solid #ddd;">
+                <td style="padding: 6px; text-align: left; font-weight: 600;">Metric</td>
+                <td style="padding: 6px; text-align: center; font-weight: 600; color: #6B6E74;">A: Modal</td>
+                <td style="padding: 6px; text-align: center; font-weight: 600; color: #49a942;">B: Winner</td>
+                <td style="padding: 6px; text-align: center; font-weight: 600; color: #6B6E74;">C: Notification</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 6px; text-align: left;">Conversion Rate</td>
+                <td style="padding: 6px; text-align: center; background: #fee;">18%</td>
+                <td style="padding: 6px; text-align: center; background: #efe; font-weight: 700;">34%</td>
+                <td style="padding: 6px; text-align: center; background: #fee;">8%</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 6px; text-align: left;">Anxiety (0–10)</td>
+                <td style="padding: 6px; text-align: center; background: #fee;">8.2</td>
+                <td style="padding: 6px; text-align: center; background: #efe; font-weight: 700;">2.1</td>
+                <td style="padding: 6px; text-align: center; background: #fee;">3.5</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 6px; text-align: left;">Browse Time (sec)</td>
+                <td style="padding: 6px; text-align: center; background: #fee;">12s</td>
+                <td style="padding: 6px; text-align: center; background: #efe; font-weight: 700;">48s</td>
+                <td style="padding: 6px; text-align: center; background: #fee;">6s</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 6px; text-align: left;">Engagement (NPS)</td>
+                <td style="padding: 6px; text-align: center; background: #fee;">+24</td>
+                <td style="padding: 6px; text-align: center; background: #efe; font-weight: 700;">+72</td>
+                <td style="padding: 6px; text-align: center; background: #fee;">+8</td>
+              </tr>
+            </table>
+          </div>
+
+          <!-- Test Insights -->
+          <div style="margin-top: 16px; padding: 12px; background: #fff; border-radius: 6px; border-left: 3px solid #49a942; font-size: 9px;">
+            <div style="font-weight: 700; color: #49a942; margin-bottom: 6px;">Key Insight from 12-User Test</div>
+            <p style="color: #666; margin: 0; line-height: 1.4;">"Users accepted interruption when ride status remained visible and immediate. Option B's persistent ride bar reduced cognitive load, enabling 4x longer browse time and 1.9x higher conversion than Option A, despite similar interruption level."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="cs-section" style="background: var(--bg-elevated);">
+    <div class="cs-section-inner">
+      <p class="section-label">The Approach</p>
+      <div class="two-col">
+        <div><h2 class="col-heading">Sell<br/>while<br/>they<br/><em>wait.</em></h2></div>
+        <div class="col-body">
+          <p>I initiated this project from zero, no brief, no request. I saw the gap in the data, built the case, and brought the right people to the table.</p>
+    
+
+          <div class="deliverables">
+            <div class="deliverable-item reveal">
+              <span class="d-num">01</span>
+              <p class="d-text"><strong>Proactive opportunity identification</strong>, Analysed repeat journey data, location signals, and order timing patterns to identify the highest-leverage moment for cross-service exposure: the ride waiting screen.</p>
+            </div>
+            <div class="deliverable-item reveal">
+              <span class="d-num">02</span>
+              <p class="d-text"><strong>Cross-functional coalition building</strong>, Built and sold the business case to stakeholders across Food, Groceries, and Engineering. Secured resource commitment before a single screen was designed.</p>
+            </div>
+            <div class="deliverable-item reveal">
+              <span class="d-num">03</span>
+              <p class="d-text"><strong>Contextual cross-sell experience</strong>, Designed bottom-sheet surfaces that appeared once a ride was confirmed. Customers browsed food or grocery options during their wait, ordered on the way, and arrived home to their delivery. Timing and relevance were everything.</p>
+            </div>
+            <div class="deliverable-item reveal">
+              <span class="d-num">04</span>
+              <p class="d-text"><strong>Minimised ride-status component</strong>, Solved the critical anxiety problem: interrupting a ride journey without losing ride context. I designed a new persistent ride-status bar for the design system that kept the customer's ride visible while they browsed other services. Testing confirmed it significantly reduced cognitive load.</p>
+            </div>
+            <div class="deliverable-item reveal">
+              <span class="d-num">05</span>
+              <p class="d-text"><strong>Rapid prototype validation</strong>, Tested with 8–12 customers across multiple prototype iterations, identifying the optimal placement, timing, and content hierarchy for maximum conversion without disruption.</p>
+            </div>
+          </div>
+          <div class="highlight-block reveal">
+            <p>"The car waiting screen was dead time. Two minutes of a customer staring at a moving dot. I turned it into the highest-converting surface on the platform."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cs-video-feature">
+    <video autoplay muted loop playsinline>
+      <source src="./media/careem-food.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <section class="cs-section">
+    <div class="cs-section-inner">
+      <p class="section-label">The Outcomes</p>
+      <div class="two-col">
+        <div><h2 class="col-heading">Platform<br/><em>unlocked.</em></h2></div>
+        <div class="col-body reveal">
+          <p>The ride journey went from a single-service experience to the platform's most powerful discovery engine.</p>
+          <div class="outcomes-grid">
+            <div class="outcome-card">
+              <h4>Food Conversion</h4>
+              <p><strong>20% uplift in food orders within 3 days</strong> of first cross-sell exposure.</p>
+            </div>
+            <div class="outcome-card">
+              <h4>Order Frequency</h4>
+              <p><strong>Weekly food order frequency doubled</strong>, a direct result of contextual cross-sell appearing at the highest-intent moment in the journey.</p>
+            </div>
+            <div class="outcome-card">
+              <h4>Platform Breadth</h4>
+              <p>Platform breadth fundamentally shifted. Customers who previously used one service began exploring the super-app.</p>
+            </div>
+            <div class="outcome-card">
+              <h4>Revenue Impact</h4>
+              <p><strong>Direct revenue uplift across Food and Grocery verticals</strong>, proving the super-app model works when discovery is designed into the journey.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="next-cs">
+    <div class="next-cs-inner">
+      <a href="./casestudy-neobank.html">
+        <div>
+          <p class="next-label">Next Case Study</p>
+          <h3 class="next-title">Crypto Neo-Bank Launch</h3>
+        </div>
+        <span class="next-arrow">&rarr;</span>
+      </a>
+    </div>
+  </section>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+  <!-- Password Gate -->
+  <div class="cs-gate" id="cs-gate">
+    <div class="cs-gate-card">
+      <div class="cs-gate-icon"></div>
+      <p class="cs-gate-title">Want in?</p>
+      <p class="cs-gate-sub">Score 100% on the Design Eye test to earn access. Or enter the password if you have it.</p>
+      <p class="cs-gate-earn-sub">4 rounds. No partial credit.</p>
+      <div class="cs-gate-actions">
+        <a class="cs-gate-earn" id="cs-earn" href="./game.html?return=casestudy-careem-superapp%2Ehtml">
+          Take the Design Eye test
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <div class="cs-gate-or"><span>or</span></div>
+        <button class="cs-gate-pwd-btn" id="cs-pwd-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Enter password
+        </button>
+      </div>
+      <div class="cs-gate-pwd-section" id="cs-pwd-section">
+        <div style="padding-top:16px">
+          <div class="cs-gate-input-wrap" id="cs-input-wrap">
+            <input class="cs-gate-input" id="cs-pwd" type="password" placeholder="Enter password" autocomplete="off" spellcheck="false" />
+            <button class="cs-gate-btn" id="cs-submit">Enter</button>
+          </div>
+          <p class="cs-gate-hint" id="cs-hint">&nbsp;</p>
+        </div>
+      </div>
+      <button class="cs-gate-back" onclick="history.back()">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.5 2.5L4 7L8.5 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Go back
+      </button>
+    </div>
+  </div>
+  <script>
+  (function() {
+    var KEY = 'jt_cs_unlocked';
+    var gate = document.getElementById('cs-gate');
+    if (!gate) return;
+    if (sessionStorage.getItem(KEY) === '1') { gate.style.display = 'none'; return; }
+    var pwdBtn = document.getElementById('cs-pwd-btn');
+    var section = document.getElementById('cs-pwd-section');
+    if (pwdBtn && section) {
+      pwdBtn.addEventListener('click', function() {
+        section.classList.toggle('open');
+        if (section.classList.contains('open')) {
+          pwdBtn.style.display = 'none';
+          setTimeout(function() { document.getElementById('cs-pwd').focus(); }, 300);
+        }
+      });
+    }
+    function attempt() {
+      var val = document.getElementById('cs-pwd').value.trim().toUpperCase().replace(/\s/g, '');
+      var wrap = document.getElementById('cs-input-wrap');
+      var hint = document.getElementById('cs-hint');
+      if (val === 'OPENSAYSME') {
+        sessionStorage.setItem(KEY, '1');
+        gate.classList.add('unlocking');
+        setTimeout(function() { gate.style.display = 'none'; }, 500);
+      } else {
+        wrap.classList.remove('error');
+        void wrap.offsetWidth;
+        wrap.classList.add('error');
+        hint.textContent = 'Incorrect password.';
+        document.getElementById('cs-pwd').value = '';
+        setTimeout(function() { wrap.classList.remove('error'); }, 500);
+      }
+    }
+    document.getElementById('cs-submit').addEventListener('click', attempt);
+    document.getElementById('cs-pwd').addEventListener('keydown', function(e) { if (e.key === 'Enter') attempt(); });
+  })();
+  </script>
+
+  <script>
+    (function() {
+      var btn = document.getElementById('nav-hamburger');
+      var drawer = document.getElementById('mobile-drawer');
+      if (!btn || !drawer) return;
+      btn.addEventListener('click', function() {
+        btn.classList.toggle('open');
+        drawer.classList.toggle('open');
+        document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+      });
+      drawer.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+          btn.classList.remove('open');
+          drawer.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

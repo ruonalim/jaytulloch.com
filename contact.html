@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png"/>
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png"/>
+  <title>Work With Me · Jay Tulloch</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:           #FFFFFF;
+      --text:         #111111;
+      --text-muted: #6B6E74;
+      --text-body:    #141414;
+      --border:       #E8E8EC;
+      --border-strong:#D0D0D0;
+      --black:        #000000;
+      --white:        #FFFFFF;
+      --tag-bg:       #EAF0FF;
+      --accent:       #0044E4;
+      --gray-dark:    #F5F5F7;
+      --gray-mid:     #E8E8EC;
+      --gray-light: #6B6E74;
+      --font:         'Switzer', -apple-system, Helvetica Neue, Arial, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Nav ── */
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px clamp(32px, 5vw, 80px);
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid #E8E8EC;
+    }
+
+    /* ── Hero ── */
+    .contact-hero {
+      padding: 160px clamp(32px, 5vw, 80px) 80px;
+      border-bottom: 1px solid var(--border);
+    }
+    .contact-hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 120px;
+      align-items: end;
+    }
+    .hero-left {}
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+    .hero-title {
+      font-size: clamp(52px, 7vw, 96px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .hero-desc {
+      font-size: 18px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 440px;
+    }
+    .hero-right {
+      padding-bottom: 8px;
+    }
+    .availability-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg-elevated, #F5F5F7);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 12px 20px;
+      margin-bottom: 40px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .availability-badge .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #f59e0b;
+      flex-shrink: 0;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(245,158,11,0.6); }
+      50% { opacity: 0.7; box-shadow: 0 0 0 5px rgba(245,158,11,0); }
+    }
+    .quick-links {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .quick-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      background: var(--bg-elevated, #F5F5F7);
+      border: 1px solid var(--border);
+      transition: background 0.2s, border-color 0.2s;
+      cursor: pointer;
+    }
+    .quick-link:hover {
+      background: var(--gray-mid);
+      border-color: var(--border-strong);
+    }
+    .ql-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+    .ql-value {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .ql-arrow {
+      font-size: 20px;
+      color: var(--text-muted);
+      transition: transform 0.2s, color 0.2s;
+    }
+    .quick-link:hover .ql-arrow {
+      transform: translateX(4px);
+      color: var(--accent);
+    }
+
+    /* ── Engagement Options ── */
+    .engagements {
+      padding: 96px clamp(32px, 5vw, 80px);
+      border-bottom: 1px solid var(--border);
+    }
+    .engagements-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 56px;
+    }
+    .engagement-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .engagement-card {
+      padding: 48px 40px;
+      background: var(--bg-elevated, #F5F5F7);
+      border-top: 3px solid transparent;
+      transition: border-color 0.3s, background 0.3s;
+    }
+    .engagement-card:hover {
+      background: #181818;
+      border-top-color: var(--accent);
+    }
+    .ec-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .ec-title {
+      font-size: clamp(20px, 2vw, 26px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      line-height: 1.1;
+    }
+    .ec-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 28px;
+    }
+    .ec-good-for {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+    .ec-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .ec-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      padding: 5px 12px;
+      background: var(--bg-elevated, #F5F5F7);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text-muted);
+    }
+
+    /* ── What You Get ── */
+    .what-you-get {
+      padding: 96px clamp(32px, 5vw, 80px);
+      background: var(--bg-elevated, #F5F5F7);
+      border-bottom: 1px solid var(--border);
+    }
+    .wyg-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .wyg-heading {
+      font-size: clamp(32px, 3.5vw, 48px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      line-height: 1.05;
+      position: sticky;
+      top: 100px;
+    }
+    .wyg-heading em { font-style: normal; color: var(--accent); }
+    .wyg-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .wyg-item {
+      padding: 28px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+    .wyg-item:last-child { border-bottom: none; }
+    .wyg-icon {
+      font-size: 22px;
+      padding-top: 2px;
+    }
+    .wyg-item h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .wyg-item p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ── CTA Block ── */
+    .cta-block {
+      padding: 120px clamp(32px, 5vw, 80px);
+      text-align: center;
+    }
+    .cta-block-inner { max-width: 800px; margin: 0 auto; }
+    .cta-title {
+      font-size: clamp(40px, 5vw, 72px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      line-height: 1.0;
+      margin-bottom: 32px;
+    }
+    .cta-title em { font-style: normal; color: var(--accent); }
+    .cta-sub {
+      font-size: 18px;
+      color: var(--text-muted);
+      margin-bottom: 56px;
+      line-height: 1.6;
+    }
+    .cta-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .cta-primary {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      background: var(--accent);
+      color: var(--white);
+      padding: 18px 40px;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .cta-primary:hover {
+      background: #0033CC;
+      transform: translateY(-2px);
+    }
+    .cta-secondary {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border: 1px solid var(--border-strong);
+      color: var(--text);
+      padding: 18px 40px;
+      transition: background 0.25s, border-color 0.25s, transform 0.2s;
+    }
+    .cta-secondary:hover {
+      background: var(--bg-elevated, #F5F5F7);
+      border-color: var(--text-muted);
+      transform: translateY(-2px);
+    }
+
+    /* ── Footer ── */
+    footer {
+      padding: 40px clamp(32px, 5vw, 80px);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .footer-name {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .footer-links {
+      display: flex;
+      gap: 32px;
+    }
+    .footer-links a {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ── Reveal ── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .contact-hero { padding: 120px 24px 64px; }
+      .contact-hero-inner { grid-template-columns: 1fr; gap: 56px; }
+      .engagements { padding: 64px 24px; }
+      .engagement-grid { grid-template-columns: 1fr; }
+      .what-you-get { padding: 64px 24px; }
+      .wyg-inner { grid-template-columns: 1fr; gap: 40px; }
+      .wyg-heading { position: static; }
+      .cta-block { padding: 80px 24px; }
+      footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; gap: 20px; }
+    }
+  
+
+
+
+    /* ─── Playfair Display callout accent ──────────────────────────── */
+    h1 em, h2 em {
+      font-family: 'Abril Fatface', Georgia, serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 1em;
+      letter-spacing: 0;
+    }
+    .pod-stat-value em {
+      font-family: var(--font);
+      font-weight: inherit;
+      font-style: normal;
+      letter-spacing: inherit;
+    }
+        /* ─── Navigation ───────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px clamp(32px, 5vw, 80px);
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid #E8E8EC;
+    }
+    .nav-logo { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #111111; flex-shrink: 0; }
+    .nav-right { display: flex; align-items: center; }
+    .nav-links { display: flex; gap: 32px; align-items: center; list-style: none; margin-right: 48px; }
+    .nav-links li a { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: #6B6E74; transition: color 0.2s; }
+    .nav-links li a:hover, .nav-links li a.active { color: #111111; }
+    .nav-cta { pointer-events: all; }
+    .nav-cta a { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #111111; border: 1px solid #111111; border-radius: 2px; padding: 10px 22px; transition: background 0.25s, color 0.25s; display: inline-block; }
+    .nav-cta a:hover { background: #111111; color: #fff; }
+    .nav-hamburger { display: none; flex-direction: column; justify-content: center; gap: 6px; width: 32px; height: 32px; cursor: pointer; background: none; border: none; padding: 0; pointer-events: all; }
+    .nav-hamburger span { display: block; width: 100%; height: 1.5px; background: #111111; transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.25s; transform-origin: center; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(3.75px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-3.75px) rotate(-45deg); }
+    .mobile-drawer { position: fixed; inset: 0; z-index: 10000; background: rgba(0,0,0,0.95); backdrop-filter: blur(40px); -webkit-backdrop-filter: blur(40px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 40px; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+    .mobile-drawer.open { opacity: 1; pointer-events: all; }
+    .mobile-drawer a { font-size: clamp(28px, 6vw, 42px); font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; opacity: 0; transform: translateY(20px); transition: opacity 0.4s ease, transform 0.4s ease, color 0.2s; }
+    .mobile-drawer.open a { opacity: 1; transform: translateY(0); }
+    .mobile-drawer.open a:nth-child(1) { transition-delay: 0.1s, 0.1s, 0s; }
+    .mobile-drawer.open a:nth-child(2) { transition-delay: 0.15s, 0.15s, 0s; }
+    .mobile-drawer.open a:nth-child(3) { transition-delay: 0.2s, 0.2s, 0s; }
+    .mobile-drawer.open a:nth-child(4) { transition-delay: 0.25s, 0.25s, 0s; }
+    .mobile-drawer.open a:nth-child(5) { transition-delay: 0.3s, 0.3s, 0s; }
+    .mobile-drawer.open a:nth-child(6) { transition-delay: 0.35s, 0.35s, 0s; }
+    .mobile-drawer a:hover { color: #0044E4; }
+    @media (max-width: 900px) {
+      nav { padding: 20px 24px; }
+      .nav-hamburger { display: flex; }
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+    }
+    </style>
+</head>
+<body>
+
+  <!-- Nav -->
+    <nav>
+    <a href="./" class="nav-logo">Jay Tulloch</a>
+    <div class="nav-right">
+      <ul class="nav-links">
+      <li><a href="./#about">About</a></li>
+      <li><a href="./#work">Work</a></li>
+      <li><a href="./writing.html">Writing</a></li>
+      <li><a href="./#podcast">Podcast</a></li>
+      <li><a href="./contact.html" class="active">Contact</a></li>
+      </ul>
+      <div class="nav-cta"><a href="./contact.html">Let's Talk</a></div>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="contact-hero">
+    <div class="contact-hero-inner">
+      <div class="hero-left">
+        <p class="eyebrow">Availability · 2026</p>
+        <h1 class="hero-title">Work<br/>With<br/><em>Me.</em></h1>
+        <p class="hero-desc">
+          I work with founders, CPOs, and product teams that are serious about design
+          as a business lever, not just a polish layer. Based in Dubai, available globally.
+        </p>
+      </div>
+      <div class="hero-right reveal">
+        <div class="availability-badge">
+          <span class="dot"></span>
+          Selectively taking on new work
+        </div>
+        <div class="quick-links">
+          <div class="quick-link" id="copy-email" onclick="copyEmail()" style="cursor:pointer;">
+            <div>
+              <p class="ql-label">Email</p>
+              <p class="ql-value" id="email-text">Copy address</p>
+            </div>
+            <span class="ql-arrow" id="copy-arrow">Copy ↗</span>
+          </div>
+          <a href="https://www.linkedin.com/in/jaytulloch" target="_blank" class="quick-link">
+            <div>
+              <p class="ql-label">LinkedIn</p>
+              <p class="ql-value">linkedin.com/in/jaytulloch</p>
+            </div>
+            <span class="ql-arrow">›</span>
+          </a>
+          <a href="https://www.beyond-the-interface.com/" target="_blank" class="quick-link">
+            <div>
+              <p class="ql-label">Podcast</p>
+              <p class="ql-value">Beyond the Interface</p>
+            </div>
+            <span class="ql-arrow">›</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Engagement Options -->
+  <section class="engagements">
+    <div class="engagements-inner">
+      <p class="section-label">How We Can Work Together</p>
+      <div class="engagement-grid">
+        <div class="engagement-card reveal">
+          <p class="ec-num">01</p>
+          <h3 class="ec-title">Fractional<br/>Design Lead</h3>
+          <p class="ec-desc">
+            Embedded senior design leadership on a part-time basis.
+            I act as your Head of Design, setting direction, running the team, and
+            shipping, without the full-time overhead.
+          </p>
+          <p class="ec-good-for">Good for</p>
+          <div class="ec-tags">
+            <span class="ec-tag">Series A–C</span>
+            <span class="ec-tag">Scaling product teams</span>
+            <span class="ec-tag">Design function gaps</span>
+          </div>
+        </div>
+        <div class="engagement-card reveal reveal-delay-1">
+          <p class="ec-num">02</p>
+          <h3 class="ec-title">Design<br/>Advisory</h3>
+          <p class="ec-desc">
+            Strategic design input at the leadership level. I help you
+            define what to build, how to position design in the org, and
+            where the biggest product opportunities sit.
+          </p>
+          <p class="ec-good-for">Good for</p>
+          <div class="ec-tags">
+            <span class="ec-tag">Founders</span>
+            <span class="ec-tag">CPOs</span>
+            <span class="ec-tag">Design strategy</span>
+            <span class="ec-tag">FinTech</span>
+          </div>
+        </div>
+        <div class="engagement-card reveal reveal-delay-2">
+          <p class="ec-num">03</p>
+          <h3 class="ec-title">Delivery<br/>via RUONALIM</h3>
+          <p class="ec-desc">
+            Full end-to-end product design delivery through my agency.
+            Research, UX, UI, design systems, and handoff, handled
+            as a trusted design partner from brief to build.
+          </p>
+          <p class="ec-good-for">Good for</p>
+          <div class="ec-tags">
+            <span class="ec-tag">Consumer apps</span>
+            <span class="ec-tag">FinTech</span>
+            <span class="ec-tag">MVP to scale</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What You Get -->
+  <section class="what-you-get">
+    <div class="wyg-inner">
+      <div>
+        <p class="section-label">What You Get</p>
+        <h2 class="wyg-heading">Senior<br/>design<br/><em>thinking.</em><br/>Operator<br/>execution.</h2>
+      </div>
+      <div class="wyg-list">
+        <div class="wyg-item reveal">
+          <span class="wyg-icon">⬛</span>
+          <div>
+            <h4>Track record, not theory</h4>
+            <p>I've led design at 50M-user super apps, UK retail banks, and crypto neobanks. I know what excellent looks like, and I move fast to close the gap.</p>
+          </div>
+        </div>
+        <div class="wyg-item reveal">
+          <span class="wyg-icon">⬛</span>
+          <div>
+            <h4>Commercial accountability</h4>
+            <p>Every design decision I make has a business rationale. I track metrics, own outcomes, and report in language the board understands.</p>
+          </div>
+        </div>
+        <div class="wyg-item reveal">
+          <span class="wyg-icon">⬛</span>
+          <div>
+            <h4>AI-augmented workflow</h4>
+            <p>I use Claude, Cursor, and Vibe Coding daily. Exploration is faster, prototypes come earlier, and decisions are made with better data.</p>
+          </div>
+        </div>
+        <div class="wyg-item reveal">
+          <span class="wyg-icon">⬛</span>
+          <div>
+            <h4>Cross-functional leadership</h4>
+            <p>I've managed teams of 25, run design sprints, set hiring bars, and partnered with C-suite stakeholders. I operate across the org, not just inside the design team.</p>
+          </div>
+        </div>
+        <div class="wyg-item reveal">
+          <span class="wyg-icon">⬛</span>
+          <div>
+            <h4>Regulated product experience</h4>
+            <p>FinTech, banking, crypto, travel, I've shipped in high-compliance, high-stakes environments where trust and clarity aren't optional.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-block">
+    <div class="cta-block-inner">
+      <h2 class="cta-title reveal">Let's<br/><em>Talk.</em></h2>
+      <p class="cta-sub reveal">Tell me what you're building and where design is the gap. I'll tell you if I can help.</p>
+      <div class="cta-actions reveal">
+        <a href="#" class="cta-primary" onclick="copyEmail(); return false;">Copy Email Address</a>
+        <a href="https://www.linkedin.com/in/jaytulloch" target="_blank" class="cta-secondary">Connect on LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <a href="./" class="footer-name">Jay Tulloch</a>
+    <div class="footer-links">
+      <a href="./">Work</a>
+      <a href="#" onclick="copyEmail(); return false;">Email</a>
+      <a href="https://www.linkedin.com/in/jaytulloch" target="_blank">LinkedIn</a>
+    </div>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+
+    function copyEmail() {
+      navigator.clipboard.writeText('mr@jaytulloch.com').then(() => {
+        const arrow = document.getElementById('copy-arrow');
+        const text = document.getElementById('email-text');
+        arrow.textContent = 'Copied!';
+        text.textContent = 'Copied to clipboard';
+        setTimeout(() => {
+          arrow.textContent = 'Copy ↗';
+          text.textContent = 'Copy address';
+        }, 2000);
+      });
+    }
+  </script>
+
+
+
+  <script>
+  (function() {
+    if (!btn) return;
+    btn.addEventListener('click', function() {
+      var html = document.documentElement;
+    });
+  })();
+  </script>
+  <script>
+    (function() {
+      var btn = document.getElementById('nav-hamburger');
+      var drawer = document.getElementById('mobile-drawer');
+      if (!btn || !drawer) return;
+      btn.addEventListener('click', function() {
+        btn.classList.toggle('open');
+        drawer.classList.toggle('open');
+        document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+      });
+      drawer.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+          btn.classList.remove('open');
+          drawer.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
