@@ -1,202 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Figma&#x27;s AI Agents Can Now Design For You. Most Teams Aren&#x27;t Ready. · Jay Tulloch</title>
-<meta name="description" content="Yesterday, Figma announced that AI agents can now write directly to your Figma files. Not generate images and paste them in. Not suggest layout options for a..."/>
-<link rel="canonical" href="https://www.jaytulloch.com/writing/figmas-ai-agents-can-now-design-for-you-most-teams-arent-ready.html"/>
-<meta property="og:title" content="Figma&#x27;s AI Agents Can Now Design For You. Most Teams Aren&#x27;t Ready."/>
-<meta property="og:description" content="Yesterday, Figma announced that AI agents can now write directly to your Figma files. Not generate images and paste them in. Not suggest layout options for a..."/>
-<meta property="og:type" content="article"/>
-<meta property="og:url" content="https://www.jaytulloch.com/writing/figmas-ai-agents-can-now-design-for-you-most-teams-arent-ready.html"/>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "Figma&#x27;s AI Agents Can Now Design For You. Most Teams Aren&#x27;t Ready.",
-  "description": "Yesterday, Figma announced that AI agents can now write directly to your Figma files. Not generate images and paste them in. Not suggest layout options for a...",
-  "author": {
-    "@type": "Person",
-    "name": "Jay Tulloch",
-    "url": "https://www.jaytulloch.com"
-  },
-  "publisher": {
-    "@type": "Person",
-    "name": "Jay Tulloch",
-    "url": "https://www.jaytulloch.com"
-  },
-  "datePublished": "2026-04-03",
-  "dateModified": "2026-04-03",
-  "url": "https://www.jaytulloch.com/writing/figmas-ai-agents-can-now-design-for-you-most-teams-arent-ready.html"
-}
-</script>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-  :root { --black: #080808; --white: #ffffff; --accent: #e63329; --muted: rgba(255,255,255,0.45); --border: rgba(255,255,255,0.06); }
-  html[data-theme="light"] { --black: #f5f4f1; --white: #0a0a0a; --muted: rgba(0,0,0,0.45); --border: rgba(0,0,0,0.07); }
-  html[data-theme="light"] body { background: #f5f4f1; color: #0a0a0a; }
-  html[data-theme="light"] nav { background: rgba(245,244,241,0.92); border-bottom-color: rgba(0,0,0,0.07); }
-  html[data-theme="light"] .article-body { color: rgba(0,0,0,0.8); }
-  html[data-theme="light"] .footer-links a { color: rgba(0,0,0,0.35); }
-  html[data-theme="light"] .footer-links a:hover { color: #0a0a0a; }
-  html[data-theme="light"] .share-btn { border-color: rgba(0,0,0,0.12); color: rgba(0,0,0,0.5); }
-  html[data-theme="light"] .share-btn:hover { border-color: rgba(0,0,0,0.4); color: #0a0a0a; }
-  body { font-family: 'Inter', -apple-system, sans-serif; background: var(--black); color: var(--white); -webkit-font-smoothing: antialiased; transition: background 0.2s, color 0.2s; }
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 24px clamp(24px,4vw,64px); display: flex; justify-content: space-between; align-items: center; background: rgba(8,8,8,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); transition: background 0.2s; }
-  .nav-left { display: flex; align-items: center; gap: 20px; }
-  .nav-logo { font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: var(--white); }
-  .nav-back { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; color: var(--muted); transition: color 0.2s; }
-  .nav-back:hover { color: var(--white); }
-  .nav-right { display: flex; align-items: center; gap: 14px; }
-  .nav-contact { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.3); padding: 8px 18px; transition: background 0.25s, color 0.25s; color: var(--white); text-decoration: none; }
-  .nav-contact:hover { background: var(--white); color: var(--black); }
-  html[data-theme="light"] .nav-contact { color: #0a0a0a; border-color: rgba(0,0,0,0.3); }
-  html[data-theme="light"] .nav-contact:hover { background: #0a0a0a; color: #fff; }
-  .nav-theme-toggle { background: none; border: none; cursor: pointer; padding: 4px; display: flex; align-items: center; color: var(--muted); transition: color 0.2s; }
-  .nav-theme-toggle:hover { color: var(--white); }
-  .nav-theme-toggle svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-  .icon-sun { display: none; } .icon-moon { display: block; }
-  html[data-theme="light"] .icon-sun { display: block; } html[data-theme="light"] .icon-moon { display: none; }
-  .article-wrap { max-width: 720px; margin: 0 auto; padding: 140px clamp(24px,5vw,48px) 100px; }
-  .article-meta { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin-bottom: 32px; }
-  .topic-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(230,51,41,0.3); padding: 4px 10px; border-radius: 4px; }
-  .article-date { font-size: 12px; color: var(--muted); }
-  .article-read-time { font-size: 12px; color: var(--muted); }
-  h1 { font-size: clamp(28px,4vw,48px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 32px; }
-  .article-body { font-size: 17px; line-height: 1.8; color: rgba(255,255,255,0.85); }
-  .article-body p { margin-bottom: 24px; }
-  .article-body h2 { font-size: 22px; font-weight: 700; margin: 48px 0 16px; color: var(--white); letter-spacing: -0.01em; }
-  .article-body h3 { font-size: 18px; font-weight: 700; margin: 36px 0 12px; color: var(--white); }
-  html[data-theme="light"] .article-body { color: rgba(0,0,0,0.8); }
-  html[data-theme="light"] .article-body h2,
-  html[data-theme="light"] .article-body h3 { color: #0a0a0a; }
-  .article-divider { border: none; border-top: 1px solid var(--border); margin: 56px 0; }
-  .article-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
-  .back-link { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-  .back-link:hover { color: var(--white); }
-  .share-bar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .share-bar-label { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-right: 2px; }
-  .share-btn { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 12px; border: 1px solid rgba(255,255,255,0.14); color: var(--muted); background: transparent; cursor: pointer; font-family: inherit; transition: border-color 0.2s, color 0.2s; border-radius: 3px; text-decoration: none; }
-  .share-btn:hover { border-color: rgba(255,255,255,0.45); color: var(--white); }
-  .share-btn svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; flex-shrink: 0; }
-  .share-btn.x-btn svg { fill: currentColor; stroke: none; }
-  .share-btn.copied { color: #4ade80; border-color: #4ade80; }
-  footer { border-top: 1px solid var(--border); padding: 40px clamp(24px,5vw,64px); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
-  .footer-logo { font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
-  .footer-links { display: flex; gap: 24px; }
-  .footer-links a { font-size: 12px; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
-  .footer-links a:hover { color: var(--white); }
-  .fact-check { margin-top: 48px; padding: 32px; border: 1px solid var(--border); border-radius: 4px; background: rgba(255,255,255,0.02); }
-  html[data-theme="light"] .fact-check { background: rgba(0,0,0,0.02); border-color: rgba(0,0,0,0.08); }
-  .fact-check-heading { font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
-  .fact-check-intro { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
-  .fc-claim { font-size: 14px; margin-bottom: 4px; color: rgba(255,255,255,0.7); }
-  html[data-theme="light"] .fc-claim { color: rgba(0,0,0,0.7); }
-  .fc-source { font-size: 13px; color: var(--muted); margin-bottom: 20px; padding-left: 16px; border-left: 2px solid var(--border); }
-  .fc-link { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; word-break: break-all; transition: color 0.15s; }
-  .fc-link:hover { color: var(--white); }
-  html[data-theme="light"] .fc-link { color: rgba(0,0,0,0.5); }
-  html[data-theme="light"] .fc-link:hover { color: var(--black); }
-  .fc-unsourced { font-size: 13px; color: var(--muted); margin-top: 8px; font-style: italic; }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Figma's AI Agents Can Now Design For You. Most Teams Aren't Ready. | Jay Tulloch</title>
+  <meta name="description" content="Yesterday, Figma announced that AI agents can now write directly to your Figma files. Not generate images and paste them in. Not suggest layout options for a human to apply...." />
+  <link rel="canonical" href="https://www.jaytulloch.com/writing/figmas-ai-agents-can-now-design-for-you-most-teams-arent-ready.html" />
+  <meta property="og:title" content="Figma's AI Agents Can Now Design For You. Most Teams Aren't Ready." />
+  <meta property="og:description" content="Yesterday, Figma announced that AI agents can now write directly to your Figma files. Not generate images and paste them in. Not suggest layout options for a human to apply...." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://www.jaytulloch.com/writing/figmas-ai-agents-can-now-design-for-you-most-teams-arent-ready.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700,800,900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #FFFFFF; --text: #111111; --text-muted: #6B6E74; --text-body: #141414;
+      --border: #E8E8EC; --accent: #0044E4;
+      --font: 'Switzer', -apple-system, Helvetica Neue, Arial, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px clamp(32px, 5vw, 80px); background: rgba(255,255,255,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #111; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .article-wrap { max-width: 720px; margin: 0 auto; padding: 140px clamp(20px, 5vw, 40px) 80px; }
+    .article-back { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 32px; }
+    .article-back:hover { color: var(--text); }
+    .article-meta { display: flex; gap: 12px; align-items: center; margin-bottom: 16px; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+    .article-topic { color: var(--accent); }
+    .article-date { color: var(--text-muted); }
+    .article-read-time { color: var(--text-muted); }
+    .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border); }
+    .article-title { font-size: clamp(32px, 5vw, 52px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+    article h2 { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; margin: 48px 0 16px; line-height: 1.2; }
+    article h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin: 32px 0 12px; }
+    article p { margin-bottom: 22px; color: var(--text-body); }
+    article strong { font-weight: 700; color: var(--text); }
+    article blockquote { border-left: 2px solid var(--accent); padding-left: 20px; margin: 32px 0; color: var(--text-muted); font-style: italic; }
+    article hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+    article ul { padding-left: 24px; margin-bottom: 22px; }
+    article li { margin-bottom: 8px; }
+    .article-footer { margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    .footer-cta { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 12px 24px; border: 1px solid var(--text); color: var(--text); transition: background 0.2s, color 0.2s; }
+    .footer-cta:hover { background: var(--text); color: var(--bg); }
+  </style>
 </head>
 <body>
-<nav>
-  <div class="nav-left">
-    <a class="nav-logo" href="../index.html">Jay Tulloch</a>
-    <a class="nav-back" href="../writing.html">← Writing</a>
-  </div>
-  <div class="nav-right">
-    <button class="nav-theme-toggle" id="nav-theme-toggle" aria-label="Toggle theme">
-      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-    </button>
-    <a href="../contact.html" class="nav-contact">Let's Talk</a>
-  </div>
-</nav>
+  <nav>
+    <a href="../" class="nav-logo">Jay Tulloch</a>
+    <ul class="nav-links">
+      <li><a href="../#about">About</a></li>
+      <li><a href="../#work">Work</a></li>
+      <li><a href="../writing.html" class="active">Writing</a></li>
+      <li><a href="../#podcast">Podcast</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+    </ul>
+  </nav>
 
-<div class="article-wrap">
-  <div class="article-meta">
-    <span class="topic-tag">AI &amp; Design</span>
-    <span class="article-date">April 3, 2026</span>
-    <span class="article-read-time">5 min read</span>
-  </div>
-  <h1>Figma&#x27;s AI Agents Can Now Design For You. Most Teams Aren&#x27;t Ready.</h1>
-  <div class="article-body">
-    <p>Yesterday, Figma announced that AI agents can now write directly to your Figma files. Not generate images and paste them in. Not suggest layout options for a human to apply. Actually write to the canvas, creating and modifying real design assets using your components, variables, and tokens. Through the Figma MCP server, tools like GitHub Copilot can now push rendered UI into your files and pull design context back into code.</p>
-    <p>This is a different category of shift from everything that&#x27;s come before.</p>
-    <p>I&#x27;ve been building digital products with AI since 2018. Back then it was classification models in banking flows, anomaly detection in travel, content recommendation in super-apps. None of it was &#x27;the AI is designing the product.&#x27; It was always &#x27;the AI is changing what the product needs to do, and we&#x27;re designing around that.&#x27; That distinction mattered. The human was still making.</p>
-    <p>Now the tool is making. And the gap between &#x27;the AI helped me design this&#x27; and &#x27;the AI designed this&#x27; just got very small.</p>
-    <p>What strikes me isn&#x27;t fear about replacement. What strikes me is that most design teams are completely unprepared for the governance question this raises. When an agent reads your design system, interprets your components, and creates production-ready frames, what&#x27;s your review process? Who owns quality? How do you catch the agent building technically correct but contextually wrong output?</p>
-    <p>I ran a neobank MVP from zero to $7M in eight weeks. Thirty thousand card orders. That kind of speed is only possible when your system is tight. Every component named consistently, every token scoped correctly, every pattern documented with intent, not just implementation. At that pace, a sloppy system doesn&#x27;t slow you down gradually. It kills you suddenly. A designer making mistakes at that speed is bad. An agent making mistakes at that speed is a different problem entirely, because it&#x27;s consistent, fast, and hard to spot until it&#x27;s in production.</p>
-    <p>At RUONALIM, this is how we approach every client engagement in Dubai. System hygiene first. Because when agents start building on top of your components, the quality of your foundation becomes the quality of your output.</p>
-    <p>The teams that will actually benefit from agentic Figma are the teams who already have their houses in order. Clean naming conventions. Documented decision rationale, not just spec&#x27;d outputs. Components built with intent rather than just built. That&#x27;s always been good practice. It&#x27;s now table stakes. If your design system is a graveyard of half-connected components and renamed-once-then-forgotten tokens, an agent running on top of it will produce beautifully broken output at scale.</p>
-    <p>The design leader&#x27;s job just became more editorial, more architectural, and more political, in the best sense of that word. You&#x27;re setting standards that AI will execute against. That&#x27;s a different skill set from the one most IC designers are practising.</p>
-    <p>I&#x27;m not saying this is bad. I think it&#x27;s clarifying. The designers who thrive in this will be the ones who always knew that making wasn&#x27;t the point. Understanding what to make, and why, and for whom. That&#x27;s the job. AI executing on a well-reasoned design brief is a force multiplier. AI executing on a vague one will produce beautiful noise.</p>
-    <div class="fact-check">
-    <h2 class="fact-check-heading">Fact Check</h2>
-    <p class="fact-check-intro">Every factual claim in this article, with its source.</p>
-    <p class="fc-claim"><strong>Claim:</strong> Figma announced that AI agents can now write directly to Figma files via the Figma MCP server.</p>
-    <p class="fc-source">Figma blog announcement around March 24, 2026. Specific URL not captured at draft time. Verify before re-promotion.</p>
-    <p class="fc-claim"><strong>Claim:</strong> Tools like GitHub Copilot can push rendered UI to the Figma canvas and pull design context back into code via the Figma MCP server.</p>
-    <p class="fc-source">Figma MCP server documentation and GitHub Copilot integration announcement. Verify before re-promotion.</p>
-    <p class="fc-unsourced">Unsourced statements (Jay&#x27;s opinion or lived experience): Krak neobank MVP at 7 million dollars in eight weeks with 30,000 card orders in first weeks post-launch; RUONALIM Dubai client engagement approach; observations on design system hygiene and agentic tooling. These are Jay&#x27;s professional experience, not third-party data.</p>
+  <div class="article-wrap">
+    <a href="../writing.html" class="article-back">← All writing</a>
+    <div class="article-meta">
+      <span class="article-topic">AI &amp; Design</span>
+      <div class="dot"></div>
+      <span class="article-date">April 3, 2026</span>
+      <div class="dot"></div>
+      <span class="article-read-time">3 min read</span>
+    </div>
+    <h1 class="article-title">Figma's AI Agents Can Now Design For You. Most Teams Aren't Ready.</h1>
+    <article>
+<p>Yesterday, Figma announced that AI agents can now write directly to your Figma files. Not generate images and paste them in. Not suggest layout options for a human to apply. Actually write to the canvas, creating and modifying real design assets using your components, variables, and tokens. Through the Figma MCP server, tools like GitHub Copilot can now push rendered UI into your files and pull design context back into code.</p>
+<p>This is a different category of shift from everything that's come before.</p>
+<h2>From the AI helped me to the AI made it</h2>
+<p>I've been building digital products with AI since 2018. Back then it was classification models in banking flows, anomaly detection in travel, content recommendation in super-apps. None of it was 'the AI is designing the product.' It was always 'the AI is changing what the product needs to do, and we're designing around that.' That distinction mattered. The human was still making.</p>
+<p>Now the tool is making. And the gap between 'the AI helped me design this' and 'the AI designed this' just got very small.</p>
+<h2>The governance question nobody is ready for</h2>
+<p>What strikes me isn't fear about replacement. What strikes me is that most design teams are completely unprepared for the governance question this raises. When an agent reads your design system, interprets your components, and creates production-ready frames, what's your review process? Who owns quality? How do you catch the agent building technically correct but contextually wrong output?</p>
+<p>I've shipped neobank MVPs at speed. That kind of speed is only possible when your system is tight. Every component named consistently, every token scoped correctly, every pattern documented with intent, not just implementation. At that pace, a sloppy system doesn't slow you down gradually. It kills you suddenly. A designer making mistakes at that speed is bad. An agent making mistakes at that speed is a different problem entirely, because it's consistent, fast, and hard to spot until it's in production.</p>
+<p>At RUONALIM, this is how we approach every client engagement in Dubai. System hygiene first. Because when agents start building on top of your components, the quality of your foundation becomes the quality of your output.</p>
+<h2>The teams that will benefit</h2>
+<p>The teams that will actually benefit from agentic Figma are the teams who already have their houses in order. Clean naming conventions. Documented decision rationale, not just spec'd outputs. Components built with intent rather than just built. That's always been good practice. It's now table stakes. If your design system is a graveyard of half-connected components and renamed-once-then-forgotten tokens, an agent running on top of it will produce beautifully broken output at scale.</p>
+<p>The design leader's job just became more editorial, more architectural, and more political, in the best sense of that word. You're setting standards that AI will execute against. That's a different skill set from the one most IC designers are practising.</p>
+<p>I'm not saying this is bad. I think it's clarifying. The designers who thrive in this will be the ones who always knew that making wasn't the point. Understanding what to make, and why, and for whom. That's the job. AI executing on a well-reasoned design brief is a force multiplier. AI executing on a vague one will produce beautiful noise.</p>
+<p>Fact Check</p>
+<p>Every factual claim in this article, with its source.</p>
+<p>Claim: Figma announced that AI agents can now write directly to Figma files via the Figma MCP server.</p>
+<p>Source: Figma blog announcement around March 24, 2026. Specific URL not captured at draft time. Verify before re-promotion.</p>
+<p>Claim: Tools like GitHub Copilot can push rendered UI to the Figma canvas and pull design context back into code via the Figma MCP server.</p>
+<p>Source: Figma MCP server documentation and GitHub Copilot integration announcement. Verify before re-promotion.</p>
+<p>Unsourced statements (Jay's opinion or lived experience): Observations from a recent neobank MVP delivery; RUONALIM Dubai client engagement approach; observations on design system hygiene and agentic tooling. These are Jay's professional experience, not third-party data.</p>
+    </article>
+    <div class="article-footer">
+      <a href="../writing.html" class="footer-cta">More writing</a>
+      <a href="../contact.html" class="footer-cta">Get in touch</a>
     </div>
   </div>
-  <hr class="article-divider"/>
-  <div class="article-footer">
-    <a class="back-link" href="../writing.html">← All articles</a>
-    <div class="share-bar">
-      <span class="share-bar-label">Share</span>
-      <a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fwww.jaytulloch.com%2Fwriting%2Ffigmas-ai-agents-can-now-design-for-you-most-teams-arent-ready.html" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-        LinkedIn
-      </a>
-      <a class="share-btn x-btn" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.jaytulloch.com%2Fwriting%2Ffigmas-ai-agents-can-now-design-for-you-most-teams-arent-ready.html&text=Figma%27s%20AI%20Agents%20Can%20Now%20Design%20For%20You.%20Most%20Teams%20Aren%27t%20Ready.%20by%20%40jaytulloch" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        X
-      </a>
-      <button class="share-btn" id="copy-article-link">
-        <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-        Copy link
-      </button>
-    </div>
-  </div>
-</div>
-
-<footer>
-  <span class="footer-logo">Jay Tulloch</span>
-  <div class="footer-links">
-    <a href="../index.html">Portfolio</a>
-    <a href="../writing.html">Writing</a>
-    <a href="https://substack.com/@jaytulloch" target="_blank">Substack</a>
-    <a href="https://www.linkedin.com/in/jaytulloch/" target="_blank">LinkedIn</a>
-  </div>
-</footer>
-<script>
-  (function() {
-    var html = document.documentElement;
-    var btn = document.getElementById('nav-theme-toggle');
-    if (localStorage.getItem('jt-theme') === 'light') html.setAttribute('data-theme', 'light');
-    if (btn) btn.addEventListener('click', function() {
-      var next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-      if (next === 'dark') { html.removeAttribute('data-theme'); localStorage.removeItem('jt-theme'); }
-      else { html.setAttribute('data-theme', 'light'); localStorage.setItem('jt-theme', 'light'); }
-    });
-  })();
-  var copyBtn = document.getElementById('copy-article-link');
-  if (copyBtn) copyBtn.addEventListener('click', function() {
-    navigator.clipboard.writeText(window.location.href).then(function() {
-      copyBtn.classList.add('copied');
-      copyBtn.textContent = 'Copied!';
-      setTimeout(function() {
-        copyBtn.classList.remove('copied');
-        copyBtn.innerHTML = '<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> Copy link';
-      }, 2000);
-    });
-  });
-</script>
 </body>
 </html>

@@ -1,202 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Vibe Design Is Real. It Won&#x27;t Replace Designers. It Will Expose Them. · Jay Tulloch</title>
-<meta name="description" content="Last week, Google redesigned Stitch. The pitch: describe a business goal or an emotional direction, and an AI agent builds you high-fidelity UI. They&#x27;re..."/>
-<link rel="canonical" href="https://www.jaytulloch.com/writing/vibe-design-is-real-it-wont-replace-designers-it-will-expose-them.html"/>
-<meta property="og:title" content="Vibe Design Is Real. It Won&#x27;t Replace Designers. It Will Expose Them."/>
-<meta property="og:description" content="Last week, Google redesigned Stitch. The pitch: describe a business goal or an emotional direction, and an AI agent builds you high-fidelity UI. They&#x27;re..."/>
-<meta property="og:type" content="article"/>
-<meta property="og:url" content="https://www.jaytulloch.com/writing/vibe-design-is-real-it-wont-replace-designers-it-will-expose-them.html"/>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "Vibe Design Is Real. It Won&#x27;t Replace Designers. It Will Expose Them.",
-  "description": "Last week, Google redesigned Stitch. The pitch: describe a business goal or an emotional direction, and an AI agent builds you high-fidelity UI. They&#x27;re...",
-  "author": {
-    "@type": "Person",
-    "name": "Jay Tulloch",
-    "url": "https://www.jaytulloch.com"
-  },
-  "publisher": {
-    "@type": "Person",
-    "name": "Jay Tulloch",
-    "url": "https://www.jaytulloch.com"
-  },
-  "datePublished": "2026-04-08",
-  "dateModified": "2026-04-08",
-  "url": "https://www.jaytulloch.com/writing/vibe-design-is-real-it-wont-replace-designers-it-will-expose-them.html"
-}
-</script>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-  :root { --black: #080808; --white: #ffffff; --accent: #e63329; --muted: rgba(255,255,255,0.45); --border: rgba(255,255,255,0.06); }
-  html[data-theme="light"] { --black: #f5f4f1; --white: #0a0a0a; --muted: rgba(0,0,0,0.45); --border: rgba(0,0,0,0.07); }
-  html[data-theme="light"] body { background: #f5f4f1; color: #0a0a0a; }
-  html[data-theme="light"] nav { background: rgba(245,244,241,0.92); border-bottom-color: rgba(0,0,0,0.07); }
-  html[data-theme="light"] .article-body { color: rgba(0,0,0,0.8); }
-  html[data-theme="light"] .footer-links a { color: rgba(0,0,0,0.35); }
-  html[data-theme="light"] .footer-links a:hover { color: #0a0a0a; }
-  html[data-theme="light"] .share-btn { border-color: rgba(0,0,0,0.12); color: rgba(0,0,0,0.5); }
-  html[data-theme="light"] .share-btn:hover { border-color: rgba(0,0,0,0.4); color: #0a0a0a; }
-  body { font-family: 'Inter', -apple-system, sans-serif; background: var(--black); color: var(--white); -webkit-font-smoothing: antialiased; transition: background 0.2s, color 0.2s; }
-  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 24px clamp(24px,4vw,64px); display: flex; justify-content: space-between; align-items: center; background: rgba(8,8,8,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); transition: background 0.2s; }
-  .nav-left { display: flex; align-items: center; gap: 20px; }
-  .nav-logo { font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: var(--white); }
-  .nav-back { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; color: var(--muted); transition: color 0.2s; }
-  .nav-back:hover { color: var(--white); }
-  .nav-right { display: flex; align-items: center; gap: 14px; }
-  .nav-contact { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.3); padding: 8px 18px; transition: background 0.25s, color 0.25s; color: var(--white); text-decoration: none; }
-  .nav-contact:hover { background: var(--white); color: var(--black); }
-  html[data-theme="light"] .nav-contact { color: #0a0a0a; border-color: rgba(0,0,0,0.3); }
-  html[data-theme="light"] .nav-contact:hover { background: #0a0a0a; color: #fff; }
-  .nav-theme-toggle { background: none; border: none; cursor: pointer; padding: 4px; display: flex; align-items: center; color: var(--muted); transition: color 0.2s; }
-  .nav-theme-toggle:hover { color: var(--white); }
-  .nav-theme-toggle svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-  .icon-sun { display: none; } .icon-moon { display: block; }
-  html[data-theme="light"] .icon-sun { display: block; } html[data-theme="light"] .icon-moon { display: none; }
-  .article-wrap { max-width: 720px; margin: 0 auto; padding: 140px clamp(24px,5vw,48px) 100px; }
-  .article-meta { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin-bottom: 32px; }
-  .topic-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(230,51,41,0.3); padding: 4px 10px; border-radius: 4px; }
-  .article-date { font-size: 12px; color: var(--muted); }
-  .article-read-time { font-size: 12px; color: var(--muted); }
-  h1 { font-size: clamp(28px,4vw,48px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 32px; }
-  .article-body { font-size: 17px; line-height: 1.8; color: rgba(255,255,255,0.85); }
-  .article-body p { margin-bottom: 24px; }
-  .article-body h2 { font-size: 22px; font-weight: 700; margin: 48px 0 16px; color: var(--white); letter-spacing: -0.01em; }
-  .article-body h3 { font-size: 18px; font-weight: 700; margin: 36px 0 12px; color: var(--white); }
-  html[data-theme="light"] .article-body { color: rgba(0,0,0,0.8); }
-  html[data-theme="light"] .article-body h2,
-  html[data-theme="light"] .article-body h3 { color: #0a0a0a; }
-  .article-divider { border: none; border-top: 1px solid var(--border); margin: 56px 0; }
-  .article-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
-  .back-link { font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-  .back-link:hover { color: var(--white); }
-  .share-bar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .share-bar-label { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-right: 2px; }
-  .share-btn { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 12px; border: 1px solid rgba(255,255,255,0.14); color: var(--muted); background: transparent; cursor: pointer; font-family: inherit; transition: border-color 0.2s, color 0.2s; border-radius: 3px; text-decoration: none; }
-  .share-btn:hover { border-color: rgba(255,255,255,0.45); color: var(--white); }
-  .share-btn svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; flex-shrink: 0; }
-  .share-btn.x-btn svg { fill: currentColor; stroke: none; }
-  .share-btn.copied { color: #4ade80; border-color: #4ade80; }
-  footer { border-top: 1px solid var(--border); padding: 40px clamp(24px,5vw,64px); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
-  .footer-logo { font-size: 12px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
-  .footer-links { display: flex; gap: 24px; }
-  .footer-links a { font-size: 12px; color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
-  .footer-links a:hover { color: var(--white); }
-  .fact-check { margin-top: 48px; padding: 32px; border: 1px solid var(--border); border-radius: 4px; background: rgba(255,255,255,0.02); }
-  html[data-theme="light"] .fact-check { background: rgba(0,0,0,0.02); border-color: rgba(0,0,0,0.08); }
-  .fact-check-heading { font-size: 11px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
-  .fact-check-intro { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
-  .fc-claim { font-size: 14px; margin-bottom: 4px; color: rgba(255,255,255,0.7); }
-  html[data-theme="light"] .fc-claim { color: rgba(0,0,0,0.7); }
-  .fc-source { font-size: 13px; color: var(--muted); margin-bottom: 20px; padding-left: 16px; border-left: 2px solid var(--border); }
-  .fc-link { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; word-break: break-all; transition: color 0.15s; }
-  .fc-link:hover { color: var(--white); }
-  html[data-theme="light"] .fc-link { color: rgba(0,0,0,0.5); }
-  html[data-theme="light"] .fc-link:hover { color: var(--black); }
-  .fc-unsourced { font-size: 13px; color: var(--muted); margin-top: 8px; font-style: italic; }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vibe Design Is Real. It Won't Replace Designers. It Will Expose Them. | Jay Tulloch</title>
+  <meta name="description" content="Last week, Google redesigned Stitch. The pitch: describe a business goal or an emotional direction, and an AI agent builds you high-fidelity UI. They're calling it 'Vibe Design.'..." />
+  <link rel="canonical" href="https://www.jaytulloch.com/writing/vibe-design-is-real-it-wont-replace-designers-it-will-expose-them.html" />
+  <meta property="og:title" content="Vibe Design Is Real. It Won't Replace Designers. It Will Expose Them." />
+  <meta property="og:description" content="Last week, Google redesigned Stitch. The pitch: describe a business goal or an emotional direction, and an AI agent builds you high-fidelity UI. They're calling it 'Vibe Design.'..." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://www.jaytulloch.com/writing/vibe-design-is-real-it-wont-replace-designers-it-will-expose-them.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700,800,900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #FFFFFF; --text: #111111; --text-muted: #6B6E74; --text-body: #141414;
+      --border: #E8E8EC; --accent: #0044E4;
+      --font: 'Switzer', -apple-system, Helvetica Neue, Arial, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px clamp(32px, 5vw, 80px); background: rgba(255,255,255,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #111; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .article-wrap { max-width: 720px; margin: 0 auto; padding: 140px clamp(20px, 5vw, 40px) 80px; }
+    .article-back { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 32px; }
+    .article-back:hover { color: var(--text); }
+    .article-meta { display: flex; gap: 12px; align-items: center; margin-bottom: 16px; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+    .article-topic { color: var(--accent); }
+    .article-date { color: var(--text-muted); }
+    .article-read-time { color: var(--text-muted); }
+    .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border); }
+    .article-title { font-size: clamp(32px, 5vw, 52px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+    article h2 { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; margin: 48px 0 16px; line-height: 1.2; }
+    article h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin: 32px 0 12px; }
+    article p { margin-bottom: 22px; color: var(--text-body); }
+    article strong { font-weight: 700; color: var(--text); }
+    article blockquote { border-left: 2px solid var(--accent); padding-left: 20px; margin: 32px 0; color: var(--text-muted); font-style: italic; }
+    article hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+    article ul { padding-left: 24px; margin-bottom: 22px; }
+    article li { margin-bottom: 8px; }
+    .article-footer { margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    .footer-cta { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 12px 24px; border: 1px solid var(--text); color: var(--text); transition: background 0.2s, color 0.2s; }
+    .footer-cta:hover { background: var(--text); color: var(--bg); }
+  </style>
 </head>
 <body>
-<nav>
-  <div class="nav-left">
-    <a class="nav-logo" href="../index.html">Jay Tulloch</a>
-    <a class="nav-back" href="../writing.html">← Writing</a>
-  </div>
-  <div class="nav-right">
-    <button class="nav-theme-toggle" id="nav-theme-toggle" aria-label="Toggle theme">
-      <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      <svg class="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-    </button>
-    <a href="../contact.html" class="nav-contact">Let's Talk</a>
-  </div>
-</nav>
+  <nav>
+    <a href="../" class="nav-logo">Jay Tulloch</a>
+    <ul class="nav-links">
+      <li><a href="../#about">About</a></li>
+      <li><a href="../#work">Work</a></li>
+      <li><a href="../writing.html" class="active">Writing</a></li>
+      <li><a href="../#podcast">Podcast</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+    </ul>
+  </nav>
 
-<div class="article-wrap">
-  <div class="article-meta">
-    <span class="topic-tag">AI &amp; Design</span>
-    <span class="article-date">April 8, 2026</span>
-    <span class="article-read-time">6 min read</span>
-  </div>
-  <h1>Vibe Design Is Real. It Won&#x27;t Replace Designers. It Will Expose Them.</h1>
-  <div class="article-body">
-    <p>Last week, Google redesigned Stitch. The pitch: describe a business goal or an emotional direction, and an AI agent builds you high-fidelity UI. They&#x27;re calling it &#x27;Vibe Design.&#x27; You speak to your canvas, it listens, critiques, updates in real-time, then exports Figma-compatible files ready for handoff. It works with Claude and Cursor. It&#x27;s free.</p>
-    <p>The design community&#x27;s response was predictable. Half of Twitter decided designers are finished. The other half posted hot takes about how AI can&#x27;t understand users. Both sides missed the point.</p>
-    <p>I&#x27;ve been building with AI since 2018. AI-powered travel search at Almosafer, fraud detection UI at Metro Bank, conversational features at Careem. I&#x27;ve watched this tooling go from novelty to necessity. And what I&#x27;ve learned is that the tools don&#x27;t change the fundamental question. The question is always: are you making good decisions, or are you making fast ones?</p>
-    <p>Google Stitch makes fast decisions faster. That&#x27;s genuinely useful. If you&#x27;ve sat in a product sprint where the team can&#x27;t align on direction because nobody can visualise the options quickly enough, a tool that generates three distinct layout directions in thirty seconds is valuable. It compresses time to decision. I would have killed for this on the Krak neobank. We shipped a $7M product in eight weeks, thirty thousand card orders in the first weeks post-launch, and we were constantly operating at the edge of what could realistically be designed, reviewed, and shipped.</p>
-    <p>But here&#x27;s where the &#x27;vibe design&#x27; framing gets dangerous. The word &#x27;vibe&#x27; does a lot of work. It sounds creative and loose. It suggests the hard part, the judgment, the research, the constraint navigation, the stakeholder alignment, is handled. It isn&#x27;t. What the tool is actually doing is making it faster to produce something that looks right before anyone has agreed on what right means.</p>
-    <p>I&#x27;ve spent a lot of my career in regulated environments: banking, crypto, travel. These are industries where bad design decisions don&#x27;t just result in lower conversion rates. They result in customer harm. A poorly designed self-exclusion flow in a regulated gambling product is a compliance failure and a safeguarding failure. A confusing onboarding flow in a neobank leads to fraud vectors. Hiding friction isn&#x27;t good UX in those contexts. It&#x27;s liability.</p>
-    <p>No AI tool changes that. At RUONALIM, our client work across Dubai&#x27;s regulated markets reinforces this daily. The lottery product we&#x27;re building requires compliance awareness that no AI tool can generate from a voice prompt. Stitch can generate a beautiful, high-fidelity flow in minutes. It will look polished. But it won&#x27;t tell you whether your error states meet accessibility standards, whether your spending limit disclosure satisfies your regional regulator, or whether you&#x27;re inadvertently creating a dark pattern in your retry logic. That judgment doesn&#x27;t come from a prompt. It comes from experience and accountability.</p>
-    <p>What I think is actually happening here is a structural shift in who design work is for. Tools like Stitch are going to rapidly eliminate the gap between &#x27;I have an idea&#x27; and &#x27;I have a mockup.&#x27; Non-designers will use this to build artefacts. Product managers will skip the designer for early exploration. Startups will ship MVPs without a design hire. That&#x27;s already happening with Figma&#x27;s AI features, with V0, with Lovable. Google Stitch is a well-resourced, well-integrated version of a trend that&#x27;s been building for two years.</p>
-    <p>The designers who should be paying attention aren&#x27;t the ones who feel threatened. They&#x27;re the ones who haven&#x27;t yet built enough depth to stand behind their decisions when the artefact is already on the table. Because that&#x27;s what changes. You used to be the person who made the thing. Now you&#x27;re the person who decides whether the thing is right. That&#x27;s a harder job. It requires you to be faster, more opinionated, and more credible. Not because you&#x27;re competing with Stitch, but because your value is now defined entirely by the quality of your judgment.</p>
-    <p>Vibe Design is real. It will keep getting better. The designers who flourish won&#x27;t be the ones who learned to prompt faster. They&#x27;ll be the ones who spent the last two years building the judgment that no prompt can replace.</p>
-    <div class="fact-check">
-    <h2 class="fact-check-heading">Fact Check</h2>
-    <p class="fact-check-intro">Every factual claim in this article, with its source.</p>
-    <p class="fc-claim"><strong>Claim:</strong> Google redesigned Stitch and launched &quot;Vibe Design&quot; on or around March 19, 2026.</p>
-    <p class="fc-source">Google Stitch announcement via Google Labs. Specific URL not captured at draft time. Verify before re-promotion.</p>
-    <p class="fc-claim"><strong>Claim:</strong> The feature supports voice input, real-time critique, Figma-compatible export, and integrations with Claude and Cursor, and is free via Google Labs.</p>
-    <p class="fc-source">Google Stitch product page. Verify before re-promotion.</p>
-    <p class="fc-unsourced">Unsourced statements (Jay&#x27;s opinion or lived experience): AI-powered travel search at Almosafer; fraud detection UI at Metro Bank; conversational features at Careem; Krak neobank product shipped at 7 million dollars in eight weeks with 30,000 card orders in first weeks post-launch; RUONALIM Dubai client work on regulated products. These are Jay&#x27;s personal experience, not third-party data.</p>
+  <div class="article-wrap">
+    <a href="../writing.html" class="article-back">← All writing</a>
+    <div class="article-meta">
+      <span class="article-topic">AI &amp; Design</span>
+      <div class="dot"></div>
+      <span class="article-date">April 8, 2026</span>
+      <div class="dot"></div>
+      <span class="article-read-time">4 min read</span>
+    </div>
+    <h1 class="article-title">Vibe Design Is Real. It Won't Replace Designers. It Will Expose Them.</h1>
+    <article>
+<p>Last week, Google redesigned Stitch. The pitch: describe a business goal or an emotional direction, and an AI agent builds you high-fidelity UI. They're calling it 'Vibe Design.' You speak to your canvas, it listens, critiques, updates in real-time, then exports Figma-compatible files ready for handoff. It works with Claude and Cursor. It's free.</p>
+<p>The design community's response was predictable. Half of Twitter decided designers are finished. The other half posted hot takes about how AI can't understand users. Both sides missed the point.</p>
+<p>I've been building with AI since 2018. AI-powered search in travel, fraud detection in banking, conversational features in a super-app. I've watched this tooling go from novelty to necessity. And what I've learned is that the tools don't change the fundamental question. The question is always: are you making good decisions, or are you making fast ones?</p>
+<h2>What Stitch actually changes</h2>
+<p>Google Stitch makes fast decisions faster. That's genuinely useful. If you've sat in a product sprint where the team can't align on direction because nobody can visualise the options quickly enough, a tool that generates three distinct layout directions in thirty seconds is valuable. It compresses time to decision. I would have killed for this on the last neobank MVP I shipped, where we were constantly operating at the edge of what could realistically be designed, reviewed, and shipped.</p>
+<p>But here's where the 'vibe design' framing gets dangerous. The word 'vibe' does a lot of work. It sounds creative and loose. It suggests the hard part, the judgment, the research, the constraint navigation, the stakeholder alignment, is handled. It isn't. What the tool is actually doing is making it faster to produce something that looks right before anyone has agreed on what right means.</p>
+<h2>Where speed becomes a liability</h2>
+<p>I've spent a lot of my career in regulated environments: banking, crypto, travel. These are industries where bad design decisions don't just result in lower conversion rates. They result in customer harm. A poorly designed self-exclusion flow in a regulated gambling product is a compliance failure and a safeguarding failure. A confusing onboarding flow in a neobank leads to fraud vectors. Hiding friction isn't good UX in those contexts. It's liability.</p>
+<p>No AI tool changes that. At RUONALIM, our client work across Dubai's regulated markets reinforces this daily. The lottery product we're building requires compliance awareness that no AI tool can generate from a voice prompt. Stitch can generate a beautiful, high-fidelity flow in minutes. It will look polished. But it won't tell you whether your error states meet accessibility standards, whether your spending limit disclosure satisfies your regional regulator, or whether you're inadvertently creating a dark pattern in your retry logic. That judgment doesn't come from a prompt. It comes from experience and accountability.</p>
+<h2>What this is actually doing to the profession</h2>
+<p>What I think is actually happening here is a structural shift in who design work is for. Tools like Stitch are going to rapidly eliminate the gap between 'I have an idea' and 'I have a mockup.' Non-designers will use this to build artefacts. Product managers will skip the designer for early exploration. Startups will ship MVPs without a design hire. That's already happening with Figma's AI features, with V0, with Lovable. Google Stitch is a well-resourced, well-integrated version of a trend that's been building for two years.</p>
+<p>The designers who should be paying attention aren't the ones who feel threatened. They're the ones who haven't yet built enough depth to stand behind their decisions when the artefact is already on the table. Because that's what changes. You used to be the person who made the thing. Now you're the person who decides whether the thing is right. That's a harder job. It requires you to be faster, more opinionated, and more credible. Not because you're competing with Stitch, but because your value is now defined entirely by the quality of your judgment.</p>
+<p>Vibe Design is real. It will keep getting better. The designers who flourish won't be the ones who learned to prompt faster. They'll be the ones who spent the last two years building the judgment that no prompt can replace.</p>
+<p>Fact Check</p>
+<p>Every factual claim in this article, with its source.</p>
+<p>Claim: Google redesigned Stitch and launched "Vibe Design" on or around March 19, 2026.</p>
+<p>Source: Google Stitch announcement via Google Labs. Specific URL not captured at draft time. Verify before re-promotion.</p>
+<p>Claim: The feature supports voice input, real-time critique, Figma-compatible export, and integrations with Claude and Cursor, and is free via Google Labs.</p>
+<p>Source: Google Stitch product page. Verify before re-promotion.</p>
+<p>Unsourced statements (Jay's opinion or lived experience): AI build experience since 2018 across travel, banking, and super-apps; the regulated-environments observation; the RUONALIM Dubai lottery product context; the prediction about Stitch eliminating the 'I have an idea' to 'I have a mockup' gap; the closing argument about judgment over prompt fluency. These are Jay's points of view, not third-party data.</p>
+    </article>
+    <div class="article-footer">
+      <a href="../writing.html" class="footer-cta">More writing</a>
+      <a href="../contact.html" class="footer-cta">Get in touch</a>
     </div>
   </div>
-  <hr class="article-divider"/>
-  <div class="article-footer">
-    <a class="back-link" href="../writing.html">← All articles</a>
-    <div class="share-bar">
-      <span class="share-bar-label">Share</span>
-      <a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fwww.jaytulloch.com%2Fwriting%2Fvibe-design-is-real-it-wont-replace-designers-it-will-expose-them.html" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-        LinkedIn
-      </a>
-      <a class="share-btn x-btn" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.jaytulloch.com%2Fwriting%2Fvibe-design-is-real-it-wont-replace-designers-it-will-expose-them.html&text=Vibe%20Design%20Is%20Real.%20It%20Won%27t%20Replace%20Designers.%20It%20Will%20Expose%20Them.%20by%20%40jaytulloch" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        X
-      </a>
-      <button class="share-btn" id="copy-article-link">
-        <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-        Copy link
-      </button>
-    </div>
-  </div>
-</div>
-
-<footer>
-  <span class="footer-logo">Jay Tulloch</span>
-  <div class="footer-links">
-    <a href="../index.html">Portfolio</a>
-    <a href="../writing.html">Writing</a>
-    <a href="https://substack.com/@jaytulloch" target="_blank">Substack</a>
-    <a href="https://www.linkedin.com/in/jaytulloch/" target="_blank">LinkedIn</a>
-  </div>
-</footer>
-<script>
-  (function() {
-    var html = document.documentElement;
-    var btn = document.getElementById('nav-theme-toggle');
-    if (localStorage.getItem('jt-theme') === 'light') html.setAttribute('data-theme', 'light');
-    if (btn) btn.addEventListener('click', function() {
-      var next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-      if (next === 'dark') { html.removeAttribute('data-theme'); localStorage.removeItem('jt-theme'); }
-      else { html.setAttribute('data-theme', 'light'); localStorage.setItem('jt-theme', 'light'); }
-    });
-  })();
-  var copyBtn = document.getElementById('copy-article-link');
-  if (copyBtn) copyBtn.addEventListener('click', function() {
-    navigator.clipboard.writeText(window.location.href).then(function() {
-      copyBtn.classList.add('copied');
-      copyBtn.textContent = 'Copied!';
-      setTimeout(function() {
-        copyBtn.classList.remove('copied');
-        copyBtn.innerHTML = '<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg> Copy link';
-      }, 2000);
-    });
-  });
-</script>
 </body>
 </html>
