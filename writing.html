@@ -155,19 +155,14 @@
       border-color: #C8C8CE;
     }
     .featured-inner {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 40px;
-      align-items: start;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
     .featured-label {
-      writing-mode: vertical-rl;
-      text-orientation: mixed;
-      transform: rotate(180deg);
       font-size: 10px; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase;
       color: var(--ink-faint);
-      align-self: stretch;
-      display: flex; align-items: center; justify-content: center;
+      padding-top: 3px;
     }
     .featured-body {}
     .card-top {
@@ -205,8 +200,6 @@
     }
     .featured-card:hover .read-link { gap: 10px; }
     @media (max-width: 640px) {
-      .featured-inner { grid-template-columns: 1fr; gap: 16px; }
-      .featured-label { writing-mode: horizontal-tb; transform: none; }
       .featured-card { padding: 28px; }
     }
 
