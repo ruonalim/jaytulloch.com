@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Figma Canvas Is Now Open to AI Agents. Most Design Teams Aren't Ready. | Jay Tulloch</title>
-  <meta name="description" content="Figma just gave AI agents write access to your design files. Not read access. Write. Through the Figma MCP server, agents can now create frames, build components, apply your..." />
+  <meta name="description" content="Figma just gave AI agents write access to your design files. Not read access. Write. Through the Figma MCP server, agents can now create frames, build components, apply your design tokens, and modify live design files directly. GitHub Copilot users are already pushing rendered UI..." />
   <link rel="canonical" href="https://www.jaytulloch.com/writing/the-figma-canvas-is-now-open-to-ai-agents-most-design-teams-arent-ready.html" />
   <meta property="og:title" content="The Figma Canvas Is Now Open to AI Agents. Most Design Teams Aren't Ready." />
-  <meta property="og:description" content="Figma just gave AI agents write access to your design files. Not read access. Write. Through the Figma MCP server, agents can now create frames, build components, apply your..." />
+  <meta property="og:description" content="Figma just gave AI agents write access to your design files. Not read access. Write. Through the Figma MCP server, agents can now create frames, build components, apply your design tokens, and modify live design files directly. GitHub Copilot users are already pushing rendered UI..." />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://www.jaytulloch.com/writing/the-figma-canvas-is-now-open-to-ai-agents-most-design-teams-arent-ready.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -49,6 +49,72 @@
     .article-footer { margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
     .footer-cta { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 12px 24px; border: 1px solid var(--text); color: var(--text); transition: background 0.2s, color 0.2s; }
     .footer-cta:hover { background: var(--text); color: var(--bg); }
+  
+    /* ── Fact Check ── */
+    .fact-check {
+      margin: 56px -40px 0;
+      background: #0A0A12;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 40px 40px 36px;
+    }
+    .fact-check-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(0,68,228,0.18);
+      border: 1px solid rgba(0,68,228,0.35);
+      border-radius: 4px;
+      padding: 4px 10px;
+      margin-bottom: 12px;
+    }
+    .fact-check-badge svg { width: 11px; height: 11px; }
+    .fact-check-badge span {
+      font-size: 10px; font-weight: 800; letter-spacing: 0.15em;
+      text-transform: uppercase; color: #6B9BFF;
+    }
+    .fact-check-intro {
+      font-size: 13px; color: rgba(255,255,255,0.38); line-height: 1.6;
+      margin-bottom: 24px; padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .fact-item {
+      display: grid; grid-template-columns: 28px 1fr; gap: 0 16px;
+      padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+      align-items: start;
+    }
+    .fact-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .fact-num {
+      font-size: 11px; font-weight: 700; color: rgba(0,68,228,0.65);
+      letter-spacing: 0.05em; padding-top: 2px;
+      font-variant-numeric: tabular-nums;
+    }
+    .fact-claim {
+      font-size: 14px; color: rgba(255,255,255,0.88);
+      line-height: 1.65; font-weight: 500; margin-bottom: 8px;
+    }
+    .fact-source {
+      font-size: 12px; color: rgba(255,255,255,0.35);
+      display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap;
+    }
+    .fact-source-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(255,255,255,0.22); flex-shrink: 0;
+    }
+    .fact-source-arrow { color: rgba(91,143,255,0.5); font-size: 11px; }
+    .fact-source a {
+      color: #5B8FFF; text-decoration: none;
+      border-bottom: 1px solid rgba(91,143,255,0.3);
+      transition: color 0.15s, border-color 0.15s; word-break: break-all;
+    }
+    .fact-source a:hover { color: #7AAAFF; border-color: rgba(91,143,255,0.7); }
+    .fact-unsourced {
+      margin-top: 24px; padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      font-size: 12px; color: rgba(255,255,255,0.25); line-height: 1.6;
+    }
+    .fact-unsourced strong {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(255,255,255,0.22);
+      display: block; margin-bottom: 6px;
+    }
   </style>
 </head>
 <body>
@@ -66,7 +132,7 @@
   <div class="article-wrap">
     <a href="../writing.html" class="article-back">← All writing</a>
     <div class="article-meta">
-      <span class="article-topic">AI &amp; Design</span>
+      <span class="article-topic">AI & Design</span>
       <div class="dot"></div>
       <span class="article-date">April 13, 2026</span>
       <div class="dot"></div>
@@ -83,12 +149,14 @@
 <p>Figma's MCP integration changes the nature of design leadership without changing the fundamentals of what makes design leadership valuable. If you're a design director and you haven't thought about what it means for an AI agent to have access to your live files, you're behind. The design system is no longer just a shared library for your team. It's the interface through which AI operates on your product. The decisions you made about component structure, variant naming, variable grouping: those decisions now have automated consequences at scale. A badly named component is no longer a minor annoyance. It's a prompt-time liability.</p>
 <h2>The job has changed</h2>
 <p>The designers who will be irreplaceable in this environment are not the ones who produce outputs faster. They are the ones who define the rules the AI follows. Writing the skill files that govern how an agent should behave on the canvas, maintaining a system rigorous enough that AI output is actually trustworthy, making the strategic calls about what should and shouldn't be automated. That's the job now. The tools have changed. The judgment required to use them well hasn't.</p>
-<h2>Fact Check</h2>
+<p>##</p>
+<hr/>
+<p>Fact Check</p>
 <p>Every factual claim in this article, with its source.</p>
-<p><strong>Claim:</strong> Figma gave AI agents write access to design files via the Figma MCP server, with agents able to create frames, build components, apply design tokens, and modify live files.</p>
-<p><strong>Source:</strong> Figma MCP server launch announcement, March 2026. Documented in Figma's developer documentation. Specific URL not captured at time of writing. Verify before re-promotion.</p>
-<p><strong>Claim:</strong> GitHub Copilot users can push rendered UI straight to the canvas via the Figma MCP server.</p>
-<p><strong>Source:</strong> Figma MCP server integration announcement, March 2026. Verify before re-promotion.</p>
+<p><strong>Claim:</strong> Figma gave AI agents write access to design files via the Figma MCP server, with agents able to create frames, build components, apply design tokens, and modify live files.
+<strong>Source:</strong> Figma MCP server launch announcement, March 2026. Documented in Figma's developer documentation. Specific URL not captured at time of writing. Verify before re-promotion.</p>
+<p><strong>Claim:</strong> GitHub Copilot users can push rendered UI straight to the canvas via the Figma MCP server.
+<strong>Source:</strong> Figma MCP server integration announcement, March 2026. Verify before re-promotion.</p>
 <p><strong>Unsourced statements (Jay's opinion or lived experience):</strong> All claims about design system governance practices and what makes systems agent-ready; the distinction between technically correct and contextually wrong AI output; the prescription for design leaders on system hygiene. These are Jay's points of view and lived experience, not third-party data.</p>
     </article>
     <div class="article-footer">
@@ -96,5 +164,99 @@
       <a href="../contact.html" class="footer-cta">Get in touch</a>
     </div>
   </div>
+
+  <script>
+  (function() {
+    // Find <p>Fact Check</p> anywhere in the article
+    var article = document.querySelector('article');
+    if (!article) return;
+    var paras = Array.from(article.querySelectorAll('p'));
+    var startIdx = -1;
+    for (var i = 0; i < paras.length; i++) {
+      if (paras[i].textContent.trim() === 'Fact Check') { startIdx = i; break; }
+    }
+    if (startIdx === -1) return;
+
+    // Collect all paragraphs from "Fact Check" onwards
+    var fcParas = [];
+    var el = paras[startIdx];
+    while (el && el.tagName === 'P') { fcParas.push(el); el = el.nextElementSibling; }
+
+    // Parse intro, claim/source pairs, and unsourced note
+    var intro = '', items = [], unsourced = '', current = null;
+    for (var i = 1; i < fcParas.length; i++) {
+      var txt = fcParas[i].textContent.trim();
+      if (txt.startsWith('Unsourced statements')) {
+        if (current) { items.push(current); current = null; }
+        unsourced = txt;
+        continue;
+      }
+      if (!txt.startsWith('Claim:') && !current && !intro) { intro = txt; continue; }
+      if (txt.startsWith('Claim:')) {
+        if (current) items.push(current);
+        current = { claim: txt.slice(6).trim(), source: '' };
+      } else if (txt.startsWith('Source:') && current) {
+        current.source = txt.slice(7).trim();
+      }
+    }
+    if (current) items.push(current);
+
+    // Parse source string — extract domain/URL
+    function parseSource(src) {
+      var rx = /\b((?:https?:\/\/)?(?:www\.)?[a-z0-9][a-z0-9\-]{0,61}[a-z0-9]?(?:\.[a-z]{2,})+(?:\/[^\s,;.]*)?)/gi;
+      var matches = [];
+      var m;
+      while ((m = rx.exec(src)) !== null) matches.push(m);
+      if (!matches.length) return { citation: src, href: null, linkText: null };
+      var raw = matches[matches.length - 1][0];
+      var href = raw.match(/^https?:\/\//) ? raw : 'https://' + raw;
+      var citation = src.slice(0, src.lastIndexOf(raw)).replace(/[.\s]+$/, '').trim();
+      var linkText = raw.replace(/^https?:\/\//, '').replace(/^www\./, '');
+      return { citation: citation, href: href, linkText: linkText };
+    }
+
+    function esc(s) {
+      return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    var itemsHtml = items.map(function(item, i) {
+      var num = String(i + 1).padStart(2, '0');
+      var srcHtml = '';
+      if (item.source) {
+        var p = parseSource(item.source);
+        srcHtml = '<div class="fact-source">' +
+          '<span class="fact-source-label">Source</span>' +
+          (p.citation ? '<span>' + esc(p.citation) + '</span>' : '') +
+          (p.href ? '<span class="fact-source-arrow">→</span><a href="' + esc(p.href) + '" target="_blank" rel="noopener noreferrer">' + esc(p.linkText) + '</a>' : '<span>' + esc(item.source) + '</span>') +
+          '</div>';
+      }
+      return '<div class="fact-item"><span class="fact-num">' + num + '</span>' +
+        '<div><div class="fact-claim">' + esc(item.claim) + '</div>' + srcHtml + '</div></div>';
+    }).join('');
+
+    var unsourcedHtml = '';
+    if (unsourced) {
+      var label = 'Unsourced';
+      var body = unsourced.replace(/^Unsourced statements[^:]*:\s*/i, '');
+      unsourcedHtml = '<div class="fact-unsourced"><strong>Unsourced / opinion</strong>' + esc(body) + '</div>';
+    }
+
+    var aside = document.createElement('aside');
+    aside.className = 'fact-check';
+    aside.setAttribute('aria-label', 'Fact check');
+    aside.innerHTML =
+      '<div class="fact-check-badge">' +
+        '<svg viewBox="0 0 12 12" fill="none" stroke="#6B9BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 6l3 3 6-6"/></svg>' +
+        '<span>Fact Check</span>' +
+      '</div>' +
+      (intro ? '<p class="fact-check-intro">' + esc(intro) + '</p>' : '') +
+      itemsHtml +
+      unsourcedHtml;
+
+    // Replace the original paragraphs with the styled aside
+    fcParas[0].replaceWith(aside);
+    fcParas.slice(1).forEach(function(p) { p.remove(); });
+  })();
+  </script>
 </body>
 </html>

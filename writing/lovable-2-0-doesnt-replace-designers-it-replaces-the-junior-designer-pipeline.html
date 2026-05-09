@@ -16,7 +16,11 @@
   <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700,800,900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --bg:#FFFFFF; --text:#111111; --text-muted:#6B6E74; --text-body:#141414; --border:#E8E8EC; --accent:#0044E4; --font:'Switzer',-apple-system,Helvetica Neue,Arial,sans-serif; }
+    :root {
+      --bg: #FFFFFF; --text: #111111; --text-muted: #6B6E74; --text-body: #141414;
+      --border: #E8E8EC; --accent: #0044E4;
+      --font: 'Switzer', -apple-system, Helvetica Neue, Arial, sans-serif;
+    }
     html { scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
     a { color: inherit; text-decoration: none; }
@@ -45,6 +49,72 @@
     .article-footer { margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
     .footer-cta { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 12px 24px; border: 1px solid var(--text); color: var(--text); transition: background 0.2s, color 0.2s; }
     .footer-cta:hover { background: var(--text); color: var(--bg); }
+  
+    /* ── Fact Check ── */
+    .fact-check {
+      margin: 56px -40px 0;
+      background: #0A0A12;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 40px 40px 36px;
+    }
+    .fact-check-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(0,68,228,0.18);
+      border: 1px solid rgba(0,68,228,0.35);
+      border-radius: 4px;
+      padding: 4px 10px;
+      margin-bottom: 12px;
+    }
+    .fact-check-badge svg { width: 11px; height: 11px; }
+    .fact-check-badge span {
+      font-size: 10px; font-weight: 800; letter-spacing: 0.15em;
+      text-transform: uppercase; color: #6B9BFF;
+    }
+    .fact-check-intro {
+      font-size: 13px; color: rgba(255,255,255,0.38); line-height: 1.6;
+      margin-bottom: 24px; padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .fact-item {
+      display: grid; grid-template-columns: 28px 1fr; gap: 0 16px;
+      padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+      align-items: start;
+    }
+    .fact-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .fact-num {
+      font-size: 11px; font-weight: 700; color: rgba(0,68,228,0.65);
+      letter-spacing: 0.05em; padding-top: 2px;
+      font-variant-numeric: tabular-nums;
+    }
+    .fact-claim {
+      font-size: 14px; color: rgba(255,255,255,0.88);
+      line-height: 1.65; font-weight: 500; margin-bottom: 8px;
+    }
+    .fact-source {
+      font-size: 12px; color: rgba(255,255,255,0.35);
+      display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap;
+    }
+    .fact-source-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(255,255,255,0.22); flex-shrink: 0;
+    }
+    .fact-source-arrow { color: rgba(91,143,255,0.5); font-size: 11px; }
+    .fact-source a {
+      color: #5B8FFF; text-decoration: none;
+      border-bottom: 1px solid rgba(91,143,255,0.3);
+      transition: color 0.15s, border-color 0.15s; word-break: break-all;
+    }
+    .fact-source a:hover { color: #7AAAFF; border-color: rgba(91,143,255,0.7); }
+    .fact-unsourced {
+      margin-top: 24px; padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      font-size: 12px; color: rgba(255,255,255,0.25); line-height: 1.6;
+    }
+    .fact-unsourced strong {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(255,255,255,0.22);
+      display: block; margin-bottom: 6px;
+    }
   </style>
 </head>
 <body>
@@ -70,41 +140,149 @@
     </div>
     <h1 class="article-title">Lovable 2.0 Doesn't Replace Designers. It Replaces the Junior Designer Pipeline.</h1>
     <article>
-      <p>Every design leader I know is asking the wrong question about Lovable 2.0.</p>
-      <p>They want to know whether AI will replace senior designers. It will not. The real risk is what AI does to the pipeline that produces senior designers in the first place. No company is going to hire a Junior in 2026 when an agent can ship the same brief in twenty minutes. In two years that becomes a hiring crisis the industry walked into with its eyes open.</p>
-      <p>WHAT ACTUALLY SHIPPED IN THE LAST 90 DAYS</p>
-      <p>Lovable 2.0 landed in February 2026 with Chat Mode Agent, Visual Edits, real-time multi-user editing for up to 20 collaborators, Dev Mode for direct code editing, and a built-in Security Scan tied to Supabase (Lovable, Feb 2026). The Agent reasons across steps, inspects logs, queries the database, and decides on its own when to look at files. Visual Edits adds CSS-level multi-element selection so a PM can change spacing without typing a sentence.</p>
-      <p>v0.app rebranded in January 2026 with a sandbox-based runtime that imports any GitHub repo, pulls environment variables from Vercel automatically, and ships a Git panel that opens PRs against main directly from a chat thread (Vercel, Jan 2026). Database integrations cover Snowflake and AWS. Pull requests are first-class. Deployments map to real previews. Anyone on the team can ship, not just engineers.</p>
-      <p>Then add Figma's Dev Mode MCP server plugged into Cursor, with Code Connect aligning generated code to real components (Figma Help Centre, 2026). The chain from "design selected in Figma" to "production-ready code in a feature branch" is now one prompt. The friction that used to absorb a junior designer's first 18 months has been compressed into a workflow a senior runs solo.</p>
-      <p>This is the part nobody is honest about. Junior design work was never glamorous. It was screen variants, state coverage, Figma component hygiene, design system audits, and the slow grind of getting spacing right at 4px increments. Agents do all of that. Faster, cheaper, less moaning.</p>
-      <p>THE APPRENTICESHIP PROBLEM</p>
-      <p>Here is what I have seen across three fintech orgs in the last four years. Senior designers are made by doing roughly 50 painful flows under supervision. Onboarding. KYC. Card activation. Transaction lists. Failed payment states. Limit increase requests. The reps teach you why the obvious solution is wrong. You only get good by being wrong out loud, then being corrected by someone who has seen it fail before.</p>
-      <p>If juniors do not get the reps, the senior pipeline collapses. We already have data. The NN/g State of UX 2026 shows that more than half of companies are primarily hiring senior roles in 2026, with only around a quarter filling junior positions (NN/g, State of UX 2026). The Stanford AI Index 2026 reports a 20% drop in junior developer hiring tied directly to AI adoption (Stanford HAI, 2026). Design lags engineering by six to twelve months on these trends. The hiring data for Junior Designer roles in late 2026 is going to look ugly.</p>
-      <p>This is the same mistake banking made between 2008 and 2012. Cut the junior analyst class to control costs. Five years later, the firms that did it were paying retention bonuses to keep mid-level analysts because the bench had nothing on it. The replacement cost was higher than the original salary cost, and the institutional knowledge was gone.</p>
-      <p>WHAT THIS LOOKS LIKE IN FINTECH SPECIFICALLY</p>
-      <p>I have spent the last few years inside neobanks and crypto products. The surfaces a junior designer used to learn on are exactly the surfaces an agent will own next.</p>
-      <p>KYC and identity verification flows are 80% pattern, 20% jurisdictional nuance. An agent trained on Persona and Sumsub patterns can output a competent flow on the first prompt. The 20% nuance, the part where you understand why UAE residency rules require a different document set than UK FCA flows, only comes from having shipped both.</p>
-      <p>Card activation states have at least 14 variants between physical and virtual, frozen and active, expired and pending. A junior used to spend a week on this. An agent does it in an hour. The trap is that the agent does not know when a "frozen" state should be soft-blocked at the UI layer versus hard-blocked at the backend. A senior knows because they watched a fraud incident play out at 2am.</p>
-      <p>Transaction list polish, pull-to-refresh behaviour, skeleton states, empty states, error recovery. Pure pattern work. Agents will eat it.</p>
-      <p>Responsible play and compliance flows in regulated products. Self-exclusion, spend limits, cool-off periods. The structure of the flow is generic. The phrasing, the friction calibration, the regulator-specific copy is the senior judgement layer. The senior designer who wrote the third version of a self-exclusion flow understands why the second version got rejected by an auditor. The agent never gets that scar.</p>
-      <p>In two years, the design org of a typical fintech will look like this. One senior designer paired with three agents, shipping four times the surface area. The senior is excellent because they did the reps in 2022. The org will not hire juniors because the juniors look slow and expensive next to the agents. By 2028, the seniors burn out, rotate, or get poached by US compensation. There is no one ready to step up because the bench was never built.</p>
-      <p>THE COUNTER-ARGUMENT I KEEP HEARING</p>
-      <p>"This democratises design." The argument runs that anyone can now ship interfaces, so we no longer need a formal pipeline of trained designers. This is wrong in a specific way.</p>
-      <p>Democratising tooling does not produce seniority. Squarespace democratised website creation. It did not produce a generation of brand designers. Photoshop did not produce art directors. Tools without trained judgement is what every cheap product looks like. You can spot the AI-generated landing page from a thousand miles away because nobody reviewed the typography contrast. Tools shipped. Judgement did not arrive with them.</p>
-      <p>The seniors that companies will fight over in 2028 are the people doing 50 painful flows in 2026. If we collectively skip that class, we are paying double for it later.</p>
-      <p>WHAT I WOULD ACTUALLY DO</p>
-      <p>Keep hiring juniors. Change what they do.</p>
-      <p>Junior designers in 2026 should not be drawing screens. They should be operating agents, judging agent output, and feeding judgement back into the prompt layer. The role becomes: ship the brief through the agent, then own the 40% of decisions the agent cannot make. Information architecture trade-offs. Compliance edge cases. Brand voice in microcopy. The places where one wrong word costs you a regulator letter.</p>
-      <p>Pair every junior with a senior on a weekly review of agent output. Make the junior critique what the agent shipped. The reps still happen. The artefact is a critique of agent output. They are learning the same patterns, faster, with more breadth.</p>
-      <p>Then promote on the basis of judgement. Senior designer in 2026 is the person who can spot a regulated UX trap at a glance and rewrite the agent's prompt to avoid it. That is a teachable skill. It just is not teachable in a vacuum.</p>
-      <p>CLOSE</p>
-      <p>The companies cutting junior design hires in 2026 are getting a clean P&L line this quarter. They will pay for it in 2028 with a senior shortage they manufactured themselves.</p>
-      <p>I would rather hire two juniors and an agent than three mid-level designers. The output is similar this year. In three years one of those companies has a Director-ready design org. The other one is on LinkedIn looking for "Senior Designer, must have shipped regulated fintech, 8+ years experience." Good luck. So is everyone else.</p>
+<p>Every design leader I know is asking the wrong question about Lovable 2.0.</p>
+<p>They want to know whether AI will replace senior designers. It will not. The real risk is what AI does to the pipeline that produces senior designers in the first place. No company is going to hire a Junior in 2026 when an agent can ship the same brief in twenty minutes. In two years that becomes a hiring crisis the industry walked into with its eyes open.</p>
+<h2>What Actually Shipped in the Last 90 Days</h2>
+<p>Lovable 2.0 landed in February 2026 with Chat Mode Agent, Visual Edits, real-time multi-user editing for up to 20 collaborators, Dev Mode for direct code editing, and a built-in Security Scan tied to Supabase (Lovable, Feb 2026). The Agent reasons across steps, inspects logs, queries the database, and decides on its own when to look at files. Visual Edits adds CSS-level multi-element selection so a PM can change spacing without typing a sentence.</p>
+<p>v0.app rebranded in January 2026 with a sandbox-based runtime that imports any GitHub repo, pulls environment variables from Vercel automatically, and ships a Git panel that opens PRs against main directly from a chat thread (Vercel, Jan 2026). Database integrations cover Snowflake and AWS. Pull requests are first-class. Deployments map to real previews. Anyone on the team can ship, not just engineers.</p>
+<p>Then add Figma's Dev Mode MCP server plugged into Cursor, with Code Connect aligning generated code to real components (Figma Help Centre, 2026). The chain from "design selected in Figma" to "production-ready code in a feature branch" is now one prompt. The friction that used to absorb a junior designer's first 18 months has been compressed into a workflow a senior runs solo.</p>
+<p>This is the part nobody is honest about. Junior design work was never glamorous. It was screen variants, state coverage, Figma component hygiene, design system audits, and the slow grind of getting spacing right at 4px increments. Agents do all of that. Faster, cheaper, less moaning.</p>
+<h2>The Apprenticeship Problem</h2>
+<p>Here is what I have seen across three fintech orgs in the last four years. Senior designers are made by doing roughly 50 painful flows under supervision. Onboarding. KYC. Card activation. Transaction lists. Failed payment states. Limit increase requests. The reps teach you why the obvious solution is wrong. You only get good by being wrong out loud, then being corrected by someone who has seen it fail before.</p>
+<p>If juniors do not get the reps, the senior pipeline collapses. We already have data. The NN/g State of UX 2026 shows that more than half of companies are primarily hiring senior roles in 2026, with only around a quarter filling junior positions (NN/g, State of UX 2026). The Stanford AI Index 2026 reports a 20% drop in junior developer hiring tied directly to AI adoption (Stanford HAI, 2026). Design lags engineering by six to twelve months on these trends. The hiring data for Junior Designer roles in late 2026 is going to look ugly.</p>
+<p>This is the same mistake banking made between 2008 and 2012. Cut the junior analyst class to control costs. Five years later, the firms that did it were paying retention bonuses to keep mid-level analysts because the bench had nothing on it. The replacement cost was higher than the original salary cost, and the institutional knowledge was gone.</p>
+<h2>What This Looks Like in Fintech Specifically</h2>
+<p>I have spent the last few years inside neobanks and crypto products. The surfaces a junior designer used to learn on are exactly the surfaces an agent will own next.</p>
+<p>KYC and identity verification flows are 80% pattern, 20% jurisdictional nuance. An agent trained on Persona and Sumsub patterns can output a competent flow on the first prompt. The 20% nuance, the part where you understand why UAE residency rules require a different document set than UK FCA flows, only comes from having shipped both.</p>
+<p>Card activation states have at least 14 variants between physical and virtual, frozen and active, expired and pending. A junior used to spend a week on this. An agent does it in an hour. The trap is that the agent does not know when a "frozen" state should be soft-blocked at the UI layer versus hard-blocked at the backend. A senior knows because they watched a fraud incident play out at 2am.</p>
+<p>Transaction list polish, pull-to-refresh behaviour, skeleton states, empty states, error recovery. Pure pattern work. Agents will eat it.</p>
+<p>Responsible play and compliance flows in regulated products. Self-exclusion, spend limits, cool-off periods. The structure of the flow is generic. The phrasing, the friction calibration, the regulator-specific copy is the senior judgement layer. The senior designer who wrote the third version of a self-exclusion flow understands why the second version got rejected by an auditor. The agent never gets that scar.</p>
+<p>In two years, the design org of a typical fintech will look like this. One senior designer paired with three agents, shipping four times the surface area. The senior is excellent because they did the reps in 2022. The org will not hire juniors because the juniors look slow and expensive next to the agents. By 2028, the seniors burn out, rotate, or get poached by US compensation. There is no one ready to step up because the bench was never built.</p>
+<h2>The Counter-Argument I Keep Hearing</h2>
+<p>"This democratises design." The argument runs that anyone can now ship interfaces, so we no longer need a formal pipeline of trained designers. This is wrong in a specific way.</p>
+<p>Democratising tooling does not produce seniority. Squarespace democratised website creation. It did not produce a generation of brand designers. Photoshop did not produce art directors. Tools without trained judgement is what every cheap product looks like. You can spot the AI-generated landing page from a thousand miles away because nobody reviewed the typography contrast. Tools shipped. Judgement did not arrive with them.</p>
+<p>The seniors that companies will fight over in 2028 are the people doing 50 painful flows in 2026. If we collectively skip that class, we are paying double for it later.</p>
+<h2>What I Would Actually Do</h2>
+<p>Keep hiring juniors. Change what they do.</p>
+<p>Junior designers in 2026 should not be drawing screens. They should be operating agents, judging agent output, and feeding judgement back into the prompt layer. The role becomes: ship the brief through the agent, then own the 40% of decisions the agent cannot make. Information architecture trade-offs. Compliance edge cases. Brand voice in microcopy. The places where one wrong word costs you a regulator letter.</p>
+<p>Pair every junior with a senior on a weekly review of agent output. Make the junior critique what the agent shipped. The reps still happen. The artefact is a critique of agent output. They are learning the same patterns, faster, with more breadth.</p>
+<p>Then promote on the basis of judgement. Senior designer in 2026 is the person who can spot a regulated UX trap at a glance and rewrite the agent's prompt to avoid it. That is a teachable skill. It just is not teachable in a vacuum.</p>
+<h2>Close</h2>
+<p>The companies cutting junior design hires in 2026 are getting a clean P&L line this quarter. They will pay for it in 2028 with a senior shortage they manufactured themselves.</p>
+<p>I would rather hire two juniors and an agent than three mid-level designers. The output is similar this year. In three years one of those companies has a Director-ready design org. The other one is on LinkedIn looking for "Senior Designer, must have shipped regulated fintech, 8+ years experience." Good luck. So is everyone else.</p>
+<hr/>
+<p>Fact Check</p>
+<p>Every factual claim in this article, with its source.</p>
+<p>Claim: Lovable 2.0 launched in February 2026 with Chat Mode Agent, Visual Edits, real-time multi-user editing for up to 20 collaborators, Dev Mode for direct code editing, and a built-in Security Scan tied to Supabase.
+Source: Lovable 2.0 launch announcement, February 2026. lovable.dev</p>
+<p>Claim: v0 rebranded to v0.app in January 2026 with a sandbox-based runtime, GitHub repo imports, automatic Vercel environment variable pulls, and a Git panel that opens pull requests against main.
+Source: Vercel, "Introducing the new v0", January 2026. vercel.com</p>
+<p>Claim: Figma's Dev Mode MCP server plugged into Cursor, with Code Connect aligning generated code to real components.
+Source: Figma Help Centre, Dev Mode MCP server, 2026. help.figma.com</p>
+<p>Claim: More than half of companies are primarily hiring senior roles in 2026, with only around a quarter filling junior positions.
+Source: NN/g, State of UX 2026. nngroup.com</p>
+<p>Claim: 20% drop in junior developer hiring tied directly to AI adoption.
+Source: Stanford HAI, AI Index Report 2026. hai.stanford.edu</p>
+<p>Unsourced statements (Jay's opinion or lived experience): All claims about KYC, card activation, transaction list, and self-exclusion design as the apprenticeship surface for junior designers; the analogy to banking analyst hiring 2008 to 2012; the prescription to keep hiring juniors but change what they do; the projected 2028 senior-shortage outcome. These are Jay's points of view, drawn from operating in fintech and crypto.</p>
     </article>
     <div class="article-footer">
       <a href="../writing.html" class="footer-cta">More writing</a>
       <a href="../contact.html" class="footer-cta">Get in touch</a>
     </div>
   </div>
+
+  <script>
+  (function() {
+    // Find <p>Fact Check</p> anywhere in the article
+    var article = document.querySelector('article');
+    if (!article) return;
+    var paras = Array.from(article.querySelectorAll('p'));
+    var startIdx = -1;
+    for (var i = 0; i < paras.length; i++) {
+      if (paras[i].textContent.trim() === 'Fact Check') { startIdx = i; break; }
+    }
+    if (startIdx === -1) return;
+
+    // Collect all paragraphs from "Fact Check" onwards
+    var fcParas = [];
+    var el = paras[startIdx];
+    while (el && el.tagName === 'P') { fcParas.push(el); el = el.nextElementSibling; }
+
+    // Parse intro, claim/source pairs, and unsourced note
+    var intro = '', items = [], unsourced = '', current = null;
+    for (var i = 1; i < fcParas.length; i++) {
+      var txt = fcParas[i].textContent.trim();
+      if (txt.startsWith('Unsourced statements')) {
+        if (current) { items.push(current); current = null; }
+        unsourced = txt;
+        continue;
+      }
+      if (!txt.startsWith('Claim:') && !current && !intro) { intro = txt; continue; }
+      if (txt.startsWith('Claim:')) {
+        if (current) items.push(current);
+        current = { claim: txt.slice(6).trim(), source: '' };
+      } else if (txt.startsWith('Source:') && current) {
+        current.source = txt.slice(7).trim();
+      }
+    }
+    if (current) items.push(current);
+
+    // Parse source string — extract domain/URL
+    function parseSource(src) {
+      var rx = /\b((?:https?:\/\/)?(?:www\.)?[a-z0-9][a-z0-9\-]{0,61}[a-z0-9]?(?:\.[a-z]{2,})+(?:\/[^\s,;.]*)?)/gi;
+      var matches = [];
+      var m;
+      while ((m = rx.exec(src)) !== null) matches.push(m);
+      if (!matches.length) return { citation: src, href: null, linkText: null };
+      var raw = matches[matches.length - 1][0];
+      var href = raw.match(/^https?:\/\//) ? raw : 'https://' + raw;
+      var citation = src.slice(0, src.lastIndexOf(raw)).replace(/[.\s]+$/, '').trim();
+      var linkText = raw.replace(/^https?:\/\//, '').replace(/^www\./, '');
+      return { citation: citation, href: href, linkText: linkText };
+    }
+
+    function esc(s) {
+      return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    var itemsHtml = items.map(function(item, i) {
+      var num = String(i + 1).padStart(2, '0');
+      var srcHtml = '';
+      if (item.source) {
+        var p = parseSource(item.source);
+        srcHtml = '<div class="fact-source">' +
+          '<span class="fact-source-label">Source</span>' +
+          (p.citation ? '<span>' + esc(p.citation) + '</span>' : '') +
+          (p.href ? '<span class="fact-source-arrow">→</span><a href="' + esc(p.href) + '" target="_blank" rel="noopener noreferrer">' + esc(p.linkText) + '</a>' : '<span>' + esc(item.source) + '</span>') +
+          '</div>';
+      }
+      return '<div class="fact-item"><span class="fact-num">' + num + '</span>' +
+        '<div><div class="fact-claim">' + esc(item.claim) + '</div>' + srcHtml + '</div></div>';
+    }).join('');
+
+    var unsourcedHtml = '';
+    if (unsourced) {
+      var label = 'Unsourced';
+      var body = unsourced.replace(/^Unsourced statements[^:]*:\s*/i, '');
+      unsourcedHtml = '<div class="fact-unsourced"><strong>Unsourced / opinion</strong>' + esc(body) + '</div>';
+    }
+
+    var aside = document.createElement('aside');
+    aside.className = 'fact-check';
+    aside.setAttribute('aria-label', 'Fact check');
+    aside.innerHTML =
+      '<div class="fact-check-badge">' +
+        '<svg viewBox="0 0 12 12" fill="none" stroke="#6B9BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 6l3 3 6-6"/></svg>' +
+        '<span>Fact Check</span>' +
+      '</div>' +
+      (intro ? '<p class="fact-check-intro">' + esc(intro) + '</p>' : '') +
+      itemsHtml +
+      unsourcedHtml;
+
+    // Replace the original paragraphs with the styled aside
+    fcParas[0].replaceWith(aside);
+    fcParas.slice(1).forEach(function(p) { p.remove(); });
+  })();
+  </script>
 </body>
 </html>
