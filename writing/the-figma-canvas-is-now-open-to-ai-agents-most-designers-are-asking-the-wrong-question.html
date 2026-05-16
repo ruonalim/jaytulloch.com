@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Figma Canvas Is Now Open to AI Agents. Most Designers Are Asking the Wrong Question. | Jay Tulloch</title>
+  <meta name="description" content="The AI can design in Figma now. Not roughly. Not as a separate prototype in a disconnected tool. Directly on your canvas, using your design system, pulling your components, applying your tokens." />
+  <link rel="canonical" href="https://www.jaytulloch.com/writing/the-figma-canvas-is-now-open-to-ai-agents-most-designers-are-asking-the-wrong-question.html" />
+  <meta property="og:title" content="The Figma Canvas Is Now Open to AI Agents. Most Designers Are Asking the Wrong Question." />
+  <meta property="og:description" content="The AI can design in Figma now. Not roughly. Not as a separate prototype in a disconnected tool. Directly on your canvas, using your design system, pulling your components, applying your tokens." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://www.jaytulloch.com/writing/the-figma-canvas-is-now-open-to-ai-agents-most-designers-are-asking-the-wrong-question.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700,800,900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg:#FFFFFF; --text:#111111; --text-muted:#6B6E74; --text-body:#141414; --border:#E8E8EC; --accent:#0044E4; --font:'Switzer',-apple-system,Helvetica Neue,Arial,sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px clamp(32px, 5vw, 80px); background: rgba(255,255,255,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #111; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .article-wrap { max-width: 720px; margin: 0 auto; padding: 140px clamp(20px, 5vw, 40px) 80px; }
+    .article-back { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 32px; }
+    .article-back:hover { color: var(--text); }
+    .article-meta { display: flex; gap: 12px; align-items: center; margin-bottom: 16px; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+    .article-topic { color: var(--accent); }
+    .article-date { color: var(--text-muted); }
+    .article-read-time { color: var(--text-muted); }
+    .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border); }
+    .article-title { font-size: clamp(32px, 5vw, 52px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+    article h2 { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; margin: 48px 0 16px; line-height: 1.2; }
+    article h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin: 32px 0 12px; }
+    article p { margin-bottom: 22px; color: var(--text-body); }
+    article strong { font-weight: 700; color: var(--text); }
+    article blockquote { border-left: 2px solid var(--accent); padding-left: 20px; margin: 32px 0; color: var(--text-muted); font-style: italic; }
+    article hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+    article ul { padding-left: 24px; margin-bottom: 22px; }
+    article li { margin-bottom: 8px; }
+    .article-footer { margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    .footer-cta { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 12px 24px; border: 1px solid var(--text); color: var(--text); transition: background 0.2s, color 0.2s; }
+    .footer-cta:hover { background: var(--text); color: var(--bg); }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="../" class="nav-logo">Jay Tulloch</a>
+    <ul class="nav-links">
+      <li><a href="../#about">About</a></li>
+      <li><a href="../#work">Work</a></li>
+      <li><a href="../writing.html" class="active">Writing</a></li>
+      <li><a href="../#podcast">Podcast</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="article-wrap">
+    <a href="../writing.html" class="article-back">← All writing</a>
+    <div class="article-meta">
+      <span class="article-topic">AI & Design</span>
+      <div class="dot"></div>
+      <span class="article-date">May 18, 2026</span>
+      <div class="dot"></div>
+      <span class="article-read-time">7 min read</span>
+    </div>
+    <h1 class="article-title">The Figma Canvas Is Now Open to AI Agents. Most Designers Are Asking the Wrong Question.</h1>
+    <article>
+      <p>The AI can design in Figma now. Not roughly. Not as a separate prototype in a disconnected tool. Directly on your canvas, using your design system, pulling your components, applying your tokens.</p>
+      <p>Figma opened the canvas to AI agents in April 2026 with a live MCP server. Agents can write directly to Figma files, create and edit components, apply variables, and build designs using Skills — markdown files that define how an agent should behave on the canvas, which steps to take, what sequencing to follow, which conventions to respect (Figma Blog, April 2026).</p>
+      <p>The question every designer asked immediately: am I next?</p>
+      <p>Wrong question.</p>
+      <p><strong>Why this matters now</strong></p>
+      <p>The April 2026 release is not a beta preview. It is live. The Figma MCP server works today with Claude Code, Codex, Cursor, Copilot CLI, Factory, and others. Make Kits and Make Attachments, released the same month, mean prototypes now start from real components and real data, not placeholder shapes.</p>
+      <p>Figma's 2025 AI report found that 72% of designers already use generative AI tools, 98% increased their usage over the past year, and 89% say they're working faster. Those numbers are real. What they do not capture is which parts of the work are accelerating and which parts are becoming more exposed.</p>
+      <p>The visual layer is accelerating. The judgment layer is becoming more exposed. Those are different things, and most designers are not tracking the distinction.</p>
+      <p><strong>What the agent gets wrong</strong></p>
+      <p>This is where the conversation stops being theoretical.</p>
+      <p>AI-generated screens come through on both client and product work now. The visual layer is frequently correct. Right component, right spacing, consistent token application. The agent follows the grammar when the grammar is documented.</p>
+      <p>What it consistently gets wrong is judgment.</p>
+      <p>Judgment looks like this: the UX pattern is technically permitted by the design system, but it is the wrong surface for this user's mental model at this moment in the flow. This is a checkout screen with four decision points. The agent has used progressive disclosure for all four, which the system allows. But the user at this stage is reviewing, not deciding. They need to see everything simultaneously. Progressive disclosure at this moment adds friction where confidence is needed.</p>
+      <p>The agent does not know that. The design system cannot tell it that. The token library does not contain it. Only someone who has shipped enough checkout flows to understand the cognitive shift between browsing and committing can identify it before it reaches production.</p>
+      <p>That is the gap. It is not a small gap. And it does not close by giving the agent more components to work from.</p>
+      <p><strong>Speed is a commodity. The brief is not.</strong></p>
+      <p>There is one variable above all others that determines the quality of an AI agent's design output: the quality of the brief it receives and the design system it operates from.</p>
+      <p>Writing a precise brief for an AI design agent is not junior work. It requires knowing what states to specify, what edge cases matter at this point in the flow, what constraints the engineer will hit in implementation, and what the user's mental model is in this moment. A vague brief produces plausible-looking screens that are wrong at the decision level. A specific brief produces something close to shippable.</p>
+      <p>At RUONALIM, working with Big Ticket on purchase flows and responsible play, the difference between a brief that moves directly into build and one that generates three rounds of revision is almost entirely in the upfront specificity. State management for self-exclusion flows. Token references that match what the dev team actually uses. CMS constraints for the hero banner so the design does not break when the content is shorter than intended. When an AI agent receives that level of specification, it can produce useful output. When it does not, you get confident-looking drift.</p>
+      <p>Designing the brief is where senior design skill now lives. Not designing the screen.</p>
+      <p><strong>The critique loop is the new leverage point.</strong></p>
+      <p>When AI generates screens, someone evaluates them. That evaluator has to know what good looks like. Not aesthetically in the abstract. Functionally, in context, for this user at this point in the product.</p>
+      <p>Critique is a skill most designers have been under-developing because they have been too busy making. In a team where screens are produced by agents and reviewed by designers, the person who can articulate precisely what is wrong, why it is wrong, and what the correct alternative is — and ground that in a principle rather than a preference — is the most valuable person in the room.</p>
+      <p>That is not junior work. It is not even mid-level work taught consistently. It is the thing built by shipping enough products to have strong opinions, by being wrong enough times to recognise what wrong looks like before it reaches users.</p>
+      <p>Figma's Skills feature makes this concrete. Skills are the markdown files designers write to tell agents how to behave on the canvas. Getting that documentation right requires exactly the kind of opinionated, precise, principle-grounded thinking that separates a designer with judgment from one without it. The agent amplifies what is already there. If the thinking is vague, the output is vague at scale.</p>
+      <p><strong>A new kind of drift</strong></p>
+      <p>The Figma MCP server introduces a design problem most teams have not named yet.</p>
+      <p>When multiple AI agents generate UI from the same system, you get consistency at the component level. The button is right. The spacing is right. The colour is right. What you get inconsistent is decision-level logic: should this be a bottom sheet or a full-screen modal? Should this error appear inline or as a toast? When does the success state redirect and when does it stay on screen and confirm?</p>
+      <p>These decisions are not in the token library. They are not in the component documentation. They live in the judgment of the team that has shipped the product. When agents make these calls without that context, the result is what I would call decision drift: a product that looks visually coherent but behaves incoherently at the interaction level.</p>
+      <p>The design lead's job now includes documenting interaction logic at the decision level, not just the visual level. When to redirect versus confirm. When to interrupt with a sheet versus navigate to a new screen. When to expose an error state immediately versus defer it to submission. That documentation is harder to produce than a component specification. It is also considerably less substitutable.</p>
+      <p><strong>The obvious pushback</strong></p>
+      <p>The agent will learn the judgment over time. It will read the principle documents, absorb historical decisions, and infer intent from the system.</p>
+      <p>Yes. And it will learn it from teams that document clearly and think precisely. The designers who build rigorous, opinionated systems with explicit decision logic will train more capable agents. The ones who treat Figma as a visual sketchpad with minimal annotation will train agents that produce plausible-looking drift.</p>
+      <p>There is a version of this future where AI amplifies the judgment of designers who have it and makes the absence of judgment more visible in the ones who do not. That is not a future-gazing scenario. It is already visible in the quality variance of what Figma Make produces across different teams. The tool is consistent. The output is not. The difference is the system quality and the brief quality on the other end.</p>
+      <p><strong>What I would actually do</strong></p>
+      <p>Not panic. Not dismiss it. Three specific things.</p>
+      <p>Treat the brief as a design deliverable. Before opening a Figma file, document what you are designing, for whom, in what context, with what states. That discipline improves your own output immediately and produces the precise input that agents need to generate useful screens.</p>
+      <p>Develop a critique practice. Review other teams' work regularly. Be specific. The gap between 'this feels off' and 'this pattern creates cognitive load at the wrong moment in this flow because the user's task at this stage is review not decision' is the gap between preference and judgment. The second version is what agents cannot produce and clients cannot ignore.</p>
+      <p>Document your decision logic. Not component variants — every design system has those. The reasoning behind interaction patterns. When a bottom sheet is correct and when a full-screen modal is. When to use inline error feedback versus a toast. When progressive disclosure helps versus hinders. That documentation is training context for the agents that will work from your system. It is also the clearest proof of your own expertise.</p>
+      <p><strong>The close</strong></p>
+      <p>The Figma canvas is open to agents. The visual layer of design is becoming a commodity faster than most designers are ready to accept.</p>
+      <p>What remains scarce is the judgment to brief agents precisely, evaluate their output rigorously, and build the systems that make their work trustworthy rather than plausible.</p>
+      <p>Stop asking if AI will replace designers. Start asking what your judgment is worth when the visual layer is free. If you have been building judgment — through shipping, reviewing, being wrong, adjusting — this is a strong moment. If Figma proficiency has been the primary differentiator, the timeline just shortened considerably.</p>
+      <p>Charge for the judgment. Document the logic. Keep the critique seat.</p>
+      <p>Sources: Figma Blog, 'Agents, Meet the Figma Canvas,' April 2026. Figma, State of the Designer 2026. Figma, 2025 AI Report. Bitovi, 'Figma Just Gave AI Agents Write Access,' April 2026. Muzli Blog, 'Figma Just Opened the Canvas to AI Agents,' April 2026.</p>
+    </article>
+    <div class="article-footer">
+      <a href="../writing.html" class="footer-cta">More writing</a>
+      <a href="../contact.html" class="footer-cta">Get in touch</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Claude Design Just Killed Figma’s Moat. The Source of Truth Just Moved, and Most Design Teams Are Looking the Wrong Way. | Jay Tulloch</title>
+  <meta name="description" content="Three days after Mike Krieger, Anthropic's CPO, stepped down from Figma's board, Anthropic launched Claude Design on 17 April 2026. Figma's stock dropped 7% in a single trading day (DesignRush, April 2026)." />
+  <link rel="canonical" href="https://www.jaytulloch.com/writing/claude-design-just-killed-figmas-moat-the-source-of-truth-just-moved-and-most-design-teams-are-looking-the-wrong-way.html" />
+  <meta property="og:title" content="Claude Design Just Killed Figma’s Moat. The Source of Truth Just Moved, and Most Design Teams Are Looking the Wrong Way." />
+  <meta property="og:description" content="Three days after Mike Krieger, Anthropic's CPO, stepped down from Figma's board, Anthropic launched Claude Design on 17 April 2026. Figma's stock dropped 7% in a single trading day (DesignRush, April 2026)." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://www.jaytulloch.com/writing/claude-design-just-killed-figmas-moat-the-source-of-truth-just-moved-and-most-design-teams-are-looking-the-wrong-way.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700,800,900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg:#FFFFFF; --text:#111111; --text-muted:#6B6E74; --text-body:#141414; --border:#E8E8EC; --accent:#0044E4; --font:'Switzer',-apple-system,Helvetica Neue,Arial,sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px clamp(32px, 5vw, 80px); background: rgba(255,255,255,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #111; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .article-wrap { max-width: 720px; margin: 0 auto; padding: 140px clamp(20px, 5vw, 40px) 80px; }
+    .article-back { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 32px; }
+    .article-back:hover { color: var(--text); }
+    .article-meta { display: flex; gap: 12px; align-items: center; margin-bottom: 16px; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+    .article-topic { color: var(--accent); }
+    .article-date { color: var(--text-muted); }
+    .article-read-time { color: var(--text-muted); }
+    .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border); }
+    .article-title { font-size: clamp(32px, 5vw, 52px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+    article h2 { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; margin: 48px 0 16px; line-height: 1.2; }
+    article h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin: 32px 0 12px; }
+    article p { margin-bottom: 22px; color: var(--text-body); }
+    article strong { font-weight: 700; color: var(--text); }
+    article blockquote { border-left: 2px solid var(--accent); padding-left: 20px; margin: 32px 0; color: var(--text-muted); font-style: italic; }
+    article hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+    article ul { padding-left: 24px; margin-bottom: 22px; }
+    article li { margin-bottom: 8px; }
+    .article-footer { margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    .footer-cta { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 12px 24px; border: 1px solid var(--text); color: var(--text); transition: background 0.2s, color 0.2s; }
+    .footer-cta:hover { background: var(--text); color: var(--bg); }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="../" class="nav-logo">Jay Tulloch</a>
+    <ul class="nav-links">
+      <li><a href="../#about">About</a></li>
+      <li><a href="../#work">Work</a></li>
+      <li><a href="../writing.html" class="active">Writing</a></li>
+      <li><a href="../#podcast">Podcast</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="article-wrap">
+    <a href="../writing.html" class="article-back">← All writing</a>
+    <div class="article-meta">
+      <span class="article-topic">AI & Design</span>
+      <div class="dot"></div>
+      <span class="article-date">May 18, 2026</span>
+      <div class="dot"></div>
+      <span class="article-read-time">6 min read</span>
+    </div>
+    <h1 class="article-title">Claude Design Just Killed Figma’s Moat. The Source of Truth Just Moved, and Most Design Teams Are Looking the Wrong Way.</h1>
+    <article>
+      <p>Three days after Mike Krieger, Anthropic's CPO, stepped down from Figma's board, Anthropic launched Claude Design on 17 April 2026. Figma's stock dropped 7% in a single trading day (DesignRush, April 2026).</p>
+      <p>Most takes I read framed it as 'AI tool launches, incumbent stumbles.' That is the boring read. The real story is harder for design teams to swallow.</p>
+      <p>The source of truth for design just moved off the canvas. It is now sitting in the codebase. And whichever team you work on, your moat is already half gone.</p>
+      <p>Here is what most people are missing. Lovable, v0, Figma Make, Google Stitch, they all generate UI. Generation has been commoditised for at least a year. Claude Design does something different. It reads your codebase and your Figma files and extracts your design system from both. It then applies that system to anything new it produces. Not the components. The grammar.</p>
+      <p>That is the move. Not 'we built a Figma killer.' It is 'we made the design system itself executable.' Vercel's v0 and Lovable can import a Figma file. Claude Design infers the rules from the repo. If your engineers ship a button component with three variants in shadcn and your Figma library has six, Claude Design follows the engineers, not the designers.</p>
+      <p>Read that line again if you run a design team.</p>
+      <p>Why this matters now</p>
+      <p>Figma has spent a decade convincing the industry that the canvas is the source of truth. That story held while components were declarative and handoff was a transition between two worlds. It does not hold once the design system is something an AI agent reads, applies, and ships from code.</p>
+      <p>Anthropic was explicit in their launch material that Claude Design treats the production codebase as the canonical reference (VentureBeat, April 2026; The New Stack, 2026). Krieger stepping down three days before the launch was not a coincidence. Read the signal.</p>
+      <p>Look at where the money flows. Vercel hit a $9B valuation in late 2025 on the back of v0 and the agentic Next.js workflow. Lovable is rumoured to be raising at a multi-billion mark off its 2.0 release. Both build from code outward. Figma's narrative depends on the canvas as the central artefact. When the canvas becomes a viewer rather than an author, the moat erodes from the underside.</p>
+      <p>What I have actually seen on the ground</p>
+      <p>At Krak, the consumer side of Kraken, the highest-leverage work I did in the last year was not pixels. It was the design system audit that consolidated three component libraries into one and aligned the Figma library to the production code. Nine months of work. A hard sell internally. The reason it mattered: every screen we then asked Claude or v0 or Figma Make to generate used the same primitives the engineers shipped. Card components matched. Tokens matched. The drift between design and code stopped accumulating.</p>
+      <p>Before that audit, a designer could draft an account screen and the engineer would rebuild it using a slightly different button. Different padding, different focus state, different font weight. Twenty screens later, the product looked stitched together. After the audit, the AI tools became useful because they had a single grammar to obey.</p>
+      <p>That is the lesson I keep telling design leaders who ask me about AI. The question is not 'which AI tool should we adopt.' The question is 'where does your design system actually live, and is it executable.'</p>
+      <p>The three things design leaders are getting wrong</p>
+      <p>First, treating the design system as documentation. If your design system is a Figma library and a Notion page, you have a museum, not a system. You need tokens that live in code, components that engineers ship from, and a Figma library that maps onto those primitives. The Figma library is a view, not the source.</p>
+      <p>Second, hiring 'AI-fluent' designers without changing the org. I have watched companies bolt a Claude or v0 workflow onto a team that does not even agree on what its button styles are. The result is faster ugliness. Speed without a system multiplies inconsistency. The new hire makes ten variants instead of three, all of them slightly off the shipped product.</p>
+      <p>Third, defending Figma over the source of truth. Figma is a brilliant tool. It will keep being a brilliant tool. But betting your design org on Figma as the canonical artefact in 2026 is the same mistake the print designers made when they bet on Quark over the web. You can love the tool. You cannot let it define the strategy.</p>
+      <p>The obvious counter</p>
+      <p>The obvious pushback is that Claude Design is still rough. AI Tool Analysis described it as burning through Pro quotas in 30 minutes and producing output that needs heavy editing (April 2026). True. So was Figma in 2014 when it was a browser-based curiosity that real designers laughed at. The trajectory matters more than the current state.</p>
+      <p>The other counter is that Figma will adapt. They added Make, First Draft, code handoff, Figma Site, and ten other AI features through 2026 (Figma release notes, 2026). Yes. But adaptation does not change the structural problem. Figma's business depends on the canvas being where the work happens. If the canvas becomes a preview of what the AI generated from the repo, the centre of gravity has already moved.</p>
+      <p>What I would do this quarter</p>
+      <p>If I were running a 20-plus person design team right now, I would do three things, in this order.</p>
+      <p>One. Audit where your design system actually lives. Not the Figma library. The shipped code. If your tokens are not in code, fix it. If your components in code do not match your Figma library, decide which is correct and align the other to it. The answer is almost always that code wins, because code is what ships.</p>
+      <p>Two. Make one engineer and one designer jointly own the design system. Not the Figma file. The system. They sit between the design org and engineering and they say no to drift. This is not a glamorous role. It is the most important role in your org for the next two years.</p>
+      <p>Three. Stop measuring designers on screen output. Measure them on the quality of the system they contribute to. The best designer on your team should be the one who reduces the number of components, not the one who ships the most screens. That single metric flip changes what gets hired, promoted, and praised.</p>
+      <p>The close</p>
+      <p>The industry has spent two years arguing about whether AI replaces designers. Wrong frame. AI replaces the bits of design that were never the point. It exposes whether your team has a system or a collection of pixels. Claude Design did not kill Figma. It made it visible which design orgs have a real source of truth and which have a beautiful library nobody actually ships from.</p>
+      <p>I have spent the last six months redesigning how RUONALIM advises clients on this. Every audit now starts with the same question. Where does your design system live, and can a machine read it? If the answer is 'in Figma, sort of,' the work is bigger than people think. If the answer is 'in code, with the Figma library aligned to it,' the AI tools become accelerators rather than another source of drift.</p>
+      <p>The teams that move first on this will pull away from the rest. Not because they adopted Claude Design or Lovable or v0 faster. Because they made their system the source of truth before the tools could exploit the gap.</p>
+      <p>If you run a design org and you are not having this conversation this week, you are already late.</p>
+      <p>Sources: DesignRush (Apr 2026), VentureBeat (Apr 2026), The New Stack (2026), Gizmodo (Apr 2026), Yahoo Finance (2026), AI Tool Analysis (Apr 2026), Figma Release Notes (2026), Agence Scroll (2026).</p>
+    </article>
+    <div class="article-footer">
+      <a href="../writing.html" class="footer-cta">More writing</a>
+      <a href="../contact.html" class="footer-cta">Get in touch</a>
+    </div>
+  </div>
+</body>
+</html>
