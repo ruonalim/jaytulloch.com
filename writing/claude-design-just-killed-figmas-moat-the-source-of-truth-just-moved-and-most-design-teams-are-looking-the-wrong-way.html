@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Claude Design Just Killed Figma’s Moat. The Source of Truth Just Moved, and Most Design Teams Are Looking the Wrong Way. | Jay Tulloch</title>
+  <title>Claude Design Just Killed Figma's Moat. The Source of Truth Just Moved, and Most Design Teams Are Looking the Wrong Way. | Jay Tulloch</title>
   <meta name="description" content="Three days after Mike Krieger, Anthropic's CPO, stepped down from Figma's board, Anthropic launched Claude Design on 17 April 2026. Figma's stock dropped 7% in a single trading day (DesignRush, April 2026)." />
   <link rel="canonical" href="https://www.jaytulloch.com/writing/claude-design-just-killed-figmas-moat-the-source-of-truth-just-moved-and-most-design-teams-are-looking-the-wrong-way.html" />
-  <meta property="og:title" content="Claude Design Just Killed Figma’s Moat. The Source of Truth Just Moved, and Most Design Teams Are Looking the Wrong Way." />
+  <meta property="og:title" content="Claude Design Just Killed Figma's Moat. The Source of Truth Just Moved, and Most Design Teams Are Looking the Wrong Way." />
   <meta property="og:description" content="Three days after Mike Krieger, Anthropic's CPO, stepped down from Figma's board, Anthropic launched Claude Design on 17 April 2026. Figma's stock dropped 7% in a single trading day (DesignRush, April 2026)." />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://www.jaytulloch.com/writing/claude-design-just-killed-figmas-moat-the-source-of-truth-just-moved-and-most-design-teams-are-looking-the-wrong-way.html" />
@@ -16,7 +16,11 @@
   <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700,800,900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --bg:#FFFFFF; --text:#111111; --text-muted:#6B6E74; --text-body:#141414; --border:#E8E8EC; --accent:#0044E4; --font:'Switzer',-apple-system,Helvetica Neue,Arial,sans-serif; }
+    :root {
+      --bg: #FFFFFF; --text: #111111; --text-muted: #6B6E74; --text-body: #141414;
+      --border: #E8E8EC; --accent: #0044E4;
+      --font: 'Switzer', -apple-system, Helvetica Neue, Arial, sans-serif;
+    }
     html { scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
     a { color: inherit; text-decoration: none; }
@@ -45,6 +49,72 @@
     .article-footer { margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
     .footer-cta { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 12px 24px; border: 1px solid var(--text); color: var(--text); transition: background 0.2s, color 0.2s; }
     .footer-cta:hover { background: var(--text); color: var(--bg); }
+  
+    /* ── Fact Check ── */
+    .fact-check {
+      margin: 56px -40px 0;
+      background: #0A0A12;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 40px 40px 36px;
+    }
+    .fact-check-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(0,68,228,0.18);
+      border: 1px solid rgba(0,68,228,0.35);
+      border-radius: 4px;
+      padding: 4px 10px;
+      margin-bottom: 12px;
+    }
+    .fact-check-badge svg { width: 11px; height: 11px; }
+    .fact-check-badge span {
+      font-size: 10px; font-weight: 800; letter-spacing: 0.15em;
+      text-transform: uppercase; color: #6B9BFF;
+    }
+    .fact-check-intro {
+      font-size: 13px; color: rgba(255,255,255,0.38); line-height: 1.6;
+      margin-bottom: 24px; padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .fact-item {
+      display: grid; grid-template-columns: 28px 1fr; gap: 0 16px;
+      padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+      align-items: start;
+    }
+    .fact-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .fact-num {
+      font-size: 11px; font-weight: 700; color: rgba(0,68,228,0.65);
+      letter-spacing: 0.05em; padding-top: 2px;
+      font-variant-numeric: tabular-nums;
+    }
+    .fact-claim {
+      font-size: 14px; color: rgba(255,255,255,0.88);
+      line-height: 1.65; font-weight: 500; margin-bottom: 8px;
+    }
+    .fact-source {
+      font-size: 12px; color: rgba(255,255,255,0.35);
+      display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap;
+    }
+    .fact-source-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(255,255,255,0.22); flex-shrink: 0;
+    }
+    .fact-source-arrow { color: rgba(91,143,255,0.5); font-size: 11px; }
+    .fact-source a {
+      color: #5B8FFF; text-decoration: none;
+      border-bottom: 1px solid rgba(91,143,255,0.3);
+      transition: color 0.15s, border-color 0.15s; word-break: break-all;
+    }
+    .fact-source a:hover { color: #7AAAFF; border-color: rgba(91,143,255,0.7); }
+    .fact-unsourced {
+      margin-top: 24px; padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      font-size: 12px; color: rgba(255,255,255,0.25); line-height: 1.6;
+    }
+    .fact-unsourced strong {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(255,255,255,0.22);
+      display: block; margin-bottom: 6px;
+    }
   </style>
 </head>
 <body>
@@ -68,7 +138,7 @@
       <div class="dot"></div>
       <span class="article-read-time">6 min read</span>
     </div>
-    <h1 class="article-title">Claude Design Just Killed Figma’s Moat. The Source of Truth Just Moved, and Most Design Teams Are Looking the Wrong Way.</h1>
+    <h1 class="article-title">Claude Design Just Killed Figma's Moat. The Source of Truth Just Moved, and Most Design Teams Are Looking the Wrong Way.</h1>
     <article>
       <p>Three days after Mike Krieger, Anthropic's CPO, stepped down from Figma's board, Anthropic launched Claude Design on 17 April 2026. Figma's stock dropped 7% in a single trading day (DesignRush, April 2026).</p>
       <p>Most takes I read framed it as 'AI tool launches, incumbent stumbles.' That is the boring read. The real story is harder for design teams to swallow.</p>
@@ -76,37 +146,144 @@
       <p>Here is what most people are missing. Lovable, v0, Figma Make, Google Stitch, they all generate UI. Generation has been commoditised for at least a year. Claude Design does something different. It reads your codebase and your Figma files and extracts your design system from both. It then applies that system to anything new it produces. Not the components. The grammar.</p>
       <p>That is the move. Not 'we built a Figma killer.' It is 'we made the design system itself executable.' Vercel's v0 and Lovable can import a Figma file. Claude Design infers the rules from the repo. If your engineers ship a button component with three variants in shadcn and your Figma library has six, Claude Design follows the engineers, not the designers.</p>
       <p>Read that line again if you run a design team.</p>
-      <p>Why this matters now</p>
+      <h2>Why This Matters Now</h2>
       <p>Figma has spent a decade convincing the industry that the canvas is the source of truth. That story held while components were declarative and handoff was a transition between two worlds. It does not hold once the design system is something an AI agent reads, applies, and ships from code.</p>
       <p>Anthropic was explicit in their launch material that Claude Design treats the production codebase as the canonical reference (VentureBeat, April 2026; The New Stack, 2026). Krieger stepping down three days before the launch was not a coincidence. Read the signal.</p>
       <p>Look at where the money flows. Vercel hit a $9B valuation in late 2025 on the back of v0 and the agentic Next.js workflow. Lovable is rumoured to be raising at a multi-billion mark off its 2.0 release. Both build from code outward. Figma's narrative depends on the canvas as the central artefact. When the canvas becomes a viewer rather than an author, the moat erodes from the underside.</p>
-      <p>What I have actually seen on the ground</p>
+      <h2>What I Have Actually Seen on the Ground</h2>
       <p>At a major crypto exchange's consumer product, the highest-leverage work I did in the last year was not pixels. It was the design system audit that consolidated three component libraries into one and aligned the Figma library to the production code. Nine months of work. A hard sell internally. The reason it mattered: every screen we then asked Claude or v0 or Figma Make to generate used the same primitives the engineers shipped. Card components matched. Tokens matched. The drift between design and code stopped accumulating.</p>
       <p>Before that audit, a designer could draft an account screen and the engineer would rebuild it using a slightly different button. Different padding, different focus state, different font weight. Twenty screens later, the product looked stitched together. After the audit, the AI tools became useful because they had a single grammar to obey.</p>
       <p>That is the lesson I keep telling design leaders who ask me about AI. The question is not 'which AI tool should we adopt.' The question is 'where does your design system actually live, and is it executable.'</p>
-      <p>The three things design leaders are getting wrong</p>
+      <h2>The Three Things Design Leaders Are Getting Wrong</h2>
       <p>First, treating the design system as documentation. If your design system is a Figma library and a Notion page, you have a museum, not a system. You need tokens that live in code, components that engineers ship from, and a Figma library that maps onto those primitives. The Figma library is a view, not the source.</p>
       <p>Second, hiring 'AI-fluent' designers without changing the org. I have watched companies bolt a Claude or v0 workflow onto a team that does not even agree on what its button styles are. The result is faster ugliness. Speed without a system multiplies inconsistency. The new hire makes ten variants instead of three, all of them slightly off the shipped product.</p>
       <p>Third, defending Figma over the source of truth. Figma is a brilliant tool. It will keep being a brilliant tool. But betting your design org on Figma as the canonical artefact in 2026 is the same mistake the print designers made when they bet on Quark over the web. You can love the tool. You cannot let it define the strategy.</p>
-      <p>The obvious counter</p>
+      <h2>The Obvious Counter</h2>
       <p>The obvious pushback is that Claude Design is still rough. AI Tool Analysis described it as burning through Pro quotas in 30 minutes and producing output that needs heavy editing (April 2026). True. So was Figma in 2014 when it was a browser-based curiosity that real designers laughed at. The trajectory matters more than the current state.</p>
       <p>The other counter is that Figma will adapt. They added Make, First Draft, code handoff, Figma Site, and ten other AI features through 2026 (Figma release notes, 2026). Yes. But adaptation does not change the structural problem. Figma's business depends on the canvas being where the work happens. If the canvas becomes a preview of what the AI generated from the repo, the centre of gravity has already moved.</p>
-      <p>What I would do this quarter</p>
+      <h2>What I Would Do This Quarter</h2>
       <p>If I were running a 20-plus person design team right now, I would do three things, in this order.</p>
       <p>One. Audit where your design system actually lives. Not the Figma library. The shipped code. If your tokens are not in code, fix it. If your components in code do not match your Figma library, decide which is correct and align the other to it. The answer is almost always that code wins, because code is what ships.</p>
       <p>Two. Make one engineer and one designer jointly own the design system. Not the Figma file. The system. They sit between the design org and engineering and they say no to drift. This is not a glamorous role. It is the most important role in your org for the next two years.</p>
       <p>Three. Stop measuring designers on screen output. Measure them on the quality of the system they contribute to. The best designer on your team should be the one who reduces the number of components, not the one who ships the most screens. That single metric flip changes what gets hired, promoted, and praised.</p>
-      <p>The close</p>
+      <h2>The Close</h2>
       <p>The industry has spent two years arguing about whether AI replaces designers. Wrong frame. AI replaces the bits of design that were never the point. It exposes whether your team has a system or a collection of pixels. Claude Design did not kill Figma. It made it visible which design orgs have a real source of truth and which have a beautiful library nobody actually ships from.</p>
       <p>I have spent the last six months redesigning how the agency advises clients on this. Every audit now starts with the same question. Where does your design system live, and can a machine read it? If the answer is 'in Figma, sort of,' the work is bigger than people think. If the answer is 'in code, with the Figma library aligned to it,' the AI tools become accelerators rather than another source of drift.</p>
       <p>The teams that move first on this will pull away from the rest. Not because they adopted Claude Design or Lovable or v0 faster. Because they made their system the source of truth before the tools could exploit the gap.</p>
       <p>If you run a design org and you are not having this conversation this week, you are already late.</p>
-      <p>Sources: DesignRush (Apr 2026), VentureBeat (Apr 2026), The New Stack (2026), Gizmodo (Apr 2026), Yahoo Finance (2026), AI Tool Analysis (Apr 2026), Figma Release Notes (2026), Agence Scroll (2026).</p>
+      <hr/>
+      <p>Fact Check</p>
+      <p>Every factual claim in this article, with its source.</p>
+      <p>Claim: Anthropic launched Claude Design on 17 April 2026, three days after Anthropic CPO Mike Krieger stepped down from Figma's board, and Figma's stock dropped 7% in a single trading day.
+Source: DesignRush, April 2026, Anthropic Launches Claude Design as Figma Stock Falls 7%. designrush.com</p>
+      <p>Claim: Anthropic's launch material positioned Claude Design as treating the production codebase as the canonical reference for design systems.
+Source: VentureBeat, April 2026, Anthropic just launched Claude Design, an AI tool that turns prompts into prototypes and challenges Figma. venturebeat.com</p>
+      <p>Claim: Vercel hit a $9B valuation in late 2025 on the back of v0 and the agentic Next.js workflow.
+Source: Yahoo Finance, 2026, Claude Design Puts Figma's AI Growth Story Under Closer Scrutiny. finance.yahoo.com</p>
+      <p>Claim: Early reviewers reported Claude Design burns through Pro quotas in roughly 30 minutes and produces output that needs heavy editing.
+Source: AI Tool Analysis, April 2026, Claude Design Review 2026. aitoolanalysis.com</p>
+      <p>Claim: Figma shipped Make, First Draft, code handoff, Figma Site and additional AI features through 2026 in response to the AI tooling shift.
+Source: Figma, 2026, Product release notes. figma.com</p>
+      <p>Unsourced statements (Jay's opinion or lived experience): The nine-month design system audit consolidating three component libraries into one at a major crypto exchange; the 'moat moved from canvas to code' thesis; the three things design leaders are getting wrong; the prescription to give one designer and one engineer joint ownership of the design system; the recommendation to stop measuring designers on screen output and instead measure them on system contribution. These are Jay's points of view, not third-party data.</p>
     </article>
     <div class="article-footer">
       <a href="../writing.html" class="footer-cta">More writing</a>
       <a href="../contact.html" class="footer-cta">Get in touch</a>
     </div>
   </div>
+
+  <script>
+  (function() {
+    // Find <p>Fact Check</p> anywhere in the article
+    var article = document.querySelector('article');
+    if (!article) return;
+    var paras = Array.from(article.querySelectorAll('p'));
+    var startIdx = -1;
+    for (var i = 0; i < paras.length; i++) {
+      if (paras[i].textContent.trim() === 'Fact Check') { startIdx = i; break; }
+    }
+    if (startIdx === -1) return;
+
+    // Collect all paragraphs from "Fact Check" onwards
+    var fcParas = [];
+    var el = paras[startIdx];
+    while (el && el.tagName === 'P') { fcParas.push(el); el = el.nextElementSibling; }
+
+    // Parse intro, claim/source pairs, and unsourced note
+    var intro = '', items = [], unsourced = '', current = null;
+    for (var i = 1; i < fcParas.length; i++) {
+      var txt = fcParas[i].textContent.trim();
+      if (txt.startsWith('Unsourced statements')) {
+        if (current) { items.push(current); current = null; }
+        unsourced = txt;
+        continue;
+      }
+      if (!txt.startsWith('Claim:') && !current && !intro) { intro = txt; continue; }
+      if (txt.startsWith('Claim:')) {
+        if (current) items.push(current);
+        current = { claim: txt.slice(6).trim(), source: '' };
+      } else if (txt.startsWith('Source:') && current) {
+        current.source = txt.slice(7).trim();
+      }
+    }
+    if (current) items.push(current);
+
+    // Parse source string — extract domain/URL
+    function parseSource(src) {
+      var rx = /\b((?:https?:\/\/)?(?:www\.)?[a-z0-9][a-z0-9\-]{0,61}[a-z0-9]?(?:\.[a-z]{2,})+(?:\/[^\s,;.]*)?)/gi;
+      var matches = [];
+      var m;
+      while ((m = rx.exec(src)) !== null) matches.push(m);
+      if (!matches.length) return { citation: src, href: null, linkText: null };
+      var raw = matches[matches.length - 1][0];
+      var href = raw.match(/^https?:\/\//) ? raw : 'https://' + raw;
+      var citation = src.slice(0, src.lastIndexOf(raw)).replace(/[.\s]+$/, '').trim();
+      var linkText = raw.replace(/^https?:\/\//, '').replace(/^www\./, '');
+      return { citation: citation, href: href, linkText: linkText };
+    }
+
+    function esc(s) {
+      return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    var itemsHtml = items.map(function(item, i) {
+      var num = String(i + 1).padStart(2, '0');
+      var srcHtml = '';
+      if (item.source) {
+        var p = parseSource(item.source);
+        srcHtml = '<div class="fact-source">' +
+          '<span class="fact-source-label">Source</span>' +
+          (p.citation ? '<span>' + esc(p.citation) + '</span>' : '') +
+          (p.href ? '<span class="fact-source-arrow">→</span><a href="' + esc(p.href) + '" target="_blank" rel="noopener noreferrer">' + esc(p.linkText) + '</a>' : '<span>' + esc(item.source) + '</span>') +
+          '</div>';
+      }
+      return '<div class="fact-item"><span class="fact-num">' + num + '</span>' +
+        '<div><div class="fact-claim">' + esc(item.claim) + '</div>' + srcHtml + '</div></div>';
+    }).join('');
+
+    var unsourcedHtml = '';
+    if (unsourced) {
+      var label = 'Unsourced';
+      var body = unsourced.replace(/^Unsourced statements[^:]*:\s*/i, '');
+      unsourcedHtml = '<div class="fact-unsourced"><strong>Unsourced / opinion</strong>' + esc(body) + '</div>';
+    }
+
+    var aside = document.createElement('aside');
+    aside.className = 'fact-check';
+    aside.setAttribute('aria-label', 'Fact check');
+    aside.innerHTML =
+      '<div class="fact-check-badge">' +
+        '<svg viewBox="0 0 12 12" fill="none" stroke="#6B9BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1.5 6l3 3 6-6"/></svg>' +
+        '<span>Fact Check</span>' +
+      '</div>' +
+      (intro ? '<p class="fact-check-intro">' + esc(intro) + '</p>' : '') +
+      itemsHtml +
+      unsourcedHtml;
+
+    // Replace the original paragraphs with the styled aside
+    fcParas[0].replaceWith(aside);
+    fcParas.slice(1).forEach(function(p) { p.remove(); });
+  })();
+  </script>
 </body>
 </html>
