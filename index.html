@@ -320,6 +320,13 @@
       align-items: center;
       gap: 16px;
     }
+    .section-title {
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin-bottom: 48px;
+    }
     .section-label::before {
       content: '';
       display: inline-block;
@@ -2242,7 +2249,6 @@
     </video>
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <p class="hero-eyebrow">Product Design Leadership · <span id="hero-city" style="display:inline-block">Dubai</span></p>
       <h1><span class="h1-line"><span class="h1-word">Design</span></span><br/><span class="h1-line"><span class="h1-word"><em>That Delivers.</em></span></span></h1>
       <p class="hero-sub">Product design leader. 18+ years across fintech, crypto, and consumer products, built for 80M+ users, from 0→1 launches to scaled platforms.</p>
     </div>
@@ -2251,7 +2257,7 @@
 
 <!-- ─── Impact Numbers ───────────────────────────────────────── -->
   <div id="numbers">
-    <p class="section-label">Impact</p>
+    <h2 class="section-title">Impact</h2>
     <div class="numbers-grid">
       <div class="number-item reveal">
         <div class="n-value" data-prefix="" data-target="80" data-suffix="M+">80<span>M+</span></div>
@@ -2274,7 +2280,6 @@
 
   <!-- ─── Intro Statement ──────────────────────────────────────── -->
   <section id="intro">
-    <p class="section-label">Perspective</p>
     <div class="intro-grid">
       <div class="intro-statement reveal">
         Design that doesn't change an outcome isn't design. <em>It's decoration.</em>
@@ -2294,7 +2299,6 @@
   <!-- ─── AI Authority ─────────────────────────────────────────── -->
   <section id="ai-authority">
     <div class="ai-inner">
-      <p class="ai-eyebrow reveal">AI Product Design</p>
       <h2 class="ai-headline reveal">Seven Years<br/>Delivering<br/><em>AI Products.</em></h2>
       <p class="ai-sub reveal">
         Before AI was a buzzword, I was designing production AI features in regulated banking.
@@ -2328,7 +2332,7 @@
 
   <!-- ─── Case Studies / Work ──────────────────────────────────── -->
   <section id="work">
-    <p class="section-label">Selected Work</p>
+    <h2 class="section-title">Selected Work</h2>
     <div class="work-grid">
       <a href="./casestudy-neobank.html" class="work-card reveal" data-tags="fintech,crypto">
         <div class="wc-bg wc-bg-kraken"></div>
@@ -2377,7 +2381,6 @@
 <!-- ─── AI Track Record ──────────────────────────────────────── -->
   <section id="ai-track">
     <div class="ai-track-intro">
-      <p class="section-label">AI Track Record</p>
       <h2 class="section-h2">Every AI product<br/><em>I've shipped.</em></h2>
       <p>Beyond the featured work: five more AI products across three companies, four industries, and seven years. From voice biometrics to LLMs to generative design systems.</p>
     </div>
@@ -2547,7 +2550,6 @@
   
 <!-- ─── Leadership Philosophy ────────────────────────────────── -->
   <section id="leadership">
-    <p class="section-label">How I Lead</p>
     <div class="lead-grid">
       <div class="lead-left reveal">
         <h2 class="text-reveal">I Don't<br/>Just Lead.<br/><em>I Deliver.</em></h2>
@@ -2594,7 +2596,6 @@
 
   <!-- ─── Podcast ──────────────────────────────────────────────── -->
   <section id="podcast">
-    <p class="section-label">Beyond the Interface</p>
     <div class="pod-header reveal">
       <h2 class="pod-heading"><em>Thinking in</em><br/>Public.</h2>
       <div class="pod-header-right">
@@ -2714,7 +2715,6 @@
 
   <!-- ─── About ────────────────────────────────────────────────── -->
   <section id="about">
-    <p class="section-label">Background</p>
     <div class="about-grid">
       <div class="about-left reveal">
         <h2><em>Jay<br/>Tulloch</em></h2>
@@ -2790,24 +2790,23 @@
 <!-- ─── Footer ──────────────────────────────────────────────── -->
   <footer>
     <div class="footer-display">
-      <p class="fd-eyebrow">Let's build something that matters</p>
       <h2 class="fd-wordmark"><em>Jay<br/>Tulloch</em></h2>
       <a href="./contact.html" class="fd-cta">Let's Talk</a>
     </div>
     <div class="footer-bar">
       <div>
-        <p class="fb-col-label">Location</p>
+        <h3 class="fb-col-label">Location</h3>
         <p class="fb-muted">Dubai, UAE</p>
         <p class="fb-muted" style="margin-top:4px;">Available globally</p>
       </div>
       <div>
-        <p class="fb-col-label">Navigate</p>
+        <h3 class="fb-col-label">Navigate</h3>
         <a href="#about">About</a>
         <a href="#work">Case Studies</a>
         <a href="./contact.html">Contact</a>
       </div>
       <div>
-        <p class="fb-col-label">Connect</p>
+        <h3 class="fb-col-label">Connect</h3>
         <a href="https://www.linkedin.com/in/jaytulloch/" target="_blank">LinkedIn</a>
         <a href="https://www.beyond-the-interface.com/" target="_blank">Podcast</a>
         <a href="#" id="footer-email-link" onclick="copyFooterEmail(event)">Email</a>
