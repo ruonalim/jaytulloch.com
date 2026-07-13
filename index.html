@@ -90,10 +90,10 @@
       --gray-dark:    #F5F5F7;
       --accent:       #0044E4;
       --font:         'Switzer', -apple-system, Helvetica Neue, Arial, sans-serif;
-      --radius-sm:    8px;
-      --radius-md:    16px;
-      --radius-lg:    24px;
-      --radius-xl:    32px;
+      --radius-sm:    20px;
+      --radius-md:    28px;
+      --radius-lg:    36px;
+      --radius-xl:    48px;
     }
 
     /* ─── Dark mode override ─────────────────────────────────────── */
@@ -1253,7 +1253,7 @@
       left: 0; top: 8px; bottom: 8px;
       width: 3px;
       background: var(--accent);
-      border-radius: 0 2px 2px 0;
+      border-radius: 0 4px 4px 0;
     }
     .pod-desktop-thumb {
       width: 88px;
@@ -2158,7 +2158,7 @@
       border-bottom: 1px solid var(--border);
       text-decoration: none;
       color: inherit;
-      border-radius: 4px;
+      border-radius: var(--radius-sm);
       transition: background 0.2s, padding-left 0.2s;
     }
     .ai-proj-item:hover { background: var(--bg-elevated); padding-left: 24px; }
