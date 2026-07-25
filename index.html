@@ -285,22 +285,23 @@
 
     /* ─── Row Header ────────────────────────────────────────────── */
     .row-header {
-      padding: 16px var(--pad);
+      padding: clamp(24px, 3vw, 40px) var(--pad);
       border-bottom: var(--border);
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
     .row-title {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(32px, 4vw, 56px);
+      letter-spacing: 0.03em;
+      line-height: 1;
     }
     .row-meta {
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.08em;
+      text-transform: uppercase;
       color: var(--muted);
     }
 
