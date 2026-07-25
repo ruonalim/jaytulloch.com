@@ -708,30 +708,13 @@
   <!-- Password Gate -->
   <div class="cs-gate" id="cs-gate">
     <div class="cs-gate-card">
-      <div class="cs-gate-icon"></div>
-      <p class="cs-gate-title">Want in?</p>
-      <p class="cs-gate-sub">Score 100% on the Design Eye test to earn access. Or enter the password if you have it.</p>
-      <p class="cs-gate-earn-sub">4 rounds. No partial credit.</p>
-      <div class="cs-gate-actions">
-        <a class="cs-gate-earn" id="cs-earn" href="./game.html?return=./casestudy-metro.html">
-          Take the Design Eye test
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </a>
-        <div class="cs-gate-or"><span>or</span></div>
-        <button class="cs-gate-pwd-btn" id="cs-pwd-btn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          Enter password
-        </button>
+      <p class="cs-gate-title">Protected</p>
+      <p class="cs-gate-sub">Enter the password to continue.</p>
+      <div class="cs-gate-input-wrap" id="cs-input-wrap">
+        <input class="cs-gate-input" id="cs-pwd" type="password" placeholder="Enter password" autocomplete="off" spellcheck="false" />
+        <button class="cs-gate-btn" id="cs-submit">Enter</button>
       </div>
-      <div class="cs-gate-pwd-section" id="cs-pwd-section">
-        <div style="padding-top:16px">
-          <div class="cs-gate-input-wrap" id="cs-input-wrap">
-            <input class="cs-gate-input" id="cs-pwd" type="password" placeholder="Enter password" autocomplete="off" spellcheck="false" />
-            <button class="cs-gate-btn" id="cs-submit">Enter</button>
-          </div>
-          <p class="cs-gate-hint" id="cs-hint">&nbsp;</p>
-        </div>
-      </div>
+      <p class="cs-gate-hint" id="cs-hint">&nbsp;</p>
       <button class="cs-gate-back" onclick="history.back()">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.5 2.5L4 7L8.5 11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         Go back
@@ -744,17 +727,7 @@
     var gate = document.getElementById('cs-gate');
     if (!gate) return;
     if (sessionStorage.getItem(KEY) === '1') { gate.style.display = 'none'; return; }
-    var pwdBtn = document.getElementById('cs-pwd-btn');
-    var section = document.getElementById('cs-pwd-section');
-    if (pwdBtn && section) {
-      pwdBtn.addEventListener('click', function() {
-        section.classList.toggle('open');
-        if (section.classList.contains('open')) {
-          pwdBtn.style.display = 'none';
-          setTimeout(function() { document.getElementById('cs-pwd').focus(); }, 300);
-        }
-      });
-    }
+    // Password input shown directly — no toggle needed
     function attempt() {
       var val = document.getElementById('cs-pwd').value.trim().toUpperCase().replace(/\s/g, '');
       var wrap = document.getElementById('cs-input-wrap');
