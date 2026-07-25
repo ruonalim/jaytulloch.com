@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design Engineer Is Either the Best Job in Tech or a Headcount Trick. The Title Will Not Tell You Which. | Jay Tulloch</title>
+  <meta name="description" content="Half the &quot;design engineer&quot; job postings sitting in your feed right now are not design engineering jobs. They are product designer roles where the company quietly cut a frontend engineer headcount and merged the budget. Same title, different intent. The shift looks like a career..." />
+  <link rel="canonical" href="https://www.jaytulloch.com/writing/design-engineer-is-either-the-best-job-in-tech-or-a-headcount-trick-the-title-will-not-tell-you-which.html" />
+  <meta property="og:title" content="Design Engineer Is Either the Best Job in Tech or a Headcount Trick. The Title Will Not Tell You Which." />
+  <meta property="og:description" content="Half the &quot;design engineer&quot; job postings sitting in your feed right now are not design engineering jobs. They are product designer roles where the company quietly cut a frontend engineer headcount and merged the budget. Same title, different intent. The shift looks like a career..." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://www.jaytulloch.com/writing/design-engineer-is-either-the-best-job-in-tech-or-a-headcount-trick-the-title-will-not-tell-you-which.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700,800,900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg:#FFFFFF; --text:#111111; --text-muted:#6B6E74; --text-body:#141414; --border:#E8E8EC; --accent:#0044E4; --font:'Switzer',-apple-system,Helvetica Neue,Arial,sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px clamp(32px, 5vw, 80px); background: rgba(255,255,255,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #111; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .article-wrap { max-width: 720px; margin: 0 auto; padding: 140px clamp(20px, 5vw, 40px) 80px; }
+    .article-back { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 32px; }
+    .article-back:hover { color: var(--text); }
+    .article-meta { display: flex; gap: 12px; align-items: center; margin-bottom: 16px; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+    .article-topic { color: var(--accent); }
+    .article-date { color: var(--text-muted); }
+    .article-read-time { color: var(--text-muted); }
+    .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border); }
+    .article-title { font-size: clamp(32px, 5vw, 52px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+    article h2 { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; margin: 48px 0 16px; line-height: 1.2; }
+    article h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin: 32px 0 12px; }
+    article p { margin-bottom: 22px; color: var(--text-body); }
+    article strong { font-weight: 700; color: var(--text); }
+    article blockquote { border-left: 2px solid var(--accent); padding-left: 20px; margin: 32px 0; color: var(--text-muted); font-style: italic; }
+    article hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+    article ul { padding-left: 24px; margin-bottom: 22px; }
+    article li { margin-bottom: 8px; }
+    .article-footer { margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    .footer-cta { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 12px 24px; border: 1px solid var(--text); color: var(--text); transition: background 0.2s, color 0.2s; }
+    .footer-cta:hover { background: var(--text); color: var(--bg); }
+
+    .fact-check { background:#0E0E10; color:#E8E8EC; border-radius:16px; padding:36px clamp(20px,4vw,40px); margin:64px 0 0; }
+    .fact-check-badge { display:inline-block; font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#6E9BFF; background:rgba(0,68,228,0.18); padding:6px 14px; border-radius:999px; margin-bottom:20px; }
+    .fact-check-intro { font-size:14px; color:#9A9DA4; margin-bottom:12px; line-height:1.6; }
+    .fact-item { display:flex; gap:16px; padding:18px 0; border-top:1px solid rgba(255,255,255,0.08); }
+    .fact-num { flex:0 0 24px; font-size:12px; font-weight:700; color:#6E9BFF; line-height:1.7; }
+    .fact-body { flex:1 1 auto; }
+    .fact-claim { font-size:15px; font-weight:600; color:#F5F5F7; margin-bottom:6px; line-height:1.5; }
+    .fact-source { font-size:13px; color:#9A9DA4; line-height:1.55; }
+    .fact-unsourced { font-size:13px; color:#9A9DA4; margin-top:24px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.08); line-height:1.6; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="../" class="nav-logo">Jay Tulloch</a>
+    <ul class="nav-links">
+      <li><a href="../#about">About</a></li>
+      <li><a href="../#work">Work</a></li>
+      <li><a href="../writing.html" class="active">Writing</a></li>
+      <li><a href="../#podcast">Podcast</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="article-wrap">
+    <a href="../writing.html" class="article-back">← All writing</a>
+    <div class="article-meta">
+      <span class="article-topic">Design Leadership</span>
+      <div class="dot"></div>
+      <span class="article-date">May 29, 2026</span>
+      <div class="dot"></div>
+      <span class="article-read-time">7 min read</span>
+    </div>
+    <h1 class="article-title">Design Engineer Is Either the Best Job in Tech or a Headcount Trick. The Title Will Not Tell You Which.</h1>
+    <article>
+      <p>Half the "design engineer" job postings sitting in your feed right now are not design engineering jobs. They are product designer roles where the company quietly cut a frontend engineer headcount and merged the budget. Same title, different intent. The shift looks like a career upgrade. For most designers picking it up, it is a quiet demotion.</p>
+      <p>This is happening fast and it deserves a sharper read than "designers should learn to code."</p>
+      <p>Design engineering postings rose 14.4% in April 2026 (Zero To Mastery, April 2026). The number is real. The story behind it is not the story the title suggests.</p>
+      <h2>What Real Design Engineering Actually Is</h2>
+      <p>Vercel publishes the cleanest definition out there. Vercel design engineers blend aesthetic sensibility with technical skill and ship autonomously, working across branding, marketing, product, and the internal design system (Vercel, Design Engineering at Vercel, 2026). They skip handoff. They iterate with designers in Figma or in code. The deliverable is shipped product, not a Figma file.</p>
+      <p>The Vercel design engineer band sits at $155,000 to $240,000 base before equity (Vercel Careers, 2026). Linear runs a similar model. Replit and Paraform have built around the same archetype.</p>
+      <p>These are not bolted-on roles. They were constituted as a function from day one. The hiring loop screens for code as a primary skill. Five plus years of dev experience is the floor.</p>
+      <p>That is one species. People who want to live in both worlds. Strong engineers with design taste, or strong designers with deep code muscle. The good ones become the connective tissue between design, engineering, and product.</p>
+      <p>That is the version worth chasing. It is also the rarer version.</p>
+      <h2>What Is Actually Showing Up in Postings</h2>
+      <p>Fast Company called it earlier this year. "AI imagineer." "Design crafter." "Builder." The category is widening because the job specs are mutating (Fast Company, AI in design 2026).</p>
+      <p>A lot of those new titles are not new functions. They are renamed product designer roles with a code requirement bolted on so the company can collapse a hybrid team into a single hire.</p>
+      <p>I have seen the same pattern across two pipeline conversations at the agency in the last six weeks. Founder used to need a designer plus a frontend engineer. Now wants one person doing both, framed as a design engineer. The proposed base pay sits closer to a senior product designer band than a Vercel-level design engineer band. The expected output is full shipped UI. The discount is real.</p>
+      <p>This is the trap. The title sounds like a promotion. The math says it is a consolidation.</p>
+      <h2>Why This Is Happening Now</h2>
+      <p>Three pressures, stacked.</p>
+      <p>One. The AI tooling delta. Anthropic and Figma launched a two-way MCP bridge in February 2026. Claude Code can now generate working UI as fully editable Figma frames, and Claude can read Figma files, components, and tokens to generate code that respects the design system (multiple coverage outlets, February 2026). v0 spits out React components a senior designer can shape. Lovable's August 2025 Design View made the front-end build feel like a design tool. The friction between a Figma file and shipped code dropped by half in twelve months. That friction was the reason you needed a frontend engineer next to a designer. If the friction goes, the budget goes.</p>
+      <p>Two. The senior bias in hiring. Figma's State of the Designer 2026 report has the cleanest number on this. 56% of hiring managers report increasing demand for senior design hires, versus 25% for junior. 73% see an increasing need for candidates to be proficient in AI tools. 79% say the same of designing AI products (Figma, State of the Designer 2026). The market is bidding up senior judgment and AI-fluent execution at the same time. The hybrid is the natural answer for cost-conscious orgs.</p>
+      <p>Three. The compounding pressure on design org budgets. After the layoffs wave that cleared 45,000 plus tech roles in Q1 2026 (layoffs.fyi tracker, Q1 2026), heads of design are not rebuilding the org they had. They are rebuilding a leaner one. A design engineer who ships is easier to defend in a quarterly review than two senior designers who hand off.</p>
+      <h2>What It Means for Product Designers Right Now</h2>
+      <p>This is where most people get the take wrong. The headline reads "designers must learn to code." The headline is half right.</p>
+      <p>I have spent the last two years working with designers who picked up code seriously and designers who stayed pure. The pure ones who are thriving are the ones with senior judgment on craft, IA, and product strategy. They got paid more, not less.</p>
+      <p>The Figma report numbers track this. 82% of hiring managers say need for designers has stayed stable or risen. Of those reporting a rise, more than a quarter say it is up 25% or more (Figma, State of the Designer 2026). The ceiling is moving up for the strongest 20%.</p>
+      <p>The ones in trouble are mid-career generalists who can run a Figma file but cannot ship code, cannot lead a critique, and cannot defend their judgment with anything stronger than "this felt right."</p>
+      <p>For that cohort, picking up code is a defensible move. For everyone else, picking up code because it is fashionable is how you become a worse designer and a mediocre engineer in the same eighteen months.</p>
+      <p>The right test is not "should I learn code." It is "what is the most senior version of my craft, and what do I need to ship that version?" For some that is more code. For some that is more strategy. For some that is more leadership.</p>
+      <h2>How to Read a Job Posting in 2026</h2>
+      <p>Three checks before applying.</p>
+      <p>One. Salary band. A real design engineer role pays close to a senior engineer band. If the posting tops out at $150k for "design engineer" in a top market, the company is renaming a designer job. Vercel's $155k to $240k band is a fair reference point (Vercel Careers, 2026).</p>
+      <p>Two. The interview loop. A real design engineer loop has at least one technical interview that looks closer to a frontend engineer screen than a portfolio review. If the loop is three portfolio rounds plus a "tell me about a time you wrote code" chat, you are interviewing for a redressed designer role.</p>
+      <p>Three. The team shape. Ask who else has the title. Ask what they ship. Ask whether they own production code. If the answer is "we are creating the role" and "the designer used to hand off to engineers," you are looking at a consolidation, not a function.</p>
+      <h2>Pushback</h2>
+      <p>The argument I would expect against this read is that any compression of design and engineering is a net good. Less handoff, faster ship cycles, better products. Fair. I would not push back on that.</p>
+      <p>The argument I would push back on is that the title shift is a free upgrade for the designer who takes it. It is not. A real design engineer role is harder than a senior designer role. Two specialisms, both held to a high bar. The good ones earn the comp difference. The bad versions of the role grind people down, pay them like designers, and ship slower than the team they replaced.</p>
+      <p>Title inflation is not new. Companies have been renaming roles to dodge comp bands for years. What is new is the speed at which AI tooling has made the consolidation defensible to the CFO.</p>
+      <h2>What I Would Do</h2>
+      <p>If you are a designer and you genuinely love code, this is the best moment in a decade to commit. The real design engineer role is the best job in tech right now. The constraints are clearer than a product designer role. The output is shipped. The comp is higher. The career runway is longer.</p>
+      <p>If you are a designer reading this because you are anxious about AI and you think the design engineer title is a survival move, slow down. The strongest designers I know are not all writing production code. They are getting sharper on judgment, strategy, and craft, and they are picking up enough AI fluency to direct the tools.</p>
+      <p>Pick the version of the title that matches what you actually want to do for the next five years. Do not let a tight hiring market sell you a consolidation as a promotion.</p>
+      <p>And if you are a leader hiring this role, name the function honestly. If you need a designer who codes, hire a designer who codes and pay them accordingly. If you need a design engineer in the Vercel mould, build the team and budget for it. The worst outcome is a role neither side committed to, papered over with a fashionable title and a flat band.</p>
+      <hr/>
+      <p>Fact Check</p>
+      <p>Every factual claim in this article, with its source.</p>
+      <p>Claim: Design engineering job postings rose 14.4% in April 2026.</p>
+      <p>Source: Zero To Mastery, April 2026. zerotomastery.io</p>
+      <p>Claim: Vercel's design engineer role sits at a $155,000 to $240,000 base salary band before equity.</p>
+      <p>Source: Vercel Careers, 2026. vercel.com</p>
+      <p>Claim: 56% of hiring managers report increasing demand for senior design hires versus 25% for junior; 73% see increasing need for AI tool proficiency and 79% for AI product design experience; 82% say demand for designers has stayed stable or risen.</p>
+      <p>Source: Figma, State of the Designer 2026. figma.com</p>
+      <p>Claim: More than 45,000 tech roles were cut in Q1 2026.</p>
+      <p>Source: Layoffs.fyi tracker, Q1 2026. layoffs.fyi</p>
+      <p>Claim: Anthropic and Figma launched a two-way MCP bridge in February 2026, letting Claude Code generate editable Figma frames and read Figma files to generate design-system-respecting code.</p>
+      <p>Source: Multiple outlet coverage of the Figma/Anthropic MCP integration, February 2026.</p>
+      <p>Unsourced statements (Jay's opinion or lived experience): Jay's two agency pipeline conversations about founders wanting to consolidate a designer-plus-engineer hire into one "design engineer" role at a lower band; his three-point test for reading a job posting; his advice to designers on which version of the title to pursue. These are Jay's points of view, not third-party data.</p>
+    </article>
+    <div class="article-footer">
+      <a href="../writing.html" class="footer-cta">More writing</a>
+      <a href="../contact.html" class="footer-cta">Get in touch</a>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var article = document.querySelector('article');
+      if (!article) return;
+      var ps = Array.prototype.slice.call(article.querySelectorAll('p'));
+      var start = null;
+      for (var k = 0; k < ps.length; k++) {
+        if (ps[k].textContent.trim() === 'Fact Check') { start = ps[k]; break; }
+      }
+      if (!start) return;
+      var nodes = [];
+      var n = start;
+      while (n) { nodes.push(n); n = n.nextElementSibling; }
+      var aside = document.createElement('aside');
+      aside.className = 'fact-check';
+      var badge = document.createElement('div');
+      badge.className = 'fact-check-badge';
+      badge.textContent = 'Fact Check';
+      aside.appendChild(badge);
+      var num = 0, pendingClaim = null;
+      for (var i = 1; i < nodes.length; i++) {
+        var t = nodes[i].textContent.trim();
+        if (/^Claim:/i.test(t)) {
+          pendingClaim = t.replace(/^Claim:\s*/i, '');
+        } else if (/^Source:/i.test(t)) {
+          num++;
+          var item = document.createElement('div'); item.className = 'fact-item';
+          var numEl = document.createElement('div'); numEl.className = 'fact-num';
+          numEl.textContent = (num < 10 ? '0' : '') + num;
+          var bodyEl = document.createElement('div'); bodyEl.className = 'fact-body';
+          var claimEl = document.createElement('div'); claimEl.className = 'fact-claim';
+          claimEl.textContent = pendingClaim || '';
+          var srcEl = document.createElement('div'); srcEl.className = 'fact-source';
+          srcEl.textContent = t.replace(/^Source:\s*/i, '');
+          bodyEl.appendChild(claimEl); bodyEl.appendChild(srcEl);
+          item.appendChild(numEl); item.appendChild(bodyEl);
+          aside.appendChild(item);
+          pendingClaim = null;
+        } else if (/^Unsourced statements/i.test(t)) {
+          var u = document.createElement('div'); u.className = 'fact-unsourced';
+          u.textContent = t;
+          aside.appendChild(u);
+        } else {
+          var intro = document.createElement('div'); intro.className = 'fact-check-intro';
+          intro.textContent = t;
+          aside.appendChild(intro);
+        }
+      }
+      start.parentNode.insertBefore(aside, start);
+      nodes.forEach(function (node) { node.parentNode.removeChild(node); });
+    })();
+  </script>
+</body>
+</html>

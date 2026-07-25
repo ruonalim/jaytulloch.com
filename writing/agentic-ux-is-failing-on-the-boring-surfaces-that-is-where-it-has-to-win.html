@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agentic UX Is Failing on the Boring Surfaces. That Is Where It Has to Win. | Jay Tulloch</title>
+  <meta name="description" content="Agentic AI demos look magical. Production agentic AI is mostly a mess. And it is failing in the place it has to win, which is the boring stuff." />
+  <link rel="canonical" href="https://www.jaytulloch.com/writing/agentic-ux-is-failing-on-the-boring-surfaces-that-is-where-it-has-to-win.html" />
+  <meta property="og:title" content="Agentic UX Is Failing on the Boring Surfaces. That Is Where It Has to Win." />
+  <meta property="og:description" content="Agentic AI demos look magical. Production agentic AI is mostly a mess. And it is failing in the place it has to win, which is the boring stuff." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://www.jaytulloch.com/writing/agentic-ux-is-failing-on-the-boring-surfaces-that-is-where-it-has-to-win.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700,800,900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg:#FFFFFF; --text:#111111; --text-muted:#6B6E74; --text-body:#141414; --border:#E8E8EC; --accent:#0044E4; --font:'Switzer',-apple-system,Helvetica Neue,Arial,sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px clamp(32px, 5vw, 80px); background: rgba(255,255,255,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #111; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .article-wrap { max-width: 720px; margin: 0 auto; padding: 140px clamp(20px, 5vw, 40px) 80px; }
+    .article-back { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 32px; }
+    .article-back:hover { color: var(--text); }
+    .article-meta { display: flex; gap: 12px; align-items: center; margin-bottom: 16px; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+    .article-topic { color: var(--accent); }
+    .article-date { color: var(--text-muted); }
+    .article-read-time { color: var(--text-muted); }
+    .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border); }
+    .article-title { font-size: clamp(32px, 5vw, 52px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+    article h2 { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; margin: 48px 0 16px; line-height: 1.2; }
+    article h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin: 32px 0 12px; }
+    article p { margin-bottom: 22px; color: var(--text-body); }
+    article strong { font-weight: 700; color: var(--text); }
+    article blockquote { border-left: 2px solid var(--accent); padding-left: 20px; margin: 32px 0; color: var(--text-muted); font-style: italic; }
+    article hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+    article ul { padding-left: 24px; margin-bottom: 22px; }
+    article li { margin-bottom: 8px; }
+    .article-footer { margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    .footer-cta { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 12px 24px; border: 1px solid var(--text); color: var(--text); transition: background 0.2s, color 0.2s; }
+    .footer-cta:hover { background: var(--text); color: var(--bg); }
+
+    .fact-check { background:#0E0E10; color:#E8E8EC; border-radius:16px; padding:36px clamp(20px,4vw,40px); margin:64px 0 0; }
+    .fact-check-badge { display:inline-block; font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#6E9BFF; background:rgba(0,68,228,0.18); padding:6px 14px; border-radius:999px; margin-bottom:20px; }
+    .fact-check-intro { font-size:14px; color:#9A9DA4; margin-bottom:12px; line-height:1.6; }
+    .fact-item { display:flex; gap:16px; padding:18px 0; border-top:1px solid rgba(255,255,255,0.08); }
+    .fact-num { flex:0 0 24px; font-size:12px; font-weight:700; color:#6E9BFF; line-height:1.7; }
+    .fact-body { flex:1 1 auto; }
+    .fact-claim { font-size:15px; font-weight:600; color:#F5F5F7; margin-bottom:6px; line-height:1.5; }
+    .fact-source { font-size:13px; color:#9A9DA4; line-height:1.55; }
+    .fact-unsourced { font-size:13px; color:#9A9DA4; margin-top:24px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.08); line-height:1.6; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="../" class="nav-logo">Jay Tulloch</a>
+    <ul class="nav-links">
+      <li><a href="../#about">About</a></li>
+      <li><a href="../#work">Work</a></li>
+      <li><a href="../writing.html" class="active">Writing</a></li>
+      <li><a href="../#podcast">Podcast</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="article-wrap">
+    <a href="../writing.html" class="article-back">← All writing</a>
+    <div class="article-meta">
+      <span class="article-topic">Product Strategy</span>
+      <div class="dot"></div>
+      <span class="article-date">May 22, 2026</span>
+      <div class="dot"></div>
+      <span class="article-read-time">6 min read</span>
+    </div>
+    <h1 class="article-title">Agentic UX Is Failing on the Boring Surfaces. That Is Where It Has to Win.</h1>
+    <article>
+      <p>Agentic AI demos look magical. Production agentic AI is mostly a mess. And it is failing in the place it has to win, which is the boring stuff.</p>
+      <p>Onboarding. Account recovery. Identity verification. Support handoffs. The surfaces nobody screenshots. The surfaces that decide whether a user actually becomes a customer.</p>
+      <p>That is where the entire bet is currently breaking.</p>
+      <h2>The Numbers Nobody on Stage Is Showing</h2>
+      <p>88% of agent pilots never reach production. That figure originated in Anaconda and Forrester research this year, and has been replicated in independent surveys by a16z and the MIT Sloan CIO panel. Three sources, same number.</p>
+      <p>Read it again. Eighty-eight percent.</p>
+      <p>Meanwhile 80% of enterprise applications shipped in Q1 2026 embed at least one AI agent (State of AI Agents 2026, Arcade.dev). Only 31% of enterprises actually have an agent in production. So most of the agents being shipped are ornamental. They sit on top of the surface and pretend to help. They do not change the outcome.</p>
+      <p>That is what is happening at the corporate level. At the customer level it is uglier.</p>
+      <p>70% of financial firms lost clients in the past year due to inefficient onboarding (Fenergo, 2025). Up from 67% in 2024. Up from 48% in 2023. 60% of users abandon digital onboarding due to friction. 40% drop applications that take longer than ten minutes (Sardine, 2026). Average annual spend on AML and KYC operations now sits at $72.9M per firm (Fenergo, 2025).</p>
+      <p>That is the surface where agentic AI was meant to earn its keep. And the data says it is losing.</p>
+      <h2>The Wrong Surface Gets All the Attention</h2>
+      <p>I have seen this play out across crypto consumer products, a neobanking app, and a regulated lottery product. Every product team I have worked with in the last year has had a slide deck with an "AI agent" on it. Almost none of them had a slide showing what the agent does on the KYC flow.</p>
+      <p>The pattern is consistent. Teams build a chat-first agent for things users want to do in two clicks. Search a balance. Find a transaction. Move money. The kind of thing a well-designed home screen already solves.</p>
+      <p>Then the same teams ignore the surface that actually leaks. Onboarding still drops the majority of new users. Account recovery still routes to a human queue. KYC still abandons at the upload step. Support still loses context the moment the user reopens the app.</p>
+      <p>This is the inverse of where the leverage is. Chat-first agents are a vanity surface. They look good on launch posts. They do not move retention.</p>
+      <p>The boring surface is where the money is. It is also the surface that requires the hardest UX work, not the smartest model.</p>
+      <h2>Most Failures Are Orchestration, Not Prompts</h2>
+      <p>Read enough post-mortems and a pattern shows up. Production agentic UX is failing for the same reasons agentic infrastructure is failing. Invisible state. Unclear tool usage. Brittle handoffs. No recovery path.</p>
+      <p>Innovatrix and Digital Applied both broke this down in their 2026 pattern catalogues. Most production agent outages in 2026 are orchestration failures, not model failures. Race conditions on shared resources. Unbounded loops with no budget. Workflows that cost $0.50 in testing and then hit $50K a month at 100K executions because the orchestrator keeps calling the model to decompose work it already decomposed. Infinite handoff loops where Agent A passes to Agent B, B passes to C, C passes back to A.</p>
+      <p>That is an architecture problem dressed up as an AI problem. And it is showing up in the UX as the user staring at a spinner with no signal about what is actually happening.</p>
+      <p>If the agent cannot tell the user what it is doing, what tool it just used, what state it is in, and how to take back control, the user does not trust it. Whether the model is right or wrong stops being the question.</p>
+      <h2>Five Patterns That Actually Work</h2>
+      <p>Smashing Magazine and HatchWorks published the cleanest write-ups I have read on this in February 2026. Strip the buzzwords out and the patterns are not new. They are the patterns any senior product designer should already know.</p>
+      <p>One. Planning visibility. Show the user what the agent intends to do before it does it. A short list of steps. Editable. Cancellable.</p>
+      <p>Two. Tool-use disclosure. When the agent calls an external system, name it. "Checking your account with the bank." Not a spinner.</p>
+      <p>Three. Memory surfacing. Show what the agent remembers about the user. Let them edit it. This is consent design, not feature design.</p>
+      <p>Four. Multi-step workflow tracking. A taskboard with goals, tasks, owners, status. The user is one of the owners. The agent does not get to silently take over.</p>
+      <p>Five. Recovery routing. Every agent action has a back-out path. Every error has a route to a human. Every dead end is logged.</p>
+      <p>None of this is exotic. It is the same logic that made progressive disclosure work in 2009. The model is new. The UX rules are not.</p>
+      <h2>The Bar Is Regulatory, Not Aesthetic</h2>
+      <p>I keep watching teams treat agentic UX as a craft problem. It is not. In any regulated category, fintech, crypto, payments, lottery, insurance, an agent taking consequential actions without user visibility is legal exposure. Not just bad UX.</p>
+      <p>If an agent moves a payment, the user has to be able to prove they consented. If an agent makes a decision in a KYC flow, the firm has to be able to audit it. If an agent denies a withdrawal, the user has to be able to escalate. MiCA, VARA, SAMA, the FCA, all of them already expect this level of explainability. The Agentic AI Institute reported a 60% governance gap across enterprises that have moved agents into production in 2026. That gap closes when regulators write the next round of guidance. Which they will.</p>
+      <p>This is why the boring surface is the right place to do this work. Because the boring surface is the regulated surface. The headline feature can afford to fail. The KYC flow cannot.</p>
+      <h2>The Obvious Counter</h2>
+      <p>Someone will read this and say the issue is just maturity. Give the models another year, the orchestration tooling another two, and the boring surfaces will catch up.</p>
+      <p>Maybe. But that is a bet on infrastructure that has shown a 60% governance gap, an 88% pilot failure rate, and a $50K-a-month cost spike that nobody saw in test. That is not a maturity problem. That is a discipline problem.</p>
+      <p>The design teams winning here are not waiting. They are building the visibility, consent, and recovery layer now, while the model layer is still volatile, because that is where the long-term differentiation sits.</p>
+      <h2>Where I Would Put the Next Quarter</h2>
+      <p>If I was running design in any regulated consumer product right now, I would freeze new chat-first agent work and put the entire team on three surfaces.</p>
+      <p>Onboarding. Identify the exact step where most users drop. Build agentic assistance there. Visible, consent-based, recoverable. Goal is conversion, not delight.</p>
+      <p>Account recovery. The surface every product treats as a footer link. The agent assists. The user controls. The path back to a human is one tap.</p>
+      <p>KYC. The surface where 60% of users walk. Build a visible progress agent. Show what is being checked, what is missing, what the user can do. Stop hiding the system.</p>
+      <p>That is not glamorous work. Nobody is going to land a keynote demo with a "smart KYC progress bar." But it is the work that moves the metric.</p>
+      <p>The boring surfaces are where agentic UX has to win. They are also where the rest of the design industry will be playing catch-up by Q4. Get there first.</p>
+      <hr/>
+      <p>Fact Check</p>
+      <p>Every factual claim in this article, with its source.</p>
+      <p>Claim: 88% of agentic AI pilots never reach production, a figure originating with Anaconda and Forrester research and replicated by a16z and the MIT Sloan CIO panel.</p>
+      <p>Source: Anaconda / Forrester, 2026, as replicated by a16z and MIT Sloan CIO research. forrester.com</p>
+      <p>Claim: 80% of enterprise applications shipped in Q1 2026 embedded at least one AI agent, but only 31% of enterprises actually have an agent in production.</p>
+      <p>Source: State of AI Agents 2026, Arcade.dev. arcade.dev</p>
+      <p>Claim: 70% of financial firms lost clients in the past year due to inefficient onboarding, up from 67% in 2024 and 48% in 2023; average annual AML/KYC spend sits at $72.9M per firm.</p>
+      <p>Source: Fenergo, 2025. fenergo.com</p>
+      <p>Claim: 60% of users abandon digital onboarding due to friction, and 40% drop applications that take longer than ten minutes.</p>
+      <p>Source: Sardine, 2026. sardine.ai</p>
+      <p>Claim: A governance gap of 60% exists across enterprises that have moved AI agents into production.</p>
+      <p>Source: Agentic AI Institute, 2026 industry report.</p>
+      <p>Unsourced statements (Jay's opinion or lived experience): Jay's observations from crypto consumer products, a neobanking app, and a regulated lottery product about teams building "vanity" chat-first agents instead of fixing onboarding, KYC, and recovery; his five recommended UX patterns as applied practice; his forecast on where regulators will push next. These are Jay's points of view, not third-party data.</p>
+    </article>
+    <div class="article-footer">
+      <a href="../writing.html" class="footer-cta">More writing</a>
+      <a href="../contact.html" class="footer-cta">Get in touch</a>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var article = document.querySelector('article');
+      if (!article) return;
+      var ps = Array.prototype.slice.call(article.querySelectorAll('p'));
+      var start = null;
+      for (var k = 0; k < ps.length; k++) {
+        if (ps[k].textContent.trim() === 'Fact Check') { start = ps[k]; break; }
+      }
+      if (!start) return;
+      var nodes = [];
+      var n = start;
+      while (n) { nodes.push(n); n = n.nextElementSibling; }
+      var aside = document.createElement('aside');
+      aside.className = 'fact-check';
+      var badge = document.createElement('div');
+      badge.className = 'fact-check-badge';
+      badge.textContent = 'Fact Check';
+      aside.appendChild(badge);
+      var num = 0, pendingClaim = null;
+      for (var i = 1; i < nodes.length; i++) {
+        var t = nodes[i].textContent.trim();
+        if (/^Claim:/i.test(t)) {
+          pendingClaim = t.replace(/^Claim:\s*/i, '');
+        } else if (/^Source:/i.test(t)) {
+          num++;
+          var item = document.createElement('div'); item.className = 'fact-item';
+          var numEl = document.createElement('div'); numEl.className = 'fact-num';
+          numEl.textContent = (num < 10 ? '0' : '') + num;
+          var bodyEl = document.createElement('div'); bodyEl.className = 'fact-body';
+          var claimEl = document.createElement('div'); claimEl.className = 'fact-claim';
+          claimEl.textContent = pendingClaim || '';
+          var srcEl = document.createElement('div'); srcEl.className = 'fact-source';
+          srcEl.textContent = t.replace(/^Source:\s*/i, '');
+          bodyEl.appendChild(claimEl); bodyEl.appendChild(srcEl);
+          item.appendChild(numEl); item.appendChild(bodyEl);
+          aside.appendChild(item);
+          pendingClaim = null;
+        } else if (/^Unsourced statements/i.test(t)) {
+          var u = document.createElement('div'); u.className = 'fact-unsourced';
+          u.textContent = t;
+          aside.appendChild(u);
+        } else {
+          var intro = document.createElement('div'); intro.className = 'fact-check-intro';
+          intro.textContent = t;
+          aside.appendChild(intro);
+        }
+      }
+      start.parentNode.insertBefore(aside, start);
+      nodes.forEach(function (node) { node.parentNode.removeChild(node); });
+    })();
+  </script>
+</body>
+</html>

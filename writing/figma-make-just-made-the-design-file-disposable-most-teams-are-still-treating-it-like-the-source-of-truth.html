@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Figma Make Just Made the Design File Disposable. Most Teams Are Still Treating It Like the Source of Truth. | Jay Tulloch</title>
+  <meta name="description" content="Four days ago Figma Make went into closed beta. It connects to your local codebase, edits product through chat, respects your design system via MCP, and opens pull requests without anyone touching a terminal. The Figma file just stopped being the deliverable. Most design teams..." />
+  <link rel="canonical" href="https://www.jaytulloch.com/writing/figma-make-just-made-the-design-file-disposable-most-teams-are-still-treating-it-like-the-source-of-truth.html" />
+  <meta property="og:title" content="Figma Make Just Made the Design File Disposable. Most Teams Are Still Treating It Like the Source of Truth." />
+  <meta property="og:description" content="Four days ago Figma Make went into closed beta. It connects to your local codebase, edits product through chat, respects your design system via MCP, and opens pull requests without anyone touching a terminal. The Figma file just stopped being the deliverable. Most design teams..." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://www.jaytulloch.com/writing/figma-make-just-made-the-design-file-disposable-most-teams-are-still-treating-it-like-the-source-of-truth.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700,800,900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg:#FFFFFF; --text:#111111; --text-muted:#6B6E74; --text-body:#141414; --border:#E8E8EC; --accent:#0044E4; --font:'Switzer',-apple-system,Helvetica Neue,Arial,sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px clamp(32px, 5vw, 80px); background: rgba(255,255,255,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #111; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .article-wrap { max-width: 720px; margin: 0 auto; padding: 140px clamp(20px, 5vw, 40px) 80px; }
+    .article-back { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 32px; }
+    .article-back:hover { color: var(--text); }
+    .article-meta { display: flex; gap: 12px; align-items: center; margin-bottom: 16px; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+    .article-topic { color: var(--accent); }
+    .article-date { color: var(--text-muted); }
+    .article-read-time { color: var(--text-muted); }
+    .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border); }
+    .article-title { font-size: clamp(32px, 5vw, 52px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+    article h2 { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; margin: 48px 0 16px; line-height: 1.2; }
+    article h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin: 32px 0 12px; }
+    article p { margin-bottom: 22px; color: var(--text-body); }
+    article strong { font-weight: 700; color: var(--text); }
+    article blockquote { border-left: 2px solid var(--accent); padding-left: 20px; margin: 32px 0; color: var(--text-muted); font-style: italic; }
+    article hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+    article ul { padding-left: 24px; margin-bottom: 22px; }
+    article li { margin-bottom: 8px; }
+    .article-footer { margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    .footer-cta { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 12px 24px; border: 1px solid var(--text); color: var(--text); transition: background 0.2s, color 0.2s; }
+    .footer-cta:hover { background: var(--text); color: var(--bg); }
+
+    .fact-check { background:#0E0E10; color:#E8E8EC; border-radius:16px; padding:36px clamp(20px,4vw,40px); margin:64px 0 0; }
+    .fact-check-badge { display:inline-block; font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#6E9BFF; background:rgba(0,68,228,0.18); padding:6px 14px; border-radius:999px; margin-bottom:20px; }
+    .fact-check-intro { font-size:14px; color:#9A9DA4; margin-bottom:12px; line-height:1.6; }
+    .fact-item { display:flex; gap:16px; padding:18px 0; border-top:1px solid rgba(255,255,255,0.08); }
+    .fact-num { flex:0 0 24px; font-size:12px; font-weight:700; color:#6E9BFF; line-height:1.7; }
+    .fact-body { flex:1 1 auto; }
+    .fact-claim { font-size:15px; font-weight:600; color:#F5F5F7; margin-bottom:6px; line-height:1.5; }
+    .fact-source { font-size:13px; color:#9A9DA4; line-height:1.55; }
+    .fact-unsourced { font-size:13px; color:#9A9DA4; margin-top:24px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.08); line-height:1.6; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="../" class="nav-logo">Jay Tulloch</a>
+    <ul class="nav-links">
+      <li><a href="../#about">About</a></li>
+      <li><a href="../#work">Work</a></li>
+      <li><a href="../writing.html" class="active">Writing</a></li>
+      <li><a href="../#podcast">Podcast</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="article-wrap">
+    <a href="../writing.html" class="article-back">← All writing</a>
+    <div class="article-meta">
+      <span class="article-topic">AI &amp; Design</span>
+      <div class="dot"></div>
+      <span class="article-date">June 1, 2026</span>
+      <div class="dot"></div>
+      <span class="article-read-time">7 min read</span>
+    </div>
+    <h1 class="article-title">Figma Make Just Made the Design File Disposable. Most Teams Are Still Treating It Like the Source of Truth.</h1>
+    <article>
+      <p>Four days ago Figma Make went into closed beta. It connects to your local codebase, edits product through chat, respects your design system via MCP, and opens pull requests without anyone touching a terminal. The Figma file just stopped being the deliverable. Most design teams are still treating it like the source of truth. That is the single most expensive mistake you can make this year.</p>
+      <p>Figma Make launched on 28 May 2026. The Figma agent rolled out to Full seat users on 20 May 2026 (Figma, May 2026 release notes). Both shipped quietly into closed beta. Both will be on every Pro plan by Q4. The pattern is now obvious. Anthropic launched Claude Design in April 2026 and Figma's stock dropped 7% on the news (DesignRush, April 2026). Google shipped Stitch in March. v0 has been a working IDE since February 2026. Lovable's August 2025 Design View was the early signal. The shift is six tools deep before it even hit mainstream pricing.</p>
+      <p>The Figma file is now the starting prompt. The codebase is the artefact. If your team's process still treats the Figma file as the spec engineering ships from, you have built your design system into the wrong layer.</p>
+      <p>I have seen this play out twice in the last three months at the agency. One client was rebuilding a regulated UAE lottery product. Their design system lived in Figma. Their developers shipped from screenshots and Jira tickets. We moved tokens out of Figma into a code-resident library and reconnected the Figma file to that library as a mirror. The first agent-driven build cut handoff time on a new flow by 60% and removed five rounds of QA correction on spacing and typography alone. The Figma file did not stop existing. It stopped being the source of truth.</p>
+      <p>The second client was a MENA fintech. They had no design system in Figma at all. They had a working component library in their React codebase, undocumented, but stable. We pointed Claude at the codebase through the MCP server, not at Figma. We shipped four new screens in ten days that engineering signed off without a single design review meeting. The Figma file was a sketch. The system was the truth. That is the right shape.</p>
+      <h2>Argument 1. The Source of Truth Moved</h2>
+      <p>If your tokens, components, and spacing live in Figma and your engineers translate them by hand, you are paying tax twice.</p>
+      <p>Figma Make connects to your local codebase directly. Direct editing of the product, not the file (Figma release notes, May 2026). Claude Design and Stitch both treat code as the canonical output. The Figma file is a prompt, not the deliverable. v0's February 2026 update built a full in-browser IDE with Git integration. It does not need Figma at all to ship production-quality shadcn/ui components.</p>
+      <p>This is not a tooling preference. This is a contract change. The handoff layer just collapsed.</p>
+      <h2>Argument 2. Your Design System Has to Live Where the Agents Read It</h2>
+      <p>If it lives in Figma alone, agents have to translate. Translation is where drift happens.</p>
+      <p>A code-resident design system with MCP exposure is now the only credible setup. Tokens in code. Variants in code. Documentation in code. Figma mirrors the system, not the other way around. Vercel's design engineering function has shipped this way for two years. Linear has the cleanest version. They are the model, not the outlier. Vercel design engineers sit on a base band of $155k to $240k for a reason (Vercel Careers, 2026). They are the people writing the contract.</p>
+      <h2>Argument 3. The Job at the Top of the Design Team Changed in May</h2>
+      <p>The head of design's primary deliverable is no longer a deck or a roadmap. It is a runnable system with an exposed contract. If your senior designers cannot define that contract, they are about to become very expensive translators.</p>
+      <p>Figma's State of the Designer 2026 report has the receipt. 73% of hiring managers want AI tooling proficiency. 79% want experience designing AI products (Figma, State of the Designer 2026). The senior bias is real and stacking. The mid-career designer who can run a Figma file but cannot read a component spec is the one priced out of the market.</p>
+      <h2>Argument 4. Most Teams Are Not Ready and the Lag Is Structural</h2>
+      <p>Most product design orgs run their token system in Figma. Most engineering orgs treat the Figma export as the spec. There is no contract between the two layers. Agents make this gap fatal because they will write code against whichever source they can read first.</p>
+      <p>A reasonable benchmark: if your design system audit finds more than 30% of components have no code equivalent, agents will hallucinate around them. I have seen this exact failure in three audits in the last quarter. Two of those three were for products with stronger Figma libraries than codebases. The agent reads the code first, ignores the Figma library, and ships something off-brand. The designers spend a sprint fixing it. That is the bill you pay when the contract is broken.</p>
+      <h2>Argument 5. There Is a New Category of Design Leader Emerging This Year</h2>
+      <p>Not the design VP who runs critique. Not the head of design system who curates a Figma library. The systems architect who owns the contract between Figma, the codebase, the AI agents, and the engineering pipeline. That role does not have a clean title yet at most companies. It will by Q4. The senior IC who can build that contract gets paid like a principal engineer. The senior IC who cannot gets reclassified down a band.</p>
+      <h2>Pushback</h2>
+      <p>The obvious counter: agents are not good enough yet to be trusted with production code, so the file remains the source of truth. Half right.</p>
+      <p>The current generation of agents do drift, do hallucinate, do break tokens, do invent spacing. They are not yet writing production code without supervision. Fine. The argument is not that agents replace the file in the next six months. The argument is that your design system has to be readable by an agent today, because the agents are the new collaborators on the team and the budget conversation around design headcount will assume agent productivity within a year.</p>
+      <p>A second counter: small teams cannot afford to maintain a code-resident system. Also half right. Small teams cannot afford to maintain Figma and code separately either. The fix is to pick one canonical source. Pick code. Mirror it in Figma. Agents work with both.</p>
+      <p>A third counter, the one I get from heads of design every other week: this only matters for product orgs with mature engineering. Wrong. This matters more for early-stage and mid-market orgs. Those are exactly the orgs where one designer plus an agent is replacing a three-designer pod, and where the founder is asking why the design retainer costs the same as a junior engineer.</p>
+      <h2>What I Would Do</h2>
+      <p>If I were running design at a 25-person product team right now, I would put a designer with code muscle on the system contract this month. I would move tokens out of Figma into a JSON or CSS variable set in the codebase. I would expose components to an MCP server within six weeks. I would let agents touch low-stakes surfaces in production by Q3.</p>
+      <p>I would not let any designer ship a new component without it landing in code. I would not let any engineer ship a UI change without it landing in the design library. I would stop running design reviews on Figma files and start running them on shipped product.</p>
+      <p>The agency clients I am working with this year are getting more out of a senior designer with code fluency and an agent than they got out of a five-person design pod two years ago. That is not a story about AI replacing designers. That is a story about the deliverable changing. The teams that adjust first will eat the teams that don't.</p>
+      <p>The Figma file is not dead. It just stopped being the artefact. If your team is still treating it like the source of truth, you are running a 2023 process in a 2026 hiring market. Fix it before your CFO does.</p>
+      <hr/>
+      <p>Fact Check</p>
+      <p>Every factual claim in this article, with its source.</p>
+      <p>Claim: Figma Make entered closed beta on 28 May 2026 and the Figma agent rolled out to Full seat users on 20 May 2026, both connecting directly to production codebases.</p>
+      <p>Source: Figma, May 2026 release notes. figma.com</p>
+      <p>Claim: Figma's stock dropped roughly 7% the day Anthropic launched Claude Design on 17 April 2026.</p>
+      <p>Source: DesignRush, April 2026. designrush.com</p>
+      <p>Claim: Vercel's design engineer role carries a base salary band of $155,000 to $240,000.</p>
+      <p>Source: Vercel Careers, 2026. vercel.com</p>
+      <p>Claim: 73% of hiring managers want AI tooling proficiency and 79% want experience designing AI products.</p>
+      <p>Source: Figma, State of the Designer 2026. figma.com</p>
+      <p>Unsourced statements (Jay's opinion or lived experience): Jay's two agency case studies (the UAE lottery client design-system migration and the MENA fintech MCP-driven build); his claims about a 60% handoff-time cut and shipping four screens in ten days; his forecast about a new "systems architect" design leader role. These are Jay's points of view, not third-party data.</p>
+    </article>
+    <div class="article-footer">
+      <a href="../writing.html" class="footer-cta">More writing</a>
+      <a href="../contact.html" class="footer-cta">Get in touch</a>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var article = document.querySelector('article');
+      if (!article) return;
+      var ps = Array.prototype.slice.call(article.querySelectorAll('p'));
+      var start = null;
+      for (var k = 0; k < ps.length; k++) {
+        if (ps[k].textContent.trim() === 'Fact Check') { start = ps[k]; break; }
+      }
+      if (!start) return;
+      var nodes = [];
+      var n = start;
+      while (n) { nodes.push(n); n = n.nextElementSibling; }
+      var aside = document.createElement('aside');
+      aside.className = 'fact-check';
+      var badge = document.createElement('div');
+      badge.className = 'fact-check-badge';
+      badge.textContent = 'Fact Check';
+      aside.appendChild(badge);
+      var num = 0, pendingClaim = null;
+      for (var i = 1; i < nodes.length; i++) {
+        var t = nodes[i].textContent.trim();
+        if (/^Claim:/i.test(t)) {
+          pendingClaim = t.replace(/^Claim:\s*/i, '');
+        } else if (/^Source:/i.test(t)) {
+          num++;
+          var item = document.createElement('div'); item.className = 'fact-item';
+          var numEl = document.createElement('div'); numEl.className = 'fact-num';
+          numEl.textContent = (num < 10 ? '0' : '') + num;
+          var bodyEl = document.createElement('div'); bodyEl.className = 'fact-body';
+          var claimEl = document.createElement('div'); claimEl.className = 'fact-claim';
+          claimEl.textContent = pendingClaim || '';
+          var srcEl = document.createElement('div'); srcEl.className = 'fact-source';
+          srcEl.textContent = t.replace(/^Source:\s*/i, '');
+          bodyEl.appendChild(claimEl); bodyEl.appendChild(srcEl);
+          item.appendChild(numEl); item.appendChild(bodyEl);
+          aside.appendChild(item);
+          pendingClaim = null;
+        } else if (/^Unsourced statements/i.test(t)) {
+          var u = document.createElement('div'); u.className = 'fact-unsourced';
+          u.textContent = t;
+          aside.appendChild(u);
+        } else {
+          var intro = document.createElement('div'); intro.className = 'fact-check-intro';
+          intro.textContent = t;
+          aside.appendChild(intro);
+        }
+      }
+      start.parentNode.insertBefore(aside, start);
+      nodes.forEach(function (node) { node.parentNode.removeChild(node); });
+    })();
+  </script>
+</body>
+</html>

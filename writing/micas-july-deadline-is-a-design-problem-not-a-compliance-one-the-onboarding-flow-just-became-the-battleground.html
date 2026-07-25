@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MiCA&#x27;s July Deadline Is a Design Problem, Not a Compliance One. The Onboarding Flow Just Became the Battleground. | Jay Tulloch</title>
+  <meta name="description" content="The MiCA deadline lands on 1 July 2026, and most compliance teams are still treating it like a legal filing. It is not. It is a design deadline. The teams that survive July are the ones who understand that the audit will be passed by..." />
+  <link rel="canonical" href="https://www.jaytulloch.com/writing/micas-july-deadline-is-a-design-problem-not-a-compliance-one-the-onboarding-flow-just-became-the-battleground.html" />
+  <meta property="og:title" content="MiCA&#x27;s July Deadline Is a Design Problem, Not a Compliance One. The Onboarding Flow Just Became the Battleground." />
+  <meta property="og:description" content="The MiCA deadline lands on 1 July 2026, and most compliance teams are still treating it like a legal filing. It is not. It is a design deadline. The teams that survive July are the ones who understand that the audit will be passed by..." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://www.jaytulloch.com/writing/micas-july-deadline-is-a-design-problem-not-a-compliance-one-the-onboarding-flow-just-became-the-battleground.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700,800,900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg:#FFFFFF; --text:#111111; --text-muted:#6B6E74; --text-body:#141414; --border:#E8E8EC; --accent:#0044E4; --font:'Switzer',-apple-system,Helvetica Neue,Arial,sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px clamp(32px, 5vw, 80px); background: rgba(255,255,255,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #111; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .article-wrap { max-width: 720px; margin: 0 auto; padding: 140px clamp(20px, 5vw, 40px) 80px; }
+    .article-back { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 32px; }
+    .article-back:hover { color: var(--text); }
+    .article-meta { display: flex; gap: 12px; align-items: center; margin-bottom: 16px; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+    .article-topic { color: var(--accent); }
+    .article-date { color: var(--text-muted); }
+    .article-read-time { color: var(--text-muted); }
+    .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border); }
+    .article-title { font-size: clamp(32px, 5vw, 52px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+    article h2 { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; margin: 48px 0 16px; line-height: 1.2; }
+    article h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin: 32px 0 12px; }
+    article p { margin-bottom: 22px; color: var(--text-body); }
+    article strong { font-weight: 700; color: var(--text); }
+    article blockquote { border-left: 2px solid var(--accent); padding-left: 20px; margin: 32px 0; color: var(--text-muted); font-style: italic; }
+    article hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+    article ul { padding-left: 24px; margin-bottom: 22px; }
+    article li { margin-bottom: 8px; }
+    .article-footer { margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    .footer-cta { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 12px 24px; border: 1px solid var(--text); color: var(--text); transition: background 0.2s, color 0.2s; }
+    .footer-cta:hover { background: var(--text); color: var(--bg); }
+
+    .fact-check { background:#0E0E10; color:#E8E8EC; border-radius:16px; padding:36px clamp(20px,4vw,40px); margin:64px 0 0; }
+    .fact-check-badge { display:inline-block; font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#6E9BFF; background:rgba(0,68,228,0.18); padding:6px 14px; border-radius:999px; margin-bottom:20px; }
+    .fact-check-intro { font-size:14px; color:#9A9DA4; margin-bottom:12px; line-height:1.6; }
+    .fact-item { display:flex; gap:16px; padding:18px 0; border-top:1px solid rgba(255,255,255,0.08); }
+    .fact-num { flex:0 0 24px; font-size:12px; font-weight:700; color:#6E9BFF; line-height:1.7; }
+    .fact-body { flex:1 1 auto; }
+    .fact-claim { font-size:15px; font-weight:600; color:#F5F5F7; margin-bottom:6px; line-height:1.5; }
+    .fact-source { font-size:13px; color:#9A9DA4; line-height:1.55; }
+    .fact-unsourced { font-size:13px; color:#9A9DA4; margin-top:24px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.08); line-height:1.6; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="../" class="nav-logo">Jay Tulloch</a>
+    <ul class="nav-links">
+      <li><a href="../#about">About</a></li>
+      <li><a href="../#work">Work</a></li>
+      <li><a href="../writing.html" class="active">Writing</a></li>
+      <li><a href="../#podcast">Podcast</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="article-wrap">
+    <a href="../writing.html" class="article-back">← All writing</a>
+    <div class="article-meta">
+      <span class="article-topic">Product Strategy</span>
+      <div class="dot"></div>
+      <span class="article-date">June 5, 2026</span>
+      <div class="dot"></div>
+      <span class="article-read-time">7 min read</span>
+    </div>
+    <h1 class="article-title">MiCA&#x27;s July Deadline Is a Design Problem, Not a Compliance One. The Onboarding Flow Just Became the Battleground.</h1>
+    <article>
+      <p>The MiCA deadline lands on 1 July 2026, and most compliance teams are still treating it like a legal filing. It is not. It is a design deadline. The teams that survive July are the ones who understand that the audit will be passed by lawyers and the customer will be lost by the product.</p>
+      <p>After eighteen months of grandfathering, roughly 130 to 140 CASPs across the EU hold a full MiCA authorisation (ItisPay, 2026; Skadden, July 2025). Italy had over 150 VASPs registered under the prior national regime. Germany leads at 53 authorisations. France sits at around 13. Malta around 12. The funnel from "registered" to "MiCA-licensed" is brutal, and from 1 July any firm left in the old regime is operating illegally in the EU.</p>
+      <p>That is the legal headline. The product headline is harder, and it is the one most teams have not written.</p>
+      <h2>Why This Is a Design Problem</h2>
+      <p>Compliance teams are excellent at documenting what must be collected. They are less good at designing the screen on which it gets collected. That is where the customer is lost.</p>
+      <p>KYC abandonment in heavily regulated digital services runs as high as 70 to 80 percent (industry data summarised by Jumio, 2026). Crypto and fintech sit at the top of that range. You can ship a flow that satisfies the regulator and still lose 8 in 10 users at the deposit cliff. The regulator will not care. The CFO will.</p>
+      <p>I have spent the last few years inside regulated onboarding work, including time at a crypto exchange's consumer product and at the agency on a UAE-based lottery client. The shape of the failure is the same in both. Compliance hands product a list of fields. Product builds a flow that asks for them. Nobody asks whether the user has the cognitive bandwidth to answer in the moment they are being asked.</p>
+      <h2>What July Actually Changes</h2>
+      <p>Three shifts converge in the same quarter.</p>
+      <p>First, MiCA enforcement. From 1 July, EU customers cannot legally transact with a non-authorised CASP. Existing customers of unlicensed firms face account closures or service interruptions. The product surface that handles "you cannot continue without verification on the new licensed entity" is now critical, and most teams have not designed it. The migration screen is the most important screen in your product this quarter and almost nobody is treating it that way.</p>
+      <p>Second, the UAE Travel Rule. VARA issued the implementing circular on 24 February 2026 and the federal Travel Rule is now fully live (VARA Rulebook, 2026; Notabene Dubai, 2026). Any virtual asset transfer above USD 1,000 (around AED 3,672) requires originator and beneficiary information collection, counterparty VASP verification, screening against VARA's and FSRA's registered VASP lists, and record retention. That obligation cannot be hidden behind a settings page. It surfaces every time a user initiates a withdrawal.</p>
+      <p>Third, the CBUAE Payment Token Services Regulation has reset the stablecoin landscape. Bank-owned issuers must hold 50 percent of reserves in cash in a segregated escrow account, with the remainder in UAE government bonds or CBUAE Monetary Bills capped at six-month maturity. Non-bank issuers must hold 100 percent in cash in escrow. Algorithmic stablecoins are out (Cryptoverse Lawyers, 2026; Hacken, 2026). The product question that follows is simple. How does a user verify, inside your product, that the token they are about to hold is one of these? Most stablecoin surfaces in 2026 still display a logo and a name. That is not enough now.</p>
+      <h2>Three Surfaces That Decide Whether You Survive the Quarter</h2>
+      <p>The migration screen. The Travel Rule disclosure on withdrawal. The source-of-funds prompt at deposit.</p>
+      <p>Compliance does not own these surfaces. Product does not own them either. Design has been brought in late on all three at every team I have seen. That has to flip before July.</p>
+      <p>Take the migration screen first. Most teams treat it as a single modal: "you must complete verification to continue." That is not a flow. It is a wall. A working migration screen tells the user three things inside the first ten seconds. What changed and why. What happens if they do nothing. What the time cost of compliance actually is. The user is being asked to re-trust the same product under a new legal entity. The screen has to do the trust-rebuilding, not just collect the data.</p>
+      <p>The Travel Rule notice is worse. Every withdrawal above the threshold now requires disclosing originator and beneficiary information. Done badly, that is a five-field form that appears before every transfer and tanks withdrawal completion. Done well, it is a one-time per-counterparty verification with the data carried forward, an obvious privacy disclosure, and a delta in friction the user can predict. The regulation does not say "make this painful." It says "collect, verify, retain." The choice of how is the design lever.</p>
+      <p>Source-of-funds is the deposit cliff. At threshold sizes, regulated CASPs must collect documented proof. Bank statement, payslip, business income, asset disposal record. A flow that asks for this in the deposit moment, with no preparation, will lose the customer. A flow that flags the threshold upfront, lets the user pre-upload outside the deposit moment, and confirms the document is accepted before any money moves, keeps them. This is not a regulator decision. It is a product sequence decision.</p>
+      <h2>The Lived Experience</h2>
+      <p>At the agency, working with a UAE-based lottery client on purchase flows and responsible play, the same pattern shows up under different regulator pressure. Spend limits, self-exclusion, cool-off periods. The structure of the flow is generic. The phrasing, the friction calibration, and the timing of the prompts decide whether the user feels supported or interrogated.</p>
+      <p>Self-exclusion is the clearest example. A user setting a spend limit at the moment of joy, just before a purchase, will not click through to honestly answer six questions about their behaviour. They will close the modal. A user offered the same flow as a planned, calm setup task, with clear language and proper estimation of time cost, will complete it. The auditor sees both flows as compliant. Only one actually protects the user. That is design.</p>
+      <p>At a crypto exchange's consumer product, the equivalent is the source-of-funds prompt for a high-value first deposit. The compliant version is a wall. The product version pre-warns the user at sign-up, allows document upload during the wait for ID verification (which is dead time anyway), and confirms acceptance asynchronously so the deposit can complete the moment the funds arrive. Same data collected. Same regulator satisfaction. Wildly different conversion.</p>
+      <h2>The Counter-Argument</h2>
+      <p>The obvious pushback is that this is bigger than design and the regulators are the constraint. Partly true. The regulators set the floor. Above the floor is where the real product work lives. MiCA does not specify whether the migration screen is a wall or a flow. VARA does not say whether the Travel Rule disclosure runs inline or as a one-time setup. The CBUAE does not write the stablecoin reserve disclosure for the issuer. Those choices are made in product, and they are decisive.</p>
+      <p>The second pushback is that users will accept friction because they have to. They do not. They route around it. Sumsub's published numbers show average verification times of about 30 seconds with a 90 percent pass rate on a well-tuned KYC flow (Sumsub, 2026). The same data shows that abandonment doubles or triples when document upload steps are sequenced before any product value has been delivered. The user does not owe you their patience. They will switch venues. Twelve percent of high-volume traders report being satisfied with their current exchange's interface (ChainUp, 2026). Eighty-eight percent are open to a better one.</p>
+      <h2>What I Would Actually Do</h2>
+      <p>Three moves over the next four weeks.</p>
+      <p>Audit the three regulated surfaces with a senior designer in the room. Migration screen. Travel Rule disclosure. Source-of-funds prompt. Walk them yourself. Time them. Note where friction lands in moments the user is not prepared for it.</p>
+      <p>Re-sequence so the user can do the regulated work in the dead time. Document uploads during ID verification wait. Travel Rule counterparty setup outside the withdrawal moment. Source-of-funds documents pre-submitted before the deposit threshold is hit.</p>
+      <p>Write the disclosure copy in the voice the customer signed up for, not the voice of legal. Regulators care that disclosure happens. They do not care which sentence carries it. The customer cares which sentence.</p>
+      <h2>The Close</h2>
+      <p>The compliance teams will pass the audit. They are good at that. The product will lose the user if design does not own the surfaces that the regulation has just made central.</p>
+      <p>The team that treats July as a legal deadline will spend Q3 explaining a churn cliff to the board. The team that treats it as a design deadline will run the table on every competitor that did not.</p>
+      <p>Pick which one you are. There is no third option.</p>
+      <hr/>
+      <p>Fact Check</p>
+      <p>Every factual claim in this article, with its source.</p>
+      <p>Claim: Roughly 130 to 140 CASPs across the EU hold full MiCA authorisation after the 18-month grandfathering period ended, with Italy at over 150 prior VASPs, Germany leading at 53 authorisations, France around 13, and Malta around 12.</p>
+      <p>Source: ItisPay, 2026; Skadden, July 2025. skadden.com</p>
+      <p>Claim: KYC abandonment in heavily regulated digital services runs as high as 70 to 80 percent, with crypto and fintech at the top of that range.</p>
+      <p>Source: Jumio, 2026 industry data summary. jumio.com</p>
+      <p>Claim: The UAE's federal Travel Rule went fully live after VARA issued its implementing circular on 24 February 2026, requiring originator and beneficiary information above USD 1,000.</p>
+      <p>Source: VARA Rulebook, 2026; Notabene Dubai coverage, 2026. vara.ae</p>
+      <p>Claim: Under the CBUAE Payment Token Services Regulation, bank-owned stablecoin issuers must hold 50% of reserves in cash escrow, non-bank issuers 100%, and algorithmic stablecoins are prohibited.</p>
+      <p>Source: Cryptoverse Lawyers, 2026; Hacken, 2026. hacken.io</p>
+      <p>Claim: A well-tuned KYC flow can average about 30 seconds verification time with a 90% pass rate.</p>
+      <p>Source: Sumsub, 2026. sumsub.com</p>
+      <p>Unsourced statements (Jay's opinion or lived experience): Jay's framing of the migration screen, Travel Rule disclosure, and source-of-funds prompt as the three decisive product surfaces; his RUONALIM lottery client experience with self-exclusion and spend-limit flows; his prescriptions for how to redesign the three surfaces. These are Jay's points of view, not third-party data.</p>
+    </article>
+    <div class="article-footer">
+      <a href="../writing.html" class="footer-cta">More writing</a>
+      <a href="../contact.html" class="footer-cta">Get in touch</a>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var article = document.querySelector('article');
+      if (!article) return;
+      var ps = Array.prototype.slice.call(article.querySelectorAll('p'));
+      var start = null;
+      for (var k = 0; k < ps.length; k++) {
+        if (ps[k].textContent.trim() === 'Fact Check') { start = ps[k]; break; }
+      }
+      if (!start) return;
+      var nodes = [];
+      var n = start;
+      while (n) { nodes.push(n); n = n.nextElementSibling; }
+      var aside = document.createElement('aside');
+      aside.className = 'fact-check';
+      var badge = document.createElement('div');
+      badge.className = 'fact-check-badge';
+      badge.textContent = 'Fact Check';
+      aside.appendChild(badge);
+      var num = 0, pendingClaim = null;
+      for (var i = 1; i < nodes.length; i++) {
+        var t = nodes[i].textContent.trim();
+        if (/^Claim:/i.test(t)) {
+          pendingClaim = t.replace(/^Claim:\s*/i, '');
+        } else if (/^Source:/i.test(t)) {
+          num++;
+          var item = document.createElement('div'); item.className = 'fact-item';
+          var numEl = document.createElement('div'); numEl.className = 'fact-num';
+          numEl.textContent = (num < 10 ? '0' : '') + num;
+          var bodyEl = document.createElement('div'); bodyEl.className = 'fact-body';
+          var claimEl = document.createElement('div'); claimEl.className = 'fact-claim';
+          claimEl.textContent = pendingClaim || '';
+          var srcEl = document.createElement('div'); srcEl.className = 'fact-source';
+          srcEl.textContent = t.replace(/^Source:\s*/i, '');
+          bodyEl.appendChild(claimEl); bodyEl.appendChild(srcEl);
+          item.appendChild(numEl); item.appendChild(bodyEl);
+          aside.appendChild(item);
+          pendingClaim = null;
+        } else if (/^Unsourced statements/i.test(t)) {
+          var u = document.createElement('div'); u.className = 'fact-unsourced';
+          u.textContent = t;
+          aside.appendChild(u);
+        } else {
+          var intro = document.createElement('div'); intro.className = 'fact-check-intro';
+          intro.textContent = t;
+          aside.appendChild(intro);
+        }
+      }
+      start.parentNode.insertBefore(aside, start);
+      nodes.forEach(function (node) { node.parentNode.removeChild(node); });
+    })();
+  </script>
+</body>
+</html>
