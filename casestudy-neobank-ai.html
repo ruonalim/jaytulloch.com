@@ -15,74 +15,69 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg: #FFFFFF; --bg-card: #FFFFFF; --bg-elevated: #F5F5F7;
-      --text: #111111; --text-muted: #6B6E74; --text-body: #141414;
-      --border: #E8E8EC; --border-strong: #D0D0D0;
-      --tag-bg: #EAF0FF; --accent: #0044E4;
-      --font: 'Instrument Sans', -apple-system, 'Helvetica Neue', Arial, sans-serif;
-      --black: #000000; --white: #FFFFFF;
-      --gray-dark: #F5F5F7; --gray-mid: #E0E0E4; --gray-light: #6B6E74;
+      --bg: #F5F5F0;
+      --bg-card: #F5F5F0;
+      --bg-elevated: #E8E8E0;
+      --text: #0A0A0A;
+      --text-muted: #666660;
+      --text-body: #0A0A0A;
+      --border: #0A0A0A;
+      --border-strong: #0A0A0A;
+      --tag-bg: #E8E8E0;
+      --accent: #0A0A0A;
+      --font: 'Space Grotesk', -apple-system, sans-serif;
+      --black: #0A0A0A;
+      --white: #F5F5F0;
+      --mid: #C0C0B8;
+      --muted: #666660;
+      --gray-dark: #E8E8E0;
+      --gray-mid: #C0C0B8;
+      --gray-light: #666660;
     }
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 16px; line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    body { background: var(--bg); color: var(--text); font-family: 'Space Grotesk', -apple-system, sans-serif; font-size: 16px; line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
     a { color: inherit; text-decoration: none; }
 
 
     .cs-hero {
       padding: 160px clamp(32px, 5vw, 80px) 100px;
-      background: var(--bg-elevated);
-      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+      border-bottom: 1.5px solid var(--border);
       position: relative; overflow: hidden;
     }
-    .cs-hero::before {
-      content: '';
-      position: absolute; top: -200px; right: -200px;
-      width: 900px; height: 900px;
-      background: none;
-      pointer-events: none;
-      animation: heroGlowDrift 10s ease-in-out infinite;
-      will-change: transform;
-    }
-        .cs-hero::after {
-      content: '';
-      position: absolute; bottom: -150px; left: -150px;
-      width: 700px; height: 700px;
-      background: none;
-      pointer-events: none;
-      animation: heroGlowDrift2 13s ease-in-out infinite;
-      will-change: transform;
-    }
+    .cs-hero::before { display: none; }
+        .cs-hero::after { display: none; }
     .cs-hero-inner { max-width: 1100px; margin: 0; }
     .cs-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; }
-    .cs-title { font-size: clamp(42px, 6vw, 80px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.0; text-transform: uppercase; margin-bottom: 32px; }
+    .cs-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(42px, 6vw, 80px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.0; text-transform: uppercase; margin-bottom: 32px; }
     .cs-title em { font-style: normal; color: var(--accent); }
     .cs-desc { font-size: clamp(16px, 1.5vw, 20px); color: var(--text-body); max-width: 680px; line-height: 1.6; margin-bottom: 60px; }
     .cs-meta { display: flex; gap: 48px; flex-wrap: wrap; }
     .cs-meta-label { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
     .cs-meta-value { font-size: 14px; font-weight: 600; color: var(--text); }
 
-    .metrics-banner { background: var(--bg-elevated); padding: 64px clamp(32px, 5vw, 80px); border-bottom: 1px solid var(--border); }
+    .metrics-banner { background: var(--bg-elevated); padding: 64px clamp(32px, 5vw, 80px); border-bottom: 1.5px solid var(--border); }
     .metrics-banner-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
     .metric-block { padding: 40px 32px; background: rgba(87,65,217,0.06); border: 1px solid rgba(87,65,217,0.15); text-align: center; }
-    .metric-value { font-size: clamp(36px, 4vw, 54px); font-weight: 800; letter-spacing: -0.03em; color: var(--accent); line-height: 1; margin-bottom: 12px; }
+    .metric-value { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 5vw, 72px); font-weight: 400; letter-spacing: 0.02em; color: var(--black); line-height: 1; margin-bottom: 12px; }
     .metric-label { font-size: 12px; font-weight: 500; letter-spacing: 0.06em; color: var(--text-muted); text-transform: uppercase; }
 
-    .cs-section { padding: 96px clamp(32px, 5vw, 80px); border-bottom: 1px solid var(--border); }
+    .cs-section { padding: 96px clamp(32px, 5vw, 80px); border-bottom: 1.5px solid var(--border); }
     .cs-section:last-of-type { border-bottom: none; }
     .cs-section-inner { max-width: 1100px; margin: 0 auto; }
-    .section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 48px; }
+    .section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 48px; }
     .two-col { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
     .col-heading { font-size: clamp(28px, 3vw, 40px); font-weight: 800; letter-spacing: -0.02em; text-transform: uppercase; line-height: 1.1; position: sticky; top: 100px; }
-    .col-heading em { font-style: normal; color: var(--accent); }
-    .col-body p { font-size: 17px; color: #2D2D30; line-height: 1.75; margin-bottom: 24px; }
+    .col-heading em { font-style: normal; color: var(--muted); }
+    .col-body p { font-size: 17px; color: var(--text); line-height: 1.75; margin-bottom: 24px; }
     .col-body p:last-child { margin-bottom: 0; }
     .col-body strong { color: var(--text); font-weight: 700; }
 
     .deliverables { margin-top: 40px; display: flex; flex-direction: column; gap: 0; }
-    .deliverable-item { padding: 20px 0; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 32px 1fr; gap: 16px; align-items: start; }
+    .deliverable-item { padding: 20px 0; border-bottom: 1.5px solid var(--border); display: grid; grid-template-columns: 32px 1fr; gap: 16px; align-items: start; }
     .deliverable-item:last-child { border-bottom: none; }
-    .d-num { font-size: 11px; font-weight: 700; color: var(--accent); padding-top: 3px; }
-    .d-text { font-size: 16px; color: #2D2D30; line-height: 1.6; }
+    .d-num { font-size: 11px; font-weight: 700; color: var(--muted); padding-top: 3px; }
+    .d-text { font-size: 16px; color: var(--text); line-height: 1.6; }
     .d-text strong { color: var(--text); }
 
     .highlight-block {
@@ -124,13 +119,13 @@
   /* Password Gate */
   .cs-gate { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(28px) saturate(160%); -webkit-backdrop-filter: blur(28px) saturate(160%); background: rgba(0,0,0,0.75); transition: opacity 0.5s ease; }
   .cs-gate.unlocking { opacity: 0; pointer-events: none; }
-  .cs-gate-card { background: rgba(10,10,10,0.97); border: 1px solid rgba(255,255,255,0.14); border-radius: 4px; padding: 52px 48px; width: 100%; max-width: 420px; text-align: center; box-shadow: 0 40px 100px rgba(0,0,0,0.8); }
+  .cs-gate-card { background: rgba(10,10,10,0.97); border: 1px solid rgba(255,255,255,0.14); border-radius: 0; padding: 52px 48px; width: 100%; max-width: 420px; text-align: center;  }
   .cs-gate-icon { display: none; }
   .cs-gate-title { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: #fff; margin-bottom: 12px; line-height: 1.2; }
   .cs-gate-sub { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.65; margin-bottom: 6px; }
-  .cs-gate-input-wrap { display: flex; gap: 0; border: 1px solid rgba(255,255,255,0.15); border-radius: 2px; overflow: hidden; transition: border-color 0.2s; }
+  .cs-gate-input-wrap { display: flex; gap: 0; border: 1px solid rgba(255,255,255,0.15); border-radius: 0; overflow: hidden; transition: border-color 0.2s; }
   .cs-gate-input-wrap:focus-within { border-color: rgba(255,255,255,0.4); }
-  .cs-gate-input-wrap.error { border-color: #0044E4; animation: gate-shake 0.4s ease; }
+  .cs-gate-input-wrap.error { border-color: #c4271e; animation: gate-shake 0.4s ease; }
   @keyframes gate-shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-8px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-6px); } 80% { transform: translateX(4px); } }
   .cs-gate-input { flex: 1; background: transparent; border: none; outline: none; padding: 14px 18px; font-size: 13px; font-family: inherit; font-weight: 600; letter-spacing: 0.12em; color: var(--text); text-transform: uppercase; }
   .cs-gate-input::placeholder { color: rgba(255,255,255,0.25); text-transform: none; letter-spacing: 0; font-weight: 400; }
@@ -138,14 +133,14 @@
   .cs-gate-btn:hover { background: #333; }
   .cs-gate-back { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; background: none; border: none; color: var(--text-muted); font-size: 13px; font-family: inherit; cursor: pointer; padding: 0; letter-spacing: 0.02em; transition: color 0.2s; }
   .cs-gate-back:hover { color: rgba(255,255,255,0.8); }
-  .cs-gate-earn { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 32px; border-radius: 40px; border: none; background: #fff; color: #0a0a0a; font-size: 13px; font-weight: 700; letter-spacing: 0.01em; text-decoration: none; font-family: inherit; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; width: 100%; box-sizing: border-box; }
-  .cs-gate-earn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,255,255,0.15); }
+  .cs-gate-earn { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 32px; border-radius: 0; border: none; background: #fff; color: #0a0a0a; font-size: 13px; font-weight: 700; letter-spacing: 0.01em; text-decoration: none; font-family: inherit; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; width: 100%; box-sizing: border-box; }
+  .cs-gate-earn:hover { transform: translateY(-2px);  }
   .cs-gate-earn-sub { font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 28px; }
   .cs-gate-actions { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; }
   .cs-gate-or { display: flex; align-items: center; gap: 12px; width: 100%; margin: 4px 0; }
   .cs-gate-or::before, .cs-gate-or::after { content: ''; flex: 1; height: 1px; background: var(--border); }
   .cs-gate-or span { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
-  .cs-gate-pwd-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 32px; border-radius: 40px; border: 1px solid var(--border); background: transparent; color: var(--text-muted); font-size: 13px; font-weight: 700; letter-spacing: 0.01em; text-decoration: none; font-family: inherit; cursor: pointer; transition: border-color 0.2s, color 0.2s, background 0.2s; width: 100%; box-sizing: border-box; }
+  .cs-gate-pwd-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 32px; border-radius: 0; border: 1.5px solid var(--border); background: transparent; color: var(--text-muted); font-size: 13px; font-weight: 700; letter-spacing: 0.01em; text-decoration: none; font-family: inherit; cursor: pointer; transition: border-color 0.2s, color 0.2s, background 0.2s; width: 100%; box-sizing: border-box; }
   .cs-gate-pwd-btn:hover { border-color: rgba(255,255,255,0.25); color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.03); }
   .cs-gate-pwd-section { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.16,1,0.3,1), opacity 0.3s; opacity: 0; width: 100%; }
   .cs-gate-pwd-section.open { max-height: 200px; opacity: 1; }
@@ -156,13 +151,13 @@
     .cs-image-block.on-dark { background: var(--bg-elevated); }
     .cs-image-block-inner { max-width: 1100px; margin: 0 auto; padding: 64px 0; }
     .cs-image-container {
-      width: 100%; border-radius: 12px; overflow: hidden;
-      background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+      width: 100%; border-radius: 0; overflow: hidden;
+      background: rgba(255,255,255,0.03); border: 1.5px solid var(--border);
       position: relative; min-height: 280px;
       display: flex; align-items: center; justify-content: center;
     }
     .cs-image-container img {
-      width: 100%; height: auto; display: block; border-radius: 12px;
+      width: 100%; height: auto; display: block; border-radius: 0;
     }
     .cs-image-placeholder {
       display: flex; flex-direction: column; align-items: center; gap: 12px;
@@ -184,11 +179,11 @@
     @media (max-width: 768px) {
       .cs-image-block { padding: 0 24px; }
       .cs-image-block-inner { padding: 40px 0; }
-      .cs-image-container { min-height: 200px; border-radius: 8px; }
+      .cs-image-container { min-height: 200px; border-radius: 0; }
     }
 
     /* Process Flow Visuals */
-    .pf-canvas { width: 100%; padding: 48px 40px; background: #faf9f7; border-radius: 12px; overflow: hidden; }
+    .pf-canvas { width: 100%; padding: 48px 40px; background: #faf9f7; border-radius: 0; overflow: hidden; }
     .pf-canvas.dark { background: var(--bg-elevated); }
     .pf-canvas.dark-neutral { background: var(--bg-elevated); }
     .pf-title-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 32px; }
@@ -202,11 +197,11 @@
     .pf-cluster { display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1; min-width: 140px; }
     .pf-cluster-label { font-size: 9px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #555559; margin-bottom: 4px; }
     .pf-stickies { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; max-width: 160px; }
-    .pf-sticky { width: 28px; height: 28px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+    .pf-sticky { width: 28px; height: 28px; border-radius: 0;  }
 
     /* Decision cards */
     .pf-decisions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .pf-decision { background: #fff; border-radius: 8px; padding: 16px 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); min-width: 180px; flex: 1; max-width: 240px; position: relative; }
+    .pf-decision { background: #fff; border-radius: 0; padding: 16px 20px;  min-width: 180px; flex: 1; max-width: 240px; position: relative; }
     .pf-decision h5 { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #333; margin-bottom: 8px; }
     .pf-decision ul { list-style: none; padding: 0; }
     .pf-decision li { font-size: 10px; color: #666; line-height: 1.5; padding: 2px 0; }
@@ -221,95 +216,95 @@
     /* Journey stages */
     .pf-journey { display: flex; gap: 0; align-items: flex-start; overflow: hidden; padding-bottom: 8px; }
     .pf-stage { flex: 1; min-width: 140px; display: flex; flex-direction: column; align-items: center; position: relative; }
-    .pf-stage-card { background: #fff; border-radius: 12px; padding: 20px 14px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); width: 100%; margin: 0 6px; }
+    .pf-stage-card { background: #fff; border-radius: 0; padding: 20px 14px; text-align: center;  width: 100%; margin: 0 6px; }
     .pf-stage-icon { font-size: 24px; margin-bottom: 8px; }
     .pf-stage-name { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #222; }
     .pf-stage-arrow { position: absolute; right: -8px; top: 50%; transform: translateY(-50%); font-size: 14px; color: #6B6E74; z-index: 1; }
     .pf-triggers { display: flex; flex-direction: column; gap: 4px; margin-top: 10px; width: 100%; padding: 0 6px; }
-    .pf-trigger { font-size: 9px; padding: 5px 8px; border-radius: 6px; text-align: center; font-weight: 500; }
+    .pf-trigger { font-size: 9px; padding: 5px 8px; border-radius: 0; text-align: center; font-weight: 500; }
     .pf-pulse { width: 6px; height: 6px; border-radius: 50%; margin: 6px auto 0; }
-    .pf-insight { background: #fff; border-radius: 8px; padding: 14px 20px; margin-top: 24px; box-shadow: 0 1px 6px rgba(0,0,0,0.04); border-left: 3px solid; }
+    .pf-insight { background: #fff; border-radius: 0; padding: 14px 20px; margin-top: 24px;  border-left: 3px solid; }
     .pf-insight p { font-size: 11px; color: #555; line-height: 1.5; font-style: italic; }
 
     /* Wireframe comparison */
     .pf-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; }
-    .pf-option { border-radius: 10px; overflow: hidden; border: 2px solid rgba(0,0,0,0.06); }
+    .pf-option { border-radius: 0; overflow: hidden; border: 2px solid rgba(0,0,0,0.06); }
     .pf-option.winner { border-color: #49a942; }
     .pf-option-header { padding: 10px 14px; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
     .pf-wireframe { padding: 16px; background: #f5f5f5; min-height: 120px; display: flex; flex-direction: column; gap: 6px; }
-    .pf-wf-bar { height: 6px; border-radius: 3px; background: #ddd; }
-    .pf-wf-block { height: 32px; border-radius: 4px; background: #e8e8e8; }
+    .pf-wf-bar { height: 6px; border-radius: 0; background: #ddd; }
+    .pf-wf-block { height: 32px; border-radius: 0; background: #e8e8e8; }
     .pf-wf-row { display: flex; gap: 6px; }
     .pf-wf-circle { width: 20px; height: 20px; border-radius: 50%; background: #e0e0e0; flex-shrink: 0; }
     .pf-wf-lines { display: flex; flex-direction: column; gap: 4px; flex: 1; }
-    .pf-wf-line { height: 4px; border-radius: 2px; background: #e0e0e0; }
-    .pf-annotation { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 4px; font-size: 9px; font-weight: 600; margin: 8px 14px; }
-    .pf-test-strip { background: #fff; border-radius: 8px; padding: 12px 16px; text-align: center; font-size: 10px; color: #555; font-weight: 500; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+    .pf-wf-line { height: 4px; border-radius: 0; background: #e0e0e0; }
+    .pf-annotation { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 0; font-size: 9px; font-weight: 600; margin: 8px 14px; }
+    .pf-test-strip { background: #fff; border-radius: 0; padding: 12px 16px; text-align: center; font-size: 10px; color: #555; font-weight: 500;  }
 
     /* Dark flow diagrams */
     .pf-flow { display: flex; align-items: center; gap: 12px; justify-content: center; flex-wrap: wrap; padding: 16px 0; }
-    .pf-node { border-radius: 10px; padding: 14px 18px; text-align: center; min-width: 100px; }
+    .pf-node { border-radius: 0; padding: 14px 18px; text-align: center; min-width: 100px; }
     .pf-node h6 { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
     .pf-node p { font-size: 9px; opacity: 0.6; line-height: 1.3; }
     .pf-arrow-r { font-size: 16px; opacity: 0.3; color: #fff; flex-shrink: 0; }
     .pf-canvas.dark .pf-arrow-r { color: #fff; }
     .pf-stat-row { display: flex; gap: 12px; justify-content: center; margin-top: 24px; }
-    .pf-stat-card { background: var(--border); border: 1px solid var(--border); border-radius: 8px; padding: 14px 20px; text-align: center; }
+    .pf-stat-card { background: var(--border); border: 1.5px solid var(--border); border-radius: 0; padding: 14px 20px; text-align: center; }
     .pf-stat-card .pf-stat-val { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 2px; }
     .pf-stat-card .pf-stat-lbl { font-size: 9px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
 
     /* Data streams */
     .pf-streams { display: flex; align-items: stretch; gap: 0; justify-content: center; margin: 16px 0; }
     .pf-stream-col { display: flex; flex-direction: column; gap: 8px; justify-content: center; min-width: 120px; }
-    .pf-stream-item { padding: 10px 14px; border-radius: 8px; font-size: 10px; font-weight: 600; text-align: center; }
-    .pf-engine { border-radius: 12px; padding: 24px 20px; text-align: center; margin: 0 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 120px; }
+    .pf-stream-item { padding: 10px 14px; border-radius: 0; font-size: 10px; font-weight: 600; text-align: center; }
+    .pf-engine { border-radius: 0; padding: 24px 20px; text-align: center; margin: 0 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 120px; }
     .pf-engine h6 { font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
     .pf-engine-icon { font-size: 28px; margin-bottom: 8px; }
     .pf-arrows-col { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 0 8px; }
 
     /* Radial diagram */
     .pf-radial { position: relative; width: 100%; max-width: 500px; margin: 0 auto; min-height: 300px; }
-    .pf-radial-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--border); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; text-align: center; z-index: 2; }
+    .pf-radial-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--border); border: 1.5px solid var(--border); border-radius: 0; padding: 14px 18px; text-align: center; z-index: 2; }
     .pf-radial-center p { font-size: 12px; font-weight: 600; color: #fff; }
-    .pf-radial-item { position: absolute; border-radius: 8px; padding: 10px 14px; text-align: center; min-width: 140px; }
+    .pf-radial-item { position: absolute; border-radius: 0; padding: 10px 14px; text-align: center; min-width: 140px; }
     .pf-radial-item .pf-conf { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; }
     .pf-radial-item .pf-rlbl { font-size: 9px; font-weight: 600; letter-spacing: 0.04em; margin-top: 2px; }
 
     /* Split infographic */
-    .pf-split { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-radius: 12px; overflow: hidden; }
+    .pf-split { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-radius: 0; overflow: hidden; }
     .pf-split-side { padding: 32px 28px; display: flex; flex-direction: column; gap: 12px; }
     .pf-split-label { font-size: 10px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px; }
     .pf-split-metric { display: flex; align-items: center; gap: 10px; }
     .pf-split-metric .pf-sm-icon { font-size: 18px; flex-shrink: 0; }
     .pf-split-metric .pf-sm-text { font-size: 11px; font-weight: 600; }
     .pf-split-divider { width: 2px; background: var(--border); }
-    .pf-split-quote { grid-column: 1 / -1; padding: 16px 28px; text-align: center; border-top: 1px solid var(--border); }
+    .pf-split-quote { grid-column: 1 / -1; padding: 16px 28px; text-align: center; border-top: 1.5px solid var(--border); }
     .pf-split-quote p { font-size: 10px; color: rgba(255,255,255,0.4); font-style: italic; letter-spacing: 0.02em; }
 
     /* WhatsApp + backend split */
     .pf-wa-split { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    .pf-wa-side { border-radius: 12px; overflow: hidden; }
+    .pf-wa-side { border-radius: 0; overflow: hidden; }
     .pf-wa-header { padding: 10px 16px; display: flex; align-items: center; gap: 8px; }
     .pf-wa-header .pf-wa-avatar { width: 28px; height: 28px; border-radius: 50%; }
     .pf-wa-header span { font-size: 12px; font-weight: 700; }
     .pf-wa-msgs { padding: 16px; display: flex; flex-direction: column; gap: 8px; }
-    .pf-wa-msg { max-width: 85%; padding: 8px 12px; border-radius: 8px; font-size: 10px; line-height: 1.5; }
+    .pf-wa-msg { max-width: 85%; padding: 8px 12px; border-radius: 0; font-size: 10px; line-height: 1.5; }
     .pf-wa-msg.user { align-self: flex-end; }
     .pf-wa-msg.ai { align-self: flex-start; }
-    .pf-wa-booking { border-radius: 6px; padding: 10px 12px; margin: 4px 0; }
+    .pf-wa-booking { border-radius: 0; padding: 10px 12px; margin: 4px 0; }
     .pf-backend { display: flex; flex-direction: column; gap: 0; align-items: center; padding: 16px; }
-    .pf-backend-step { padding: 10px 16px; border-radius: 8px; text-align: center; font-size: 10px; font-weight: 600; width: 80%; }
+    .pf-backend-step { padding: 10px 16px; border-radius: 0; text-align: center; font-size: 10px; font-weight: 600; width: 80%; }
     .pf-backend-arrow { font-size: 12px; padding: 4px 0; }
 
     /* System architecture */
     .pf-arch { display: flex; align-items: stretch; gap: 16px; justify-content: center; }
     .pf-arch-col { display: flex; flex-direction: column; gap: 8px; justify-content: center; }
-    .pf-arch-node { padding: 10px 16px; border-radius: 8px; font-size: 10px; font-weight: 600; text-align: center; border: 1px solid; }
-    .pf-arch-center { border-radius: 12px; padding: 20px 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; min-width: 140px; }
+    .pf-arch-node { padding: 10px 16px; border-radius: 0; font-size: 10px; font-weight: 600; text-align: center; border: 1px solid; }
+    .pf-arch-center { border-radius: 0; padding: 20px 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; min-width: 140px; }
     .pf-arch-center h6 { font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; }
     .pf-arch-center .pf-arch-sub { font-size: 9px; margin-top: 4px; }
     .pf-arch-process { display: flex; gap: 8px; margin-top: 20px; justify-content: center; flex-wrap: wrap; }
-    .pf-arch-step { padding: 8px 14px; border-radius: 20px; font-size: 9px; font-weight: 600; letter-spacing: 0.04em; }
+    .pf-arch-step { padding: 8px 14px; border-radius: 0; font-size: 9px; font-weight: 600; letter-spacing: 0.04em; }
     .pf-arch-step-arrow { color: rgba(255,255,255,0.2); font-size: 12px; display: flex; align-items: center; }
 
     @media (max-width: 768px) {
@@ -351,7 +346,7 @@
       letter-spacing: 0;
     }
     .pod-stat-value em {
-      font-family: var(--font);
+      font-family: 'Space Grotesk', -apple-system, sans-serif;
       font-weight: inherit;
       font-style: normal;
       letter-spacing: inherit;
@@ -444,7 +439,7 @@
   <div class="cs-image-block cs-image-full-width reveal">
     <div class="cs-image-block-inner">
       <div class="cs-image-container" id="img-4-layer-ai-workflow-architecture-diagram">
-        <div class="pf-canvas dark-neutral" style="border-radius: 12px;">
+        <div class="pf-canvas dark-neutral" style="border-radius: 0;">
           <div class="pf-title-bar">
             <div class="pf-dot" style="background: #e85d5d;"></div>
             <div class="pf-dot" style="background: #7b68ee;"></div>
@@ -452,7 +447,7 @@
           </div>
 
           <!-- Metadata Strip -->
-          <div style="display: flex; gap: 16px; margin-bottom: 28px; padding: 14px 16px; background: rgba(87,65,217,0.04); border-radius: 8px; border: 1px solid rgba(87,65,217,0.08); flex-wrap: wrap; align-items: center; font-size: 9px;">
+          <div style="display: flex; gap: 16px; margin-bottom: 28px; padding: 14px 16px; background: rgba(87,65,217,0.04); border-radius: 0; border: 1px solid rgba(87,65,217,0.08); flex-wrap: wrap; align-items: center; font-size: 9px;">
             <div style="display: flex; gap: 4px; align-items: center;"><span style="color: rgba(255,255,255,0.3); font-weight: 600;">DURATION</span><span style="color: rgba(255,255,255,0.6);">8 weeks</span></div>
             <div style="width: 1px; height: 14px; background: var(--border);"></div>
             <div style="display: flex; gap: 4px; align-items: center;"><span style="color: rgba(255,255,255,0.3); font-weight: 600;">SCOPE</span><span style="color: rgba(255,255,255,0.6);">Full Design Ops Transformation</span></div>
@@ -464,39 +459,39 @@
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 28px;">
 
             <!-- BEFORE SIDE -->
-            <div style="background: rgba(232,93,93,0.06); border: 1px solid rgba(232,93,93,0.12); border-radius: 10px; padding: 20px;">
-              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border);">
-                <div style="width: 8px; height: 8px; border-radius: 4px; background: #e85d5d;"></div>
+            <div style="background: rgba(232,93,93,0.06); border: 1px solid rgba(232,93,93,0.12); border-radius: 0; padding: 20px;">
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1.5px solid var(--border);">
+                <div style="width: 8px; height: 8px; border-radius: 0; background: #e85d5d;"></div>
                 <span style="font-weight: 700; font-size: 12px; color: #e85d5d; text-transform: uppercase; letter-spacing: 0.04em;">Before</span>
               </div>
 
               <!-- Before Metrics -->
               <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
-                <div style="background: rgba(0,0,0,0.2); border-radius: 8px; padding: 12px; text-align: center;">
+                <div style="background: transparent; border-radius: 0; padding: 12px; text-align: center;">
                   <div style="font-weight: 700; font-size: 14px; color: #e85d5d;">72%</div>
                   <div style="font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 4px;">Design System<br/>Compliance</div>
                 </div>
-                <div style="background: rgba(0,0,0,0.2); border-radius: 8px; padding: 12px; text-align: center;">
+                <div style="background: transparent; border-radius: 0; padding: 12px; text-align: center;">
                   <div style="font-weight: 700; font-size: 14px; color: #e85d5d;">3 days</div>
                   <div style="font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 4px;">Handoff<br/>Cycle Time</div>
                 </div>
-                <div style="background: rgba(0,0,0,0.2); border-radius: 8px; padding: 12px; text-align: center;">
+                <div style="background: transparent; border-radius: 0; padding: 12px; text-align: center;">
                   <div style="font-weight: 700; font-size: 14px; color: #e85d5d;">12x/wk</div>
                   <div style="font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 4px;">Design<br/>Review Meetings</div>
                 </div>
-                <div style="background: rgba(0,0,0,0.2); border-radius: 8px; padding: 12px; text-align: center;">
+                <div style="background: transparent; border-radius: 0; padding: 12px; text-align: center;">
                   <div style="font-weight: 700; font-size: 14px; color: #e85d5d;">~60%</div>
                   <div style="font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 4px;">Spec Writing<br/>Accuracy</div>
                 </div>
-                <div style="background: rgba(0,0,0,0.2); border-radius: 8px; padding: 12px; text-align: center;">
+                <div style="background: transparent; border-radius: 0; padding: 12px; text-align: center;">
                   <div style="font-weight: 700; font-size: 14px; color: #e85d5d;">38 hrs</div>
                   <div style="font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 4px;">Weekly Overhead<br/>per Designer</div>
                 </div>
-                <div style="background: rgba(0,0,0,0.2); border-radius: 8px; padding: 12px; text-align: center;">
+                <div style="background: transparent; border-radius: 0; padding: 12px; text-align: center;">
                   <div style="font-weight: 700; font-size: 14px; color: #e85d5d;">4x</div>
                   <div style="font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 4px;">Dev Spec<br/>Revisions</div>
                 </div>
-                <div style="background: rgba(0,0,0,0.2); border-radius: 8px; padding: 12px; text-align: center;">
+                <div style="background: transparent; border-radius: 0; padding: 12px; text-align: center;">
                   <div style="font-weight: 700; font-size: 14px; color: #e85d5d;">Manual</div>
                   <div style="font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 4px;">Governance &amp;<br/>QA Process</div>
                 </div>
@@ -509,47 +504,47 @@
             </div>
 
             <!-- AFTER SIDE -->
-            <div style="background: rgba(123,104,238,0.08); border: 1px solid rgba(123,104,238,0.16); border-radius: 10px; padding: 20px; position: relative;">
-              <div style="position: absolute; top: -12px; right: 16px; background: var(--bg-elevated); color: white; padding: 4px 12px; border-radius: 4px; font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;">Live</div>
+            <div style="background: rgba(123,104,238,0.08); border: 1px solid rgba(123,104,238,0.16); border-radius: 0; padding: 20px; position: relative;">
+              <div style="position: absolute; top: -12px; right: 16px; background: var(--bg-elevated); color: white; padding: 4px 12px; border-radius: 0; font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;">Live</div>
 
-              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border);">
-                <div style="width: 8px; height: 8px; border-radius: 4px; background: #7b68ee;"></div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1.5px solid var(--border);">
+                <div style="width: 8px; height: 8px; border-radius: 0; background: #7b68ee;"></div>
                 <span style="font-weight: 700; font-size: 12px; color: #7b68ee; text-transform: uppercase; letter-spacing: 0.04em;">After (AI-Integrated)</span>
               </div>
 
               <!-- After Metrics -->
               <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
-                <div style="background: rgba(123,104,238,0.1); border: 1px solid rgba(123,104,238,0.2); border-radius: 8px; padding: 12px; text-align: center;">
+                <div style="background: rgba(123,104,238,0.1); border: 1px solid rgba(123,104,238,0.2); border-radius: 0; padding: 12px; text-align: center;">
                   <div style="font-weight: 700; font-size: 14px; color: #7b68ee;">98%</div>
                   <div style="font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 4px;">Design System<br/>Compliance</div>
                   <div style="font-size: 7px; color: #49a942; margin-top: 6px; font-weight: 600;">+36% increase</div>
                 </div>
-                <div style="background: rgba(123,104,238,0.1); border: 1px solid rgba(123,104,238,0.2); border-radius: 8px; padding: 12px; text-align: center;">
+                <div style="background: rgba(123,104,238,0.1); border: 1px solid rgba(123,104,238,0.2); border-radius: 0; padding: 12px; text-align: center;">
                   <div style="font-weight: 700; font-size: 14px; color: #7b68ee;">Same-day</div>
                   <div style="font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 4px;">Handoff<br/>Cycle Time</div>
                   <div style="font-size: 7px; color: #49a942; margin-top: 6px; font-weight: 600;">-70% faster</div>
                 </div>
-                <div style="background: rgba(123,104,238,0.1); border: 1px solid rgba(123,104,238,0.2); border-radius: 8px; padding: 12px; text-align: center;">
+                <div style="background: rgba(123,104,238,0.1); border: 1px solid rgba(123,104,238,0.2); border-radius: 0; padding: 12px; text-align: center;">
                   <div style="font-weight: 700; font-size: 14px; color: #7b68ee;">7x/wk</div>
                   <div style="font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 4px;">Design<br/>Review Meetings</div>
                   <div style="font-size: 7px; color: #49a942; margin-top: 6px; font-weight: 600;">-40% reduction</div>
                 </div>
-                <div style="background: rgba(123,104,238,0.1); border: 1px solid rgba(123,104,238,0.2); border-radius: 8px; padding: 12px; text-align: center;">
+                <div style="background: rgba(123,104,238,0.1); border: 1px solid rgba(123,104,238,0.2); border-radius: 0; padding: 12px; text-align: center;">
                   <div style="font-weight: 700; font-size: 14px; color: #7b68ee;">~98%</div>
                   <div style="font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 4px;">Spec Writing<br/>Accuracy</div>
                   <div style="font-size: 7px; color: #49a942; margin-top: 6px; font-weight: 600;">+63% improvement</div>
                 </div>
-                <div style="background: rgba(123,104,238,0.1); border: 1px solid rgba(123,104,238,0.2); border-radius: 8px; padding: 12px; text-align: center;">
+                <div style="background: rgba(123,104,238,0.1); border: 1px solid rgba(123,104,238,0.2); border-radius: 0; padding: 12px; text-align: center;">
                   <div style="font-weight: 700; font-size: 14px; color: #7b68ee;">12 hrs</div>
                   <div style="font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 4px;">Weekly Overhead<br/>per Designer</div>
                   <div style="font-size: 7px; color: #49a942; margin-top: 6px; font-weight: 600;">-68% reduction</div>
                 </div>
-                <div style="background: rgba(123,104,238,0.1); border: 1px solid rgba(123,104,238,0.2); border-radius: 8px; padding: 12px; text-align: center;">
+                <div style="background: rgba(123,104,238,0.1); border: 1px solid rgba(123,104,238,0.2); border-radius: 0; padding: 12px; text-align: center;">
                   <div style="font-weight: 700; font-size: 14px; color: #7b68ee;">&lt;1x</div>
                   <div style="font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 4px;">Dev Spec<br/>Revisions</div>
                   <div style="font-size: 7px; color: #49a942; margin-top: 6px; font-weight: 600;">-75% fewer</div>
                 </div>
-                <div style="background: rgba(123,104,238,0.1); border: 1px solid rgba(123,104,238,0.2); border-radius: 8px; padding: 12px; text-align: center;">
+                <div style="background: rgba(123,104,238,0.1); border: 1px solid rgba(123,104,238,0.2); border-radius: 0; padding: 12px; text-align: center;">
                   <div style="font-weight: 700; font-size: 14px; color: #7b68ee;">Automated</div>
                   <div style="font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 4px;">Governance &amp;<br/>Real-time QA</div>
                   <div style="font-size: 7px; color: #49a942; margin-top: 6px; font-weight: 600;">Proactive</div>
@@ -564,26 +559,26 @@
           </div>
 
           <!-- Tools & Infrastructure Section -->
-          <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin-bottom: 28px;">
+          <div style="background: rgba(255,255,255,0.02); border: 1.5px solid var(--border); border-radius: 0; padding: 20px; margin-bottom: 28px;">
             <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
               <span style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.04em;">AI Stack &amp; Infrastructure</span>
               <div style="flex: 1; height: 1px; background: var(--border);"></div>
             </div>
 
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
-              <div style="background: rgba(123,104,238,0.08); border: 1px solid rgba(123,104,238,0.16); border-radius: 8px; padding: 14px;">
+              <div style="background: rgba(123,104,238,0.08); border: 1px solid rgba(123,104,238,0.16); border-radius: 0; padding: 14px;">
                 <div style="font-weight: 700; font-size: 10px; color: #7b68ee; text-transform: uppercase; margin-bottom: 8px;">Claude</div>
                 <div style="font-size: 8px; color: rgba(255,255,255,0.6); line-height: 1.5;">
                   • Spec generation<br/>• Interaction flows<br/>• Copy refinement<br/>• Jira automation
                 </div>
               </div>
-              <div style="background: rgba(123,104,238,0.08); border: 1px solid rgba(123,104,238,0.16); border-radius: 8px; padding: 14px;">
+              <div style="background: rgba(123,104,238,0.08); border: 1px solid rgba(123,104,238,0.16); border-radius: 0; padding: 14px;">
                 <div style="font-weight: 700; font-size: 10px; color: #7b68ee; text-transform: uppercase; margin-bottom: 8px;">Cursor IDE</div>
                 <div style="font-size: 8px; color: rgba(255,255,255,0.6); line-height: 1.5;">
                   • Real-time code assist<br/>• Component generation<br/>• DevTools integration<br/>• File sync automation
                 </div>
               </div>
-              <div style="background: rgba(123,104,238,0.08); border: 1px solid rgba(123,104,238,0.16); border-radius: 8px; padding: 14px;">
+              <div style="background: rgba(123,104,238,0.08); border: 1px solid rgba(123,104,238,0.16); border-radius: 0; padding: 14px;">
                 <div style="font-weight: 700; font-size: 10px; color: #7b68ee; text-transform: uppercase; margin-bottom: 8px;">Figma MCP</div>
                 <div style="font-size: 8px; color: rgba(255,255,255,0.6); line-height: 1.5;">
                   • Token export automation<br/>• Component API access<br/>• Design-to-code bridge<br/>• Live sync with Cursor
@@ -593,29 +588,29 @@
           </div>
 
           <!-- Transformation Timeline -->
-          <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 10px; padding: 20px; margin-bottom: 28px;">
+          <div style="background: rgba(255,255,255,0.02); border: 1.5px solid var(--border); border-radius: 0; padding: 20px; margin-bottom: 28px;">
             <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
               <span style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.04em;">Transformation Timeline</span>
               <div style="flex: 1; height: 1px; background: var(--border);"></div>
             </div>
 
             <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
-              <div style="background: rgba(232,93,93,0.1); border-radius: 8px; padding: 12px; text-align: center;">
+              <div style="background: rgba(232,93,93,0.1); border-radius: 0; padding: 12px; text-align: center;">
                 <div style="font-weight: 700; font-size: 9px; color: #e85d5d; margin-bottom: 6px; text-transform: uppercase;">Week 1-2</div>
                 <div style="font-size: 8px; color: var(--text-muted);">Audit Current State</div>
                 <div style="font-size: 7px; color: rgba(255,255,255,0.4); margin-top: 6px;">Pain point mapping<br/>Bottleneck analysis</div>
               </div>
-              <div style="background: rgba(123,104,238,0.1); border-radius: 8px; padding: 12px; text-align: center;">
+              <div style="background: rgba(123,104,238,0.1); border-radius: 0; padding: 12px; text-align: center;">
                 <div style="font-weight: 700; font-size: 9px; color: #7b68ee; margin-bottom: 6px; text-transform: uppercase;">Week 3-4</div>
                 <div style="font-size: 8px; color: var(--text-muted);">Implementation</div>
                 <div style="font-size: 7px; color: rgba(255,255,255,0.4); margin-top: 6px;">AI workflow setup<br/>Tool integration</div>
               </div>
-              <div style="background: rgba(73,169,66,0.1); border-radius: 8px; padding: 12px; text-align: center;">
+              <div style="background: rgba(73,169,66,0.1); border-radius: 0; padding: 12px; text-align: center;">
                 <div style="font-weight: 700; font-size: 9px; color: #49a942; margin-bottom: 6px; text-transform: uppercase;">Week 5-6</div>
                 <div style="font-size: 8px; color: var(--text-muted);">Pilot &amp; Refinement</div>
                 <div style="font-size: 7px; color: rgba(255,255,255,0.4); margin-top: 6px;">Team training<br/>Workflow optimization</div>
               </div>
-              <div style="background: rgba(123,104,238,0.1); border-radius: 8px; padding: 12px; text-align: center;">
+              <div style="background: rgba(123,104,238,0.1); border-radius: 0; padding: 12px; text-align: center;">
                 <div style="font-weight: 700; font-size: 9px; color: #7b68ee; margin-bottom: 6px; text-transform: uppercase;">Week 7-8</div>
                 <div style="font-size: 8px; color: var(--text-muted);">Optimisation &amp; Scale</div>
                 <div style="font-size: 7px; color: rgba(255,255,255,0.4); margin-top: 6px;">MVP launch<br/>Governance setup</div>
@@ -624,36 +619,36 @@
           </div>
 
           <!-- Team Impact Section -->
-          <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 10px; padding: 20px;">
+          <div style="background: rgba(255,255,255,0.02); border: 1.5px solid var(--border); border-radius: 0; padding: 20px;">
             <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
               <span style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.04em;">Team Capacity Impact</span>
               <div style="flex: 1; height: 1px; background: var(--border);"></div>
             </div>
 
             <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
-              <div style="background: rgba(123,104,238,0.08); border-radius: 8px; padding: 14px;">
+              <div style="background: rgba(123,104,238,0.08); border-radius: 0; padding: 14px;">
                 <div style="font-weight: 700; font-size: 9px; color: #7b68ee; text-transform: uppercase; margin-bottom: 8px;">Product Designer</div>
                 <div style="font-size: 13px; font-weight: 700; color: #49a942; margin-bottom: 4px;">18 hrs/week</div>
                 <div style="font-size: 8px; color: var(--text-muted);">Reclaimed from spec writing &amp; rework</div>
               </div>
-              <div style="background: rgba(123,104,238,0.08); border-radius: 8px; padding: 14px;">
+              <div style="background: rgba(123,104,238,0.08); border-radius: 0; padding: 14px;">
                 <div style="font-weight: 700; font-size: 9px; color: #7b68ee; text-transform: uppercase; margin-bottom: 8px;">Front-end Eng</div>
                 <div style="font-size: 13px; font-weight: 700; color: #49a942; margin-bottom: 4px;">12 hrs/week</div>
                 <div style="font-size: 8px; color: var(--text-muted);">Fewer spec clarifications &amp; rework</div>
               </div>
-              <div style="background: rgba(123,104,238,0.08); border-radius: 8px; padding: 14px;">
+              <div style="background: rgba(123,104,238,0.08); border-radius: 0; padding: 14px;">
                 <div style="font-weight: 700; font-size: 9px; color: #7b68ee; text-transform: uppercase; margin-bottom: 8px;">Design Lead</div>
                 <div style="font-size: 13px; font-weight: 700; color: #49a942; margin-bottom: 4px;">8 hrs/week</div>
                 <div style="font-size: 8px; color: var(--text-muted);">Fewer review meetings &amp; escalations</div>
               </div>
-              <div style="background: rgba(123,104,238,0.08); border-radius: 8px; padding: 14px;">
+              <div style="background: rgba(123,104,238,0.08); border-radius: 0; padding: 14px;">
                 <div style="font-weight: 700; font-size: 9px; color: #7b68ee; text-transform: uppercase; margin-bottom: 8px;">Product Manager</div>
                 <div style="font-size: 13px; font-weight: 700; color: #49a942; margin-bottom: 4px;">6 hrs/week</div>
                 <div style="font-size: 8px; color: var(--text-muted);">Automated status &amp; comms synthesis</div>
               </div>
             </div>
 
-            <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);">
+            <div style="margin-top: 16px; padding-top: 16px; border-top: 1.5px solid var(--border);">
               <div style="font-size: 9px; color: rgba(255,255,255,0.6);">
                 <strong style="color: rgba(255,255,255,0.8);">Total Time Reclaimed:</strong> 44 hours/week across team (equivalent to 1.1 FTE)
               </div>
