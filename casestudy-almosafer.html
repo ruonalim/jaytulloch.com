@@ -50,7 +50,7 @@
     .cs-hero::before { display: none; }
         .cs-hero::after { display: none; }
     .cs-hero-inner { max-width: 1100px; margin: 0; }
-    .cs-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; }
+    .cs-eyebrow { display: none; font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; }
     .cs-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(42px, 6vw, 80px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.0; text-transform: uppercase; margin-bottom: 32px; }
     .cs-title em { font-style: normal; color: var(--accent); }
     .cs-desc { font-size: clamp(16px, 1.5vw, 20px); color: var(--text-body); max-width: 680px; line-height: 1.6; margin-bottom: 60px; }
@@ -67,10 +67,10 @@
     .cs-section { padding: 96px clamp(32px, 5vw, 80px); border-bottom: 1.5px solid var(--border); }
     .cs-section:last-of-type { border-bottom: none; }
     .cs-section-inner { max-width: 1100px; margin: 0 auto; }
-    .section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 48px; }
+    .section-label { display: none; font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 48px; }
     .two-col { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
-    .col-heading { font-size: clamp(28px, 3vw, 40px); font-weight: 800; letter-spacing: -0.02em; text-transform: uppercase; line-height: 1.1; position: sticky; top: 100px; }
-    .col-heading em { font-style: normal; color: var(--muted); }
+    .col-heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 5vw, 72px); font-weight: 400; letter-spacing: 0.02em; text-transform: uppercase; line-height: 0.95; position: sticky; top: 100px; }
+    .col-heading em { font-style: normal; color: var(--muted); font-family: inherit; }
     .col-body p { font-size: 17px; color: var(--text); line-height: 1.75; margin-bottom: 24px; }
     .col-body p:last-child { margin-bottom: 0; }
     .col-body strong { color: var(--text); font-weight: 700; }
@@ -340,13 +340,7 @@
     }
   
     /* ─── Playfair Display callout accent ──────────────────────────── */
-    h1 em, h2 em {
-      font-family: 'Abril Fatface', Georgia, serif;
-      font-weight: 400;
-      font-style: normal;
-      font-size: 1em;
-      letter-spacing: 0;
-    }
+    h1 em, h2 em { font-family: inherit; font-weight: inherit; font-style: normal; letter-spacing: inherit; }
     .pod-stat-value em {
       font-family: 'Space Grotesk', -apple-system, sans-serif;
       font-weight: inherit;
