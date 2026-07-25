@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Design System Is Now Machine Infrastructure. Most Teams Still Document It for Humans. | Jay Tulloch</title>
+  <meta name="description" content="For fifteen years we built design systems for people. A tidy documentation site. Usage guidelines nobody read past the first heading. A component library one designer updated on a good week. That entire model is now aimed at the wrong reader." />
+  <link rel="canonical" href="https://www.jaytulloch.com/writing/your-design-system-is-now-machine-infrastructure-most-teams-still-document-it-for-humans.html" />
+  <meta property="og:title" content="Your Design System Is Now Machine Infrastructure. Most Teams Still Document It for Humans." />
+  <meta property="og:description" content="For fifteen years we built design systems for people. A tidy documentation site. Usage guidelines nobody read past the first heading. A component library one designer updated on a good week. That entire model is now aimed at the wrong reader." />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://www.jaytulloch.com/writing/your-design-system-is-now-machine-infrastructure-most-teams-still-document-it-for-humans.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=switzer@300,400,500,600,700,800,900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg:#FFFFFF; --text:#111111; --text-muted:#6B6E74; --text-body:#141414; --border:#E8E8EC; --accent:#0044E4; --font:'Switzer',-apple-system,Helvetica Neue,Arial,sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 20px clamp(32px, 5vw, 80px); background: rgba(255,255,255,0.95); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #111; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .article-wrap { max-width: 720px; margin: 0 auto; padding: 140px clamp(20px, 5vw, 40px) 80px; }
+    .article-back { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 32px; }
+    .article-back:hover { color: var(--text); }
+    .article-meta { display: flex; gap: 12px; align-items: center; margin-bottom: 16px; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+    .article-topic { color: var(--accent); }
+    .article-date { color: var(--text-muted); }
+    .article-read-time { color: var(--text-muted); }
+    .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--border); }
+    .article-title { font-size: clamp(32px, 5vw, 52px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
+    article h2 { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; margin: 48px 0 16px; line-height: 1.2; }
+    article h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin: 32px 0 12px; }
+    article p { margin-bottom: 22px; color: var(--text-body); }
+    article strong { font-weight: 700; color: var(--text); }
+    article blockquote { border-left: 2px solid var(--accent); padding-left: 20px; margin: 32px 0; color: var(--text-muted); font-style: italic; }
+    article hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+    article ul { padding-left: 24px; margin-bottom: 22px; }
+    article li { margin-bottom: 8px; }
+    .article-footer { margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+    .footer-cta { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 12px 24px; border: 1px solid var(--text); color: var(--text); transition: background 0.2s, color 0.2s; }
+    .footer-cta:hover { background: var(--text); color: var(--bg); }
+
+    .fact-check { background:#0E0E10; color:#E8E8EC; border-radius:16px; padding:36px clamp(20px,4vw,40px); margin:64px 0 0; }
+    .fact-check-badge { display:inline-block; font-size:11px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#6E9BFF; background:rgba(0,68,228,0.18); padding:6px 14px; border-radius:999px; margin-bottom:20px; }
+    .fact-check-intro { font-size:14px; color:#9A9DA4; margin-bottom:12px; line-height:1.6; }
+    .fact-item { display:flex; gap:16px; padding:18px 0; border-top:1px solid rgba(255,255,255,0.08); }
+    .fact-num { flex:0 0 24px; font-size:12px; font-weight:700; color:#6E9BFF; line-height:1.7; }
+    .fact-body { flex:1 1 auto; }
+    .fact-claim { font-size:15px; font-weight:600; color:#F5F5F7; margin-bottom:6px; line-height:1.5; }
+    .fact-source { font-size:13px; color:#9A9DA4; line-height:1.55; }
+    .fact-unsourced { font-size:13px; color:#9A9DA4; margin-top:24px; padding-top:20px; border-top:1px solid rgba(255,255,255,0.08); line-height:1.6; }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="../" class="nav-logo">Jay Tulloch</a>
+    <ul class="nav-links">
+      <li><a href="../#about">About</a></li>
+      <li><a href="../#work">Work</a></li>
+      <li><a href="../writing.html" class="active">Writing</a></li>
+      <li><a href="../#podcast">Podcast</a></li>
+      <li><a href="../contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="article-wrap">
+    <a href="../writing.html" class="article-back">← All writing</a>
+    <div class="article-meta">
+      <span class="article-topic">AI &amp; Design</span>
+      <div class="dot"></div>
+      <span class="article-date">July 27, 2026</span>
+      <div class="dot"></div>
+      <span class="article-read-time">7 min read</span>
+    </div>
+    <h1 class="article-title">Your Design System Is Now Machine Infrastructure. Most Teams Still Document It for Humans.</h1>
+    <article>
+      <p>For fifteen years we built design systems for people. A tidy documentation site. Usage guidelines nobody read past the first heading. A component library one designer updated on a good week. That entire model is now aimed at the wrong reader.</p>
+      <p>The primary consumer of your design system in 2026 is an agent. And it does not read your docs.</p>
+      <p>This is the shift most design teams are sleeping through. They are still polishing the Storybook site and arguing about whether the button page needs another example, while the thing that actually decides whether an AI can build against their system sits one layer down: in the props, the types, and the states. Nobody owns that layer with any real rigour. It is about to become the most valuable thing the team has.</p>
+      <h2>Why this is happening now</h2>
+      <p>In 2026 Brad Frost, who wrote Atomic Design, ran a session with Dominic Nguyen, co-founder of Chromatic, called Agentic Design Systems in 2026. The demo is the part worth watching. Someone typed &quot;Add a customer reviews component.&quot; The agent found a Star component, pulled in Typography and an Avatar, read their props, understood their states, composed something new, wrote the code, and wrote the tests. No designer opened a file. No engineer wired it up by hand.</p>
+      <p>That is not a party trick. That is the new default build path. Figma has already shipped a native agentic tool aimed specifically at design tasks, handing designers assistants inside the canvas that generate interface elements directly (Fast Company, 2026). The direction of travel is obvious. Agents assemble UI. The only question left is what they assemble it from.</p>
+      <p>And here is the uncomfortable answer. They assemble it from whatever your system exposes. If your components have clean, typed props and well-defined states, the agent composes something sensible. If your props are inconsistent and your states are half-documented, the agent still ships. It just ships something wrong, fast, and with confidence.</p>
+      <h2>Agents read structure, not screenshots</h2>
+      <p>The core insight from the agentic design systems work is blunt. AI agents consume context differently from humans. They do not learn your system by looking at a nicely laid out documentation page. They need structured metadata, types, and examples. Frost and the Chromatic team frame the requirement as two pillars: coverage, which means machine-readable patterns through normalised examples and composition rules, and validation, which means enforcing standards through tests and human review.</p>
+      <p>Read that back and notice what is missing. Nowhere in there is &quot;a really good usage guidelines page.&quot; The artefact we have spent a decade perfecting, the human-facing doc site, is close to irrelevant to the machine that is now doing the composition.</p>
+      <p>This reframes what a design system actually is. It was never really the Figma library or the docs. It was always the contract: what a component accepts, what states it can be in, how pieces combine. We just got away with keeping that contract loose because humans are good at filling gaps. A designer sees a button with three documented states and instinctively knows there is a disabled state too. An agent does not instinct anything. It reads what is there and builds on it.</p>
+      <h2>Token drift stops being a taste argument and becomes a test</h2>
+      <p>Here is where this gets practical, and honestly where it gets good. For years, governance in design systems was a losing battle fought with politeness. You would spot someone hardcoding a hex value instead of using a token, leave a comment, and hope. Multiply that across a fast team and the system slowly rots.</p>
+      <p>AI tooling is now emerging that auto-polices this. It flags token drift, the moment a designer hardcodes a hex value instead of using the token, and it does it automatically. Governance moves from a person nagging in review to a rule that fails a check. That is a genuine upgrade. The systems that adopt this will hold their integrity under speed. The ones that do not will drift faster than ever, because agents will happily generate a hundred screens a week on top of a broken foundation.</p>
+      <p>I have seen the before-state up close. On a regulated product in a heavily compliance-bound category, I ran a design system audit and found the same thing every audit finds. Components that looked consistent on the surface but had three different naming conventions underneath. States that existed in the built product but were never captured in the system. Spacing applied by eye, not by token. Humans had absorbed all of it. The product worked. Nobody noticed the debt because the debt lived in a layer people did not have to read.</p>
+      <p>An agent has to read that layer. That is the whole point. The mess we hid from humans is exactly the mess we now have to expose and fix, because it is the input to everything the machine builds next.</p>
+      <h2>What this does to the org</h2>
+      <p>This changes who is valuable on a design systems team. The person who makes the beautiful documentation site is no longer the most important hire. The person who defines a rigorous component API, names every state, types every prop, and writes the composition rules is now sitting on the critical path for the entire product&#x27;s build velocity.</p>
+      <p>That is a real shift in status, and most orgs have not caught up to it. Design systems work has long been treated as the unglamorous back office of a design team, the place you put people who like tidy things. In an agentic build pipeline it becomes the leverage point. Get the contract right and every agent-generated screen inherits your quality. Get it wrong and every agent-generated screen inherits your problems, at machine speed.</p>
+      <h2>The obvious pushback</h2>
+      <p>The fair counter is that most companies do not even have a mature design system, so this is a problem for the top five percent of teams and irrelevant to everyone else.</p>
+      <p>I disagree, and I think that reading gets the timing exactly backwards. The teams without a mature system are the ones most exposed, not least. If you have no structured component layer, an agent will improvise one every time it builds, and it will improvise a different one each time. You do not get to skip the design system in an agentic workflow. You either author the contract deliberately or you let the machine invent an inconsistent one on the fly. The absence of a system is not neutral anymore. It is an active liability that compounds with every prompt.</p>
+      <p>The second pushback is that this is design systems people talking their own book, inflating their importance during an AI wave. Maybe. But the demo is real, the Figma agent is shipping, and the token-drift tooling exists. When the tooling arrives before the think-piece, it is usually not hype.</p>
+      <h2>What I would do</h2>
+      <p>If I were running a design org right now, I would stop treating the documentation site as the deliverable. I would treat the component contract as the deliverable. Typed props, every state named and captured, composition rules written down, machine-readable examples for each pattern. I would wire token drift into a check that fails a build, not a comment that starts an argument. And I would move my strongest systems thinker onto that layer and tell the org plainly that this is now infrastructure, not housekeeping.</p>
+      <p>What I would not do is spend another quarter making the human-facing docs prettier while the props stay loose underneath. That is polishing the lobby while the foundations crack.</p>
+      <p>The design system stopped being a reference for humans who skim. It became infrastructure for machines that execute. The teams that internalise that in the next two quarters will ship faster and cleaner than they ever have. The teams that keep documenting for a reader who no longer shows up will watch agents build confidently on top of their mess, and wonder why the quality fell off a cliff.</p>
+      <hr/>
+      <p>Fact Check</p>
+      <p>Every factual claim in this article, with its source.</p>
+      <p>Claim: In 2026 Brad Frost, author of Atomic Design, and Chromatic co-founder Dominic Nguyen ran an &quot;Agentic Design Systems in 2026&quot; session in which an AI agent composed a new customer reviews component from existing components&#x27; props and states, then wrote the code and the tests, with no designer opening a file.</p>
+      <p>Source: Brad Frost &amp; Dominic Nguyen (Chromatic), &quot;Agentic Design Systems in 2026&quot; session, 2026. bradfrost.com</p>
+      <p>Claim: Figma has shipped a native agentic tool aimed at design tasks, giving designers assistants inside the canvas that generate interface elements directly.</p>
+      <p>Source: Fast Company, 2026, coverage of Figma&#x27;s native agentic design tool. fastcompany.com</p>
+      <p>Claim: The agentic design systems approach frames the requirement as two pillars, coverage (machine-readable patterns via normalised examples and composition rules) and validation (enforcing standards through tests and human review).</p>
+      <p>Source: Brad Frost &amp; Chromatic, &quot;Agentic Design Systems in 2026,&quot; 2026. chromatic.com</p>
+      <p>Claim: The Atomic Design methodology, which structures interfaces from small reusable components upward, was authored by Brad Frost.</p>
+      <p>Source: Brad Frost, Atomic Design, 2016. atomicdesign.bradfrost.com</p>
+      <p>Unsourced statements (Jay&#x27;s opinion or lived experience): Jay&#x27;s framing that a design system&#x27;s primary consumer is now an agent and its value lies in a clean machine-readable contract; his account of running a design system audit on a regulated product and finding inconsistent naming, uncaptured states and eye-applied spacing; his prescriptions to treat the component contract as the deliverable, wire token drift into build checks, and move the strongest systems thinker onto that layer; his view that teams without a mature system are the most exposed. These are Jay&#x27;s points of view, not third-party data.</p>
+    </article>
+    <div class="article-footer">
+      <a href="../writing.html" class="footer-cta">More writing</a>
+      <a href="../contact.html" class="footer-cta">Get in touch</a>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var article = document.querySelector('article');
+      if (!article) return;
+      var ps = Array.prototype.slice.call(article.querySelectorAll('p'));
+      var start = null;
+      for (var k = 0; k < ps.length; k++) {
+        if (ps[k].textContent.trim() === 'Fact Check') { start = ps[k]; break; }
+      }
+      if (!start) return;
+      var nodes = [];
+      var n = start;
+      while (n) { nodes.push(n); n = n.nextElementSibling; }
+      var aside = document.createElement('aside');
+      aside.className = 'fact-check';
+      var badge = document.createElement('div');
+      badge.className = 'fact-check-badge';
+      badge.textContent = 'Fact Check';
+      aside.appendChild(badge);
+      var num = 0, pendingClaim = null;
+      for (var i = 1; i < nodes.length; i++) {
+        var t = nodes[i].textContent.trim();
+        if (/^Claim:/i.test(t)) {
+          pendingClaim = t.replace(/^Claim:\s*/i, '');
+        } else if (/^Source:/i.test(t)) {
+          num++;
+          var item = document.createElement('div'); item.className = 'fact-item';
+          var numEl = document.createElement('div'); numEl.className = 'fact-num';
+          numEl.textContent = (num < 10 ? '0' : '') + num;
+          var bodyEl = document.createElement('div'); bodyEl.className = 'fact-body';
+          var claimEl = document.createElement('div'); claimEl.className = 'fact-claim';
+          claimEl.textContent = pendingClaim || '';
+          var srcEl = document.createElement('div'); srcEl.className = 'fact-source';
+          srcEl.textContent = t.replace(/^Source:\s*/i, '');
+          bodyEl.appendChild(claimEl); bodyEl.appendChild(srcEl);
+          item.appendChild(numEl); item.appendChild(bodyEl);
+          aside.appendChild(item);
+          pendingClaim = null;
+        } else if (/^Unsourced statements/i.test(t)) {
+          var u = document.createElement('div'); u.className = 'fact-unsourced';
+          u.textContent = t;
+          aside.appendChild(u);
+        } else {
+          var intro = document.createElement('div'); intro.className = 'fact-check-intro';
+          intro.textContent = t;
+          aside.appendChild(intro);
+        }
+      }
+      start.parentNode.insertBefore(aside, start);
+      nodes.forEach(function (node) { node.parentNode.removeChild(node); });
+    })();
+  </script>
+</body>
+</html>
