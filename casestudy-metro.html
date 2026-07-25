@@ -15,22 +15,22 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg: #F5F5F0;
-      --bg-card: #F5F5F0;
-      --bg-elevated: #E8E8E0;
+      --bg: #FFFFFF;
+      --bg-card: #FFFFFF;
+      --bg-elevated: #F0F0F0;
       --text: #0A0A0A;
       --text-muted: #666660;
       --text-body: #0A0A0A;
       --border: #0A0A0A;
       --border-strong: #0A0A0A;
-      --tag-bg: #E8E8E0;
+      --tag-bg: #F0F0F0;
       --accent: #0A0A0A;
       --font: 'Space Grotesk', -apple-system, sans-serif;
       --black: #0A0A0A;
-      --white: #F5F5F0;
+      --white: #FFFFFF;
       --mid: #C0C0B8;
       --muted: #666660;
-      --gray-dark: #E8E8E0;
+      --gray-dark: #F0F0F0;
       --gray-mid: #C0C0B8;
       --gray-light: #666660;
     }
@@ -191,7 +191,7 @@
     }
 
     /* Process Flow Visuals */
-    .pf-canvas { width: 100%; padding: 48px 40px; background: #faf9f7; border-radius: 0; overflow: hidden; }
+    .pf-canvas { width: 100%; padding: 48px 40px; background: #FFFFFF; border-radius: 0; overflow: hidden; }
     .pf-canvas.dark { background: var(--bg-elevated); }
     .pf-canvas.dark-neutral { background: var(--bg-elevated); }
     .pf-title-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 32px; }
@@ -356,7 +356,7 @@
         /* ─── Navigation ───────────────────────────────────────────── */
     nav {
       position: sticky; top: 0; z-index: 100;
-      background: #F5F5F0;
+      background: #FFFFFF;
       border-bottom: 3px solid #0A0A0A;
       padding: 0 0 0 clamp(24px, 4vw, 60px);
       height: 56px; display: flex; align-items: stretch; justify-content: space-between;
@@ -365,16 +365,16 @@
     .nav-links { display: flex; align-items: stretch; list-style: none; }
     .nav-links li { display: flex; align-items: stretch; }
     .nav-links li a { display: flex; align-items: center; padding: 0 20px; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; border-left: 1.5px solid #0A0A0A; color: #0A0A0A; transition: background 0.1s, color 0.1s; }
-    .nav-links li a:hover { background: #0A0A0A; color: #F5F5F0; }
-    .nav-links li.nav-cta a { background: #0A0A0A; color: #F5F5F0; padding: 0 28px; }
+    .nav-links li a:hover { background: #0A0A0A; color: #FFFFFF; }
+    .nav-links li.nav-cta a { background: #0A0A0A; color: #FFFFFF; padding: 0 28px; }
     .nav-links li.nav-cta a:hover { background: #333; }
     .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; border-left: 1.5px solid #0A0A0A; cursor: pointer; padding: 0 20px; align-items: center; justify-content: center; }
     .nav-hamburger span { display: block; width: 18px; height: 1.5px; background: #0A0A0A; }
     .mobile-drawer { display: none; position: fixed; inset: 0; background: #0A0A0A; z-index: 200; flex-direction: column; padding: 80px clamp(24px,4vw,60px) clamp(24px,4vw,60px); }
     .mobile-drawer.open { display: flex; }
-    .mobile-drawer a { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px,8vw,56px); color: #F5F5F0; border-bottom: 1.5px solid rgba(255,255,255,0.2); padding: 20px 0; letter-spacing: 0.02em; text-decoration: none; }
+    .mobile-drawer a { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px,8vw,56px); color: #FFFFFF; border-bottom: 1.5px solid rgba(255,255,255,0.2); padding: 20px 0; letter-spacing: 0.02em; text-decoration: none; }
     .mobile-drawer a:first-of-type { border-top: 1.5px solid rgba(255,255,255,0.2); }
-    .drawer-close { position: absolute; top: 20px; right: clamp(24px,4vw,60px); background: none; border: 1.5px solid rgba(255,255,255,0.4); color: #F5F5F0; font-size: 20px; width: 44px; height: 44px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .drawer-close { position: absolute; top: 20px; right: clamp(24px,4vw,60px); background: none; border: 1.5px solid rgba(255,255,255,0.4); color: #FFFFFF; font-size: 20px; width: 44px; height: 44px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
     @media (max-width: 960px) {
       .nav-links li:not(.nav-cta) { display: none; }
       .nav-links li.nav-cta { display: none; }
