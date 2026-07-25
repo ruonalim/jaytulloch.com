@@ -100,22 +100,27 @@
       z-index: 100;
       background: var(--white);
       border-bottom: var(--border-heavy);
-      padding: 0 var(--pad);
+      padding: 0 0 0 var(--pad);
       height: 56px;
       display: flex;
-      align-items: center;
+      align-items: stretch;
       justify-content: space-between;
     }
     .nav-logo {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 22px;
       letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
     }
     .nav-links {
       display: flex;
       align-items: stretch;
       list-style: none;
-      height: 56px;
+    }
+    .nav-links li {
+      display: flex;
+      align-items: stretch;
     }
     .nav-links li a {
       display: flex;
@@ -136,10 +141,12 @@
       flex-direction: column;
       gap: 5px;
       background: none;
-      border: var(--border);
+      border: none;
+      border-left: var(--border);
       cursor: pointer;
-      padding: 10px 12px;
-      margin-left: 16px;
+      padding: 0 20px;
+      align-items: center;
+      justify-content: center;
     }
     .nav-hamburger span {
       display: block;
@@ -853,6 +860,7 @@
     /* ─── Responsive ────────────────────────────────────────────── */
     @media (max-width: 960px) {
       .nav-links li:not(.nav-cta) { display: none; }
+      .nav-links li.nav-cta { display: none; }
       .nav-hamburger { display: flex; }
       #hero { grid-template-columns: 1fr; min-height: auto; }
       .hero-text { border-right: none; border-bottom: var(--border-heavy); }
