@@ -227,7 +227,7 @@
     if (lpl) lpl.addEventListener('click', function() { lpl.style.display='none'; lps.classList.add('show'); if(lpi) lpi.focus(); });
     function checkLockPwd() {
       var val = (lpi ? lpi.value : '').replace(/\s/g,'').toUpperCase();
-      if (val === 'OPENSAYSME') { sessionStorage.setItem('jt_cs_unlocked','1'); window.location.href = (returnTo && returnTo !== './') ? returnTo : './#work'; }
+      if (val === 'ALAKAZAM!') { sessionStorage.setItem('jt_cs_unlocked','1'); window.location.href = (returnTo && returnTo !== './') ? returnTo : './#work'; }
       else { if(lpe) lpe.style.display='block'; if(lpi){ lpi.style.borderColor='var(--accent)'; setTimeout(function(){ lpi.style.borderColor=''; },1500); } }
     }
     if (lpb) lpb.addEventListener('click', checkLockPwd);
