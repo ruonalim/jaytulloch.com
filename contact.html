@@ -139,11 +139,9 @@
     .quick-link {
       display: flex; align-items: center; justify-content: space-between;
       padding: 20px 0;
-      border-top: var(--border);
       cursor: pointer;
       transition: background 0.1s, color 0.1s, padding 0.1s;
     }
-    .quick-link:last-child { border-bottom: var(--border); }
     .quick-link:hover { padding-left: 12px; }
     .ql-label {
       font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
@@ -315,11 +313,10 @@
     .footer-nav { list-style: none; }
     .footer-nav li a {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 16px 0; border-bottom: var(--border);
+      padding: 16px 0;
       font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
       transition: padding-left 0.15s;
     }
-    .footer-nav li:first-child a { border-top: var(--border); }
     .footer-nav li a:hover { padding-left: 12px; }
     .footer-nav li a::after { content: '↗'; font-size: 14px; }
     .footer-bottom { padding: 20px var(--pad); display: flex; justify-content: space-between; align-items: center; }
