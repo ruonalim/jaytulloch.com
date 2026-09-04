@@ -44,14 +44,14 @@
     .krak-gallery { display: grid; grid-template-columns: 2fr 1fr; gap: 2px; background: var(--bg-elevated); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .krak-gallery-wide { grid-column: span 1; }
     .krak-gallery-item { position: relative; overflow: hidden; background: var(--bg-elevated); }
-    .krak-gallery-item img { width: 100%; height: auto; display: block; object-fit: contain; transition: transform 0.6s ease; }
+    .krak-gallery-item img { width: 100%; height: auto; display: block; object-fit: unset; transition: transform 0.6s ease; }
     .krak-gallery-item:hover img { transform: scale(1.03); }
     .krak-gallery-item .krak-img-empty { width: 100%; aspect-ratio: 9/19; background: var(--bg-elevated); display: flex; align-items: center; justify-content: center; }
     .krak-gallery-item .krak-img-empty span { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.07); }
 
     .krak-img-pair { display: grid; grid-template-columns: 1fr; gap: 2px; background: var(--bg-elevated); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .krak-full-img { width: 100%; background: var(--bg-elevated); overflow: hidden; }
-    .krak-full-img img { width: 100%; display: block; max-height: 80vh; object-fit: contain; background: var(--bg-elevated); transition: transform 0.8s ease; }
+    .krak-full-img img { width: 100%; height: auto; display: block; background: var(--bg-elevated); transition: transform 0.8s ease; }
     .krak-full-img:hover img { transform: scale(1.02); }
     .krak-full-img .krak-img-empty { width: 100%; aspect-ratio: 16/9; background: var(--bg-elevated); display: flex; align-items: center; justify-content: center; }
     .krak-full-img .krak-img-empty span { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--border); }
@@ -61,7 +61,7 @@
 
     /* ── Jitter GIF showcase — full bleed ── */
     .krak-gif-showcase { background: #000; line-height: 0; overflow: hidden; }
-    .krak-gif-full { width: 100%; height: auto; display: block; max-height: 80vh; object-fit: cover; }
+    .krak-gif-full { width: 100%; max-width: 960px; height: auto; display: block; margin: 0 auto; }
 
     /* ── Product showcase — full-width floating image ── */
     .krak-showcase { background: var(--bg-elevated); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 80px clamp(32px, 5vw, 80px); }
@@ -70,7 +70,7 @@
 
     @media (max-width: 768px) {
       .krak-gallery { grid-template-columns: 1fr; }
-      .krak-gallery-item { aspect-ratio: 16/9; }
+      .krak-gallery-item { aspect-ratio: unset; }
       .krak-showcase-inner { grid-template-columns: 1fr; gap: 20px; }
       .krak-showcase { padding: 48px 24px; }
     }
@@ -191,9 +191,7 @@
       position: relative; min-height: 280px;
       display: flex; align-items: center; justify-content: center;
     }
-    .cs-image-container img {
-      width: 100%; height: auto; display: block; border-radius: 0;
-    }
+    .cs-image-container img { width: 100%; height: auto; display: block; border-radius: 0; }
     .cs-image-placeholder {
       display: flex; flex-direction: column; align-items: center; gap: 12px;
       color: rgba(255,255,255,0.15); padding: 60px 24px; text-align: center;
