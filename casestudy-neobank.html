@@ -59,6 +59,10 @@
     .krak-video-inline { background: var(--bg-elevated); padding: 64px clamp(32px, 5vw, 80px); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .krak-video-inline video { width: 100%; max-width: 1100px; height: auto; display: block; margin: 0 auto; border-radius: 0;  }
 
+    /* ── Jitter GIF showcase — full bleed ── */
+    .krak-gif-showcase { background: #000; line-height: 0; overflow: hidden; }
+    .krak-gif-full { width: 100%; height: auto; display: block; max-height: 80vh; object-fit: cover; }
+
     /* ── Product showcase — full-width floating image ── */
     .krak-showcase { background: var(--bg-elevated); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 80px clamp(32px, 5vw, 80px); }
     .krak-showcase-single { max-width: 1280px; margin: 0 auto; }
@@ -348,12 +352,8 @@
     <span class="krak-video-caption">Krak Debit Card</span>
   </div>
 
-  <div class="cs-image-block cs-image-full-width reveal">
-    <div class="cs-image-block-inner">
-      <div class="cs-image-container" id="img-app-home-screen-with-metal-debit-card-mo">
-        
-      </div>
-    </div>
+  <div class="krak-gif-showcase">
+    <img src="./assets/neobank-animation.gif" alt="Krak neobank animation" class="krak-gif-full" loading="lazy">
   </div>
 
   <section class="cs-section" style="background: var(--bg-elevated);">
