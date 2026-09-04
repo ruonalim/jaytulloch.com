@@ -198,8 +198,8 @@
   </section>
 
   <!-- Video -->
-  <div style="border-bottom: 1px solid var(--rule); line-height: 0; overflow: hidden; max-height: 480px;">
-    <video autoplay muted loop playsinline preload="metadata" style="width: 100%; height: 480px; object-fit: cover; object-position: center top; display: block;">
+  <div style="border-bottom: 1px solid var(--rule); line-height: 0; overflow: hidden;">
+    <video autoplay muted loop playsinline preload="metadata" style="width: 100%; height: clamp(220px,50vw,480px); object-fit: cover; object-position: center top; display: block;">
       <source src="./jay-contact.mp4" type="video/mp4">
     </video>
   </div>
@@ -305,7 +305,7 @@
     <div class="footer-top">
       <div class="footer-cta-col">
         <div class="footer-cta-head">Let's work<br/>together.</div>
-        <a href="mailto:mr@jaytulloch.com" class="footer-email-link" id="footer-email-link" onclick="copyFooterEmail(event)">mr@jaytulloch.com →</a>
+        <a href="https://www.linkedin.com/in/jaytulloch/" target="_blank" class="footer-email-link">Connect on LinkedIn →</a>
       </div>
       <div class="footer-right">
         <ul class="footer-nav">
@@ -337,14 +337,7 @@
         }, 2000);
       });
     }
-
-    function copyFooterEmail(e) {
-      e.preventDefault();
-      var link = document.getElementById('footer-email-link');
-      navigator.clipboard.writeText('mr@jaytulloch.com').then(function() {
-        var orig = link.textContent;
-        link.textContent = 'Copied!';
-        setTimeout(function() { link.textContent = orig; }, 2000);
+    , 2000);
       });
     }
 

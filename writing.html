@@ -775,7 +775,7 @@
     <div class="footer-top">
       <div class="footer-cta-col">
         <div class="footer-cta-head">Let's work<br/>together.</div>
-        <a href="mailto:mr@jaytulloch.com" class="footer-email-link" id="footer-email-link" onclick="copyFooterEmail(event)">mr@jaytulloch.com →</a>
+        <a href="./contact.html" class="footer-email-link">Get in touch →</a>
       </div>
       <div class="footer-right">
         <ul class="footer-nav">
@@ -823,13 +823,7 @@
     });
 
     // Footer email copy
-    function copyFooterEmail(e) {
-      e.preventDefault();
-      var link = document.getElementById('footer-email-link');
-      navigator.clipboard.writeText('mr@jaytulloch.com').then(function() {
-        var orig = link.textContent;
-        link.textContent = 'Copied!';
-        setTimeout(function() { link.textContent = orig; }, 2000);
+    , 2000);
       });
     }
 

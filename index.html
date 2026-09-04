@@ -25,7 +25,6 @@
     "name": "Jay Tulloch",
     "jobTitle": "Head of Product Design",
     "url": "https://www.jaytulloch.com",
-    "email": "mr@jaytulloch.com",
     "address": { "@type": "PostalAddress", "addressLocality": "Dubai", "addressCountry": "UAE" },
     "sameAs": ["https://www.linkedin.com/in/jaytulloch/", "https://substack.com/@jaytulloch"]
   }
@@ -193,14 +192,6 @@
       color: var(--text);
       display: block;
     }
-    .hero-tags {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--subtle);
-    }
-    .hero-tags .dot { margin: 0 8px; opacity: 0.4; }
     .hero-cta {
       display: inline-flex;
       align-items: center;
@@ -904,6 +895,20 @@
       .career-row { grid-template-columns: 1fr 1fr; }
       .cr-year { text-align: left; }
       .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
+      /* Hero */
+      .hero-title { font-size: clamp(36px, 10vw, 64px); }
+      /* Numbers */
+      .number-cell { padding: 28px 20px; }
+      .stat-value { font-size: clamp(36px, 10vw, 64px); }
+      /* AI section */
+      .ai-right { border-top: 1px solid rgba(255,255,255,0.1); }
+      .ai-stat { padding: 16px 20px; }
+      /* Work rows */
+      .work-title { font-size: 15px; }
+      /* Testimonials */
+      .t-quote { font-size: 17px; }
+      /* Footer CTA */
+      .footer-cta-head { font-size: clamp(28px, 8vw, 40px); }
     }
   </style>
 </head>
@@ -942,7 +947,6 @@
         <span class="hl-light">Product design</span>
         <span class="hl-bold">that delivers.</span>
       </h1>
-      <p class="hero-tags">Fintech <span class="dot">·</span> Crypto <span class="dot">·</span> Consumer Apps</p>
       <a href="#work" class="hero-cta">View selected work →</a>
     </div>
     <div class="hero-video-wrap">
@@ -1366,7 +1370,7 @@
     <div class="footer-top">
       <div class="footer-cta-col">
         <div class="footer-cta-head">Let's work<br/>together.</div>
-        <a href="mailto:mr@jaytulloch.com" class="footer-email-link" id="footer-email-link" onclick="copyFooterEmail(event)">mr@jaytulloch.com →</a>
+        <a href="./contact.html" class="footer-email-link">Get in touch →</a>
       </div>
       <div class="footer-right">
         <ul class="footer-nav">
@@ -1386,13 +1390,7 @@
   </footer>
 
   <script>
-    function copyFooterEmail(e) {
-      e.preventDefault();
-      var link = document.getElementById('footer-email-link');
-      navigator.clipboard.writeText('mr@jaytulloch.com').then(function() {
-        var orig = link.textContent;
-        link.textContent = 'Copied!';
-        setTimeout(function() { link.textContent = orig; }, 2000);
+    , 2000);
       });
     }
     var drawer = document.getElementById('mobile-drawer');

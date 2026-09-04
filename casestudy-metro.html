@@ -110,11 +110,11 @@
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
     @media (max-width: 768px) {
-      .cs-hero { padding: 120px 24px 72px; }
+      .cs-hero { padding: 88px 20px 56px; }
       .cs-meta { gap: 28px; }
       .metrics-banner { padding: 48px 24px; }
       .metrics-banner-inner { grid-template-columns: 1fr; }
-      .cs-section { padding: 64px 24px; }
+      .cs-section { padding: 56px 20px; }
       .two-col { grid-template-columns: 1fr; gap: 40px; }
       .col-heading { position: static; }
       .outcomes-grid { grid-template-columns: 1fr; }
@@ -124,7 +124,7 @@
   /* Password Gate */
   .cs-gate { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(28px) saturate(160%); -webkit-backdrop-filter: blur(28px) saturate(160%); background: rgba(0,0,0,0.75); transition: opacity 0.5s ease; }
   .cs-gate.unlocking { opacity: 0; pointer-events: none; }
-  .cs-gate-card { background: rgba(10,10,10,0.97); border: 1px solid rgba(255,255,255,0.14); border-radius: 0; padding: 52px 48px; width: 100%; max-width: 420px; text-align: center;  }
+  .cs-gate-card { background: rgba(10,10,10,0.97); border: 1px solid rgba(255,255,255,0.14); border-radius: 0; padding: clamp(32px,6vw,52px) clamp(20px,6vw,48px); width: min(420px, calc(100% - 40px)); text-align: center; }
   .cs-gate-icon { display: none; }
   .cs-gate-title { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: #fff; margin-bottom: 12px; line-height: 1.2; }
   .cs-gate-sub { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.65; margin-bottom: 6px; }
@@ -363,6 +363,15 @@
     @media (max-width: 860px) {
       .nav-links li:not(.nav-cta) { display: none; }
       .nav-hamburger { display: flex; }
+    }
+    @media (max-width: 480px) {
+      .cs-title { font-size: clamp(28px, 9vw, 48px); letter-spacing: -0.03em; }
+      .metrics-banner-inner { grid-template-columns: 1fr 1fr; }
+      .metric-block { padding: 24px 16px; }
+      .metric-value { font-size: clamp(28px, 8vw, 44px); }
+      .cs-meta { gap: 20px; }
+      .col-heading { font-size: clamp(24px, 7vw, 36px); }
+      .next-cs { padding: 48px 20px; }
     }
     </style>
 
