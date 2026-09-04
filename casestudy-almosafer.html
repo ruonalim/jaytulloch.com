@@ -38,7 +38,6 @@
     .cs-video-feature { background: var(--bg-elevated); padding: 64px clamp(32px, 5vw, 80px); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .cs-video-feature video { width: 100%; max-width: 1100px; height: auto; display: block; margin: 0 auto; border-radius: 0;  }
 
-
     .cs-hero {
       padding: clamp(80px,10vw,140px) clamp(24px,5vw,80px) clamp(48px,6vw,80px);
       background: var(--bg);
@@ -182,143 +181,30 @@
     }
 
     /* Process Flow Visuals */
-    .pf-canvas { width: 100%; padding: 48px 40px; background: #FFFFFF; border-radius: 0; overflow: hidden; }
-    .pf-canvas.dark { background: var(--bg-elevated); }
-    .pf-canvas.dark-neutral { background: var(--bg-elevated); }
-    .pf-title-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 32px; }
-    .pf-dot { width: 8px; height: 8px; border-radius: 50%; }
-    .pf-title-bar span { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #555559; }
-    .pf-canvas.dark .pf-title-bar span,
-    .pf-canvas.dark-neutral .pf-title-bar span { color: rgba(255,255,255,0.3); }
 
     /* Sticky note clusters */
-    .pf-clusters { display: flex; gap: 20px; margin-bottom: 32px; flex-wrap: wrap; justify-content: center; }
-    .pf-cluster { display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1; min-width: 140px; }
-    .pf-cluster-label { font-size: 9px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #555559; margin-bottom: 4px; }
-    .pf-stickies { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; max-width: 160px; }
-    .pf-sticky { width: 28px; height: 28px; border-radius: 0;  }
 
     /* Decision cards */
-    .pf-decisions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .pf-decision { background: #fff; border-radius: 0; padding: 16px 20px;  min-width: 180px; flex: 1; max-width: 240px; position: relative; }
-    .pf-decision h5 { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #333; margin-bottom: 8px; }
-    .pf-decision ul { list-style: none; padding: 0; }
-    .pf-decision li { font-size: 10px; color: #666; line-height: 1.5; padding: 2px 0; }
-    .pf-decision li::before { content: '•'; margin-right: 6px; color: #2D2D30; }
-    .pf-selected-dot { position: absolute; top: 12px; right: 12px; width: 10px; height: 10px; border-radius: 50%; }
 
     /* Connector lines */
-    .pf-connectors { display: flex; justify-content: center; padding: 12px 0; }
-    .pf-connector-line { width: 1px; height: 20px; background: rgba(0,0,0,0.12); position: relative; }
-    .pf-connector-line::after { content: '▾'; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); font-size: 8px; color: #6B6E74; }
 
     /* Journey stages */
-    .pf-journey { display: flex; gap: 0; align-items: flex-start; overflow: hidden; padding-bottom: 8px; }
-    .pf-stage { flex: 1; min-width: 140px; display: flex; flex-direction: column; align-items: center; position: relative; }
-    .pf-stage-card { background: #fff; border-radius: 0; padding: 20px 14px; text-align: center;  width: 100%; margin: 0 6px; }
-    .pf-stage-icon { font-size: 24px; margin-bottom: 8px; }
-    .pf-stage-name { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #222; }
-    .pf-stage-arrow { position: absolute; right: -8px; top: 50%; transform: translateY(-50%); font-size: 14px; color: #6B6E74; z-index: 1; }
-    .pf-triggers { display: flex; flex-direction: column; gap: 4px; margin-top: 10px; width: 100%; padding: 0 6px; }
-    .pf-trigger { font-size: 9px; padding: 5px 8px; border-radius: 0; text-align: center; font-weight: 500; }
-    .pf-pulse { width: 6px; height: 6px; border-radius: 50%; margin: 6px auto 0; }
-    .pf-insight { background: #fff; border-radius: 0; padding: 14px 20px; margin-top: 24px;  border-left: 3px solid; }
-    .pf-insight p { font-size: 11px; color: #555; line-height: 1.5; font-style: italic; }
 
     /* Wireframe comparison */
-    .pf-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; }
-    .pf-option { border-radius: 0; overflow: hidden; border: 2px solid rgba(0,0,0,0.06); }
-    .pf-option.winner { border-color: #49a942; }
-    .pf-option-header { padding: 10px 14px; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
-    .pf-wireframe { padding: 16px; background: #f5f5f5; min-height: 120px; display: flex; flex-direction: column; gap: 6px; }
-    .pf-wf-bar { height: 6px; border-radius: 0; background: #ddd; }
-    .pf-wf-block { height: 32px; border-radius: 0; background: #e8e8e8; }
-    .pf-wf-row { display: flex; gap: 6px; }
-    .pf-wf-circle { width: 20px; height: 20px; border-radius: 50%; background: #e0e0e0; flex-shrink: 0; }
-    .pf-wf-lines { display: flex; flex-direction: column; gap: 4px; flex: 1; }
-    .pf-wf-line { height: 4px; border-radius: 0; background: #e0e0e0; }
-    .pf-annotation { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 0; font-size: 9px; font-weight: 600; margin: 8px 14px; }
-    .pf-test-strip { background: #fff; border-radius: 0; padding: 12px 16px; text-align: center; font-size: 10px; color: #555; font-weight: 500;  }
 
     /* Dark flow diagrams */
-    .pf-flow { display: flex; align-items: center; gap: 12px; justify-content: center; flex-wrap: wrap; padding: 16px 0; }
-    .pf-node { border-radius: 0; padding: 14px 18px; text-align: center; min-width: 100px; }
-    .pf-node h6 { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
-    .pf-node p { font-size: 9px; opacity: 0.6; line-height: 1.3; }
-    .pf-arrow-r { font-size: 16px; opacity: 0.3; color: #fff; flex-shrink: 0; }
-    .pf-canvas.dark .pf-arrow-r { color: #fff; }
-    .pf-stat-row { display: flex; gap: 12px; justify-content: center; margin-top: 24px; }
-    .pf-stat-card { background: var(--border); border: 1px solid var(--border); border-radius: 0; padding: 14px 20px; text-align: center; }
-    .pf-stat-card .pf-stat-val { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 2px; }
-    .pf-stat-card .pf-stat-lbl { font-size: 9px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
 
     /* Data streams */
-    .pf-streams { display: flex; align-items: stretch; gap: 0; justify-content: center; margin: 16px 0; }
-    .pf-stream-col { display: flex; flex-direction: column; gap: 8px; justify-content: center; min-width: 120px; }
-    .pf-stream-item { padding: 10px 14px; border-radius: 0; font-size: 10px; font-weight: 600; text-align: center; }
-    .pf-engine { border-radius: 0; padding: 24px 20px; text-align: center; margin: 0 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 120px; }
-    .pf-engine h6 { font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
-    .pf-engine-icon { font-size: 28px; margin-bottom: 8px; }
-    .pf-arrows-col { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 0 8px; }
 
     /* Radial diagram */
-    .pf-radial { position: relative; width: 100%; max-width: 500px; margin: 0 auto; min-height: 300px; }
-    .pf-radial-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--border); border: 1px solid var(--border); border-radius: 0; padding: 14px 18px; text-align: center; z-index: 2; }
-    .pf-radial-center p { font-size: 12px; font-weight: 600; color: #fff; }
-    .pf-radial-item { position: absolute; border-radius: 0; padding: 10px 14px; text-align: center; min-width: 140px; }
-    .pf-radial-item .pf-conf { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; }
-    .pf-radial-item .pf-rlbl { font-size: 9px; font-weight: 600; letter-spacing: 0.04em; margin-top: 2px; }
 
     /* Split infographic */
-    .pf-split { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-radius: 0; overflow: hidden; }
-    .pf-split-side { padding: 32px 28px; display: flex; flex-direction: column; gap: 12px; }
-    .pf-split-label { font-size: 10px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px; }
-    .pf-split-metric { display: flex; align-items: center; gap: 10px; }
-    .pf-split-metric .pf-sm-icon { font-size: 18px; flex-shrink: 0; }
-    .pf-split-metric .pf-sm-text { font-size: 11px; font-weight: 600; }
-    .pf-split-divider { width: 2px; background: var(--border); }
-    .pf-split-quote { grid-column: 1 / -1; padding: 16px 28px; text-align: center; border-top: 1px solid var(--border); }
-    .pf-split-quote p { font-size: 10px; color: rgba(255,255,255,0.4); font-style: italic; letter-spacing: 0.02em; }
 
     /* WhatsApp + backend split */
-    .pf-wa-split { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    .pf-wa-side { border-radius: 0; overflow: hidden; }
-    .pf-wa-header { padding: 10px 16px; display: flex; align-items: center; gap: 8px; }
-    .pf-wa-header .pf-wa-avatar { width: 28px; height: 28px; border-radius: 50%; }
-    .pf-wa-header span { font-size: 12px; font-weight: 700; }
-    .pf-wa-msgs { padding: 16px; display: flex; flex-direction: column; gap: 8px; }
-    .pf-wa-msg { max-width: 85%; padding: 8px 12px; border-radius: 0; font-size: 10px; line-height: 1.5; }
-    .pf-wa-msg.user { align-self: flex-end; }
-    .pf-wa-msg.ai { align-self: flex-start; }
-    .pf-wa-booking { border-radius: 0; padding: 10px 12px; margin: 4px 0; }
-    .pf-backend { display: flex; flex-direction: column; gap: 0; align-items: center; padding: 16px; }
-    .pf-backend-step { padding: 10px 16px; border-radius: 0; text-align: center; font-size: 10px; font-weight: 600; width: 80%; }
-    .pf-backend-arrow { font-size: 12px; padding: 4px 0; }
 
     /* System architecture */
-    .pf-arch { display: flex; align-items: stretch; gap: 16px; justify-content: center; }
-    .pf-arch-col { display: flex; flex-direction: column; gap: 8px; justify-content: center; }
-    .pf-arch-node { padding: 10px 16px; border-radius: 0; font-size: 10px; font-weight: 600; text-align: center; border: 1px solid; }
-    .pf-arch-center { border-radius: 0; padding: 20px 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; min-width: 140px; }
-    .pf-arch-center h6 { font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; }
-    .pf-arch-center .pf-arch-sub { font-size: 9px; margin-top: 4px; }
-    .pf-arch-process { display: flex; gap: 8px; margin-top: 20px; justify-content: center; flex-wrap: wrap; }
-    .pf-arch-step { padding: 8px 14px; border-radius: 0; font-size: 9px; font-weight: 600; letter-spacing: 0.04em; }
-    .pf-arch-step-arrow { color: rgba(255,255,255,0.2); font-size: 12px; display: flex; align-items: center; }
 
     @media (max-width: 768px) {
-      .pf-canvas { padding: 32px 20px; }
-      .pf-clusters { gap: 12px; }
-      .pf-options { grid-template-columns: 1fr; }
-      .pf-split { grid-template-columns: 1fr; }
-      .pf-wa-split { grid-template-columns: 1fr; }
-      .pf-arch { flex-direction: column; align-items: center; }
-      .pf-streams { flex-direction: column; align-items: center; }
-      .pf-journey { flex-direction: column; align-items: stretch; }
-      .pf-stage-arrow { display: none; }
-      .pf-radial { min-height: auto; }
-      .pf-radial-item { position: static !important; transform: none !important; margin: 4px auto; }
-      .pf-radial-center { position: static; transform: none; margin: 12px auto; }
     }
       25%  { transform: translate(-160px, 120px) scale(1.25); opacity: 1; }
       50%  { transform: translate(120px, -80px) scale(0.85);  opacity: 0.75; }
@@ -424,228 +310,7 @@
   <div class="cs-image-block cs-image-full-width reveal">
     <div class="cs-image-block-inner">
       <div class="cs-image-container" id="img-natural-language-travel-search-with-ai-c">
-        <div class="pf-canvas dark-neutral" style="border-radius: 0;">
-          <div class="pf-title-bar">
-            <div class="pf-dot" style="background: #00b5a3;"></div>
-            <div class="pf-dot" style="background: #00857c;"></div>
-            <span>Conversational Booking, WhatsApp + Backend Integration</span>
-          </div>
-
-          <!-- Metadata Strip -->
-          <div style="display: flex; gap: 16px; margin-bottom: 28px; padding: 14px 16px; background: rgba(0,139,124,0.04); border-radius: 0; border: 1px solid rgba(0,181,163,0.08); flex-wrap: wrap; align-items: center; font-size: 9px;">
-            <div style="display: flex; gap: 4px; align-items: center;"><span style="color: rgba(255,255,255,0.3); font-weight: 600;">CHANNEL</span><span style="color: rgba(255,255,255,0.6);">WhatsApp Business API</span></div>
-            <div style="width: 1px; height: 14px; background: var(--border);"></div>
-            <div style="display: flex; gap: 4px; align-items: center;"><span style="color: rgba(255,255,255,0.3); font-weight: 600;">E2E LATENCY</span><span style="color: #00b5a3; font-weight: 600;">2.3s avg</span></div>
-            <div style="width: 1px; height: 14px; background: var(--border);"></div>
-            <div style="display: flex; gap: 4px; align-items: center;"><span style="color: rgba(255,255,255,0.3); font-weight: 600;">MARKETS</span><span style="color: rgba(255,255,255,0.6);">Saudi Arabia, UAE, Egypt</span></div>
-          </div>
-
-          <div class="pf-wa-split">
-            <!-- WhatsApp Conversation Side -->
-            <div class="pf-wa-side" style="background: #0b1a18; border: 1px solid rgba(0,181,163,0.15); border-radius: 0; overflow: hidden;">
-              <div class="pf-wa-header" style="background: rgba(0,181,163,0.08); border-bottom: 1px solid var(--border); padding: 12px; display: flex; align-items: center; gap: 10px;">
-                <div class="pf-wa-avatar" style="background: var(--bg-elevated); width: 36px; height: 36px; border-radius: 50%;"></div>
-                <div>
-                  <div style="color: #00b5a3; font-size: 11px; font-weight: 700;">Almosafer AI</div>
-                  <div style="color: rgba(255,255,255,0.3); font-size: 8px;">Always online</div>
-                </div>
-              </div>
-              <div class="pf-wa-msgs" style="padding: 16px; display: flex; flex-direction: column; gap: 10px; max-height: 350px; overflow-y: auto;">
-
-                <!-- User Message 1 -->
-                <div style="display: flex; justify-content: flex-end;">
-                  <div style="background: rgba(0,181,163,0.16); color: rgba(255,255,255,0.9); border-radius: 0; padding: 10px 12px; max-width: 75%; font-size: 9px; line-height: 1.4;">Family trip to Maldives, 4 nights, budget around AED 4000 per person</div>
-                </div>
-                <div style="font-size: 7px; color: rgba(255,255,255,0.25); text-align: right;">2:14 PM</div>
-
-                <!-- AI Response with typing indicator -->
-                <div style="display: flex; align-items: center; gap: 6px; margin-top: 8px;">
-                  <div style="width: 20px; height: 20px; background: rgba(0,181,163,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                    <span style="font-size: 10px; color: #00b5a3;">✦</span>
-                  </div>
-                  <div style="background: var(--border); color: rgba(255,255,255,0.6); border-radius: 0; padding: 8px 12px; font-size: 9px; display: flex; gap: 3px;">
-                    <span style="width: 4px; height: 4px; border-radius: 50%; background: rgba(0,181,163,0.6); animation: pulse 1s infinite;"></span>
-                    <span style="width: 4px; height: 4px; border-radius: 50%; background: rgba(0,181,163,0.4); animation: pulse 1s infinite 0.2s;"></span>
-                    <span style="width: 4px; height: 4px; border-radius: 50%; background: rgba(0,181,163,0.2); animation: pulse 1s infinite 0.4s;"></span>
-                  </div>
-                </div>
-
-                <!-- AI Response Text -->
-                <div style="display: flex; justify-content: flex-start;">
-                  <div style="background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.7); border-radius: 0; padding: 10px 12px; max-width: 75%; font-size: 9px;">Found 3 great options for your family! ✓</div>
-                </div>
-
-                <!-- Booking Card 1 -->
-                <div style="background: rgba(0,181,163,0.08); border: 1px solid rgba(0,181,163,0.2); border-radius: 0; padding: 12px; margin: 8px 0;">
-                  <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
-                    <div>
-                      <div style="font-size: 10px; font-weight: 700; color: #00b5a3;">Centara Grand Maldives</div>
-                      <div style="font-size: 8px; color: var(--text-muted); margin-top: 2px;">4 nights · Flights included</div>
-                    </div>
-                    <div style="font-size: 11px; font-weight: 700; color: #00b5a3;">AED 4,200</div>
-                  </div>
-                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 8px;">
-                    <div style="font-size: 8px; color: rgba(0,181,163,0.7); background: rgba(0,181,163,0.1); padding: 4px 6px; border-radius: 0;">✓ In budget</div>
-                    <div style="font-size: 8px; color: rgba(0,181,163,0.7); background: rgba(0,181,163,0.1); padding: 4px 6px; border-radius: 0;">Direct flight</div>
-                  </div>
-                  <div style="font-size: 7px; color: rgba(255,255,255,0.4);">Confidence: 96% match</div>
-                </div>
-
-                <!-- Booking Card 2 -->
-                <div style="background: rgba(0,181,163,0.06); border: 1px solid rgba(0,181,163,0.15); border-radius: 0; padding: 12px; margin: 8px 0;">
-                  <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
-                    <div>
-                      <div style="font-size: 10px; font-weight: 700; color: rgba(0,181,163,0.8);">Kandooma Resort</div>
-                      <div style="font-size: 8px; color: var(--text-muted); margin-top: 2px;">4 nights · Ferry transfer</div>
-                    </div>
-                    <div style="font-size: 11px; font-weight: 700; color: rgba(0,181,163,0.8);">AED 3,750</div>
-                  </div>
-                  <div style="font-size: 7px; color: rgba(255,255,255,0.4);">Confidence: 88% match</div>
-                </div>
-
-                <!-- AI CTA -->
-                <div style="display: flex; justify-content: flex-start;">
-                  <div style="background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.7); border-radius: 0; padding: 10px 12px; max-width: 75%; font-size: 9px;">Tap any option to reserve &rarr;</div>
-                </div>
-                <div style="font-size: 7px; color: rgba(255,255,255,0.25);">2:16 PM</div>
-
-                <!-- Confirmation -->
-                <div style="display: flex; justify-content: flex-start; margin-top: 12px;">
-                  <div style="background: rgba(0,181,163,0.2); color: #00b5a3; border-radius: 0; padding: 10px 12px; max-width: 75%; font-size: 9px; font-weight: 600; border: 1px solid rgba(0,181,163,0.3);">✓ Booking confirmed<br/>Ref: ALM-482156<br/>Confirmation email sent</div>
-                </div>
-                <div style="font-size: 7px; color: rgba(255,255,255,0.25);">2:16 PM</div>
-
-              </div>
-            </div>
-
-            <!-- Backend Processing Side -->
-            <div class="pf-wa-side" style="background: #0b1a18; border: 1px solid rgba(0,181,163,0.15); border-radius: 0; overflow: hidden;">
-              <div class="pf-wa-header" style="background: rgba(0,181,163,0.08); border-bottom: 1px solid var(--border); padding: 12px;">
-                <span style="color: rgba(255,255,255,0.4); font-size: 10px; font-weight: 600; letter-spacing: 0.1em;">BACKEND PROCESSING</span>
-              </div>
-
-              <div style="padding: 16px; display: flex; flex-direction: column; gap: 12px;">
-
-                <!-- Processing Pipeline -->
-                <div style="display: flex; flex-direction: column; gap: 8px;">
-                  <div style="background: rgba(0,181,163,0.08); border: 1px solid rgba(0,181,163,0.2); border-radius: 0; padding: 10px;">
-                    <div style="font-size: 9px; font-weight: 700; color: #00b5a3; margin-bottom: 4px;">1. Webhook Receive (t+0ms)</div>
-                    <div style="font-size: 8px; color: var(--text-muted);">WhatsApp message validated, user context loaded</div>
-                  </div>
-
-                  <div style="color: rgba(0,181,163,0.4); text-align: center; font-size: 12px;">↓</div>
-
-                  <div style="background: rgba(0,181,163,0.08); border: 1px solid rgba(0,181,163,0.2); border-radius: 0; padding: 10px;">
-                    <div style="font-size: 9px; font-weight: 700; color: #00b5a3; margin-bottom: 4px;">2. NLU Parsing (t+240ms)</div>
-                    <div style="font-size: 8px; color: var(--text-muted);">Destination, dates, budget, preferences extracted</div>
-                  </div>
-
-                  <div style="color: rgba(0,181,163,0.4); text-align: center; font-size: 12px;">↓</div>
-
-                  <div style="background: rgba(0,181,163,0.08); border: 1px solid rgba(0,181,163,0.2); border-radius: 0; padding: 10px;">
-                    <div style="font-size: 9px; font-weight: 700; color: #00b5a3; margin-bottom: 4px;">3. Inventory Query (t+850ms)</div>
-                    <div style="font-size: 8px; color: var(--text-muted);">Live flight/hotel APIs queried in parallel<br/>Top 12 options ranked by fit score</div>
-                  </div>
-
-                  <div style="color: rgba(0,181,163,0.4); text-align: center; font-size: 12px;">↓</div>
-
-                  <div style="background: rgba(0,181,163,0.08); border: 1px solid rgba(0,181,163,0.2); border-radius: 0; padding: 10px;">
-                    <div style="font-size: 9px; font-weight: 700; color: #00b5a3; margin-bottom: 4px;">4. Response Generation (t+1280ms)</div>
-                    <div style="font-size: 8px; color: var(--text-muted);">LLM writes natural response + formats results</div>
-                  </div>
-
-                  <div style="color: rgba(0,181,163,0.4); text-align: center; font-size: 12px;">↓</div>
-
-                  <div style="background: rgba(0,181,163,0.12); border: 1px solid rgba(0,181,163,0.25); border-radius: 0; padding: 10px; font-weight: 700;">
-                    <div style="font-size: 9px; color: #00b5a3; margin-bottom: 4px;">✓ Send to WhatsApp (t+1840ms)</div>
-                    <div style="font-size: 8px; color: rgba(0,181,163,0.7);">Total: 1.8s end-to-end</div>
-                  </div>
-                </div>
-
-                <!-- Confidence Scoring -->
-                <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 0; padding: 10px; margin-top: 8px;">
-                  <div style="font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.7); margin-bottom: 8px;">Confidence Scoring</div>
-                  <div style="font-size: 8px; color: var(--text-muted); line-height: 1.6;">
-                    • Intent match: 96%<br/>
-                    • Budget fit: 94%<br/>
-                    • Availability: 98%<br/>
-                    • Overall: 96% ✓
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-
-          <!-- Channel Comparison -->
-          <div style="background: rgba(0,181,163,0.05); border: 1px solid rgba(0,181,163,0.12); border-radius: 0; padding: 16px; margin-top: 24px;">
-            <div style="font-size: 9px; font-weight: 700; color: #00b5a3; text-transform: uppercase; margin-bottom: 12px; letter-spacing: 0.04em;">Channel Performance Comparison</div>
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
-              <div style="background: rgba(0,181,163,0.08); border-radius: 0; padding: 10px;">
-                <div style="font-size: 9px; font-weight: 600; color: #00b5a3; margin-bottom: 6px;">WhatsApp</div>
-                <div style="font-size: 8px; color: rgba(255,255,255,0.6); line-height: 1.5;">
-                  • 2.3s latency<br/>• 87% completion rate<br/>• 41% higher conversion
-                </div>
-              </div>
-              <div style="background: rgba(0,181,163,0.06); border-radius: 0; padding: 10px;">
-                <div style="font-size: 9px; font-weight: 600; color: rgba(0,181,163,0.7); margin-bottom: 6px;">In-app Chat</div>
-                <div style="font-size: 8px; color: var(--text-muted); line-height: 1.5;">
-                  • 1.6s latency<br/>• 78% completion rate<br/>• Baseline comparison
-                </div>
-              </div>
-              <div style="background: rgba(0,181,163,0.06); border-radius: 0; padding: 10px;">
-                <div style="font-size: 9px; font-weight: 600; color: rgba(0,181,163,0.7); margin-bottom: 6px;">Traditional Search</div>
-                <div style="font-size: 8px; color: var(--text-muted); line-height: 1.5;">
-                  • Form-based<br/>• 54% completion rate<br/>• 3.2x less discovery
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Error Handling & Fallbacks -->
-          <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 0; padding: 16px; margin-top: 12px;">
-            <div style="font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.8); text-transform: uppercase; margin-bottom: 10px; letter-spacing: 0.04em;">Error Handling & Fallbacks</div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-              <div style="font-size: 8px; color: rgba(255,255,255,0.6); line-height: 1.6;">
-                <strong style="color: #00b5a3;">Ambiguous intent:</strong> AI asks clarifying questions in conversation
-              </div>
-              <div style="font-size: 8px; color: rgba(255,255,255,0.6); line-height: 1.6;">
-                <strong style="color: #00b5a3;">No availability:</strong> Shows alternatives + suggests date shifts
-              </div>
-              <div style="font-size: 8px; color: rgba(255,255,255,0.6); line-height: 1.6;">
-                <strong style="color: #00b5a3;">API timeout:</strong> Retries up to 3x, degrades to keyword search
-              </div>
-              <div style="font-size: 8px; color: rgba(255,255,255,0.6); line-height: 1.6;">
-                <strong style="color: #00b5a3;">Payment failure:</strong> Booking link persists for manual retry
-              </div>
-            </div>
-          </div>
-
-          <!-- Stats -->
-          <div class="pf-stat-row" style="margin-top: 20px;">
-            <div class="pf-stat-card">
-              <div class="pf-stat-val" style="color: #00b5a3;">2.3s</div>
-              <div class="pf-stat-lbl">E2E Latency</div>
-            </div>
-            <div class="pf-stat-card">
-              <div class="pf-stat-val" style="color: #00b5a3;">87%</div>
-              <div class="pf-stat-lbl">Completion Rate</div>
-            </div>
-            <div class="pf-stat-card">
-              <div class="pf-stat-val" style="color: #00b5a3;">+41%</div>
-              <div class="pf-stat-lbl">Conversion Lift</div>
-            </div>
-            <div class="pf-stat-card">
-              <div class="pf-stat-val" style="color: #00b5a3;">3.2x</div>
-              <div class="pf-stat-lbl">Destination Discovery</div>
-            </div>
-            <div class="pf-stat-card">
-              <div class="pf-stat-val" style="color: #00b5a3;">96%</div>
-              <div class="pf-stat-lbl">Avg Confidence</div>
-            </div>
-          </div>
-
-        </div>
+        
       </div>
     </div>
   </div>

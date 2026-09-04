@@ -36,7 +36,6 @@
     body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 16px; line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
     a { color: inherit; text-decoration: none; }
 
-
     .cs-hero {
       padding: clamp(80px,10vw,140px) clamp(24px,5vw,80px) clamp(48px,6vw,80px);
       background: var(--bg);
@@ -180,143 +179,30 @@
     }
 
     /* Process Flow Visuals */
-    .pf-canvas { width: 100%; padding: 48px 40px; background: #FFFFFF; border-radius: 0; overflow: hidden; }
-    .pf-canvas.dark { background: var(--bg-elevated); }
-    .pf-canvas.dark-neutral { background: var(--bg-elevated); }
-    .pf-title-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 32px; }
-    .pf-dot { width: 8px; height: 8px; border-radius: 50%; }
-    .pf-title-bar span { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #555559; }
-    .pf-canvas.dark .pf-title-bar span,
-    .pf-canvas.dark-neutral .pf-title-bar span { color: rgba(255,255,255,0.3); }
 
     /* Sticky note clusters */
-    .pf-clusters { display: flex; gap: 20px; margin-bottom: 32px; flex-wrap: wrap; justify-content: center; }
-    .pf-cluster { display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1; min-width: 140px; }
-    .pf-cluster-label { font-size: 9px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #555559; margin-bottom: 4px; }
-    .pf-stickies { display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; max-width: 160px; }
-    .pf-sticky { width: 28px; height: 28px; border-radius: 0;  }
 
     /* Decision cards */
-    .pf-decisions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .pf-decision { background: #fff; border-radius: 0; padding: 16px 20px;  min-width: 180px; flex: 1; max-width: 240px; position: relative; }
-    .pf-decision h5 { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #333; margin-bottom: 8px; }
-    .pf-decision ul { list-style: none; padding: 0; }
-    .pf-decision li { font-size: 10px; color: #666; line-height: 1.5; padding: 2px 0; }
-    .pf-decision li::before { content: '•'; margin-right: 6px; color: #2D2D30; }
-    .pf-selected-dot { position: absolute; top: 12px; right: 12px; width: 10px; height: 10px; border-radius: 50%; }
 
     /* Connector lines */
-    .pf-connectors { display: flex; justify-content: center; padding: 12px 0; }
-    .pf-connector-line { width: 1px; height: 20px; background: rgba(0,0,0,0.12); position: relative; }
-    .pf-connector-line::after { content: '▾'; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); font-size: 8px; color: #6B6E74; }
 
     /* Journey stages */
-    .pf-journey { display: flex; gap: 0; align-items: flex-start; overflow: hidden; padding-bottom: 8px; }
-    .pf-stage { flex: 1; min-width: 140px; display: flex; flex-direction: column; align-items: center; position: relative; }
-    .pf-stage-card { background: #fff; border-radius: 0; padding: 20px 14px; text-align: center;  width: 100%; margin: 0 6px; }
-    .pf-stage-icon { font-size: 24px; margin-bottom: 8px; }
-    .pf-stage-name { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #222; }
-    .pf-stage-arrow { position: absolute; right: -8px; top: 50%; transform: translateY(-50%); font-size: 14px; color: #6B6E74; z-index: 1; }
-    .pf-triggers { display: flex; flex-direction: column; gap: 4px; margin-top: 10px; width: 100%; padding: 0 6px; }
-    .pf-trigger { font-size: 9px; padding: 5px 8px; border-radius: 0; text-align: center; font-weight: 500; }
-    .pf-pulse { width: 6px; height: 6px; border-radius: 50%; margin: 6px auto 0; }
-    .pf-insight { background: #fff; border-radius: 0; padding: 14px 20px; margin-top: 24px;  border-left: 3px solid; }
-    .pf-insight p { font-size: 11px; color: #555; line-height: 1.5; font-style: italic; }
 
     /* Wireframe comparison */
-    .pf-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; }
-    .pf-option { border-radius: 0; overflow: hidden; border: 2px solid rgba(0,0,0,0.06); }
-    .pf-option.winner { border-color: #49a942; }
-    .pf-option-header { padding: 10px 14px; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
-    .pf-wireframe { padding: 16px; background: #f5f5f5; min-height: 120px; display: flex; flex-direction: column; gap: 6px; }
-    .pf-wf-bar { height: 6px; border-radius: 0; background: #ddd; }
-    .pf-wf-block { height: 32px; border-radius: 0; background: #e8e8e8; }
-    .pf-wf-row { display: flex; gap: 6px; }
-    .pf-wf-circle { width: 20px; height: 20px; border-radius: 50%; background: #e0e0e0; flex-shrink: 0; }
-    .pf-wf-lines { display: flex; flex-direction: column; gap: 4px; flex: 1; }
-    .pf-wf-line { height: 4px; border-radius: 0; background: #e0e0e0; }
-    .pf-annotation { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 0; font-size: 9px; font-weight: 600; margin: 8px 14px; }
-    .pf-test-strip { background: #fff; border-radius: 0; padding: 12px 16px; text-align: center; font-size: 10px; color: #555; font-weight: 500;  }
 
     /* Dark flow diagrams */
-    .pf-flow { display: flex; align-items: center; gap: 12px; justify-content: center; flex-wrap: wrap; padding: 16px 0; }
-    .pf-node { border-radius: 0; padding: 14px 18px; text-align: center; min-width: 100px; }
-    .pf-node h6 { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
-    .pf-node p { font-size: 9px; opacity: 0.6; line-height: 1.3; }
-    .pf-arrow-r { font-size: 16px; opacity: 0.3; color: #fff; flex-shrink: 0; }
-    .pf-canvas.dark .pf-arrow-r { color: #fff; }
-    .pf-stat-row { display: flex; gap: 12px; justify-content: center; margin-top: 24px; }
-    .pf-stat-card { background: var(--border); border: 1px solid var(--border); border-radius: 0; padding: 14px 20px; text-align: center; }
-    .pf-stat-card .pf-stat-val { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 2px; }
-    .pf-stat-card .pf-stat-lbl { font-size: 9px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
 
     /* Data streams */
-    .pf-streams { display: flex; align-items: stretch; gap: 0; justify-content: center; margin: 16px 0; }
-    .pf-stream-col { display: flex; flex-direction: column; gap: 8px; justify-content: center; min-width: 120px; }
-    .pf-stream-item { padding: 10px 14px; border-radius: 0; font-size: 10px; font-weight: 600; text-align: center; }
-    .pf-engine { border-radius: 0; padding: 24px 20px; text-align: center; margin: 0 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 120px; }
-    .pf-engine h6 { font-size: 11px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
-    .pf-engine-icon { font-size: 28px; margin-bottom: 8px; }
-    .pf-arrows-col { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 0 8px; }
 
     /* Radial diagram */
-    .pf-radial { position: relative; width: 100%; max-width: 500px; margin: 0 auto; min-height: 300px; }
-    .pf-radial-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: var(--border); border: 1px solid var(--border); border-radius: 0; padding: 14px 18px; text-align: center; z-index: 2; }
-    .pf-radial-center p { font-size: 12px; font-weight: 600; color: #fff; }
-    .pf-radial-item { position: absolute; border-radius: 0; padding: 10px 14px; text-align: center; min-width: 140px; }
-    .pf-radial-item .pf-conf { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; }
-    .pf-radial-item .pf-rlbl { font-size: 9px; font-weight: 600; letter-spacing: 0.04em; margin-top: 2px; }
 
     /* Split infographic */
-    .pf-split { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-radius: 0; overflow: hidden; }
-    .pf-split-side { padding: 32px 28px; display: flex; flex-direction: column; gap: 12px; }
-    .pf-split-label { font-size: 10px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px; }
-    .pf-split-metric { display: flex; align-items: center; gap: 10px; }
-    .pf-split-metric .pf-sm-icon { font-size: 18px; flex-shrink: 0; }
-    .pf-split-metric .pf-sm-text { font-size: 11px; font-weight: 600; }
-    .pf-split-divider { width: 2px; background: var(--border); }
-    .pf-split-quote { grid-column: 1 / -1; padding: 16px 28px; text-align: center; border-top: 1px solid var(--border); }
-    .pf-split-quote p { font-size: 10px; color: rgba(255,255,255,0.4); font-style: italic; letter-spacing: 0.02em; }
 
     /* WhatsApp + backend split */
-    .pf-wa-split { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    .pf-wa-side { border-radius: 0; overflow: hidden; }
-    .pf-wa-header { padding: 10px 16px; display: flex; align-items: center; gap: 8px; }
-    .pf-wa-header .pf-wa-avatar { width: 28px; height: 28px; border-radius: 50%; }
-    .pf-wa-header span { font-size: 12px; font-weight: 700; }
-    .pf-wa-msgs { padding: 16px; display: flex; flex-direction: column; gap: 8px; }
-    .pf-wa-msg { max-width: 85%; padding: 8px 12px; border-radius: 0; font-size: 10px; line-height: 1.5; }
-    .pf-wa-msg.user { align-self: flex-end; }
-    .pf-wa-msg.ai { align-self: flex-start; }
-    .pf-wa-booking { border-radius: 0; padding: 10px 12px; margin: 4px 0; }
-    .pf-backend { display: flex; flex-direction: column; gap: 0; align-items: center; padding: 16px; }
-    .pf-backend-step { padding: 10px 16px; border-radius: 0; text-align: center; font-size: 10px; font-weight: 600; width: 80%; }
-    .pf-backend-arrow { font-size: 12px; padding: 4px 0; }
 
     /* System architecture */
-    .pf-arch { display: flex; align-items: stretch; gap: 16px; justify-content: center; }
-    .pf-arch-col { display: flex; flex-direction: column; gap: 8px; justify-content: center; }
-    .pf-arch-node { padding: 10px 16px; border-radius: 0; font-size: 10px; font-weight: 600; text-align: center; border: 1px solid; }
-    .pf-arch-center { border-radius: 0; padding: 20px 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; min-width: 140px; }
-    .pf-arch-center h6 { font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; }
-    .pf-arch-center .pf-arch-sub { font-size: 9px; margin-top: 4px; }
-    .pf-arch-process { display: flex; gap: 8px; margin-top: 20px; justify-content: center; flex-wrap: wrap; }
-    .pf-arch-step { padding: 8px 14px; border-radius: 0; font-size: 9px; font-weight: 600; letter-spacing: 0.04em; }
-    .pf-arch-step-arrow { color: rgba(255,255,255,0.2); font-size: 12px; display: flex; align-items: center; }
 
     @media (max-width: 768px) {
-      .pf-canvas { padding: 32px 20px; }
-      .pf-clusters { gap: 12px; }
-      .pf-options { grid-template-columns: 1fr; }
-      .pf-split { grid-template-columns: 1fr; }
-      .pf-wa-split { grid-template-columns: 1fr; }
-      .pf-arch { flex-direction: column; align-items: center; }
-      .pf-streams { flex-direction: column; align-items: center; }
-      .pf-journey { flex-direction: column; align-items: stretch; }
-      .pf-stage-arrow { display: none; }
-      .pf-radial { min-height: auto; }
-      .pf-radial-item { position: static !important; transform: none !important; margin: 4px auto; }
-      .pf-radial-center { position: static; transform: none; margin: 12px auto; }
     }
       25%  { transform: translate(-160px, 120px) scale(1.25); opacity: 1; }
       50%  { transform: translate(120px, -80px) scale(0.85);  opacity: 0.75; }
@@ -422,223 +308,7 @@
   <div class="cs-image-block cs-image-full-width reveal">
     <div class="cs-image-block-inner">
       <div class="cs-image-container" id="img-4-layer-ai-workflow-architecture-diagram">
-        <div class="pf-canvas dark-neutral" style="border-radius: 0;">
-          <div class="pf-title-bar">
-            <div class="pf-dot" style="background: #e85d5d;"></div>
-            <div class="pf-dot" style="background: #7b68ee;"></div>
-            <span>Operational Impact, Before & After AI Integration</span>
-          </div>
-
-          <!-- Metadata Strip -->
-          <div style="display: flex; gap: 16px; margin-bottom: 28px; padding: 14px 16px; background: rgba(87,65,217,0.04); border-radius: 0; border: 1px solid rgba(87,65,217,0.08); flex-wrap: wrap; align-items: center; font-size: 9px;">
-            <div style="display: flex; gap: 4px; align-items: center;"><span style="color: rgba(255,255,255,0.3); font-weight: 600;">DURATION</span><span style="color: rgba(255,255,255,0.6);">8 weeks</span></div>
-            <div style="width: 1px; height: 14px; background: var(--border);"></div>
-            <div style="display: flex; gap: 4px; align-items: center;"><span style="color: rgba(255,255,255,0.3); font-weight: 600;">SCOPE</span><span style="color: rgba(255,255,255,0.6);">Full Design Ops Transformation</span></div>
-            <div style="width: 1px; height: 14px; background: var(--border);"></div>
-            <div style="display: flex; gap: 4px; align-items: center;"><span style="color: rgba(255,255,255,0.3); font-weight: 600;">AI TOOLS</span><span style="color: rgba(255,255,255,0.6);">Claude, Cursor, Figma MCP</span></div>
-          </div>
-
-          <!-- Main Before/After Grid -->
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 28px;">
-
-            <!-- BEFORE SIDE -->
-            <div style="background: rgba(232,93,93,0.06); border: 1px solid rgba(232,93,93,0.12); border-radius: 0; padding: 20px;">
-              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border);">
-                <div style="width: 8px; height: 8px; border-radius: 0; background: #e85d5d;"></div>
-                <span style="font-weight: 700; font-size: 12px; color: #e85d5d; text-transform: uppercase; letter-spacing: 0.04em;">Before</span>
-              </div>
-
-              <!-- Before Metrics -->
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
-                <div style="background: transparent; border-radius: 0; padding: 12px; text-align: center;">
-                  <div style="font-weight: 700; font-size: 14px; color: #e85d5d;">72%</div>
-                  <div style="font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 4px;">Design System<br/>Compliance</div>
-                </div>
-                <div style="background: transparent; border-radius: 0; padding: 12px; text-align: center;">
-                  <div style="font-weight: 700; font-size: 14px; color: #e85d5d;">3 days</div>
-                  <div style="font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 4px;">Handoff<br/>Cycle Time</div>
-                </div>
-                <div style="background: transparent; border-radius: 0; padding: 12px; text-align: center;">
-                  <div style="font-weight: 700; font-size: 14px; color: #e85d5d;">12x/wk</div>
-                  <div style="font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 4px;">Design<br/>Review Meetings</div>
-                </div>
-                <div style="background: transparent; border-radius: 0; padding: 12px; text-align: center;">
-                  <div style="font-weight: 700; font-size: 14px; color: #e85d5d;">~60%</div>
-                  <div style="font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 4px;">Spec Writing<br/>Accuracy</div>
-                </div>
-                <div style="background: transparent; border-radius: 0; padding: 12px; text-align: center;">
-                  <div style="font-weight: 700; font-size: 14px; color: #e85d5d;">38 hrs</div>
-                  <div style="font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 4px;">Weekly Overhead<br/>per Designer</div>
-                </div>
-                <div style="background: transparent; border-radius: 0; padding: 12px; text-align: center;">
-                  <div style="font-weight: 700; font-size: 14px; color: #e85d5d;">4x</div>
-                  <div style="font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 4px;">Dev Spec<br/>Revisions</div>
-                </div>
-                <div style="background: transparent; border-radius: 0; padding: 12px; text-align: center;">
-                  <div style="font-weight: 700; font-size: 14px; color: #e85d5d;">Manual</div>
-                  <div style="font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 4px;">Governance &amp;<br/>QA Process</div>
-                </div>
-              </div>
-
-              <!-- Before Sub-process -->
-              <div style="font-size: 9px; color: var(--text-muted); line-height: 1.6;">
-                <strong style="color: rgba(255,255,255,0.7);">Process:</strong> Design in Figma, Manual Spec Writing, Slack/Email, Dev Interpretation, Review Loops, Revisions Cycle
-              </div>
-            </div>
-
-            <!-- AFTER SIDE -->
-            <div style="background: rgba(123,104,238,0.08); border: 1px solid rgba(123,104,238,0.16); border-radius: 0; padding: 20px; position: relative;">
-              <div style="position: absolute; top: -12px; right: 16px; background: var(--bg-elevated); color: white; padding: 4px 12px; border-radius: 0; font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em;">Live</div>
-
-              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border);">
-                <div style="width: 8px; height: 8px; border-radius: 0; background: #7b68ee;"></div>
-                <span style="font-weight: 700; font-size: 12px; color: #7b68ee; text-transform: uppercase; letter-spacing: 0.04em;">After (AI-Integrated)</span>
-              </div>
-
-              <!-- After Metrics -->
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
-                <div style="background: rgba(123,104,238,0.1); border: 1px solid rgba(123,104,238,0.2); border-radius: 0; padding: 12px; text-align: center;">
-                  <div style="font-weight: 700; font-size: 14px; color: #7b68ee;">98%</div>
-                  <div style="font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 4px;">Design System<br/>Compliance</div>
-                  <div style="font-size: 7px; color: #49a942; margin-top: 6px; font-weight: 600;">+36% increase</div>
-                </div>
-                <div style="background: rgba(123,104,238,0.1); border: 1px solid rgba(123,104,238,0.2); border-radius: 0; padding: 12px; text-align: center;">
-                  <div style="font-weight: 700; font-size: 14px; color: #7b68ee;">Same-day</div>
-                  <div style="font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 4px;">Handoff<br/>Cycle Time</div>
-                  <div style="font-size: 7px; color: #49a942; margin-top: 6px; font-weight: 600;">-70% faster</div>
-                </div>
-                <div style="background: rgba(123,104,238,0.1); border: 1px solid rgba(123,104,238,0.2); border-radius: 0; padding: 12px; text-align: center;">
-                  <div style="font-weight: 700; font-size: 14px; color: #7b68ee;">7x/wk</div>
-                  <div style="font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 4px;">Design<br/>Review Meetings</div>
-                  <div style="font-size: 7px; color: #49a942; margin-top: 6px; font-weight: 600;">-40% reduction</div>
-                </div>
-                <div style="background: rgba(123,104,238,0.1); border: 1px solid rgba(123,104,238,0.2); border-radius: 0; padding: 12px; text-align: center;">
-                  <div style="font-weight: 700; font-size: 14px; color: #7b68ee;">~98%</div>
-                  <div style="font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 4px;">Spec Writing<br/>Accuracy</div>
-                  <div style="font-size: 7px; color: #49a942; margin-top: 6px; font-weight: 600;">+63% improvement</div>
-                </div>
-                <div style="background: rgba(123,104,238,0.1); border: 1px solid rgba(123,104,238,0.2); border-radius: 0; padding: 12px; text-align: center;">
-                  <div style="font-weight: 700; font-size: 14px; color: #7b68ee;">12 hrs</div>
-                  <div style="font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 4px;">Weekly Overhead<br/>per Designer</div>
-                  <div style="font-size: 7px; color: #49a942; margin-top: 6px; font-weight: 600;">-68% reduction</div>
-                </div>
-                <div style="background: rgba(123,104,238,0.1); border: 1px solid rgba(123,104,238,0.2); border-radius: 0; padding: 12px; text-align: center;">
-                  <div style="font-weight: 700; font-size: 14px; color: #7b68ee;">&lt;1x</div>
-                  <div style="font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 4px;">Dev Spec<br/>Revisions</div>
-                  <div style="font-size: 7px; color: #49a942; margin-top: 6px; font-weight: 600;">-75% fewer</div>
-                </div>
-                <div style="background: rgba(123,104,238,0.1); border: 1px solid rgba(123,104,238,0.2); border-radius: 0; padding: 12px; text-align: center;">
-                  <div style="font-weight: 700; font-size: 14px; color: #7b68ee;">Automated</div>
-                  <div style="font-size: 8px; color: rgba(255,255,255,0.6); margin-top: 4px;">Governance &amp;<br/>Real-time QA</div>
-                  <div style="font-size: 7px; color: #49a942; margin-top: 6px; font-weight: 600;">Proactive</div>
-                </div>
-              </div>
-
-              <!-- After Sub-process -->
-              <div style="font-size: 9px; color: var(--text-muted); line-height: 1.6;">
-                <strong style="color: rgba(255,255,255,0.7);">Process:</strong> Design in Figma, Figma MCP Auto-Export, Claude AI Spec Gen, Cursor Integration, Auto-QA Check, Ready-to-build
-              </div>
-            </div>
-          </div>
-
-          <!-- Tools & Infrastructure Section -->
-          <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 0; padding: 20px; margin-bottom: 28px;">
-            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
-              <span style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.04em;">AI Stack &amp; Infrastructure</span>
-              <div style="flex: 1; height: 1px; background: var(--border);"></div>
-            </div>
-
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
-              <div style="background: rgba(123,104,238,0.08); border: 1px solid rgba(123,104,238,0.16); border-radius: 0; padding: 14px;">
-                <div style="font-weight: 700; font-size: 10px; color: #7b68ee; text-transform: uppercase; margin-bottom: 8px;">Claude</div>
-                <div style="font-size: 8px; color: rgba(255,255,255,0.6); line-height: 1.5;">
-                  • Spec generation<br/>• Interaction flows<br/>• Copy refinement<br/>• Jira automation
-                </div>
-              </div>
-              <div style="background: rgba(123,104,238,0.08); border: 1px solid rgba(123,104,238,0.16); border-radius: 0; padding: 14px;">
-                <div style="font-weight: 700; font-size: 10px; color: #7b68ee; text-transform: uppercase; margin-bottom: 8px;">Cursor IDE</div>
-                <div style="font-size: 8px; color: rgba(255,255,255,0.6); line-height: 1.5;">
-                  • Real-time code assist<br/>• Component generation<br/>• DevTools integration<br/>• File sync automation
-                </div>
-              </div>
-              <div style="background: rgba(123,104,238,0.08); border: 1px solid rgba(123,104,238,0.16); border-radius: 0; padding: 14px;">
-                <div style="font-weight: 700; font-size: 10px; color: #7b68ee; text-transform: uppercase; margin-bottom: 8px;">Figma MCP</div>
-                <div style="font-size: 8px; color: rgba(255,255,255,0.6); line-height: 1.5;">
-                  • Token export automation<br/>• Component API access<br/>• Design-to-code bridge<br/>• Live sync with Cursor
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Transformation Timeline -->
-          <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 0; padding: 20px; margin-bottom: 28px;">
-            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
-              <span style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.04em;">Transformation Timeline</span>
-              <div style="flex: 1; height: 1px; background: var(--border);"></div>
-            </div>
-
-            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
-              <div style="background: rgba(232,93,93,0.1); border-radius: 0; padding: 12px; text-align: center;">
-                <div style="font-weight: 700; font-size: 9px; color: #e85d5d; margin-bottom: 6px; text-transform: uppercase;">Week 1-2</div>
-                <div style="font-size: 8px; color: var(--text-muted);">Audit Current State</div>
-                <div style="font-size: 7px; color: rgba(255,255,255,0.4); margin-top: 6px;">Pain point mapping<br/>Bottleneck analysis</div>
-              </div>
-              <div style="background: rgba(123,104,238,0.1); border-radius: 0; padding: 12px; text-align: center;">
-                <div style="font-weight: 700; font-size: 9px; color: #7b68ee; margin-bottom: 6px; text-transform: uppercase;">Week 3-4</div>
-                <div style="font-size: 8px; color: var(--text-muted);">Implementation</div>
-                <div style="font-size: 7px; color: rgba(255,255,255,0.4); margin-top: 6px;">AI workflow setup<br/>Tool integration</div>
-              </div>
-              <div style="background: rgba(73,169,66,0.1); border-radius: 0; padding: 12px; text-align: center;">
-                <div style="font-weight: 700; font-size: 9px; color: #49a942; margin-bottom: 6px; text-transform: uppercase;">Week 5-6</div>
-                <div style="font-size: 8px; color: var(--text-muted);">Pilot &amp; Refinement</div>
-                <div style="font-size: 7px; color: rgba(255,255,255,0.4); margin-top: 6px;">Team training<br/>Workflow optimization</div>
-              </div>
-              <div style="background: rgba(123,104,238,0.1); border-radius: 0; padding: 12px; text-align: center;">
-                <div style="font-weight: 700; font-size: 9px; color: #7b68ee; margin-bottom: 6px; text-transform: uppercase;">Week 7-8</div>
-                <div style="font-size: 8px; color: var(--text-muted);">Optimisation &amp; Scale</div>
-                <div style="font-size: 7px; color: rgba(255,255,255,0.4); margin-top: 6px;">MVP launch<br/>Governance setup</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Team Impact Section -->
-          <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 0; padding: 20px;">
-            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
-              <span style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.8); text-transform: uppercase; letter-spacing: 0.04em;">Team Capacity Impact</span>
-              <div style="flex: 1; height: 1px; background: var(--border);"></div>
-            </div>
-
-            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
-              <div style="background: rgba(123,104,238,0.08); border-radius: 0; padding: 14px;">
-                <div style="font-weight: 700; font-size: 9px; color: #7b68ee; text-transform: uppercase; margin-bottom: 8px;">Product Designer</div>
-                <div style="font-size: 13px; font-weight: 700; color: #49a942; margin-bottom: 4px;">18 hrs/week</div>
-                <div style="font-size: 8px; color: var(--text-muted);">Reclaimed from spec writing &amp; rework</div>
-              </div>
-              <div style="background: rgba(123,104,238,0.08); border-radius: 0; padding: 14px;">
-                <div style="font-weight: 700; font-size: 9px; color: #7b68ee; text-transform: uppercase; margin-bottom: 8px;">Front-end Eng</div>
-                <div style="font-size: 13px; font-weight: 700; color: #49a942; margin-bottom: 4px;">12 hrs/week</div>
-                <div style="font-size: 8px; color: var(--text-muted);">Fewer spec clarifications &amp; rework</div>
-              </div>
-              <div style="background: rgba(123,104,238,0.08); border-radius: 0; padding: 14px;">
-                <div style="font-weight: 700; font-size: 9px; color: #7b68ee; text-transform: uppercase; margin-bottom: 8px;">Design Lead</div>
-                <div style="font-size: 13px; font-weight: 700; color: #49a942; margin-bottom: 4px;">8 hrs/week</div>
-                <div style="font-size: 8px; color: var(--text-muted);">Fewer review meetings &amp; escalations</div>
-              </div>
-              <div style="background: rgba(123,104,238,0.08); border-radius: 0; padding: 14px;">
-                <div style="font-weight: 700; font-size: 9px; color: #7b68ee; text-transform: uppercase; margin-bottom: 8px;">Product Manager</div>
-                <div style="font-size: 13px; font-weight: 700; color: #49a942; margin-bottom: 4px;">6 hrs/week</div>
-                <div style="font-size: 8px; color: var(--text-muted);">Automated status &amp; comms synthesis</div>
-              </div>
-            </div>
-
-            <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);">
-              <div style="font-size: 9px; color: rgba(255,255,255,0.6);">
-                <strong style="color: rgba(255,255,255,0.8);">Total Time Reclaimed:</strong> 44 hours/week across team (equivalent to 1.1 FTE)
-              </div>
-            </div>
-          </div>
-
-        </div>
+        
       </div>
     </div>
   </div>
