@@ -310,25 +310,7 @@
     }
 
     /* ─── Section label ─────────────────────────────────────────── */
-    .section-eyebrow {
-      padding: clamp(20px, 2.5vw, 32px) var(--pad);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--rule);
-    }
-    .section-eyebrow-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--subtle);
-    }
-    .section-eyebrow-meta {
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--subtle);
-    }
+
 
     /* ─── Intro ─────────────────────────────────────────────────── */
     #intro {
@@ -426,16 +408,7 @@
     }
 
     /* ─── AI Section ────────────────────────────────────────────── */
-    @keyframes ai-aurora {
-      0%   { transform: translate(0%, 0%) scale(1); }
-      33%  { transform: translate(12%, -8%) scale(1.12); }
-      66%  { transform: translate(-6%, 12%) scale(0.94); }
-      100% { transform: translate(0%, 0%) scale(1); }
-    }
-    @keyframes ai-text-sweep {
-      0%   { background-position: 200% center; }
-      100% { background-position: -200% center; }
-    }
+
     #ai-authority {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -443,27 +416,8 @@
       min-height: 100vh;
       position: relative;
       overflow: hidden;
-      scroll-snap-align: start;
       background: #0A0A0F;
       color: #FFFFFF;
-    }
-    #ai-authority::before {
-      content: '';
-      position: absolute;
-      width: 160%;
-      height: 160%;
-      top: -30%;
-      left: -30%;
-      background: radial-gradient(
-        ellipse at 40% 50%,
-        rgba(80,100,255,0.12) 0%,
-        rgba(150,70,240,0.08) 35%,
-        rgba(40,180,210,0.06) 60%,
-        transparent 80%
-      );
-      animation: ai-aurora 16s ease-in-out infinite;
-      pointer-events: none;
-      z-index: 0;
     }
     .ai-left {
       padding: clamp(48px, 6vw, 80px) var(--pad);
@@ -480,21 +434,7 @@
       line-height: 1.0;
       letter-spacing: -0.03em;
       margin-bottom: 32px;
-      background: linear-gradient(
-        100deg,
-        #FFFFFF 0%,
-        #FFFFFF 30%,
-        #4F6CFF 43%,
-        #9B5CF7 50%,
-        #22D4EE 57%,
-        #FFFFFF 70%,
-        #FFFFFF 100%
-      );
-      background-size: 300% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: ai-text-sweep 9s linear infinite;
+      color: #FFFFFF;
     }
     .ai-sub {
       font-size: 15px;
@@ -1084,11 +1024,6 @@
   </section>
 
   <!-- Work -->
-  <div class="section-eyebrow">
-    <span class="section-eyebrow-label">Selected Work</span>
-    <span class="section-eyebrow-meta">04 Projects</span>
-  </div>
-
   <a href="./casestudy-neobank.html" id="work" class="work-row reveal">
     <span class="work-num">01</span>
     <div class="work-body">
@@ -1171,12 +1106,7 @@
   </section>
 
   <!-- AI Track Record -->
-  <div id="ai-track" class="section-eyebrow">
-    <span class="section-eyebrow-label">AI Track Record</span>
-    <span class="section-eyebrow-meta">05 Products</span>
-  </div>
-
-  <a href="./casestudy-metro-voice.html" class="ai-proj-row reveal">
+  <a href="./casestudy-metro-voice.html" id="ai-track" class="ai-proj-row reveal">
     <span class="ai-proj-num">01</span>
     <div class="ai-proj-body">
       <div class="ai-proj-title">AI Voice Authentication</div>
@@ -1238,10 +1168,6 @@
 
   <!-- Testimonials -->
   <section id="testimonials">
-    <div class="section-eyebrow">
-      <span class="section-eyebrow-label">Don't Take My Word</span>
-      <span class="section-eyebrow-meta">04 Testimonials</span>
-    </div>
     <div class="t-grid">
       <a href="https://www.linkedin.com/in/jaytulloch/" target="_blank" class="t-card reveal">
         <p class="t-quote">Few leaders inspire enough confidence to follow them from one company to another. Jay is incredible at making sense of business chaos for his design team.</p>
