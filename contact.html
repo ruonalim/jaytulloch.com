@@ -44,23 +44,57 @@
     .drawer-close { position: absolute; top: 20px; right: var(--pad); background: none; border: none; color: #fff; font-size: 28px; width: 44px; height: 44px; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0.6; }
 
     /* Hero */
-    .contact-hero { background: var(--white); border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: 1fr 1fr; min-height: 500px; }
-    .hero-left { padding: clamp(64px, 9vw, 120px) var(--pad) clamp(48px, 5vw, 72px); display: flex; flex-direction: column; justify-content: flex-end; }
-    .hero-title { font-size: clamp(64px, 10vw, 140px); font-weight: 800; letter-spacing: -0.04em; line-height: 0.92; margin-bottom: 28px; }
+    .contact-hero {
+      background: var(--white);
+      border-bottom: 1px solid var(--rule);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 88vh;
+    }
+    .hero-left {
+      padding: clamp(64px, 9vw, 120px) var(--pad) clamp(48px, 5vw, 72px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid var(--rule);
+    }
+    .hero-title {
+      font-size: clamp(52px, 7vw, 110px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 0.92;
+      margin-bottom: 24px;
+    }
     .hero-title span.light { color: var(--muted); font-weight: 300; }
-    .hero-desc { font-size: 15px; color: var(--muted); line-height: 1.75; max-width: 420px; font-weight: 400; }
-    .hero-right { padding: clamp(64px, 9vw, 120px) var(--pad) clamp(48px, 5vw, 72px); display: flex; flex-direction: column; justify-content: flex-end; }
+    .hero-desc { font-size: 15px; color: var(--muted); line-height: 1.75; max-width: 400px; font-weight: 400; margin-bottom: 48px; }
+    .hero-contact-block { margin-top: auto; }
     .availability-badge { display: inline-flex; align-items: center; gap: 10px; background: var(--bg); border: 1px solid var(--rule); padding: 10px 16px; border-radius: 100px; margin-bottom: 32px; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; color: var(--muted); align-self: flex-start; }
     .availability-badge .pulse-dot { width: 8px; height: 8px; border-radius: 50%; background: #f59e0b; flex-shrink: 0; animation: pulse 2s ease-in-out infinite; }
     @keyframes pulse { 0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(245,158,11,0.5); } 50% { opacity: 0.7; box-shadow: 0 0 0 5px rgba(245,158,11,0); } }
     .quick-links { display: flex; flex-direction: column; }
     .quick-link { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; border-bottom: 1px solid var(--rule); cursor: pointer; transition: all 0.2s; }
+    .quick-link:first-child { border-top: 1px solid var(--rule); }
     .quick-link:last-child { border-bottom: none; }
     .quick-link:hover { padding-left: 8px; }
     .ql-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--subtle); margin-bottom: 3px; }
     .ql-value { font-size: 14px; font-weight: 600; color: var(--text); }
     .ql-arrow { font-size: 18px; color: var(--subtle); flex-shrink: 0; transition: color 0.2s; }
     .quick-link:hover .ql-arrow { color: var(--text); }
+    /* Video panel */
+    .hero-video-panel {
+      position: relative;
+      overflow: hidden;
+      min-height: 500px;
+    }
+    .hero-video-panel video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      display: block;
+    }
 
     /* Engagements */
     .engagements { background: var(--white); border-bottom: 1px solid var(--rule); }
@@ -120,8 +154,10 @@
     @media (max-width: 860px) {
       .nav-links li:not(.nav-cta) { display: none; }
       .nav-hamburger { display: flex; }
-      .contact-hero { grid-template-columns: 1fr; }
-      .hero-left { border-bottom: 1px solid var(--rule); }
+      .contact-hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-video-panel { height: clamp(280px, 55vw, 480px); min-height: 0; }
+      .hero-left { border-bottom: none; border-right: none; }
+      .hero-contact-block { margin-top: 48px; }
       .engagement-grid { grid-template-columns: 1fr; }
       .engagement-card { border-bottom: 1px solid var(--rule); }
       .engagement-card:last-child { border-bottom: none; }
@@ -163,46 +199,46 @@
   <!-- Hero -->
   <section class="contact-hero">
     <div class="hero-left">
-      <h1 class="hero-title">Work With<br/>Me.</h1>
-      <p class="hero-desc">I work with founders, CPOs, and product teams that are serious about design as a business lever, not just a polish layer. Based in Dubai, available globally.</p>
-    </div>
-    <div class="hero-right">
-      <div class="availability-badge">
-        <span class="pulse-dot"></span>
-        Selectively taking on new work
+      <div>
+        <h1 class="hero-title">Work With<br/><span class="light">Me.</span></h1>
+        <p class="hero-desc">I work with founders, CPOs, and product teams that are serious about design as a business lever, not just a polish layer. Based in Dubai, available globally.</p>
       </div>
-      <div class="quick-links">
-        <div class="quick-link" id="copy-email" onclick="copyEmail()" style="cursor:pointer;">
-          <div>
-            <p class="ql-label">Email</p>
-            <p class="ql-value" id="email-text">Copy address</p>
-          </div>
-          <span class="ql-arrow" id="copy-arrow">↗</span>
+      <div class="hero-contact-block">
+        <div class="availability-badge">
+          <span class="pulse-dot"></span>
+          Selectively taking on new work
         </div>
-        <a href="https://www.linkedin.com/in/jaytulloch" target="_blank" class="quick-link">
-          <div>
-            <p class="ql-label">LinkedIn</p>
-            <p class="ql-value">linkedin.com/in/jaytulloch</p>
+        <div class="quick-links">
+          <div class="quick-link" id="copy-email" onclick="copyEmail()" style="cursor:pointer;">
+            <div>
+              <p class="ql-label">Email</p>
+              <p class="ql-value" id="email-text">Copy address</p>
+            </div>
+            <span class="ql-arrow" id="copy-arrow">↗</span>
           </div>
-          <span class="ql-arrow">↗</span>
-        </a>
-        <a href="https://www.beyond-the-interface.com/" target="_blank" class="quick-link">
-          <div>
-            <p class="ql-label">Podcast</p>
-            <p class="ql-value">Beyond the Interface</p>
-          </div>
-          <span class="ql-arrow">↗</span>
-        </a>
+          <a href="https://www.linkedin.com/in/jaytulloch" target="_blank" class="quick-link">
+            <div>
+              <p class="ql-label">LinkedIn</p>
+              <p class="ql-value">linkedin.com/in/jaytulloch</p>
+            </div>
+            <span class="ql-arrow">↗</span>
+          </a>
+          <a href="https://www.beyond-the-interface.com/" target="_blank" class="quick-link">
+            <div>
+              <p class="ql-label">Podcast</p>
+              <p class="ql-value">Beyond the Interface</p>
+            </div>
+            <span class="ql-arrow">↗</span>
+          </a>
+        </div>
       </div>
+    </div>
+    <div class="hero-video-panel">
+      <video autoplay muted loop playsinline preload="metadata">
+        <source src="./jay-contact.mp4" type="video/mp4">
+      </video>
     </div>
   </section>
-
-  <!-- Video -->
-  <div style="border-bottom: 1px solid var(--rule); line-height: 0; overflow: hidden;">
-    <video autoplay muted loop playsinline preload="metadata" style="width: 100%; height: clamp(220px,50vw,480px); object-fit: cover; object-position: center top; display: block;">
-      <source src="./jay-contact.mp4" type="video/mp4">
-    </video>
-  </div>
 
   <!-- Engagements -->
   <section class="engagements">
