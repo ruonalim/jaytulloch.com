@@ -392,6 +392,19 @@
     }
 
     /* ─── AI Section ────────────────────────────────────────────── */
+    @keyframes ai-shimmer-sweep {
+      0%   { transform: translateX(-120%) skewX(-12deg); }
+      100% { transform: translateX(250%) skewX(-12deg); }
+    }
+    @keyframes ai-glow-breathe {
+      0%, 100% { opacity: 0.4; transform: scale(1) translate(0,0); }
+      33%       { opacity: 0.7; transform: scale(1.08) translate(2%, -2%); }
+      66%       { opacity: 0.5; transform: scale(0.95) translate(-3%, 2%); }
+    }
+    @keyframes ai-stat-shine {
+      0%   { background-position: 200% center; }
+      100% { background-position: -200% center; }
+    }
 
     #ai-authority {
       display: grid;
@@ -399,12 +412,43 @@
       border-bottom: 1px solid var(--rule);
       position: relative;
       overflow: hidden;
-      background: #0A0A0F;
+      background: #06060B;
       color: #FFFFFF;
+    }
+    /* Primary shimmer sweep */
+    #ai-authority::before {
+      content: '';
+      position: absolute;
+      inset: -10%;
+      width: 40%;
+      background: linear-gradient(
+        105deg,
+        transparent 0%,
+        rgba(139,92,246,0.05) 30%,
+        rgba(167,139,250,0.10) 50%,
+        rgba(99,102,241,0.05) 70%,
+        transparent 100%
+      );
+      animation: ai-shimmer-sweep 5s cubic-bezier(0.4,0,0.6,1) infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    /* Ambient glow orb */
+    #ai-authority::after {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -10%;
+      width: 55%;
+      height: 160%;
+      background: radial-gradient(ellipse at center, rgba(99,102,241,0.08) 0%, rgba(139,92,246,0.04) 40%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      animation: ai-glow-breathe 9s ease-in-out infinite;
     }
     .ai-left {
       padding: clamp(40px, 5vw, 64px) var(--pad);
-      border-right: 1px solid rgba(255,255,255,0.1);
+      border-right: 1px solid rgba(255,255,255,0.08);
       position: relative;
       z-index: 1;
       display: flex;
@@ -417,7 +461,10 @@
       line-height: 1.05;
       letter-spacing: -0.03em;
       margin-bottom: 24px;
-      color: #FFFFFF;
+      background: linear-gradient(135deg, #FFFFFF 0%, rgba(255,255,255,0.65) 60%, rgba(167,139,250,0.9) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     .ai-sub {
       font-size: 15px;
@@ -448,8 +495,8 @@
     }
     .ai-stat {
       padding: 20px 24px;
-      border-right: 1px solid rgba(255,255,255,0.1);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      border-right: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
     .ai-stat:nth-child(2) { border-right: none; }
     .ai-stat:nth-child(3) { border-bottom: none; }
@@ -459,7 +506,12 @@
       font-weight: 800;
       line-height: 1;
       letter-spacing: -0.03em;
-      color: #FFFFFF;
+      background: linear-gradient(90deg, #fff 0%, rgba(255,255,255,0.55) 40%, #fff 55%, rgba(255,255,255,0.55) 100%);
+      background-size: 250% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: ai-stat-shine 4s linear infinite;
     }
     .ai-stat-label {
       font-size: 11px;
@@ -524,22 +576,39 @@
     }
 
     /* ─── Testimonials ──────────────────────────────────────────── */
-    #testimonials { border-bottom: 1px solid var(--rule); }
+    #testimonials {
+      border-bottom: 1px solid var(--rule);
+      background: var(--bg);
+    }
+    .t-header {
+      padding: clamp(48px, 6vw, 80px) var(--pad) clamp(32px, 4vw, 48px);
+      border-bottom: 1px solid var(--rule);
+      background: var(--bg);
+    }
+    .t-header-title {
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.0;
+      color: var(--text);
+    }
+    .t-header-title span { color: var(--muted); font-weight: 300; }
     .t-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
+      background: var(--bg);
     }
     .t-card {
       padding: clamp(32px, 4vw, 56px) var(--pad);
       border-bottom: 1px solid var(--rule);
       display: block;
-      background: var(--white);
+      background: var(--bg);
       transition: background 0.25s;
     }
     .t-card:nth-child(2n) { }
     .t-card:nth-child(3),
     .t-card:nth-child(4) { border-bottom: none; }
-    .t-card:hover { background: var(--bg); }
+    .t-card:hover { background: var(--white); }
     .t-quote {
       font-size: 15px;
       line-height: 1.7;
@@ -1159,6 +1228,9 @@
 
   <!-- Testimonials -->
   <section id="testimonials">
+    <div class="t-header">
+      <h2 class="t-header-title">Don't take<br/><span>my word for it.</span></h2>
+    </div>
     <div class="t-grid">
       <a href="https://www.linkedin.com/in/jaytulloch/" target="_blank" class="t-card reveal">
         <p class="t-quote">Few leaders inspire enough confidence to follow them from one company to another. Jay is incredible at making sense of business chaos for his design team.</p>
