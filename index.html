@@ -406,14 +406,13 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       border-bottom: 1px solid var(--rule);
-      min-height: 100vh;
       position: relative;
       overflow: hidden;
       background: #0A0A0F;
       color: #FFFFFF;
     }
     .ai-left {
-      padding: clamp(48px, 6vw, 80px) var(--pad);
+      padding: clamp(40px, 5vw, 64px) var(--pad);
       border-right: 1px solid rgba(255,255,255,0.1);
       position: relative;
       z-index: 1;
@@ -422,11 +421,11 @@
       justify-content: flex-end;
     }
     .ai-headline {
-      font-size: clamp(48px, 6vw, 88px);
+      font-size: clamp(32px, 4vw, 52px);
       font-weight: 800;
-      line-height: 1.0;
+      line-height: 1.05;
       letter-spacing: -0.03em;
-      margin-bottom: 32px;
+      margin-bottom: 24px;
       color: #FFFFFF;
     }
     .ai-sub {
@@ -444,10 +443,10 @@
       padding-bottom: 1px;
     }
     .ai-right {
-      padding: clamp(48px, 6vw, 80px) var(--pad);
+      padding: clamp(40px, 5vw, 64px) var(--pad);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: center;
       position: relative;
       z-index: 1;
     }
@@ -455,18 +454,17 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 0;
-      flex: 1;
     }
     .ai-stat {
-      padding: 32px;
+      padding: 20px 24px;
       border-right: 1px solid rgba(255,255,255,0.1);
       border-bottom: 1px solid rgba(255,255,255,0.1);
     }
-    .ai-stat:nth-child(2) { }
+    .ai-stat:nth-child(2) { border-right: none; }
     .ai-stat:nth-child(3) { border-bottom: none; }
-    .ai-stat:nth-child(4) { border-bottom: none; }
+    .ai-stat:nth-child(4) { border-bottom: none; border-right: none; }
     .ai-stat-value {
-      font-size: 56px;
+      font-size: clamp(32px, 3.5vw, 44px);
       font-weight: 800;
       line-height: 1;
       letter-spacing: -0.03em;
@@ -476,7 +474,7 @@
       font-size: 11px;
       font-weight: 500;
       color: rgba(255,255,255,0.45);
-      margin-top: 8px;
+      margin-top: 6px;
       line-height: 1.4;
     }
 
