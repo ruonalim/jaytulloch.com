@@ -63,6 +63,10 @@
     .krak-gif-showcase { background: #000; line-height: 0; overflow: hidden; }
     .krak-gif-full { width: 100%; max-width: 960px; height: auto; display: block; margin: 0 auto; }
 
+    /* ── App screen banner — full width, top 40% crop ── */
+    .krak-app-banner { width: 100%; overflow: hidden; height: 18.8vw; min-height: 180px; line-height: 0; }
+    .krak-app-banner img { width: 100%; display: block; }
+
     /* ── Product showcase — full-width floating image ── */
     .krak-showcase { background: var(--bg-elevated); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 80px clamp(32px, 5vw, 80px); }
     .krak-showcase-single { max-width: 1280px; margin: 0 auto; }
@@ -421,6 +425,11 @@
       </div>
     </div>
   </section>
+
+  <!-- App screen — full width, top 40% crop -->
+  <div class="krak-app-banner">
+    <img src="./assets/krak-app-screen.png" alt="Krak neobank app home screen">
+  </div>
 
   <!-- Product showcase — home screen, breaks up the text before the closing video -->
   <div class="krak-showcase">
