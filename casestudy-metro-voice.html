@@ -55,7 +55,7 @@
 
     .metrics-banner { background: var(--bg-elevated); padding: 64px clamp(24px,5vw,80px); border-bottom: 1px solid var(--border); }
     .metrics-banner-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
-    .metric-block { padding: 40px 32px; background: rgba(200,16,46,0.06); border: 1px solid rgba(200,16,46,0.15); text-align: center; }
+    .metric-block { padding: 40px 32px; background: var(--bg); border: 1px solid var(--border); text-align: center; }
     .metric-value { font-family: var(--font); font-size: clamp(48px, 5vw, 72px); font-weight: 800; letter-spacing: -0.03em; color: var(--black); line-height: 1; margin-bottom: 12px; }
     .metric-label { font-size: 12px; font-weight: 500; letter-spacing: 0.04em; color: var(--text-muted); }
 
@@ -79,7 +79,7 @@
 
     .highlight-block {
       margin-top: 40px; padding: 40px 40px;
-      background: rgba(200,16,46,0.08);
+      background: var(--bg-elevated);
       }
     .highlight-block p { font-size: 20px; font-weight: 600; color: var(--text); line-height: 1.5; font-style: italic; }
 
@@ -143,7 +143,7 @@
   .cs-gate-hint { margin-top: 16px; font-size: 11px; color: rgba(255,255,255,0.2); letter-spacing: 0.06em; }
 
     /* Case Study Image Containers */
-    .cs-image-block { padding: 0 clamp(32px, 5vw, 80px); background: var(--black); }
+    .cs-image-block { padding: 0 clamp(32px, 5vw, 80px); background: var(--bg); }
     .cs-image-block.on-dark { background: var(--bg-elevated); }
     .cs-image-block-inner { max-width: 1100px; margin: 0 auto; padding: 64px 0; }
     .cs-image-container {
@@ -226,7 +226,11 @@
       .col-heading { font-size: clamp(24px, 7vw, 36px); }
       .next-cs { padding: 48px 20px; }
     }
-    </style>
+  
+    /* ── Metro GIF showcase ── */
+    .metro-gif-showcase { background: var(--bg-elevated); padding: 64px clamp(32px,5vw,80px); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .metro-gif-full { width: 100%; max-width: 800px; height: auto; display: block; margin: 0 auto; }
+  </style>
 
 </head>
 <body>
@@ -296,12 +300,8 @@
     </div>
   </section>
 
-  <div class="cs-image-block reveal">
-    <div class="cs-image-block-inner">
-      <div class="cs-image-container">
-        
-      </div>
-    </div>
+  <div class="metro-gif-showcase reveal">
+    <img src="./assets/metro-animation.gif" alt="Metro Bank app interface" class="metro-gif-full" loading="lazy">
   </div>
 
   <section class="cs-section" style="background: var(--bg-elevated);">
