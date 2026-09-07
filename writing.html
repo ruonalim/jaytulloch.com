@@ -260,7 +260,7 @@
 
     // ─── RSS Parser ───────────────────────────────────────────────────────────
 
-    const FEED_URL = 'https://jaytulloch.substack.com/feed';
+    const FEED_URL = '/api/feed';
     const CONTENT_NS = 'http://purl.org/rss/1.0/modules/content/';
 
     function extractExcerpt(contentEncoded, descriptionFallback) {
@@ -359,13 +359,8 @@
       try {
         xml = await tryFetch(FEED_URL);
       } catch {
-        try {
-          // CORS proxy fallback
-          xml = await tryFetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(FEED_URL));
-        } catch {
-          renderError();
-          return;
-        }
+        renderError();
+        return;
       }
 
       let doc;
