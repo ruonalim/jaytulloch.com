@@ -12,8 +12,8 @@
   <title>Inside the Build | Jay Tulloch — Design Leadership, AI & Fintech UX</title>
   <meta name="description" content="Inside the Build by Jay Tulloch. I've led design at digital banks, super apps, and crypto. This is what actually happens when you build."/>
   <link rel="canonical" href="https://www.jaytulloch.com/writing.html"/>
-  <meta property="og:title" content="Writing by Jay Tulloch — Design Leadership, AI & Fintech UX"/>
-  <meta property="og:description" content="Unfiltered perspective on AI product design, design leadership, and building products that matter."/>
+  <meta property="og:title" content="Inside the Build | Jay Tulloch"/>
+  <meta property="og:description" content="I've led design at digital banks, super apps, and crypto. This is what actually happens when you build."/>
   <meta property="og:type" content="website"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -54,14 +54,6 @@
     .writing-header h1 { font-size: clamp(64px, 10vw, 140px); font-weight: 800; letter-spacing: -0.04em; line-height: 0.92; }
     .writing-header-sub { font-size: 13px; font-weight: 400; color: var(--muted); max-width: 240px; text-align: right; line-height: 1.65; padding-bottom: 10px; }
 
-    /* Filters */
-    .filters { background: var(--white); border-bottom: 1px solid var(--rule); padding: 12px var(--pad); }
-    .filters-inner { max-width: 1100px; margin: 0 auto; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
-    .filters-inner::-webkit-scrollbar { display: none; }
-    .filter-pill { flex-shrink: 0; font-family: var(--font); font-size: 12px; font-weight: 600; padding: 8px 18px; background: none; color: var(--muted); border: 1px solid var(--rule); border-radius: 100px; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
-    .filter-pill:hover { border-color: var(--text); color: var(--text); }
-    .filter-pill.active { background: var(--black); color: #fff; border-color: var(--black); }
-
     /* Featured */
     .featured-wrap { background: var(--white); border-bottom: 1px solid var(--rule); }
     .featured-card { display: block; padding: clamp(40px, 5vw, 80px) var(--pad); transition: background 0.25s; max-width: calc(1100px + 2 * var(--pad)); margin: 0 auto; }
@@ -70,7 +62,7 @@
     .featured-body { max-width: 780px; }
     .card-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
     .tag { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; background: var(--bg); color: var(--muted); }
-    .card-date, .card-rt { font-size: 12px; color: var(--subtle); font-weight: 500; }
+    .card-date { font-size: 12px; color: var(--subtle); font-weight: 500; }
     .sep { font-size: 12px; color: var(--rule); }
     .featured-title { font-size: clamp(26px, 3.5vw, 48px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.06; margin-bottom: 18px; }
     .featured-excerpt { font-size: 15px; color: var(--muted); line-height: 1.72; max-width: 640px; font-weight: 400; }
@@ -78,7 +70,7 @@
     .substack-badge { display: inline-flex; align-items: center; gap: 6px; margin-top: 20px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--subtle); }
     .substack-badge::before { content: ''; display: block; width: 14px; height: 14px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2386868B'%3E%3Cpath d='M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z'/%3E%3C/svg%3E") center/contain no-repeat; }
 
-    /* Article grid */
+    /* Articles grid */
     .articles-section { background: var(--white); }
     .articles-section-inner { max-width: 1100px; margin: 0 auto; padding: 0 var(--pad); }
     .articles-grid { display: grid; grid-template-columns: 1fr 1fr; border-left: 1px solid var(--rule); }
@@ -91,6 +83,25 @@
     .card-time { font-size: 11px; color: var(--subtle); font-weight: 500; }
     .card-arrow { font-size: 18px; color: var(--subtle); transition: transform 0.2s; }
     .article-card:hover .card-arrow { transform: translateX(4px); }
+
+    /* Skeleton loading */
+    .skeleton { background: linear-gradient(90deg, var(--bg) 25%, #e8e8ea 50%, var(--bg) 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: 4px; }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    .skeleton-featured { padding: clamp(40px,5vw,80px) var(--pad); border-bottom: 1px solid var(--rule); }
+    .skeleton-featured .sk-tag { height: 22px; width: 100px; margin-bottom: 20px; }
+    .skeleton-featured .sk-title { height: clamp(32px,4vw,56px); width: 70%; margin-bottom: 12px; }
+    .skeleton-featured .sk-title2 { height: clamp(32px,4vw,56px); width: 50%; margin-bottom: 20px; }
+    .skeleton-featured .sk-p { height: 14px; width: 90%; margin-bottom: 8px; }
+    .skeleton-featured .sk-p2 { height: 14px; width: 75%; }
+    .skeleton-card { padding: 36px 32px; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .skeleton-card .sk-tag { height: 20px; width: 80px; margin-bottom: 14px; }
+    .skeleton-card .sk-title { height: 16px; width: 90%; margin-bottom: 6px; }
+    .skeleton-card .sk-title2 { height: 16px; width: 70%; margin-bottom: 14px; }
+    .skeleton-card .sk-p { height: 12px; width: 100%; margin-bottom: 6px; }
+    .skeleton-card .sk-p2 { height: 12px; width: 80%; }
+    .error-state { padding: clamp(40px,5vw,80px) var(--pad); text-align: center; color: var(--muted); }
+    .error-state h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+    .error-state a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
 
     /* Subscribe CTA */
     .subscribe-cta { background: var(--black); color: #fff; padding: clamp(64px, 8vw, 112px) var(--pad); border-top: 1px solid var(--rule); }
@@ -138,9 +149,6 @@
       .subscribe-actions { width: 100%; }
       .btn-subscribe { width: 100%; justify-content: center; }
     }
-
-    /* Hidden articles for filter */
-    .article-card[data-hidden="true"], .featured-wrap[data-hidden="true"] { display: none; }
   </style>
 </head>
 <body>
@@ -171,272 +179,34 @@
 
   <div class="writing-header">
     <div class="writing-header-inner">
-      <h1>Writing.</h1>
-      <p class="writing-header-sub">Inside the Build — what actually happens when you design digital banks, super apps, and crypto products.</p>
+      <h1>Inside<br/>the Build.</h1>
+      <p class="writing-header-sub">I've led design at digital banks, super apps, and crypto. This is what actually happens when you build.</p>
     </div>
   </div>
 
-  <div class="filters">
-    <div class="filters-inner">
-      <button class="filter-pill active" data-topic="all">All</button>
-      <button class="filter-pill" data-topic="ai">AI &amp; Design</button>
-      <button class="filter-pill" data-topic="leadership">Design Leadership</button>
-      <button class="filter-pill" data-topic="product">Product Strategy</button>
-      <button class="filter-pill" data-topic="fractional">Fractional Work</button>
+  <!-- Dynamic content injected here -->
+  <div id="content-area">
+    <!-- Skeleton featured -->
+    <div class="featured-wrap skeleton-featured">
+      <div class="sk-tag skeleton"></div>
+      <div class="sk-title skeleton" style="margin-bottom:10px"></div>
+      <div class="sk-title2 skeleton" style="margin-bottom:22px"></div>
+      <div class="sk-p skeleton"></div>
+      <div class="sk-p2 skeleton" style="margin-top:8px"></div>
     </div>
-  </div>
-
-  <!-- Featured -->
-  <div class="featured-wrap" data-topic="ai">
-    <a class="featured-card" href="https://jaytulloch.substack.com/p/your-design-system-is-now-machine-infrastructure-most-teams-still-document-it-for-humans" target="_blank" rel="noopener">
-      <div class="featured-inner">
-        <div class="featured-body">
-          <div class="card-meta">
-            <span class="tag">AI &amp; Design</span>
-            <span class="sep">·</span>
-            <span class="card-date">July 27, 2026</span>
-            <span class="sep">·</span>
-            <span class="card-rt">7 min read</span>
-          </div>
-          <h2 class="featured-title">Your Design System Is Now Machine Infrastructure. Most Teams Still Document It for Humans.</h2>
-          <p class="featured-excerpt">For fifteen years we built design systems for people. A tidy documentation site. Usage guidelines nobody read past the first heading. A component library one designer updated on a good week. That entire model is now aimed at the wrong reader. The AI doesn't need a getting-started guide. It needs structured, machine-parseable truth.</p>
-          <span class="substack-badge">Read on Substack</span>
+    <!-- Skeleton grid -->
+    <div class="articles-section">
+      <div class="articles-section-inner">
+        <div class="articles-grid" id="skeleton-grid">
+          <!-- 6 skeleton cards -->
+          <div class="skeleton-card"><div class="sk-tag skeleton"></div><div class="sk-title skeleton" style="margin-bottom:6px"></div><div class="sk-title2 skeleton" style="margin-bottom:16px"></div><div class="sk-p skeleton"></div><div class="sk-p2 skeleton" style="margin-top:6px"></div></div>
+          <div class="skeleton-card"><div class="sk-tag skeleton"></div><div class="sk-title skeleton" style="margin-bottom:6px"></div><div class="sk-title2 skeleton" style="margin-bottom:16px"></div><div class="sk-p skeleton"></div><div class="sk-p2 skeleton" style="margin-top:6px"></div></div>
+          <div class="skeleton-card"><div class="sk-tag skeleton"></div><div class="sk-title skeleton" style="margin-bottom:6px"></div><div class="sk-title2 skeleton" style="margin-bottom:16px"></div><div class="sk-p skeleton"></div><div class="sk-p2 skeleton" style="margin-top:6px"></div></div>
+          <div class="skeleton-card"><div class="sk-tag skeleton"></div><div class="sk-title skeleton" style="margin-bottom:6px"></div><div class="sk-title2 skeleton" style="margin-bottom:16px"></div><div class="sk-p skeleton"></div><div class="sk-p2 skeleton" style="margin-top:6px"></div></div>
+          <div class="skeleton-card"><div class="sk-tag skeleton"></div><div class="sk-title skeleton" style="margin-bottom:6px"></div><div class="sk-title2 skeleton" style="margin-bottom:16px"></div><div class="sk-p skeleton"></div><div class="sk-p2 skeleton" style="margin-top:6px"></div></div>
+          <div class="skeleton-card"><div class="sk-tag skeleton"></div><div class="sk-title skeleton" style="margin-bottom:6px"></div><div class="sk-title2 skeleton" style="margin-bottom:16px"></div><div class="sk-p skeleton"></div><div class="sk-p2 skeleton" style="margin-top:6px"></div></div>
         </div>
-        <div class="featured-arrow">→</div>
       </div>
-    </a>
-  </div>
-
-  <!-- Articles grid -->
-  <div class="articles-section">
-    <div class="articles-section-inner">
-      <div class="articles-grid" id="articles-grid">
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/micas-july-deadline-is-a-design-problem-not-a-compliance-one-the-onboarding-flow-just-became-the-battleground" target="_blank" rel="noopener" data-topic="product">
-          <div class="card-meta"><span class="tag">Product Strategy</span></div>
-          <h3 class="card-title">MiCA's July Deadline Is a Design Problem, Not a Compliance One. The Onboarding Flow Just Became the Battleground.</h3>
-          <p class="card-excerpt">The MiCA deadline lands on 1 July 2026, and most compliance teams are still treating it like a legal filing. It is not. It is a design deadline. The teams that understand this will gain customers. The ones that don't will lose them at the door.</p>
-          <div class="card-footer"><span class="card-time">June 5, 2026 · 7 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/figma-make-just-made-the-design-file-disposable-most-teams-are-still-treating-it-like-the-source-of-truth" target="_blank" rel="noopener" data-topic="ai">
-          <div class="card-meta"><span class="tag">AI &amp; Design</span></div>
-          <h3 class="card-title">Figma Make Just Made the Design File Disposable. Most Teams Are Still Treating It Like the Source of Truth.</h3>
-          <p class="card-excerpt">Four days ago Figma Make went into closed beta. It connects to your local codebase, edits product through chat, respects your design system via MCP, and opens pull requests without leaving the conversation. The design file is no longer the source of truth. The codebase is.</p>
-          <div class="card-footer"><span class="card-time">June 1, 2026 · 7 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/design-engineer-is-either-the-best-job-in-tech-or-a-headcount-trick-the-title-will-not-tell-you-which" target="_blank" rel="noopener" data-topic="leadership">
-          <div class="card-meta"><span class="tag">Design Leadership</span></div>
-          <h3 class="card-title">Design Engineer Is Either the Best Job in Tech or a Headcount Trick. The Title Will Not Tell You Which.</h3>
-          <p class="card-excerpt">Half the "design engineer" job postings sitting in your feed right now are not design engineering jobs. They are product designer roles where the company quietly cut a frontend engineer and decided the designer should cover both. The title is the same. The job is completely different.</p>
-          <div class="card-footer"><span class="card-time">May 29, 2026 · 7 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/agentic-ux-is-failing-on-the-boring-surfaces-that-is-where-it-has-to-win" target="_blank" rel="noopener" data-topic="product">
-          <div class="card-meta"><span class="tag">Product Strategy</span></div>
-          <h3 class="card-title">Agentic UX Is Failing on the Boring Surfaces. That Is Where It Has to Win.</h3>
-          <p class="card-excerpt">Agentic AI demos look magical. Production agentic AI is mostly a mess. And it is failing in the place it has to win — the boring stuff. Scheduling. Form submission. Status updates. The surfaces users touch fifty times a day, not once a week in a demo.</p>
-          <div class="card-footer"><span class="card-time">May 22, 2026 · 6 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/fractional-design-leadership-just-crossed-a-tipping-point-most-founders-are-buying-the-wrong-thing" target="_blank" rel="noopener" data-topic="fractional">
-          <div class="card-meta"><span class="tag">Fractional Work</span></div>
-          <h3 class="card-title">Fractional Design Leadership Just Crossed a Tipping Point. Most Founders Are Buying the Wrong Thing.</h3>
-          <p class="card-excerpt">Fractional design leadership is no longer a workaround. The model just crossed the tipping point where it stops being clever and starts being the default. And most founders are getting it wrong — they're buying hours when they should be buying outcomes.</p>
-          <div class="card-footer"><span class="card-time">May 20, 2026 · 7 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/the-figma-canvas-is-now-open-to-ai-agents-most-designers-are-asking-the-wrong-question" target="_blank" rel="noopener" data-topic="ai">
-          <div class="card-meta"><span class="tag">AI &amp; Design</span></div>
-          <h3 class="card-title">The Figma Canvas Is Now Open to AI Agents. Most Designers Are Asking the Wrong Question.</h3>
-          <p class="card-excerpt">The AI can design in Figma now. Not roughly. Not as a separate prototype in a disconnected tool. Directly on your canvas, using your design system, pulling your components, applying your tokens. The question isn't whether this changes your job. It's whether you're building the skills that survive it.</p>
-          <div class="card-footer"><span class="card-time">May 18, 2026 · 7 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/generation-just-became-free-design-taste-just-became-the-moat" target="_blank" rel="noopener" data-topic="ai">
-          <div class="card-meta"><span class="tag">AI &amp; Design</span></div>
-          <h3 class="card-title">Generation Just Became Free. Design Taste Just Became the Moat.</h3>
-          <p class="card-excerpt">Five tools can now generate a passable product screen from one sentence. Figma's stock dropped roughly 7% the day Claude Design launched. The story is not that AI can generate. It's that generation is now a commodity — and the only thing left to compete on is judgment.</p>
-          <div class="card-footer"><span class="card-time">May 18, 2026 · 7 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/claude-design-just-killed-figmas-moat-the-source-of-truth-just-moved-and-most-design-teams-are-looking-the-wrong-way" target="_blank" rel="noopener" data-topic="ai">
-          <div class="card-meta"><span class="tag">AI &amp; Design</span></div>
-          <h3 class="card-title">Claude Design Just Killed Figma's Moat. The Source of Truth Just Moved, and Most Design Teams Are Looking the Wrong Way.</h3>
-          <p class="card-excerpt">Claude Design doesn't just generate UI. It generates UI that lives in code, runs in a browser, and reflects your decisions in real time. Figma's moat was always the shared canvas. That moat just moved — and it moved to wherever the AI can see your actual product.</p>
-          <div class="card-footer"><span class="card-time">May 18, 2026 · 6 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/the-design-job-market-didnt-just-get-worse-it-split-in-two" target="_blank" rel="noopener" data-topic="leadership">
-          <div class="card-meta"><span class="tag">Design Leadership</span></div>
-          <h3 class="card-title">The Design Job Market Didn't Just Get Worse. It Split in Two.</h3>
-          <p class="card-excerpt">There are two design job markets right now. One is genuinely brutal — mid-level IC roles being compressed, junior pipelines drying up, AI absorbing execution work. The other is thriving — senior designers with systems thinking and business fluency are getting pulled faster than they can respond to messages.</p>
-          <div class="card-footer"><span class="card-time">May 13, 2026 · 6 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/mena-fintech-just-lost-85-of-its-funding-in-a-month-the-survivors-will-be-boring" target="_blank" rel="noopener" data-topic="product">
-          <div class="card-meta"><span class="tag">Product Strategy</span></div>
-          <h3 class="card-title">MENA Fintech Just Lost 85% of Its Funding in a Month. The Survivors Will Be Boring.</h3>
-          <p class="card-excerpt">The MENA fintech funding collapse wasn't a market correction. It was a culling of everything that was never a product — only a pitch. The startups that survive this aren't the ones with the boldest vision. They're the ones that built something a real person opens on a Tuesday morning to do something they actually need to do.</p>
-          <div class="card-footer"><span class="card-time">May 8, 2026 · 6 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/lovable-2-0-doesnt-replace-designers-it-replaces-the-junior-designer-pipeline" target="_blank" rel="noopener" data-topic="ai">
-          <div class="card-meta"><span class="tag">AI &amp; Design</span></div>
-          <h3 class="card-title">Lovable 2.0 Doesn't Replace Designers. It Replaces the Junior Designer Pipeline.</h3>
-          <p class="card-excerpt">Lovable 2.0 can ship a functional product with solid UI in an afternoon. That's not a threat to senior designers. It's a threat to the path that used to create them. The three years of doing relatively unambiguous execution work — the years that built taste — are disappearing.</p>
-          <div class="card-footer"><span class="card-time">May 6, 2026 · 7 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/staff-designer-is-the-best-job-in-tech-right-now-most-companies-dont-know-how-to-hire-one" target="_blank" rel="noopener" data-topic="leadership">
-          <div class="card-meta"><span class="tag">Design Leadership</span></div>
-          <h3 class="card-title">Staff Designer Is the Best Job in Tech Right Now. Most Companies Don't Know How to Hire One.</h3>
-          <p class="card-excerpt">Staff designer sits at the exact intersection that AI can't commoditise: deep craft, cross-functional influence, and systemic thinking — all without the political overhead of management. Most companies post the role, then accidentally interview for a senior designer and a VP at the same time.</p>
-          <div class="card-footer"><span class="card-time">May 4, 2026 · 7 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/the-hidden-cost-of-hiring-a-full-time-design-lead-before-youre-ready" target="_blank" rel="noopener" data-topic="fractional">
-          <div class="card-meta"><span class="tag">Fractional Work</span></div>
-          <h3 class="card-title">The Hidden Cost of Hiring a Full-Time Design Lead Before You're Ready</h3>
-          <p class="card-excerpt">Hiring a full-time design leader before you have the product clarity to direct them is one of the most expensive mistakes an early-stage company can make. You don't just lose salary — you lose months of momentum while a talented person tries to build something stable on unstable ground.</p>
-          <div class="card-footer"><span class="card-time">May 1, 2026 · 10 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/why-most-designers-will-never-become-director-and-it-has-nothing-to-do-with-skill" target="_blank" rel="noopener" data-topic="leadership">
-          <div class="card-meta"><span class="tag">Design Leadership</span></div>
-          <h3 class="card-title">Why Most Designers Will Never Become Director. And It Has Nothing To Do With Skill.</h3>
-          <p class="card-excerpt">The designers who plateau at senior level are almost always excellent craftspeople. The gap isn't skill. It's that nobody taught them how to operate at the level above — how to speak in business outcomes, how to build trust across functions, how to make themselves indispensable to a leadership team.</p>
-          <div class="card-footer"><span class="card-time">April 29, 2026 · 7 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/stop-treating-onboarding-like-a-funnel-your-users-arent-metrics" target="_blank" rel="noopener" data-topic="product">
-          <div class="card-meta"><span class="tag">Product Strategy</span></div>
-          <h3 class="card-title">Stop Treating Onboarding Like a Funnel. Your Users Aren't Metrics.</h3>
-          <p class="card-excerpt">Funnel thinking turns onboarding into a conversion optimisation problem. It puts the product's needs ahead of the user's. The teams getting onboarding right in 2026 aren't asking "how do we get users to step 4 faster?" They're asking "what does this person actually need to feel confident right now?"</p>
-          <div class="card-footer"><span class="card-time">April 28, 2026 · 7 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/neo-banks-didnt-lose-to-banks-they-lost-to-themselves" target="_blank" rel="noopener" data-topic="product">
-          <div class="card-meta"><span class="tag">Product Strategy</span></div>
-          <h3 class="card-title">Neo-banks Didn't Lose to Banks. They Lost to Themselves.</h3>
-          <p class="card-excerpt">A decade ago neobanks were going to make incumbent banking irrelevant. They had design, speed, and the moral high ground. Most of them are now either limping, pivoting, or quietly being absorbed. They didn't lose to JP Morgan. They lost the moment they started copying the product decisions that made banks bad.</p>
-          <div class="card-footer"><span class="card-time">April 27, 2026 · 7 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/google-declared-war-on-figma-the-wrong-people-are-worried" target="_blank" rel="noopener" data-topic="ai">
-          <div class="card-meta"><span class="tag">AI &amp; Design</span></div>
-          <h3 class="card-title">Google Declared War on Figma. The Wrong People Are Worried.</h3>
-          <p class="card-excerpt">Google's Stitch launch isn't a Figma killer. It's a signal of where the whole category is going. The designers panicking about tool competition are missing the actual question: when generation is free and collaboration is commoditised, what exactly is your design process for?</p>
-          <div class="card-footer"><span class="card-time">April 24, 2026 · 6 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/compliance-is-not-a-constraint-it-is-the-only-differentiator-fintech-has-left" target="_blank" rel="noopener" data-topic="product">
-          <div class="card-meta"><span class="tag">Product Strategy</span></div>
-          <h3 class="card-title">Compliance Is Not a Constraint. It Is the Only Differentiator Fintech Has Left.</h3>
-          <p class="card-excerpt">Every fintech surface looks the same now. The gradients, the rounded cards, the green confirmation states. The teams that will separate themselves in the next cycle aren't the ones with better UI — they're the ones that made regulatory complexity feel like a feature rather than a tax.</p>
-          <div class="card-footer"><span class="card-time">April 22, 2026 · 8 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/what-running-an-agency-taught-me-about-director-level-clarity" target="_blank" rel="noopener" data-topic="leadership">
-          <div class="card-meta"><span class="tag">Design Leadership</span></div>
-          <h3 class="card-title">What Running an Agency Taught Me About Director-Level Clarity</h3>
-          <p class="card-excerpt">Running an agency forces a kind of clarity that in-house roles rarely demand. When the client relationship is the product, you can't afford vague direction, soft feedback, or ambiguous success criteria. Everything I know about operating at director level, I learned the hard way by running RUONALIM.</p>
-          <div class="card-footer"><span class="card-time">April 20, 2026 · 7 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/the-ai-hiring-bet-thats-already-going-wrong" target="_blank" rel="noopener" data-topic="leadership">
-          <div class="card-meta"><span class="tag">Design Leadership</span></div>
-          <h3 class="card-title">The AI Hiring Bet That's Already Going Wrong</h3>
-          <p class="card-excerpt">Companies are replacing design roles with "AI-augmented" headcount expectations — fewer people, same output, powered by tools. Some of that is rational. Most of it is a bet being made without understanding what designers actually do. The reckoning is coming in the form of products that technically work and humanly fail.</p>
-          <div class="card-footer"><span class="card-time">April 17, 2026 · 6 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/the-rise-of-the-super-ic-why-the-best-senior-designers-dont-want-your-management-title" target="_blank" rel="noopener" data-topic="leadership">
-          <div class="card-meta"><span class="tag">Design Leadership</span></div>
-          <h3 class="card-title">The Rise of the Super IC: Why the Best Senior Designers Don't Want Your Management Title</h3>
-          <p class="card-excerpt">The best senior designers are turning down management. Not because they can't lead — because the individual contributor ceiling has moved. Staff and principal roles now carry as much influence as director without the calendar tax. The companies that haven't built this path are quietly losing their best people to companies that have.</p>
-          <div class="card-footer"><span class="card-time">April 15, 2026 · 7 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/the-figma-canvas-is-now-open-to-ai-agents-most-design-teams-arent-ready" target="_blank" rel="noopener" data-topic="ai">
-          <div class="card-meta"><span class="tag">AI &amp; Design</span></div>
-          <h3 class="card-title">The Figma Canvas Is Now Open to AI Agents. Most Design Teams Aren't Ready.</h3>
-          <p class="card-excerpt">AI agents inside the design canvas aren't a future-state experiment. They're here, and they're moving faster than most teams are prepared for. The question isn't whether to adopt them — it's whether your team has the structure and standards to direct them toward something good.</p>
-          <div class="card-footer"><span class="card-time">April 13, 2026 · 5 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/your-fintech-app-doesnt-have-a-design-problem-it-has-a-trust-problem" target="_blank" rel="noopener" data-topic="product">
-          <div class="card-meta"><span class="tag">Product Strategy</span></div>
-          <h3 class="card-title">Your Fintech App Doesn't Have a Design Problem. It Has a Trust Problem.</h3>
-          <p class="card-excerpt">Most fintech design critiques land on the wrong diagnosis. The interface isn't the issue. The issue is that users don't believe the product is on their side. Trust in financial products isn't earned through better UI — it's earned through every moment the product does exactly what it said it would, without friction or surprise.</p>
-          <div class="card-footer"><span class="card-time">April 10, 2026 · 4 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/your-design-system-isnt-a-library-anymore-its-your-ais-operating-manual" target="_blank" rel="noopener" data-topic="ai">
-          <div class="card-meta"><span class="tag">AI &amp; Design</span></div>
-          <h3 class="card-title">Your Design System Isn't a Library Anymore. It's Your AI's Operating Manual.</h3>
-          <p class="card-excerpt">Design systems were built to create consistency across human designers. That's still true. But the new reader of your system is a language model — and it reads your documentation in a completely different way. If your system isn't structured for machine consumption, you're handing AI a document it can't use.</p>
-          <div class="card-footer"><span class="card-time">April 10, 2026 · 7 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/the-ai-design-trap-more-variants-worse-decisions" target="_blank" rel="noopener" data-topic="ai">
-          <div class="card-meta"><span class="tag">AI &amp; Design</span></div>
-          <h3 class="card-title">The AI Design Trap: More Variants, Worse Decisions</h3>
-          <p class="card-excerpt">AI gives you ten options where you used to make three. That sounds like progress. In practice, it's paralysis dressed up as productivity. More variants don't produce better decisions — they dilute conviction, slow review cycles, and create the illusion of thoroughness without any of the outcomes.</p>
-          <div class="card-footer"><span class="card-time">April 8, 2026 · 3 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/the-best-design-leaders-in-2026-are-still-designing" target="_blank" rel="noopener" data-topic="leadership">
-          <div class="card-meta"><span class="tag">Design Leadership</span></div>
-          <h3 class="card-title">The Best Design Leaders in 2026 Are Still Designing.</h3>
-          <p class="card-excerpt">The advice to "put down the tools and focus on leadership" was always half-wrong. In 2026, design leaders who stopped designing are losing the vocabulary to direct AI, losing the credibility to set standards, and losing the instincts that made them worth promoting in the first place.</p>
-          <div class="card-footer"><span class="card-time">April 8, 2026 · 4 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/vibe-design-is-real-it-wont-replace-designers-it-will-expose-them" target="_blank" rel="noopener" data-topic="ai">
-          <div class="card-meta"><span class="tag">AI &amp; Design</span></div>
-          <h3 class="card-title">Vibe Design Is Real. It Won't Replace Designers. It Will Expose Them.</h3>
-          <p class="card-excerpt">Vibe design — generating UI through conversational prompts — is now a real workflow, not a toy. It won't replace designers with taste. It will expose designers who don't have any. The AI will generate exactly what you ask for. If what you ask for is mediocre, so is the output.</p>
-          <div class="card-footer"><span class="card-time">April 8, 2026 · 6 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/agentic-ux-is-the-next-design-discipline-most-designers-dont-know-it-exists" target="_blank" rel="noopener" data-topic="ai">
-          <div class="card-meta"><span class="tag">AI &amp; Design</span></div>
-          <h3 class="card-title">Agentic UX Is the Next Design Discipline. Most Designers Don't Know It Exists.</h3>
-          <p class="card-excerpt">Agentic UX is the design of systems where AI acts on behalf of users — not just responds to them. It's a fundamentally different design problem: you're no longer designing a surface for a human to navigate. You're designing a set of constraints for an AI to act within. Almost nobody is teaching this yet.</p>
-          <div class="card-footer"><span class="card-time">April 6, 2026 · 3 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/the-designers-who-survive-ai-arent-the-ones-learning-tools-fastest" target="_blank" rel="noopener" data-topic="ai">
-          <div class="card-meta"><span class="tag">AI &amp; Design</span></div>
-          <h3 class="card-title">The Designers Who Survive AI Aren't the Ones Learning Tools Fastest</h3>
-          <p class="card-excerpt">The framing of AI survival as a tools race is wrong. The designers who will thrive aren't the ones who mastered the most plugins — they're the ones who developed the judgment to know what good looks like, and the communication skills to direct systems toward it.</p>
-          <div class="card-footer"><span class="card-time">April 3, 2026 · 2 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/figmas-ai-agents-can-now-design-for-you-most-teams-arent-ready" target="_blank" rel="noopener" data-topic="ai">
-          <div class="card-meta"><span class="tag">AI &amp; Design</span></div>
-          <h3 class="card-title">Figma's AI Agents Can Now Design For You. Most Teams Aren't Ready.</h3>
-          <p class="card-excerpt">Figma's AI agents can now execute design tasks autonomously inside your file. That's not a feature update — it's a workflow shift. The teams that aren't ready aren't the ones without the tools. They're the ones without the standards that give an autonomous agent something coherent to work with.</p>
-          <div class="card-footer"><span class="card-time">April 3, 2026 · 5 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/the-ai-layoff-myth-why-the-best-designers-are-about-to-become-untouchable" target="_blank" rel="noopener" data-topic="ai">
-          <div class="card-meta"><span class="tag">AI &amp; Design</span></div>
-          <h3 class="card-title">The AI Layoff Myth: Why the Best Designers Are About to Become Untouchable</h3>
-          <p class="card-excerpt">The narrative that AI is about to wipe out design roles is both true and false at the same time. Yes, execution-only design roles are being compressed. No, the designers who operate at the intersection of systems, strategy, and craft are not going anywhere — they're becoming rarer and more valuable.</p>
-          <div class="card-footer"><span class="card-time">April 1, 2026 · 3 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-        <a class="article-card" href="https://jaytulloch.substack.com/p/ai-fluency-isnt-the-skill-knowing-when-ai-is-wrong-is" target="_blank" rel="noopener" data-topic="ai">
-          <div class="card-meta"><span class="tag">AI &amp; Design</span></div>
-          <h3 class="card-title">AI Fluency Isn't the Skill. Knowing When AI Is Wrong Is.</h3>
-          <p class="card-excerpt">Using AI tools is a baseline now, not a differentiator. The actual skill — the one that separates senior practitioners from everyone else — is knowing when the output is wrong, why it's wrong, and what to do instead. That requires the domain knowledge the AI is trying to replace.</p>
-          <div class="card-footer"><span class="card-time">March 23, 2026 · 4 min</span><span class="card-arrow">→</span></div>
-        </a>
-
-      </div><!-- /articles-grid -->
     </div>
   </div>
 
@@ -483,40 +253,145 @@
 
   <script>
     // Mobile nav
-    const hamburger = document.getElementById('nav-hamburger');
-    const drawer = document.getElementById('mobile-drawer');
-    const drawerClose = document.getElementById('drawer-close');
-    hamburger.addEventListener('click', () => drawer.classList.add('open'));
-    drawerClose.addEventListener('click', () => drawer.classList.remove('open'));
+    document.getElementById('nav-hamburger').addEventListener('click', () =>
+      document.getElementById('mobile-drawer').classList.add('open'));
+    document.getElementById('drawer-close').addEventListener('click', () =>
+      document.getElementById('mobile-drawer').classList.remove('open'));
 
-    // Filter pills
-    const pills = document.querySelectorAll('.filter-pill');
-    const cards = document.querySelectorAll('.articles-grid .article-card');
-    const featuredWrap = document.querySelector('.featured-wrap');
+    // ─── RSS Parser ───────────────────────────────────────────────────────────
 
-    pills.forEach(pill => {
-      pill.addEventListener('click', () => {
-        pills.forEach(p => p.classList.remove('active'));
-        pill.classList.add('active');
-        const topic = pill.dataset.topic;
+    const FEED_URL = 'https://jaytulloch.substack.com/feed';
+    const CONTENT_NS = 'http://purl.org/rss/1.0/modules/content/';
 
-        // Filter featured
-        if (topic === 'all' || featuredWrap.dataset.topic === topic) {
-          featuredWrap.removeAttribute('data-hidden');
-        } else {
-          featuredWrap.setAttribute('data-hidden', 'true');
+    function extractExcerpt(contentEncoded, descriptionFallback) {
+      if (!contentEncoded) return descriptionFallback || '';
+      const tmp = document.createElement('div');
+      tmp.innerHTML = contentEncoded;
+      // Remove headings, fact-check blocks, hr elements
+      tmp.querySelectorAll('h1,h2,h3,h4,h5,h6,hr').forEach(el => el.remove());
+      const paras = Array.from(tmp.querySelectorAll('p'));
+      let excerpt = '';
+      for (const p of paras) {
+        const text = p.textContent.trim();
+        // Skip short/boilerplate paragraphs
+        if (text.length < 40) continue;
+        if (/^(fact check|sources:|originally published|claim:|source:)/i.test(text)) continue;
+        excerpt += (excerpt ? ' ' : '') + text;
+        if (excerpt.length >= 200) break;
+      }
+      if (!excerpt) excerpt = descriptionFallback || '';
+      // Trim cleanly at word boundary
+      if (excerpt.length > 240) {
+        excerpt = excerpt.slice(0, 240).replace(/\s+\S*$/, '') + '…';
+      }
+      return excerpt;
+    }
+
+    function formatDate(dateStr) {
+      const d = new Date(dateStr);
+      return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+
+    function renderArticles(items) {
+      if (!items.length) { renderError(); return; }
+
+      const featured = items[0];
+      const rest = items.slice(1);
+
+      const featuredHTML = `
+        <div class="featured-wrap">
+          <a class="featured-card" href="${featured.link}" target="_blank" rel="noopener">
+            <div class="featured-inner">
+              <div class="featured-body">
+                <div class="card-meta">
+                  <span class="tag">Inside the Build</span>
+                  <span class="sep">·</span>
+                  <span class="card-date">${formatDate(featured.pubDate)}</span>
+                </div>
+                <h2 class="featured-title">${featured.title}</h2>
+                <p class="featured-excerpt">${featured.excerpt}</p>
+                <span class="substack-badge">Read on Substack</span>
+              </div>
+              <div class="featured-arrow">→</div>
+            </div>
+          </a>
+        </div>`;
+
+      const cardHTML = rest.map(item => `
+        <a class="article-card" href="${item.link}" target="_blank" rel="noopener">
+          <div class="card-meta">
+            <span class="tag">Inside the Build</span>
+          </div>
+          <h3 class="card-title">${item.title}</h3>
+          <p class="card-excerpt">${item.excerpt}</p>
+          <div class="card-footer">
+            <span class="card-time">${formatDate(item.pubDate)}</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </a>`).join('');
+
+      const gridHTML = `
+        <div class="articles-section">
+          <div class="articles-section-inner">
+            <div class="articles-grid">${cardHTML}</div>
+          </div>
+        </div>`;
+
+      document.getElementById('content-area').innerHTML = featuredHTML + gridHTML;
+    }
+
+    function renderError() {
+      document.getElementById('content-area').innerHTML = `
+        <div class="error-state">
+          <h3>Couldn't load articles right now.</h3>
+          <p>Read everything on <a href="https://jaytulloch.substack.com" target="_blank" rel="noopener">Substack →</a></p>
+        </div>`;
+    }
+
+    async function loadFeed() {
+      const tryFetch = async (url) => {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(res.status);
+        return res.text();
+      };
+
+      let xml;
+      try {
+        xml = await tryFetch(FEED_URL);
+      } catch {
+        try {
+          // CORS proxy fallback
+          xml = await tryFetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(FEED_URL));
+        } catch {
+          renderError();
+          return;
         }
+      }
 
-        // Filter cards
-        cards.forEach(card => {
-          if (topic === 'all' || card.dataset.topic === topic) {
-            card.removeAttribute('data-hidden');
-          } else {
-            card.setAttribute('data-hidden', 'true');
-          }
-        });
+      let doc;
+      try {
+        doc = new DOMParser().parseFromString(xml, 'application/xml');
+      } catch {
+        renderError();
+        return;
+      }
+
+      const itemEls = doc.querySelectorAll('item');
+      const items = Array.from(itemEls).map(el => {
+        const title = el.querySelector('title')?.textContent || '';
+        const link = el.querySelector('link')?.textContent || '';
+        const description = el.querySelector('description')?.textContent || '';
+        const pubDate = el.querySelector('pubDate')?.textContent || '';
+        const contentEl = el.getElementsByTagNameNS(CONTENT_NS, 'encoded')[0];
+        const contentEncoded = contentEl?.textContent || '';
+        const excerpt = extractExcerpt(contentEncoded, description);
+        return { title, link, description, pubDate, excerpt };
       });
-    });
+
+      renderArticles(items);
+    }
+
+    loadFeed();
   </script>
 
 </body>
