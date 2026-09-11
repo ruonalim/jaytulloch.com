@@ -726,7 +726,6 @@
     .t-card:nth-child(2n) { }
     .t-card:nth-child(3),
     .t-card:nth-child(4) { border-bottom: none; }
-    .t-card:hover { background: var(--white); }
     .t-quote {
       font-size: 15px;
       line-height: 1.7;
@@ -1571,7 +1570,6 @@
     .engagement-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
     .engagement-card { padding: clamp(36px, 4vw, 56px) var(--pad); transition: background 0.25s; border-right: 1px solid var(--rule); }
     .engagement-card:last-child { border-right: none; }
-    .engagement-card:hover { background: var(--bg); }
     .ec-num { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; color: var(--subtle); margin-bottom: 20px; }
     .ec-title { font-size: clamp(22px, 2.5vw, 32px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; margin-bottom: 14px; }
     .ec-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 24px; font-weight: 400; }
@@ -1586,7 +1584,6 @@
     .wyg-list-col { }
     .wyg-item { display: grid; grid-template-columns: 52px 1fr; gap: 20px; align-items: start; padding: 28px var(--pad); border-bottom: 1px solid var(--rule); transition: background 0.2s; }
     .wyg-item:last-child { border-bottom: none; }
-    .wyg-item:hover { background: var(--bg); }
     .wyg-num { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--subtle); padding-top: 3px; }
     .wyg-item h4 { font-size: 14px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 6px; }
     .wyg-item p { font-size: 13px; color: var(--muted); line-height: 1.7; font-weight: 400; }
@@ -1657,6 +1654,8 @@
       border-bottom: 1px solid var(--rule);
       background: var(--white);
       overflow: hidden;
+      position: relative;
+      z-index: 1;
     }
     .brands-label {
       font-size: 9px;
@@ -1724,27 +1723,12 @@
       padding: clamp(14px, 1.6vw, 20px) var(--pad);
       border-bottom: 1px solid var(--rule);
       border-right: 1px solid var(--rule);
-      transition: background 0.45s cubic-bezier(0.32, 0.72, 0, 1);
-      position: relative;
-      overflow: hidden;
     }
     /* Right column: no right border */
     .career-entry:nth-child(2n) { border-right: none; }
     /* Last row: no bottom border */
     .career-entry:nth-last-child(-n+2) { border-bottom: none; }
-    .career-entry::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 0; bottom: 0;
-      width: 2px;
-      background: var(--black);
-      transform: scaleY(0);
-      transform-origin: top;
-      transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1);
-    }
     .career-entry:last-child { border-bottom: none; }
-    .career-entry:hover { background: var(--white); }
-    .career-entry:hover::before { transform: scaleY(1); }
     .ce-year {
       font-size: 11px;
       font-weight: 700;
@@ -2173,7 +2157,7 @@
           <h3 class="ce-company">Kraken</h3>
           <p class="ce-role">Sr. Staff Product Designer</p>
         </div>
-        <span class="ce-badge">2025</span>
+        <span></span>
       </div>
 
       <div class="career-entry reveal">
@@ -2182,7 +2166,7 @@
           <h3 class="ce-company">Careem (Uber)</h3>
           <p class="ce-role">Head of Product Design, Pay &amp; Platform</p>
         </div>
-        <span class="ce-badge">2024</span>
+        <span></span>
       </div>
 
       <div class="career-entry reveal">
@@ -2191,7 +2175,7 @@
           <h3 class="ce-company">Almosafer</h3>
           <p class="ce-role">Director of UX &amp; Product Design</p>
         </div>
-        <span class="ce-badge">2020</span>
+        <span></span>
       </div>
 
       <div class="career-entry reveal">
@@ -2200,7 +2184,7 @@
           <h3 class="ce-company">Metro Bank</h3>
           <p class="ce-role">Head of Product Design &amp; UX</p>
         </div>
-        <span class="ce-badge">2017</span>
+        <span></span>
       </div>
 
       <div class="career-entry reveal">
@@ -2209,7 +2193,7 @@
           <h3 class="ce-company">Momondo</h3>
           <p class="ce-role">Lead Product Designer</p>
         </div>
-        <span class="ce-badge">2015</span>
+        <span></span>
       </div>
 
       <div class="career-entry reveal">
@@ -2218,7 +2202,7 @@
           <h3 class="ce-company">Sopra Steria</h3>
           <p class="ce-role">UX Designer · Gov Digital</p>
         </div>
-        <span class="ce-badge">2014</span>
+        <span></span>
       </div>
 
     </div>
