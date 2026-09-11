@@ -195,56 +195,82 @@
     /* ─── Hero ──────────────────────────────────────────────────── */
     #hero {
       display: grid;
-      grid-template-columns: 40% 60%;
+      grid-template-columns: 45% 55%;
       height: calc(100vh - 76px);
-      border-bottom: 1px solid var(--rule);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
       position: sticky;
       top: 0;
       z-index: 0;
     }
     .hero-text {
+      background: #0C0C12;
       padding: var(--pad);
-      padding-top: clamp(40px, 6vw, 80px);
+      padding-top: clamp(40px, 5vw, 72px);
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      gap: 24px;
-      padding-bottom: clamp(48px, 7vw, 96px);
+      justify-content: space-between;
+      gap: 0;
+      padding-bottom: clamp(40px, 5vw, 72px);
+    }
+    .hero-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .hero-name {
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .hero-location {
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.04em;
     }
     .hero-headline {
-      font-size: clamp(56px, 8.5vw, 128px);
-      line-height: 0.96;
-      letter-spacing: -0.04em;
+      font-size: clamp(64px, 9.5vw, 148px);
+      line-height: 0.93;
+      letter-spacing: -0.045em;
     }
     .hl-light {
       font-weight: 300;
-      color: var(--muted);
+      color: rgba(255,255,255,0.35);
       display: block;
     }
     .hl-bold {
       font-weight: 800;
-      color: var(--text);
+      color: #ffffff;
       display: block;
     }
-    .hero-name {
+    .hero-bottom {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .hero-tagline {
       font-size: 13px;
-      font-weight: 600;
-      color: var(--muted);
-      letter-spacing: 0.02em;
-      margin-bottom: 16px;
+      color: rgba(255,255,255,0.35);
+      font-weight: 400;
+      line-height: 1.6;
+      max-width: 220px;
     }
     .hero-cta {
       display: inline-flex;
       align-items: center;
       gap: 0;
-      background: var(--black);
-      color: var(--white);
+      background: #fff;
+      color: #0C0C12;
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 700;
       padding: 6px 6px 6px 20px;
       border-radius: 100px;
-      transition: opacity 0.4s cubic-bezier(0.32, 0.72, 0, 1), transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
-      align-self: flex-start;
+      transition: opacity 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+      align-self: flex-end;
+      flex-shrink: 0;
     }
     .hero-cta::after {
       content: '↓';
@@ -254,17 +280,17 @@
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.12);
+      background: rgba(0,0,0,0.08);
       margin-left: 12px;
       font-size: 14px;
       transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
     }
     .hero-cta:hover { opacity: 0.85; }
-    .hero-cta:hover::after { transform: translateY(2px); }
+    .hero-cta:hover::after { transform: translateY(3px); }
     .hero-video-wrap {
       position: relative;
       overflow: hidden;
-      background: #111;
+      background: #0a0a0a;
     }
     .hero-video-wrap video {
       position: absolute;
@@ -278,7 +304,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to right, rgba(0,0,0,0.15) 0%, transparent 40%);
+      background: linear-gradient(to right, rgba(12,12,18,0.4) 0%, transparent 35%);
     }
 
     /* ─── Ticker ────────────────────────────────────────────────── */
@@ -1663,7 +1689,7 @@
 
     /* ─── Career Section ───────────────────────────────────────── */
     #career {
-      background: var(--white);
+      background: var(--bg);
       border-bottom: 1px solid var(--rule);
       position: relative;
       z-index: 1;
@@ -1719,7 +1745,7 @@
       transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1);
     }
     .career-entry:last-child { border-bottom: none; }
-    .career-entry:hover { background: var(--bg); }
+    .career-entry:hover { background: var(--white); }
     .career-entry:hover::before { transform: scaleY(1); }
     .ce-year {
       font-size: 11px;
@@ -1977,12 +2003,18 @@
   <!-- Hero -->
   <section id="hero">
     <div class="hero-text">
-      <p class="hero-name">Jay Tulloch</p>
+      <div class="hero-top">
+        <p class="hero-name">Jay Tulloch</p>
+        <p class="hero-location">Dubai, UAE</p>
+      </div>
       <h1 class="hero-headline">
         <span class="hl-light">Product design</span>
         <span class="hl-bold">that delivers.</span>
       </h1>
-      <a href="#work" class="hero-cta">Selected work</a>
+      <div class="hero-bottom">
+        <p class="hero-tagline">18 years shaping products used by tens of millions of people.</p>
+        <a href="#work" class="hero-cta">Selected work</a>
+      </div>
     </div>
     <div class="hero-video-wrap">
       <video autoplay muted loop playsinline>
@@ -2223,7 +2255,7 @@
       <div class="pod-right">
         <iframe
           id="pod-iframe"
-          src="https://www.youtube.com/embed/ojBxx_muPW8?autoplay=1&mute=1&controls=1&rel=0&modestbranding=1&color=white"
+          src="https://www.youtube.com/embed/ojBxx_muPW8?start=1663&autoplay=1&mute=1&controls=1&rel=0&modestbranding=1&color=white"
           title="Beyond the Interface Podcast"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
