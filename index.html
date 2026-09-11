@@ -51,7 +51,6 @@
       background: var(--bg);
       color: var(--text);
       -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
     }
     a { color: inherit; text-decoration: none; }
     img { display: block; max-width: 100%; }
@@ -166,8 +165,11 @@
     #hero {
       display: grid;
       grid-template-columns: 40% 60%;
-      min-height: 75vh;
+      height: 75vh;
       border-bottom: 1px solid var(--rule);
+      position: sticky;
+      top: 0;
+      z-index: 0;
     }
     .hero-text {
       padding: var(--pad);
@@ -343,6 +345,8 @@
       align-items: stretch;
       transition: background 0.25s;
       background: var(--white);
+      position: relative;
+      z-index: 1;
     }
     .work-row:hover { background: var(--bg); }
     .work-num {
@@ -721,6 +725,9 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       border-bottom: 1px solid var(--rule);
+      position: relative;
+      z-index: 1;
+      background: var(--bg);
     }
     .about-left {
       position: relative;
@@ -874,6 +881,8 @@
       border-top: 1px solid var(--rule);
       background: var(--black);
       color: var(--white);
+      position: relative;
+      z-index: 1;
     }
     .footer-top {
       display: grid;
@@ -1024,6 +1033,9 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       border-bottom: 1px solid var(--rule);
+      background: var(--bg);
+      position: relative;
+      z-index: 1;
     }
     .metric {
       padding: clamp(24px, 3vw, 40px) var(--pad);
@@ -1047,13 +1059,68 @@
       line-height: 1.4;
     }
 
-    /* ─── AI Minimal ────────────────────────────────────────────── */
+    /* ─── AI Minimal — Siri Aurora ─────────────────────────────── */
+    @keyframes aurora-drift-1 {
+      0%, 100% { transform: translate(0,0) scale(1); opacity: 0.9; }
+      40%       { transform: translate(6%, -8%) scale(1.1); opacity: 1; }
+      70%       { transform: translate(-4%, 5%) scale(0.95); opacity: 0.8; }
+    }
+    @keyframes aurora-drift-2 {
+      0%, 100% { transform: translate(0,0) scale(1); opacity: 0.8; }
+      35%       { transform: translate(-7%, 6%) scale(1.08); opacity: 1; }
+      70%       { transform: translate(5%, -5%) scale(0.93); opacity: 0.85; }
+    }
+    @keyframes siri-text-glow {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     #ai {
       display: grid;
       grid-template-columns: 1fr 1fr;
       border-bottom: 1px solid var(--rule);
-      background: #0A0A0F;
+      background: #06060A;
       color: #fff;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    /* Aurora blob 1: purple/indigo (top-left) */
+    #ai::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      left: -25%;
+      width: 85%;
+      height: 180%;
+      background: radial-gradient(ellipse 70% 55% at 40% 50%,
+        rgba(100, 50, 255, 0.40) 0%,
+        rgba(168, 85, 247, 0.24) 35%,
+        rgba(59, 130, 246, 0.12) 60%,
+        transparent 80%
+      );
+      animation: aurora-drift-1 15s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    /* Aurora blob 2: blue/warm (bottom-right) */
+    #ai::after {
+      content: '';
+      position: absolute;
+      bottom: -50%;
+      right: -25%;
+      width: 80%;
+      height: 190%;
+      background: radial-gradient(ellipse 75% 60% at 60% 60%,
+        rgba(30, 80, 255, 0.30) 0%,
+        rgba(130, 50, 230, 0.20) 35%,
+        rgba(200, 60, 80, 0.10) 65%,
+        transparent 85%
+      );
+      animation: aurora-drift-2 20s ease-in-out infinite 3s;
+      pointer-events: none;
+      z-index: 0;
     }
     .ai-m-left {
       padding: clamp(40px, 5vw, 72px) var(--pad);
@@ -1061,13 +1128,15 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      position: relative;
+      z-index: 1;
     }
     .ai-m-tag {
       font-size: 10px;
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.35);
       margin-bottom: 40px;
     }
     .ai-m-headline {
@@ -1075,12 +1144,26 @@
       font-weight: 800;
       letter-spacing: -0.03em;
       line-height: 1.05;
-      color: #fff;
+      background: linear-gradient(
+        135deg,
+        #ffffff 0%,
+        rgba(210, 180, 255, 1) 30%,
+        rgba(130, 80, 255, 0.95) 55%,
+        rgba(200, 160, 255, 1) 75%,
+        #ffffff 100%
+      );
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: siri-text-glow 8s ease-in-out infinite;
     }
     .ai-m-right {
       padding: clamp(40px, 5vw, 72px) var(--pad);
       display: flex;
       align-items: flex-end;
+      position: relative;
+      z-index: 1;
     }
     .ai-m-body {
       font-size: 14px;
@@ -1093,6 +1176,9 @@
     /* ─── Writing Section ───────────────────────────────────────── */
     #writing {
       border-top: 1px solid var(--rule);
+      position: relative;
+      z-index: 1;
+      background: var(--bg);
     }
     .writing-section-header {
       padding: clamp(64px, 9vw, 120px) var(--pad) clamp(32px, 4vw, 56px);
@@ -1176,6 +1262,9 @@
     /* ─── Contact Section ───────────────────────────────────────── */
     #contact {
       border-top: 1px solid var(--rule);
+      position: relative;
+      z-index: 1;
+      background: var(--white);
     }
     .contact-hero-wrap {
       display: grid;
@@ -1424,7 +1513,7 @@
       <h2 class="ai-m-headline">Seven years<br/>delivering<br/>AI products.</h2>
     </div>
     <div class="ai-m-right">
-      <p class="ai-m-body">Before AI was a buzzword, I was shipping it in regulated banking. <strong>UK's first AI in retail banking</strong> (2018). <strong>LLM-powered travel search</strong> (2023). <strong>AI dineout discovery</strong> at Careem (2024). <strong>LLM design ops</strong> at Kraken (2025). Six production AI case studies across fintech, travel, and super apps.</p>
+      <p class="ai-m-body">Before AI was a buzzword, I was shipping it in regulated banking. <strong>UK's first AI in retail banking</strong> (2018). <strong>LLM-powered travel search</strong> (2023). <strong>AI dineout discovery</strong> at Careem (2024). <strong>LLM design ops</strong> (2025). Six production AI case studies across fintech, travel, and super apps.</p>
     </div>
   </section>
 
