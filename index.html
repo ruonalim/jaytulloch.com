@@ -928,6 +928,229 @@
       color: rgba(255,255,255,0.35);
     }
 
+    /* ─── Case Study Modal ─────────────────────────────────────── */
+    .cs-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: #000;
+    }
+    .cs-modal.open { display: flex; flex-direction: column; }
+    .cs-modal-bar {
+      height: 52px;
+      background: rgba(15,15,15,0.97);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      flex-shrink: 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .cs-modal-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+    .cs-modal-actions { display: flex; align-items: center; gap: 8px; }
+    .cs-modal-open {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.55);
+      background: rgba(255,255,255,0.08);
+      border: none;
+      padding: 6px 14px;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: color 0.2s, background 0.2s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .cs-modal-open:hover { color: #fff; background: rgba(255,255,255,0.14); }
+    .cs-modal-close {
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.6);
+      font-size: 24px;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s;
+    }
+    .cs-modal-close:hover { color: #fff; }
+    .cs-modal iframe {
+      flex: 1;
+      width: 100%;
+      border: none;
+      background: #fff;
+    }
+
+    /* ─── Writing Section ───────────────────────────────────────── */
+    #writing {
+      border-top: 1px solid var(--rule);
+    }
+    .writing-section-header {
+      padding: clamp(64px, 9vw, 120px) var(--pad) clamp(32px, 4vw, 56px);
+      border-bottom: 1px solid var(--rule);
+      background: var(--white);
+    }
+    .writing-header-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 40px;
+    }
+    .writing-section-header h2 {
+      font-size: clamp(64px, 10vw, 140px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 0.92;
+    }
+    .writing-header-sub {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--muted);
+      max-width: 240px;
+      text-align: right;
+      line-height: 1.65;
+      padding-bottom: 10px;
+    }
+    .featured-wrap { background: var(--white); border-bottom: 1px solid var(--rule); }
+    .featured-card { display: block; padding: clamp(40px, 5vw, 80px) var(--pad); transition: background 0.25s; }
+    .featured-card:hover { background: var(--bg); }
+    .featured-inner { display: grid; grid-template-columns: 1fr auto; gap: 60px; align-items: end; }
+    .featured-body { max-width: 780px; }
+    .card-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 18px; flex-wrap: wrap; }
+    .tag { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; background: var(--bg); color: var(--muted); }
+    .card-date { font-size: 12px; color: var(--subtle); font-weight: 500; }
+    .sep { font-size: 12px; color: var(--rule); }
+    .featured-title { font-size: clamp(26px, 3.5vw, 48px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.06; margin-bottom: 18px; }
+    .featured-excerpt { font-size: 15px; color: var(--muted); line-height: 1.72; max-width: 640px; font-weight: 400; }
+    .featured-arrow { font-size: 72px; font-weight: 300; color: var(--subtle); line-height: 1; padding-bottom: 4px; }
+    .substack-badge { display: inline-flex; align-items: center; gap: 6px; margin-top: 20px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--subtle); }
+    .substack-badge::before { content: ''; display: block; width: 14px; height: 14px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2386868B'%3E%3Cpath d='M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z'/%3E%3C/svg%3E") center/contain no-repeat; }
+    .articles-section { background: var(--white); }
+    .articles-section-inner { padding: 0 var(--pad); }
+    .articles-grid { display: grid; grid-template-columns: 1fr 1fr; border-left: 1px solid var(--rule); }
+    .article-card { display: block; padding: 36px 32px; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); transition: background 0.2s; }
+    .article-card:hover { background: var(--bg); }
+    .article-card .card-meta { margin-bottom: 12px; }
+    .article-card .card-title { font-size: 16px; font-weight: 700; line-height: 1.35; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .article-card .card-excerpt { font-size: 13px; color: var(--muted); line-height: 1.65; font-weight: 400; margin-bottom: 16px; }
+    .article-card .card-footer { display: flex; align-items: center; justify-content: space-between; }
+    .card-time { font-size: 11px; color: var(--subtle); font-weight: 500; }
+    .card-arrow { font-size: 18px; color: var(--subtle); transition: transform 0.2s; }
+    .article-card:hover .card-arrow { transform: translateX(4px); }
+    .skeleton { background: linear-gradient(90deg, var(--bg) 25%, #e8e8ea 50%, var(--bg) 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: 4px; }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    .skeleton-featured { padding: clamp(40px,5vw,80px) var(--pad); border-bottom: 1px solid var(--rule); background: var(--white); }
+    .skeleton-featured .sk-tag { height: 22px; width: 100px; margin-bottom: 20px; }
+    .skeleton-featured .sk-title { height: clamp(32px,4vw,56px); width: 70%; margin-bottom: 12px; }
+    .skeleton-featured .sk-title2 { height: clamp(32px,4vw,56px); width: 50%; margin-bottom: 20px; }
+    .skeleton-featured .sk-p { height: 14px; width: 90%; margin-bottom: 8px; }
+    .skeleton-featured .sk-p2 { height: 14px; width: 75%; }
+    .skeleton-card { padding: 36px 32px; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .skeleton-card .sk-tag { height: 20px; width: 80px; margin-bottom: 14px; }
+    .skeleton-card .sk-title { height: 16px; width: 90%; margin-bottom: 6px; }
+    .skeleton-card .sk-title2 { height: 16px; width: 70%; margin-bottom: 14px; }
+    .skeleton-card .sk-p { height: 12px; width: 100%; margin-bottom: 6px; }
+    .skeleton-card .sk-p2 { height: 12px; width: 80%; }
+    .error-state { padding: clamp(40px,5vw,80px) var(--pad); text-align: center; color: var(--muted); background: var(--white); }
+    .error-state h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
+    .error-state a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+    .subscribe-cta { background: var(--black); color: #fff; padding: clamp(64px, 8vw, 112px) var(--pad); border-top: 1px solid rgba(255,255,255,0.08); }
+    .subscribe-cta-inner { display: grid; grid-template-columns: 1fr auto; gap: 60px; align-items: center; }
+    .subscribe-cta h2 { font-size: clamp(36px, 5vw, 72px); font-weight: 800; letter-spacing: -0.04em; line-height: 1.0; margin-bottom: 16px; }
+    .subscribe-cta p { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.65; max-width: 440px; }
+    .subscribe-actions { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; flex-shrink: 0; }
+    .btn-subscribe { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: var(--black); font-family: var(--font); font-size: 14px; font-weight: 700; padding: 14px 26px; border-radius: 100px; transition: opacity 0.2s; white-space: nowrap; }
+    .btn-subscribe:hover { opacity: 0.9; }
+    .btn-subscribe svg { width: 14px; height: 14px; fill: var(--black); }
+    .subscribe-note { font-size: 11px; color: rgba(255,255,255,0.3); font-weight: 500; }
+
+    /* ─── Contact Section ───────────────────────────────────────── */
+    #contact {
+      border-top: 1px solid var(--rule);
+    }
+    .contact-hero-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 80vh;
+      border-bottom: 1px solid var(--rule);
+      background: var(--white);
+    }
+    .ct-hero-left {
+      padding: clamp(64px, 9vw, 120px) var(--pad) clamp(48px, 5vw, 72px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid var(--rule);
+    }
+    .ct-hero-title {
+      font-size: clamp(52px, 7vw, 110px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 0.92;
+      margin-bottom: 24px;
+    }
+    .ct-hero-title span.light { color: var(--muted); font-weight: 300; }
+    .ct-hero-desc { font-size: 15px; color: var(--muted); line-height: 1.75; max-width: 400px; font-weight: 400; margin-bottom: 48px; }
+    .ct-contact-block { margin-top: auto; }
+    .availability-badge { display: inline-flex; align-items: center; gap: 10px; background: var(--bg); border: 1px solid var(--rule); padding: 10px 16px; border-radius: 100px; margin-bottom: 32px; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; color: var(--muted); align-self: flex-start; }
+    .availability-badge .pulse-dot { width: 8px; height: 8px; border-radius: 50%; background: #f59e0b; flex-shrink: 0; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(245,158,11,0.5); } 50% { opacity: 0.7; box-shadow: 0 0 0 5px rgba(245,158,11,0); } }
+    .quick-links { display: flex; flex-direction: column; }
+    .quick-link { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; border-bottom: 1px solid var(--rule); cursor: pointer; transition: all 0.2s; }
+    .quick-link:first-child { border-top: 1px solid var(--rule); }
+    .quick-link:last-child { border-bottom: none; }
+    .quick-link:hover { padding-left: 8px; }
+    .ql-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--subtle); margin-bottom: 3px; }
+    .ql-value { font-size: 14px; font-weight: 600; color: var(--text); }
+    .ql-arrow { font-size: 18px; color: var(--subtle); flex-shrink: 0; transition: color 0.2s; }
+    .quick-link:hover .ql-arrow { color: var(--text); }
+    .ct-video-panel { position: relative; overflow: hidden; min-height: 500px; }
+    .ct-video-panel video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; }
+    .engagements { background: var(--white); border-bottom: 1px solid var(--rule); }
+    .engagement-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .engagement-card { padding: clamp(36px, 4vw, 56px) var(--pad); transition: background 0.25s; border-right: 1px solid var(--rule); }
+    .engagement-card:last-child { border-right: none; }
+    .engagement-card:hover { background: var(--bg); }
+    .ec-num { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; color: var(--subtle); margin-bottom: 20px; }
+    .ec-title { font-size: clamp(22px, 2.5vw, 32px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; margin-bottom: 14px; }
+    .ec-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 24px; font-weight: 400; }
+    .ec-good-for { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--subtle); margin-bottom: 10px; }
+    .ec-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .ec-tag { font-size: 11px; font-weight: 600; padding: 5px 12px; border-radius: 100px; background: var(--bg); color: var(--muted); border: 1px solid var(--rule); }
+    .what-you-get { background: var(--white); border-bottom: 1px solid var(--rule); }
+    .wyg-grid { display: grid; grid-template-columns: 1fr 2fr; }
+    .wyg-heading-col { padding: clamp(48px, 6vw, 80px) var(--pad); }
+    .wyg-heading { font-size: clamp(36px, 5vw, 60px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.0; position: sticky; top: 72px; }
+    .wyg-heading span { display: block; color: var(--muted); font-weight: 300; }
+    .wyg-list-col { }
+    .wyg-item { display: grid; grid-template-columns: 52px 1fr; gap: 20px; align-items: start; padding: 28px var(--pad); border-bottom: 1px solid var(--rule); transition: background 0.2s; }
+    .wyg-item:last-child { border-bottom: none; }
+    .wyg-item:hover { background: var(--bg); }
+    .wyg-num { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--subtle); padding-top: 3px; }
+    .wyg-item h4 { font-size: 14px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 6px; }
+    .wyg-item p { font-size: 13px; color: var(--muted); line-height: 1.7; font-weight: 400; }
+    .ct-cta-block { padding: clamp(80px, 10vw, 140px) var(--pad); text-align: center; border-bottom: 1px solid var(--rule); background: var(--white); }
+    .ct-cta-title { font-size: clamp(64px, 10vw, 140px); font-weight: 800; letter-spacing: -0.04em; line-height: 0.92; margin-bottom: 24px; }
+    .ct-cta-title span { display: block; color: var(--muted); font-weight: 300; }
+    .ct-cta-sub { font-size: 16px; color: var(--muted); margin-bottom: 48px; line-height: 1.7; max-width: 480px; margin-left: auto; margin-right: auto; font-weight: 400; }
+    .ct-cta-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .ct-cta-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--black); color: #fff; font-family: var(--font); font-size: 14px; font-weight: 600; padding: 14px 28px; border-radius: 100px; border: none; cursor: pointer; transition: opacity 0.2s; }
+    .ct-cta-primary:hover { opacity: 0.8; }
+    .ct-cta-secondary { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; border: 1px solid var(--rule); padding: 14px 28px; border-radius: 100px; color: var(--text); transition: background 0.2s; }
+    .ct-cta-secondary:hover { background: var(--bg); }
+
     /* ─── Responsive ────────────────────────────────────────────── */
     @media (max-width: 900px) {
       .nav-links li { display: none; }
@@ -965,6 +1188,22 @@
       .career-row { grid-template-columns: 1fr 1fr; }
       .cr-year { text-align: left; }
       .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .contact-hero-wrap { grid-template-columns: 1fr; min-height: auto; }
+      .ct-hero-left { border-right: none; border-bottom: 1px solid var(--rule); }
+      .ct-video-panel { height: clamp(280px, 55vw, 480px); min-height: 0; }
+      .ct-contact-block { margin-top: 48px; }
+      .engagement-grid { grid-template-columns: 1fr; }
+      .engagement-card { border-right: none; border-bottom: 1px solid var(--rule); }
+      .engagement-card:last-child { border-bottom: none; }
+      .wyg-grid { grid-template-columns: 1fr; }
+      .wyg-heading-col { border-bottom: 1px solid var(--rule); }
+      .wyg-heading { position: static; }
+      .writing-header-inner { grid-template-columns: 1fr; }
+      .writing-header-sub { text-align: left; max-width: none; }
+      .featured-inner { grid-template-columns: 1fr; gap: 24px; }
+      .featured-arrow { display: none; }
+      .articles-grid { grid-template-columns: 1fr; }
+      .subscribe-cta-inner { grid-template-columns: 1fr; gap: 40px; }
       /* Hero */
       .hero-title { font-size: clamp(36px, 10vw, 64px); }
       /* Numbers */
@@ -984,14 +1223,26 @@
 </head>
 <body>
 
+  <!-- Case Study Modal -->
+  <div class="cs-modal" id="cs-modal">
+    <div class="cs-modal-bar">
+      <span class="cs-modal-label">Case Study</span>
+      <div class="cs-modal-actions">
+        <a class="cs-modal-open" id="cs-modal-link" href="#" target="_blank" rel="noopener">Open full page ↗</a>
+        <button class="cs-modal-close" id="cs-modal-close">✕</button>
+      </div>
+    </div>
+    <iframe id="cs-modal-iframe" src="" title="Case Study"></iframe>
+  </div>
+
   <!-- Mobile Drawer -->
   <div class="mobile-drawer" id="mobile-drawer">
     <button class="drawer-close" id="drawer-close">✕</button>
     <a href="#about">About</a>
     <a href="#work">Work</a>
+    <a href="#writing">Writing</a>
     <a href="#podcast">Podcast</a>
-    <a href="./writing.html">Writing</a>
-    <a href="./contact.html">Let's Talk</a>
+    <a href="#contact">Let's Talk</a>
   </div>
 
   <!-- Nav -->
@@ -1000,10 +1251,10 @@
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#work">Work</a></li>
-      <li><a href="./writing.html">Writing</a></li>
+      <li><a href="#writing">Writing</a></li>
       <li><a href="#podcast">Podcast</a></li>
-      <li><a href="./contact.html">Contact</a></li>
-      <li class="nav-cta"><a href="./contact.html">Let's Talk</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li class="nav-cta"><a href="#contact">Let's Talk</a></li>
     </ul>
     <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -1017,7 +1268,7 @@
         <span class="hl-light">Product design</span>
         <span class="hl-bold">that delivers.</span>
       </h1>
-      <a href="#work" class="hero-cta">View selected work →</a>
+      <a href="#work" class="hero-cta">View selected work ↓</a>
     </div>
     <div class="hero-video-wrap">
       <video autoplay muted loop playsinline>
@@ -1268,7 +1519,7 @@
   <section id="leadership">
     <div class="lead-left reveal">
       <h2 class="lead-headline">I Don't Just Lead.<br/>I Deliver.</h2>
-      <a href="./contact.html" class="lead-cta">Let's talk →</a>
+      <a href="#contact" class="lead-cta">Let's talk →</a>
     </div>
     <div class="lead-right reveal reveal-delay-1">
       <div class="lead-principle">
@@ -1426,20 +1677,205 @@
     </div>
   </section>
 
+  <!-- Writing -->
+  <section id="writing">
+    <div class="writing-section-header">
+      <div class="writing-header-inner">
+        <h2>Inside<br/>the Build.</h2>
+        <p class="writing-header-sub">I've led design at digital banks and super apps. This is what actually happens when you build.</p>
+      </div>
+    </div>
+    <div id="writing-content-area">
+      <!-- Skeleton featured -->
+      <div class="skeleton-featured">
+        <div class="sk-tag skeleton"></div>
+        <div class="sk-title skeleton" style="margin-bottom:10px"></div>
+        <div class="sk-title2 skeleton" style="margin-bottom:22px"></div>
+        <div class="sk-p skeleton"></div>
+        <div class="sk-p2 skeleton" style="margin-top:8px"></div>
+      </div>
+      <!-- Skeleton grid -->
+      <div class="articles-section">
+        <div class="articles-section-inner">
+          <div class="articles-grid">
+            <div class="skeleton-card"><div class="sk-tag skeleton"></div><div class="sk-title skeleton" style="margin-bottom:6px"></div><div class="sk-title2 skeleton" style="margin-bottom:16px"></div><div class="sk-p skeleton"></div><div class="sk-p2 skeleton" style="margin-top:6px"></div></div>
+            <div class="skeleton-card"><div class="sk-tag skeleton"></div><div class="sk-title skeleton" style="margin-bottom:6px"></div><div class="sk-title2 skeleton" style="margin-bottom:16px"></div><div class="sk-p skeleton"></div><div class="sk-p2 skeleton" style="margin-top:6px"></div></div>
+            <div class="skeleton-card"><div class="sk-tag skeleton"></div><div class="sk-title skeleton" style="margin-bottom:6px"></div><div class="sk-title2 skeleton" style="margin-bottom:16px"></div><div class="sk-p skeleton"></div><div class="sk-p2 skeleton" style="margin-top:6px"></div></div>
+            <div class="skeleton-card"><div class="sk-tag skeleton"></div><div class="sk-title skeleton" style="margin-bottom:6px"></div><div class="sk-title2 skeleton" style="margin-bottom:16px"></div><div class="sk-p skeleton"></div><div class="sk-p2 skeleton" style="margin-top:6px"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="subscribe-cta">
+      <div class="subscribe-cta-inner">
+        <div>
+          <h2>Inside the<br/>Build.</h2>
+          <p>I've led design at digital banks and super apps. This is what actually happens when you build. Published weekly on Substack.</p>
+        </div>
+        <div class="subscribe-actions">
+          <a class="btn-subscribe" href="https://jaytulloch.substack.com/subscribe" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+            Subscribe on Substack
+          </a>
+          <span class="subscribe-note">Free. No spam. Unsubscribe anytime.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="contact-hero-wrap">
+      <div class="ct-hero-left">
+        <div>
+          <h2 class="ct-hero-title">Work With<br/><span class="light">Me.</span></h2>
+          <p class="ct-hero-desc">I work with founders, CPOs, and product teams that are serious about design as a business lever, not just a polish layer. Based in Dubai, available globally.</p>
+        </div>
+        <div class="ct-contact-block">
+          <div class="availability-badge">
+            <span class="pulse-dot"></span>
+            Selectively taking on new work
+          </div>
+          <div class="quick-links">
+            <div class="quick-link" onclick="copyEmail()" style="cursor:pointer;">
+              <div>
+                <p class="ql-label">Email</p>
+                <p class="ql-value" id="email-text">Copy address</p>
+              </div>
+              <span class="ql-arrow" id="copy-arrow">↗</span>
+            </div>
+            <a href="https://www.linkedin.com/in/jaytulloch" target="_blank" class="quick-link">
+              <div>
+                <p class="ql-label">LinkedIn</p>
+                <p class="ql-value">linkedin.com/in/jaytulloch</p>
+              </div>
+              <span class="ql-arrow">↗</span>
+            </a>
+            <a href="https://www.beyond-the-interface.com/" target="_blank" class="quick-link">
+              <div>
+                <p class="ql-label">Podcast</p>
+                <p class="ql-value">Beyond the Interface</p>
+              </div>
+              <span class="ql-arrow">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="ct-video-panel">
+        <video autoplay muted playsinline preload="metadata">
+          <source src="./jay-contact-4.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+
+    <section class="engagements">
+      <div class="engagement-grid">
+        <div class="engagement-card">
+          <p class="ec-num">01</p>
+          <h3 class="ec-title">Fractional<br/>Design Lead</h3>
+          <p class="ec-desc">Embedded senior design leadership on a part-time basis. I act as your Head of Design, setting direction, running the team, and shipping — without the full-time overhead.</p>
+          <p class="ec-good-for">Good for</p>
+          <div class="ec-tags">
+            <span class="ec-tag">Series A–C</span>
+            <span class="ec-tag">Scaling product teams</span>
+            <span class="ec-tag">Design function gaps</span>
+          </div>
+        </div>
+        <div class="engagement-card">
+          <p class="ec-num">02</p>
+          <h3 class="ec-title">Design<br/>Advisory</h3>
+          <p class="ec-desc">Strategic design input at the leadership level. I help you define what to build, how to position design in the org, and where the biggest product opportunities sit.</p>
+          <p class="ec-good-for">Good for</p>
+          <div class="ec-tags">
+            <span class="ec-tag">Founders</span>
+            <span class="ec-tag">CPOs</span>
+            <span class="ec-tag">Design strategy</span>
+            <span class="ec-tag">FinTech</span>
+          </div>
+        </div>
+        <div class="engagement-card">
+          <p class="ec-num">03</p>
+          <h3 class="ec-title">Delivery<br/>via RUONALIM</h3>
+          <p class="ec-desc">Full end-to-end product design delivery through my agency. Research, UX, UI, design systems, and handoff — handled as a trusted design partner from brief to build.</p>
+          <p class="ec-good-for">Good for</p>
+          <div class="ec-tags">
+            <span class="ec-tag">Consumer apps</span>
+            <span class="ec-tag">FinTech</span>
+            <span class="ec-tag">MVP to scale</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="what-you-get">
+      <div class="wyg-grid">
+        <div class="wyg-heading-col">
+          <h2 class="wyg-heading">Senior design<br/>thinking.<br/><span>Operator execution.</span></h2>
+        </div>
+        <div class="wyg-list-col">
+          <div class="wyg-item">
+            <span class="wyg-num">01</span>
+            <div>
+              <h4>Track record, not theory</h4>
+              <p>I've led design at 50M-user super apps, UK retail banks, and neobanks. I know what excellent looks like, and I move fast to close the gap.</p>
+            </div>
+          </div>
+          <div class="wyg-item">
+            <span class="wyg-num">02</span>
+            <div>
+              <h4>Commercial accountability</h4>
+              <p>Every design decision I make has a business rationale. I track metrics, own outcomes, and report in language the board understands.</p>
+            </div>
+          </div>
+          <div class="wyg-item">
+            <span class="wyg-num">03</span>
+            <div>
+              <h4>AI-augmented workflow</h4>
+              <p>I use Claude, Cursor, and Vibe Coding daily. Exploration is faster, prototypes come earlier, and decisions are made with better data.</p>
+            </div>
+          </div>
+          <div class="wyg-item">
+            <span class="wyg-num">04</span>
+            <div>
+              <h4>Cross-functional leadership</h4>
+              <p>I've managed teams of 25, run design sprints, set hiring bars, and partnered with C-suite stakeholders. I operate across the org, not just inside the design team.</p>
+            </div>
+          </div>
+          <div class="wyg-item">
+            <span class="wyg-num">05</span>
+            <div>
+              <h4>Regulated product experience</h4>
+              <p>FinTech, banking, travel — I've shipped in high-compliance, high-stakes environments where trust and clarity aren't optional.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ct-cta-block">
+      <h2 class="ct-cta-title"><span>Let's</span>Talk.</h2>
+      <p class="ct-cta-sub">Tell me what you're building and where design is the gap. I'll tell you if I can help.</p>
+      <div class="ct-cta-actions">
+        <button class="ct-cta-primary" onclick="copyEmail()">Copy Email Address</button>
+        <a href="https://www.linkedin.com/in/jaytulloch" target="_blank" class="ct-cta-secondary">Connect on LinkedIn ↗</a>
+      </div>
+    </div>
+  </section>
+
   <!-- Footer -->
   <footer>
     <div class="footer-top">
       <div class="footer-cta-col">
         <div class="footer-cta-head">Let's work<br/>together.</div>
-        <a href="./contact.html" class="footer-email-link">Get in touch →</a>
+        <button class="footer-email-link" onclick="copyEmail()" style="font-family:var(--font); cursor:pointer;">Get in touch →</button>
       </div>
       <div class="footer-right">
         <ul class="footer-nav">
           <li><a href="https://www.linkedin.com/in/jaytulloch/" target="_blank">LinkedIn</a></li>
           <li><a href="https://substack.com/@jaytulloch" target="_blank">Substack</a></li>
           <li><a href="https://www.beyond-the-interface.com/" target="_blank">Podcast</a></li>
-          <li><a href="./writing.html">Writing</a></li>
-          <li><a href="./contact.html">Contact</a></li>
+          <li><a href="#writing">Writing</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
         <p style="font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.35); margin-top: 24px;">Dubai, UAE · Available globally</p>
       </div>
@@ -1458,6 +1894,116 @@
     document.getElementById('drawer-close').addEventListener('click', function() {
       drawer.classList.remove('open');
     });
+
+    // ─── Case Study Modal ─────────────────────────────────────────
+    var csModal = document.getElementById('cs-modal');
+    var csIframe = document.getElementById('cs-modal-iframe');
+    var csLink = document.getElementById('cs-modal-link');
+
+    function openCaseStudy(href) {
+      csIframe.src = href;
+      csLink.href = href;
+      csModal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeCaseStudy() {
+      csModal.classList.remove('open');
+      csIframe.src = '';
+      document.body.style.overflow = '';
+    }
+    document.getElementById('cs-modal-close').addEventListener('click', closeCaseStudy);
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeCaseStudy();
+    });
+
+    // Intercept work-row and ai-proj-row clicks
+    document.querySelectorAll('.work-row, .ai-proj-row').forEach(function(el) {
+      el.addEventListener('click', function(e) {
+        var href = el.getAttribute('href');
+        if (href && href !== '#') {
+          e.preventDefault();
+          openCaseStudy(href);
+        }
+      });
+    });
+
+    // ─── Copy Email ───────────────────────────────────────────────
+    function copyEmail() {
+      var addr = atob('bXJAamF5dHVsbG9jaC5jb20=');
+      navigator.clipboard.writeText(addr).then(function() {
+        var t = document.getElementById('email-text');
+        var a = document.getElementById('copy-arrow');
+        if (t) { t.textContent = 'Copied!'; setTimeout(function() { t.textContent = 'Copy address'; }, 2000); }
+        if (a) { a.textContent = '✓'; setTimeout(function() { a.textContent = '↗'; }, 2000); }
+      }).catch(function() {
+        var addr2 = atob('bXJAamF5dHVsbG9jaC5jb20=');
+        prompt('Copy email:', addr2);
+      });
+    }
+
+    // ─── RSS Feed ─────────────────────────────────────────────────
+    var FEED_URL = '/api/feed';
+    var CONTENT_NS = 'http://purl.org/rss/1.0/modules/content/';
+
+    function extractExcerpt(contentEncoded, descFallback) {
+      if (!contentEncoded) return descFallback || '';
+      var tmp = document.createElement('div');
+      tmp.innerHTML = contentEncoded;
+      tmp.querySelectorAll('h1,h2,h3,h4,h5,h6,hr').forEach(function(el) { el.remove(); });
+      var paras = Array.from(tmp.querySelectorAll('p'));
+      var excerpt = '';
+      for (var i = 0; i < paras.length; i++) {
+        var text = paras[i].textContent.trim();
+        if (text.length < 40) continue;
+        if (/^(fact check|sources:|originally published|claim:|source:)/i.test(text)) continue;
+        excerpt += (excerpt ? ' ' : '') + text;
+        if (excerpt.length >= 200) break;
+      }
+      if (!excerpt) excerpt = descFallback || '';
+      if (excerpt.length > 240) excerpt = excerpt.slice(0, 240).replace(/\s+\S*$/, '') + '…';
+      return excerpt;
+    }
+
+    function formatDate(dateStr) {
+      var d = new Date(dateStr);
+      return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+    }
+
+    function renderArticles(items) {
+      if (!items.length) { renderFeedError(); return; }
+      var featured = items[0];
+      var rest = items.slice(1);
+      var featuredHTML = '<div class="featured-wrap"><a class="featured-card" href="' + featured.link + '" target="_blank" rel="noopener"><div class="featured-inner"><div class="featured-body"><div class="card-meta"><span class="tag">Inside the Build</span><span class="sep">·</span><span class="card-date">' + formatDate(featured.pubDate) + '</span></div><h2 class="featured-title">' + featured.title + '</h2><p class="featured-excerpt">' + featured.excerpt + '</p><span class="substack-badge">Read on Substack</span></div><div class="featured-arrow">→</div></div></a></div>';
+      var cardHTML = rest.map(function(item) {
+        return '<a class="article-card" href="' + item.link + '" target="_blank" rel="noopener"><div class="card-meta"><span class="tag">Inside the Build</span></div><h3 class="card-title">' + item.title + '</h3><p class="card-excerpt">' + item.excerpt + '</p><div class="card-footer"><span class="card-time">' + formatDate(item.pubDate) + '</span><span class="card-arrow">→</span></div></a>';
+      }).join('');
+      var gridHTML = '<div class="articles-section"><div class="articles-section-inner"><div class="articles-grid">' + cardHTML + '</div></div></div>';
+      document.getElementById('writing-content-area').innerHTML = featuredHTML + gridHTML;
+    }
+
+    function renderFeedError() {
+      document.getElementById('writing-content-area').innerHTML = '<div class="error-state"><h3>Couldn\'t load articles right now.</h3><p>Read everything on <a href="https://jaytulloch.substack.com" target="_blank" rel="noopener">Substack →</a></p></div>';
+    }
+
+    fetch(FEED_URL).then(function(res) {
+      if (!res.ok) throw new Error(res.status);
+      return res.text();
+    }).then(function(xml) {
+      var doc = new DOMParser().parseFromString(xml, 'application/xml');
+      var itemEls = doc.querySelectorAll('item');
+      var items = Array.from(itemEls).map(function(el) {
+        var contentEl = el.getElementsByTagNameNS(CONTENT_NS, 'encoded')[0];
+        return {
+          title: el.querySelector('title')?.textContent || '',
+          link: el.querySelector('link')?.textContent || '',
+          description: el.querySelector('description')?.textContent || '',
+          pubDate: el.querySelector('pubDate')?.textContent || '',
+          excerpt: extractExcerpt(contentEl?.textContent || '', el.querySelector('description')?.textContent || '')
+        };
+      });
+      renderArticles(items);
+    }).catch(renderFeedError);
+
     // Podcast switcher
     var rows = document.querySelectorAll('.pod-list-row');
     var iframe = document.getElementById('pod-iframe');
