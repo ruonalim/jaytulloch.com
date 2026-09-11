@@ -192,6 +192,13 @@
       color: var(--text);
       display: block;
     }
+    .hero-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+      margin-bottom: 16px;
+    }
     .hero-cta {
       display: inline-flex;
       align-items: center;
@@ -928,70 +935,160 @@
       color: rgba(255,255,255,0.35);
     }
 
-    /* ─── Case Study Modal ─────────────────────────────────────── */
+    /* ─── Case Study Modal (bottom sheet) ──────────────────────── */
     .cs-modal {
-      display: none;
       position: fixed;
       inset: 0;
       z-index: 500;
-      background: #000;
+      background: rgba(0,0,0,0);
+      display: flex;
+      align-items: flex-end;
+      pointer-events: none;
+      transition: background 0.4s ease;
     }
-    .cs-modal.open { display: flex; flex-direction: column; }
+    .cs-modal.open {
+      background: rgba(0,0,0,0.55);
+      pointer-events: all;
+    }
+    .cs-modal-sheet {
+      width: 100%;
+      height: calc(100% - 48px);
+      background: #fff;
+      border-radius: 14px 14px 0 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform: translateY(100%);
+      transition: transform 0.48s cubic-bezier(0.32, 0.72, 0, 1);
+      box-shadow: 0 -8px 48px rgba(0,0,0,0.18);
+    }
+    .cs-modal.open .cs-modal-sheet { transform: translateY(0); }
     .cs-modal-bar {
-      height: 52px;
-      background: rgba(15,15,15,0.97);
-      backdrop-filter: blur(12px);
+      height: 48px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--rule);
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 20px;
       flex-shrink: 0;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
     }
     .cs-modal-label {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
+      color: var(--subtle);
     }
     .cs-modal-actions { display: flex; align-items: center; gap: 8px; }
     .cs-modal-open {
       font-size: 12px;
       font-weight: 600;
-      color: rgba(255,255,255,0.55);
-      background: rgba(255,255,255,0.08);
-      border: none;
-      padding: 6px 14px;
+      color: var(--muted);
+      background: none;
+      border: 1px solid var(--rule);
+      padding: 5px 13px;
       border-radius: 100px;
       cursor: pointer;
-      transition: color 0.2s, background 0.2s;
+      transition: color 0.2s, border-color 0.2s;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
     }
-    .cs-modal-open:hover { color: #fff; background: rgba(255,255,255,0.14); }
+    .cs-modal-open:hover { color: var(--text); border-color: var(--text); }
     .cs-modal-close {
       background: none;
       border: none;
-      color: rgba(255,255,255,0.6);
-      font-size: 24px;
+      color: var(--muted);
+      font-size: 20px;
       cursor: pointer;
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: color 0.2s;
+      border-radius: 50%;
     }
-    .cs-modal-close:hover { color: #fff; }
+    .cs-modal-close:hover { color: var(--text); background: var(--rule); }
     .cs-modal iframe {
       flex: 1;
       width: 100%;
       border: none;
       background: #fff;
     }
+
+    /* ─── Metrics strip ─────────────────────────────────────────── */
+    #metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--rule);
+    }
+    .metric {
+      padding: clamp(24px, 3vw, 40px) var(--pad);
+      border-right: 1px solid var(--rule);
+    }
+    .metric:last-child { border-right: none; }
+    .m-value {
+      display: block;
+      font-size: clamp(28px, 3.5vw, 48px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: var(--text);
+    }
+    .m-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted);
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+
+    /* ─── AI Minimal ────────────────────────────────────────────── */
+    #ai {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--rule);
+      background: #0A0A0F;
+      color: #fff;
+    }
+    .ai-m-left {
+      padding: clamp(40px, 5vw, 72px) var(--pad);
+      border-right: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .ai-m-tag {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 40px;
+    }
+    .ai-m-headline {
+      font-size: clamp(28px, 3.5vw, 48px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      color: #fff;
+    }
+    .ai-m-right {
+      padding: clamp(40px, 5vw, 72px) var(--pad);
+      display: flex;
+      align-items: flex-end;
+    }
+    .ai-m-body {
+      font-size: 14px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.5);
+      font-weight: 400;
+    }
+    .ai-m-body strong { color: rgba(255,255,255,0.85); font-weight: 600; }
 
     /* ─── Writing Section ───────────────────────────────────────── */
     #writing {
@@ -1188,6 +1285,12 @@
       .career-row { grid-template-columns: 1fr 1fr; }
       .cr-year { text-align: left; }
       .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
+      #metrics { grid-template-columns: repeat(2, 1fr); }
+      .metric:nth-child(2) { border-right: none; }
+      .metric:nth-child(3) { border-top: 1px solid var(--rule); }
+      .metric:nth-child(4) { border-top: 1px solid var(--rule); border-right: none; }
+      #ai { grid-template-columns: 1fr; }
+      .ai-m-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
       .contact-hero-wrap { grid-template-columns: 1fr; min-height: auto; }
       .ct-hero-left { border-right: none; border-bottom: 1px solid var(--rule); }
       .ct-video-panel { height: clamp(280px, 55vw, 480px); min-height: 0; }
@@ -1225,48 +1328,27 @@
 
   <!-- Case Study Modal -->
   <div class="cs-modal" id="cs-modal">
-    <div class="cs-modal-bar">
-      <span class="cs-modal-label">Case Study</span>
-      <div class="cs-modal-actions">
-        <a class="cs-modal-open" id="cs-modal-link" href="#" target="_blank" rel="noopener">Open full page ↗</a>
-        <button class="cs-modal-close" id="cs-modal-close">✕</button>
+    <div class="cs-modal-sheet">
+      <div class="cs-modal-bar">
+        <span class="cs-modal-label">Case Study</span>
+        <div class="cs-modal-actions">
+          <a class="cs-modal-open" id="cs-modal-link" href="#" target="_blank" rel="noopener">Open full page ↗</a>
+          <button class="cs-modal-close" id="cs-modal-close">✕</button>
+        </div>
       </div>
+      <iframe id="cs-modal-iframe" src="" title="Case Study"></iframe>
     </div>
-    <iframe id="cs-modal-iframe" src="" title="Case Study"></iframe>
   </div>
-
-  <!-- Mobile Drawer -->
-  <div class="mobile-drawer" id="mobile-drawer">
-    <button class="drawer-close" id="drawer-close">✕</button>
-    <a href="#work">Work</a>
-    <a href="#about">About</a>
-    <a href="#writing">Writing</a>
-    <a href="#contact">Let's Talk</a>
-  </div>
-
-  <!-- Nav -->
-  <nav>
-    <a href="#hero" class="nav-logo">Jay Tulloch</a>
-    <ul class="nav-links">
-      <li><a href="#work">Work</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#writing">Writing</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <li class="nav-cta"><a href="#contact">Let's Talk</a></li>
-    </ul>
-    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
 
   <!-- Hero -->
   <section id="hero">
     <div class="hero-text">
+      <p class="hero-name">Jay Tulloch</p>
       <h1 class="hero-headline">
         <span class="hl-light">Product design</span>
         <span class="hl-bold">that delivers.</span>
       </h1>
-      <a href="#work" class="hero-cta">View selected work ↓</a>
+      <a href="#work" class="hero-cta">Selected work ↓</a>
     </div>
     <div class="hero-video-wrap">
       <video autoplay muted loop playsinline>
@@ -1274,6 +1356,26 @@
       </video>
     </div>
   </section>
+
+  <!-- Metrics -->
+  <div id="metrics">
+    <div class="metric">
+      <span class="m-value">80M+</span>
+      <span class="m-label">People using products I've shaped</span>
+    </div>
+    <div class="metric">
+      <span class="m-value">$7M</span>
+      <span class="m-label">Revenue in 8 weeks from a 0→1 launch</span>
+    </div>
+    <div class="metric">
+      <span class="m-value">150%</span>
+      <span class="m-label">Subscription growth on Careem Plus</span>
+    </div>
+    <div class="metric">
+      <span class="m-value">18+</span>
+      <span class="m-label">Years leading product design</span>
+    </div>
+  </div>
 
   <!-- Work -->
   <a href="./casestudy-neobank.html" id="work" class="work-row reveal">
@@ -1314,6 +1416,17 @@
       <span class="work-meta-year">2018</span>
     </div>
   </a>
+
+  <!-- AI -->
+  <section id="ai">
+    <div class="ai-m-left">
+      <p class="ai-m-tag">AI Track Record</p>
+      <h2 class="ai-m-headline">Seven years<br/>delivering<br/>AI products.</h2>
+    </div>
+    <div class="ai-m-right">
+      <p class="ai-m-body">Before AI was a buzzword, I was shipping it in regulated banking. <strong>UK's first AI in retail banking</strong> (2018). <strong>LLM-powered travel search</strong> (2023). <strong>AI dineout discovery</strong> at Careem (2024). <strong>LLM design ops</strong> at Kraken (2025). Six production AI case studies across fintech, travel, and super apps.</p>
+    </div>
+  </section>
 
   <!-- About -->
   <section id="about">
@@ -1400,24 +1513,13 @@
       </div>
     </div>
     <div id="writing-content-area">
-      <!-- Skeleton featured -->
+      <!-- Skeleton -->
       <div class="skeleton-featured">
         <div class="sk-tag skeleton"></div>
         <div class="sk-title skeleton" style="margin-bottom:10px"></div>
         <div class="sk-title2 skeleton" style="margin-bottom:22px"></div>
         <div class="sk-p skeleton"></div>
         <div class="sk-p2 skeleton" style="margin-top:8px"></div>
-      </div>
-      <!-- Skeleton grid -->
-      <div class="articles-section">
-        <div class="articles-section-inner">
-          <div class="articles-grid">
-            <div class="skeleton-card"><div class="sk-tag skeleton"></div><div class="sk-title skeleton" style="margin-bottom:6px"></div><div class="sk-title2 skeleton" style="margin-bottom:16px"></div><div class="sk-p skeleton"></div><div class="sk-p2 skeleton" style="margin-top:6px"></div></div>
-            <div class="skeleton-card"><div class="sk-tag skeleton"></div><div class="sk-title skeleton" style="margin-bottom:6px"></div><div class="sk-title2 skeleton" style="margin-bottom:16px"></div><div class="sk-p skeleton"></div><div class="sk-p2 skeleton" style="margin-top:6px"></div></div>
-            <div class="skeleton-card"><div class="sk-tag skeleton"></div><div class="sk-title skeleton" style="margin-bottom:6px"></div><div class="sk-title2 skeleton" style="margin-bottom:16px"></div><div class="sk-p skeleton"></div><div class="sk-p2 skeleton" style="margin-top:6px"></div></div>
-            <div class="skeleton-card"><div class="sk-tag skeleton"></div><div class="sk-title skeleton" style="margin-bottom:6px"></div><div class="sk-title2 skeleton" style="margin-bottom:16px"></div><div class="sk-p skeleton"></div><div class="sk-p2 skeleton" style="margin-top:6px"></div></div>
-          </div>
-        </div>
       </div>
     </div>
     <div class="subscribe-cta">
@@ -1509,14 +1611,6 @@
   </footer>
 
   <script>
-    var drawer = document.getElementById('mobile-drawer');
-    document.getElementById('nav-hamburger').addEventListener('click', function() {
-      drawer.classList.add('open');
-    });
-    document.getElementById('drawer-close').addEventListener('click', function() {
-      drawer.classList.remove('open');
-    });
-
     // ─── Case Study Modal ─────────────────────────────────────────
     var csModal = document.getElementById('cs-modal');
     var csIframe = document.getElementById('cs-modal-iframe');
@@ -1530,10 +1624,14 @@
     }
     function closeCaseStudy() {
       csModal.classList.remove('open');
-      csIframe.src = '';
       document.body.style.overflow = '';
+      // Clear src after animation completes
+      setTimeout(function() { csIframe.src = ''; }, 500);
     }
     document.getElementById('cs-modal-close').addEventListener('click', closeCaseStudy);
+    csModal.addEventListener('click', function(e) {
+      if (e.target === csModal) closeCaseStudy();
+    });
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') closeCaseStudy();
     });
@@ -1594,13 +1692,8 @@
     function renderArticles(items) {
       if (!items.length) { renderFeedError(); return; }
       var featured = items[0];
-      var rest = items.slice(1);
-      var featuredHTML = '<div class="featured-wrap"><a class="featured-card" href="' + featured.link + '" target="_blank" rel="noopener"><div class="featured-inner"><div class="featured-body"><div class="card-meta"><span class="tag">Inside the Build</span><span class="sep">·</span><span class="card-date">' + formatDate(featured.pubDate) + '</span></div><h2 class="featured-title">' + featured.title + '</h2><p class="featured-excerpt">' + featured.excerpt + '</p><span class="substack-badge">Read on Substack</span></div><div class="featured-arrow">→</div></div></a></div>';
-      var cardHTML = rest.map(function(item) {
-        return '<a class="article-card" href="' + item.link + '" target="_blank" rel="noopener"><div class="card-meta"><span class="tag">Inside the Build</span></div><h3 class="card-title">' + item.title + '</h3><p class="card-excerpt">' + item.excerpt + '</p><div class="card-footer"><span class="card-time">' + formatDate(item.pubDate) + '</span><span class="card-arrow">→</span></div></a>';
-      }).join('');
-      var gridHTML = '<div class="articles-section"><div class="articles-section-inner"><div class="articles-grid">' + cardHTML + '</div></div></div>';
-      document.getElementById('writing-content-area').innerHTML = featuredHTML + gridHTML;
+      var featuredHTML = '<div class="featured-wrap"><a class="featured-card" href="' + featured.link + '" target="_blank" rel="noopener"><div class="featured-inner"><div class="featured-body"><div class="card-meta"><span class="tag">Latest</span><span class="sep">·</span><span class="card-date">' + formatDate(featured.pubDate) + '</span></div><h2 class="featured-title">' + featured.title + '</h2><p class="featured-excerpt">' + featured.excerpt + '</p><span class="substack-badge">Read on Substack</span></div><div class="featured-arrow">→</div></div></a></div>';
+      document.getElementById('writing-content-area').innerHTML = featuredHTML;
     }
 
     function renderFeedError() {
