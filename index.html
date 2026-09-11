@@ -1061,34 +1061,32 @@
       align-items: center;
       justify-content: center;
       pointer-events: none;
-      /* Frosted glass overlay */
+      visibility: hidden;
       background: rgba(10,10,16,0);
-      backdrop-filter: blur(0px);
-      -webkit-backdrop-filter: blur(0px);
-      transition: background 0.45s ease, backdrop-filter 0.45s ease;
+      transition: background 0.45s ease, visibility 0s 0.5s;
     }
     .cs-modal.open {
-      background: rgba(10,10,16,0.65);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: rgba(10,10,16,0.72);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       pointer-events: all;
+      visibility: visible;
+      transition: background 0.45s ease, backdrop-filter 0.45s ease, visibility 0s 0s;
     }
     .cs-modal-sheet {
-      width: calc(100% - 40px);
+      width: calc(100% - 48px);
       max-width: 1200px;
-      height: calc(100vh - 60px);
-      background: rgba(255,255,255,0.96);
-      backdrop-filter: blur(40px);
-      -webkit-backdrop-filter: blur(40px);
+      height: calc(100vh - 64px);
+      background: #ffffff;
       border-radius: 20px;
       display: flex;
       flex-direction: column;
       overflow: hidden;
       position: relative;
-      transform: scale(0.94) translateY(24px);
+      transform: scale(0.93) translateY(28px);
       opacity: 0;
-      transition: transform 0.52s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.4s cubic-bezier(0.32, 0.72, 0, 1);
-      box-shadow: 0 32px 80px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.15) inset;
+      transition: transform 0.55s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+      box-shadow: 0 40px 100px rgba(0,0,0,0.45), 0 0 0 0.5px rgba(255,255,255,0.08);
     }
     .cs-modal.open .cs-modal-sheet {
       transform: scale(1) translateY(0);
@@ -1369,19 +1367,27 @@
       z-index: 1;
       background: var(--white);
     }
-    .writing-hero {
+    .writing-combined {
       display: grid;
       grid-template-columns: 1fr 1fr;
       border-bottom: 1px solid var(--rule);
       background: var(--white);
-      min-height: 320px;
     }
-    .writing-hero-left {
+    .writing-combined-left {
       padding: clamp(48px, 6vw, 80px) var(--pad);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       border-right: 1px solid var(--rule);
+    }
+    .writing-combined-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .writing-combined-footer {
+      padding: clamp(20px, 2.5vw, 32px) var(--pad);
+      border-top: 1px solid var(--rule);
     }
     .writing-eyebrow {
       font-size: 10px;
@@ -1402,28 +1408,6 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       animation: siri-text-glow 8s ease-in-out infinite;
-    }
-    .writing-hero-right {
-      padding: clamp(48px, 6vw, 80px) var(--pad);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .writing-hero-desc {
-      font-size: 15px;
-      font-weight: 400;
-      line-height: 1.7;
-      color: var(--muted);
-      max-width: 360px;
-    }
-    .writing-hero-sub {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.7;
-      font-weight: 400;
-      max-width: 360px;
-      margin-top: 16px;
-      margin-bottom: 40px;
     }
     .writing-subscribe-btn {
       display: inline-flex;
@@ -1457,26 +1441,11 @@
     }
     .writing-subscribe-btn:hover { opacity: 0.85; }
     .writing-subscribe-btn:hover::after { transform: translate(2px, -2px); }
-    .writing-bar {
-      display: none;
-    }
-    .writing-bar-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .writing-bar-name {
-      font-size: 16px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-    }
-    .writing-bar-sep { font-size: 13px; color: var(--rule); }
-    .writing-bar-sub { font-size: 13px; color: var(--muted); font-weight: 400; }
-    .writing-bar-cta { font-size: 12px; font-weight: 600; color: var(--muted); transition: color 0.2s; }
-    .writing-bar-cta:hover { color: var(--text); }
+    .writing-bar { display: none; }
     .writing-skeleton {
       padding: clamp(32px, 4vw, 48px) var(--pad);
       background: var(--white);
+      flex: 1;
     }
     .featured-wrap { background: var(--white); border-bottom: 1px solid var(--rule); }
     .featured-card { display: block; padding: clamp(40px, 5vw, 80px) var(--pad); transition: background 0.25s; }
@@ -1617,7 +1586,7 @@
       align-items: center;
       padding: clamp(28px, 3.5vw, 48px) var(--pad);
       background: var(--white);
-      border-bottom: 1px solid var(--rule);
+      flex: 1;
       transition: background 0.2s;
     }
     .writing-article:hover { background: var(--bg); }
@@ -1948,8 +1917,8 @@
       .wyg-heading { position: static; }
       .writing-header-inner { grid-template-columns: 1fr; }
       .writing-header-sub { text-align: left; max-width: none; }
-      .writing-hero { grid-template-columns: 1fr; }
-      .writing-hero-left { border-right: none; border-bottom: 1px solid var(--rule); }
+      .writing-combined { grid-template-columns: 1fr; }
+      .writing-combined-left { border-right: none; border-bottom: 1px solid var(--rule); }
       .ns-item { padding: 0 10px; }
       .ns-val { font-size: 12px; }
       .ns-lbl { display: none; }
@@ -2229,24 +2198,23 @@
 
   <!-- Writing -->
   <section id="writing">
-    <div class="writing-hero">
-      <div class="writing-hero-left">
+    <div class="writing-combined">
+      <div class="writing-combined-left">
         <p class="writing-eyebrow">Newsletter</p>
         <h2 class="writing-hero-title">Inside<br/>the Build.</h2>
       </div>
-      <div class="writing-hero-right">
-        <div>
-          <p class="writing-hero-desc">How I think about product, AI, and the craft of building.</p>
+      <div class="writing-combined-right">
+        <div id="writing-content-area">
+          <!-- Skeleton -->
+          <div class="writing-skeleton">
+            <div class="skeleton" style="height:10px;width:60px;margin-bottom:14px;border-radius:4px;"></div>
+            <div class="skeleton" style="height:20px;width:80%;margin-bottom:8px;border-radius:4px;"></div>
+            <div class="skeleton" style="height:14px;width:65%;border-radius:4px;"></div>
+          </div>
         </div>
-        <a class="writing-subscribe-btn" href="https://jaytulloch.substack.com/subscribe" target="_blank" rel="noopener">Subscribe to the newsletter</a>
-      </div>
-    </div>
-    <div id="writing-content-area">
-      <!-- Skeleton -->
-      <div class="writing-skeleton">
-        <div class="skeleton" style="height:12px;width:80px;margin-bottom:16px;border-radius:4px;"></div>
-        <div class="skeleton" style="height:22px;width:55%;margin-bottom:10px;border-radius:4px;"></div>
-        <div class="skeleton" style="height:14px;width:70%;border-radius:4px;"></div>
+        <div class="writing-combined-footer">
+          <a class="writing-subscribe-btn" href="https://jaytulloch.substack.com/subscribe" target="_blank" rel="noopener">Subscribe to the newsletter</a>
+        </div>
       </div>
     </div>
   </section>
