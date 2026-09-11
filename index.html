@@ -2129,7 +2129,7 @@
   <!-- About -->
   <section id="about">
     <div class="about-left reveal">
-      <video class="about-video" autoplay muted loop playsinline preload="metadata">
+      <video class="about-video lazy-video" muted loop playsinline preload="none">
         <source src="./jay-about-3.mp4" type="video/mp4">
       </video>
       <div class="about-name-overlay">
@@ -2252,7 +2252,7 @@
         </div>
       </div>
       <div class="ct-video-panel">
-        <video autoplay muted playsinline preload="metadata">
+        <video class="lazy-video" muted loop playsinline preload="none">
           <source src="./jay-contact-4.mp4" type="video/mp4">
         </video>
       </div>
@@ -2468,6 +2468,21 @@
       });
     }, { threshold: 0.08 });
     reveals.forEach(function(el) { observer.observe(el); });
+
+    // ─── Lazy video play/pause on scroll ─────────────────────────
+    var lazyVideos = document.querySelectorAll('.lazy-video');
+    var videoObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        var vid = entry.target;
+        if (entry.isIntersecting) {
+          if (vid.readyState === 0) { vid.load(); }
+          vid.play().catch(function(){});
+        } else {
+          vid.pause();
+        }
+      });
+    }, { threshold: 0.25 });
+    lazyVideos.forEach(function(vid) { videoObserver.observe(vid); });
   </script>
 </body>
 </html>
