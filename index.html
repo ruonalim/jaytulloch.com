@@ -1229,9 +1229,15 @@
       gap: 10px;
     }
     .writing-bar-name {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text);
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #1D1D1F 0%, rgba(130,80,255,0.95) 45%, rgba(80,140,255,0.9) 70%, #1D1D1F 100%);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: siri-text-glow 8s ease-in-out infinite;
     }
     .writing-bar-sep {
       font-size: 13px;
@@ -1800,7 +1806,6 @@
   <section id="career">
     <div class="career-section-header">
       <span class="career-eyebrow">Experience</span>
-      <span class="career-count">11 roles · 14 years</span>
     </div>
     <div class="career-list">
 
@@ -1886,21 +1891,21 @@
       </div>
 
       <div class="career-entry reveal">
-        <span class="ce-year">2009</span>
-        <div class="ce-body">
-          <h3 class="ce-company">JDT Designs</h3>
-          <p class="ce-role">Founder &amp; Designer</p>
-        </div>
-        <span class="ce-badge">2009</span>
-      </div>
-
-      <div class="career-entry reveal">
         <span class="ce-year">2012</span>
         <div class="ce-body">
           <h3 class="ce-company">Digitap Media</h3>
           <p class="ce-role">Digital Designer</p>
         </div>
         <span class="ce-badge">2012</span>
+      </div>
+
+      <div class="career-entry reveal">
+        <span class="ce-year">2009</span>
+        <div class="ce-body">
+          <h3 class="ce-company">JDT Designs</h3>
+          <p class="ce-role">Founder &amp; Designer</p>
+        </div>
+        <span class="ce-badge">2009</span>
       </div>
 
     </div>
@@ -1910,9 +1915,9 @@
   <section id="writing">
     <div class="writing-bar">
       <div class="writing-bar-left">
-        <span class="writing-bar-name">Inside the Build</span>
+        <span class="writing-bar-name">Think Different. Build Better.</span>
         <span class="writing-bar-sep">·</span>
-        <span class="writing-bar-sub">Design from the inside</span>
+        <span class="writing-bar-sub">Inside the Build</span>
       </div>
       <a class="writing-bar-cta" href="https://jaytulloch.substack.com/subscribe" target="_blank" rel="noopener">Subscribe ↗</a>
     </div>
@@ -1929,6 +1934,15 @@
   <!-- Podcast -->
   <section id="podcast">
     <div class="pod-inner">
+      <div class="pod-right">
+        <iframe
+          id="pod-iframe"
+          src="https://www.youtube.com/embed/ojBxx_muPW8?autoplay=1&mute=1&controls=1&rel=0&modestbranding=1&color=white"
+          title="Beyond the Interface Podcast"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
       <div class="pod-left">
         <div>
           <p class="pod-eyebrow">Podcast</p>
@@ -1938,15 +1952,6 @@
         <a class="pod-link-btn" href="https://www.beyond-the-interface.com/" target="_blank" rel="noopener">
           Listen to all episodes ↗
         </a>
-      </div>
-      <div class="pod-right">
-        <iframe
-          id="pod-iframe"
-          src="https://www.youtube.com/embed/ojBxx_muPW8?autoplay=1&mute=1&controls=1&rel=0&modestbranding=1&color=white"
-          title="Beyond the Interface Podcast"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
       </div>
     </div>
   </section>
