@@ -967,6 +967,7 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
+      position: relative;
       transform: translateY(100%);
       transition: transform 0.48s cubic-bezier(0.32, 0.72, 0, 1);
       box-shadow: 0 -8px 48px rgba(0,0,0,0.18);
@@ -1007,20 +1008,22 @@
     }
     .cs-modal-open:hover { color: var(--text); border-color: var(--text); }
     .cs-modal-close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
       background: none;
       border: none;
-      color: var(--muted);
-      font-size: 20px;
+      color: rgba(0,0,0,0.25);
+      font-size: 40px;
+      font-weight: 200;
+      line-height: 1;
       cursor: pointer;
-      width: 36px;
-      height: 36px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      padding: 0;
+      z-index: 10;
       transition: color 0.2s;
-      border-radius: 50%;
+      font-family: var(--font);
     }
-    .cs-modal-close:hover { color: var(--text); background: var(--rule); }
+    .cs-modal-close:hover { color: var(--text); }
     .cs-modal iframe {
       flex: 1;
       width: 100%;
@@ -1680,13 +1683,7 @@
   <!-- Case Study Modal -->
   <div class="cs-modal" id="cs-modal">
     <div class="cs-modal-sheet">
-      <div class="cs-modal-bar">
-        <span class="cs-modal-label">Case Study</span>
-        <div class="cs-modal-actions">
-          <a class="cs-modal-open" id="cs-modal-link" href="#" target="_blank" rel="noopener">Open full page ↗</a>
-          <button class="cs-modal-close" id="cs-modal-close">✕</button>
-        </div>
-      </div>
+      <button class="cs-modal-close" id="cs-modal-close">×</button>
       <iframe id="cs-modal-iframe" src="" title="Case Study"></iframe>
     </div>
   </div>
