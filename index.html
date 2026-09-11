@@ -1081,6 +1081,18 @@
       max-height: 0;
       margin-top: 0;
     }
+    .m-label-short {
+      display: none;
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--muted);
+      line-height: 1.2;
+      margin-top: 2px;
+      white-space: nowrap;
+    }
+    #metrics.minimized .m-label-short {
+      display: block;
+    }
 
     /* ─── AI Minimal — Siri Aurora ─────────────────────────────── */
     @keyframes aurora-drift-1 {
@@ -1548,18 +1560,22 @@
     <div class="metric">
       <span class="m-value">80M+</span>
       <span class="m-label">People using products I've shaped</span>
+      <span class="m-label-short">people reached</span>
     </div>
     <div class="metric">
       <span class="m-value">$7M</span>
       <span class="m-label">Revenue in 8 weeks from a 0→1 launch</span>
+      <span class="m-label-short">revenue in 8 weeks</span>
     </div>
     <div class="metric">
       <span class="m-value">150%</span>
       <span class="m-label">Subscription growth on Careem Plus</span>
+      <span class="m-label-short">subscription growth</span>
     </div>
     <div class="metric">
       <span class="m-value">18+</span>
       <span class="m-label">Years leading product design</span>
+      <span class="m-label-short">years leading design</span>
     </div>
   </div>
 
@@ -1741,7 +1757,7 @@
       <div class="pod-right">
         <iframe
           id="pod-iframe"
-          src="https://www.youtube.com/embed?listType=user_uploads&list=beyondtheinterface&controls=1&rel=0&modestbranding=1&color=white"
+          src="https://www.youtube.com/embed/ojBxx_muPW8?controls=1&rel=0&modestbranding=1&color=white"
           title="Beyond the Interface Podcast"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
