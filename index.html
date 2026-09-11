@@ -1213,33 +1213,45 @@
       border-top: 1px solid var(--rule);
       position: relative;
       z-index: 1;
-      background: var(--bg);
+      background: var(--white);
     }
-    .writing-section-header {
-      padding: clamp(64px, 9vw, 120px) var(--pad) clamp(32px, 4vw, 56px);
+    .writing-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px var(--pad);
       border-bottom: 1px solid var(--rule);
       background: var(--white);
     }
-    .writing-header-inner {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: end;
-      gap: 40px;
+    .writing-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .writing-section-header h2 {
-      font-size: clamp(64px, 10vw, 140px);
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 0.92;
-    }
-    .writing-header-sub {
+    .writing-bar-name {
       font-size: 13px;
-      font-weight: 400;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .writing-bar-sep {
+      font-size: 13px;
+      color: var(--rule);
+    }
+    .writing-bar-sub {
+      font-size: 13px;
       color: var(--muted);
-      max-width: 240px;
-      text-align: right;
-      line-height: 1.65;
-      padding-bottom: 10px;
+      font-weight: 400;
+    }
+    .writing-bar-cta {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      transition: color 0.2s;
+    }
+    .writing-bar-cta:hover { color: var(--text); }
+    .writing-skeleton {
+      padding: clamp(32px, 4vw, 48px) var(--pad);
+      background: var(--white);
     }
     .featured-wrap { background: var(--white); border-bottom: 1px solid var(--rule); }
     .featured-card { display: block; padding: clamp(40px, 5vw, 80px) var(--pad); transition: background 0.25s; }
@@ -1371,6 +1383,54 @@
     .ct-cta-primary:hover { opacity: 0.8; }
     .ct-cta-secondary { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; border: 1px solid var(--rule); padding: 14px 28px; border-radius: 100px; color: var(--text); transition: background 0.2s; }
     .ct-cta-secondary:hover { background: var(--bg); }
+
+    /* ─── Writing Article Card ──────────────────────────────────── */
+    .writing-article {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: center;
+      padding: clamp(28px, 3.5vw, 48px) var(--pad);
+      background: var(--white);
+      border-bottom: 1px solid var(--rule);
+      transition: background 0.2s;
+    }
+    .writing-article:hover { background: var(--bg); }
+    .wa-left { min-width: 0; }
+    .wa-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin-bottom: 10px;
+    }
+    .wa-title {
+      font-size: clamp(18px, 2.5vw, 32px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .wa-excerpt {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.65;
+      font-weight: 400;
+      max-width: 640px;
+    }
+    .wa-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .wa-date { font-size: 12px; color: var(--subtle); font-weight: 500; white-space: nowrap; }
+    .wa-arrow { font-size: 28px; color: var(--subtle); font-weight: 300; transition: transform 0.2s; }
+    .writing-article:hover .wa-arrow { transform: translateX(4px); }
 
     /* ─── Career Section ───────────────────────────────────────── */
     #career {
@@ -1848,35 +1908,20 @@
 
   <!-- Writing -->
   <section id="writing">
-    <div class="writing-section-header">
-      <div class="writing-header-inner">
-        <h2>Inside<br/>the Build.</h2>
-        <p class="writing-header-sub">I've led design at digital banks and super apps. This is what actually happens when you build.</p>
+    <div class="writing-bar">
+      <div class="writing-bar-left">
+        <span class="writing-bar-name">Inside the Build</span>
+        <span class="writing-bar-sep">·</span>
+        <span class="writing-bar-sub">Design from the inside</span>
       </div>
+      <a class="writing-bar-cta" href="https://jaytulloch.substack.com/subscribe" target="_blank" rel="noopener">Subscribe ↗</a>
     </div>
     <div id="writing-content-area">
       <!-- Skeleton -->
-      <div class="skeleton-featured">
-        <div class="sk-tag skeleton"></div>
-        <div class="sk-title skeleton" style="margin-bottom:10px"></div>
-        <div class="sk-title2 skeleton" style="margin-bottom:22px"></div>
-        <div class="sk-p skeleton"></div>
-        <div class="sk-p2 skeleton" style="margin-top:8px"></div>
-      </div>
-    </div>
-    <div class="subscribe-cta">
-      <div class="subscribe-cta-inner">
-        <div>
-          <h2>Inside the<br/>Build.</h2>
-          <p>I've led design at digital banks and super apps. This is what actually happens when you build. Published weekly on Substack.</p>
-        </div>
-        <div class="subscribe-actions">
-          <a class="btn-subscribe" href="https://jaytulloch.substack.com/subscribe" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
-            Subscribe on Substack
-          </a>
-          <span class="subscribe-note">Free. No spam. Unsubscribe anytime.</span>
-        </div>
+      <div class="writing-skeleton">
+        <div class="skeleton" style="height:12px;width:80px;margin-bottom:16px;border-radius:4px;"></div>
+        <div class="skeleton" style="height:22px;width:55%;margin-bottom:10px;border-radius:4px;"></div>
+        <div class="skeleton" style="height:14px;width:70%;border-radius:4px;"></div>
       </div>
     </div>
   </section>
@@ -1897,7 +1942,7 @@
       <div class="pod-right">
         <iframe
           id="pod-iframe"
-          src="https://www.youtube.com/embed/ojBxx_muPW8?controls=1&rel=0&modestbranding=1&color=white"
+          src="https://www.youtube.com/embed/ojBxx_muPW8?autoplay=1&mute=1&controls=1&rel=0&modestbranding=1&color=white"
           title="Beyond the Interface Podcast"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
@@ -2074,9 +2119,19 @@
 
     function renderArticles(items) {
       if (!items.length) { renderFeedError(); return; }
-      var featured = items[0];
-      var featuredHTML = '<div class="featured-wrap"><a class="featured-card" href="' + featured.link + '" target="_blank" rel="noopener"><div class="featured-inner"><div class="featured-body"><div class="card-meta"><span class="tag">Latest</span><span class="sep">·</span><span class="card-date">' + formatDate(featured.pubDate) + '</span></div><h2 class="featured-title">' + featured.title + '</h2><p class="featured-excerpt">' + featured.excerpt + '</p><span class="substack-badge">Read on Substack</span></div><div class="featured-arrow">→</div></div></a></div>';
-      document.getElementById('writing-content-area').innerHTML = featuredHTML;
+      var a = items[0];
+      var html = '<a class="writing-article" href="' + a.link + '" target="_blank" rel="noopener">'
+        + '<div class="wa-left">'
+        + '<span class="wa-tag">Latest</span>'
+        + '<h2 class="wa-title">' + a.title + '</h2>'
+        + '<p class="wa-excerpt">' + a.excerpt + '</p>'
+        + '</div>'
+        + '<div class="wa-right">'
+        + '<span class="wa-date">' + formatDate(a.pubDate) + '</span>'
+        + '<span class="wa-arrow">→</span>'
+        + '</div>'
+        + '</a>';
+      document.getElementById('writing-content-area').innerHTML = html;
     }
 
     function renderFeedError() {
