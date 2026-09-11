@@ -118,12 +118,26 @@
       box-shadow: 0 2px 20px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04);
       padding: 0 6px 0 24px;
       height: 48px;
+      transition: background 0.45s cubic-bezier(0.32,0.72,0,1), border-color 0.45s cubic-bezier(0.32,0.72,0,1), box-shadow 0.45s cubic-bezier(0.32,0.72,0,1);
     }
+    /* Dark pill — shown at top over dark hero */
+    nav.dark-pill .nav-pill {
+      background: rgba(12,12,18,0.82);
+      border-color: rgba(255,255,255,0.08);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.35);
+    }
+    nav.dark-pill .nav-logo { color: #fff; }
+    nav.dark-pill .nav-links li a { color: rgba(255,255,255,0.45); }
+    nav.dark-pill .nav-links li a:hover { color: #fff; }
+    nav.dark-pill .nav-links li.nav-cta a { background: #fff; color: #0C0C12; }
+    nav.dark-pill .nav-links li.nav-cta a::after { background: rgba(0,0,0,0.08); }
+    nav.dark-pill .nav-hamburger { filter: invert(1); opacity: 0.7; }
     .nav-logo {
       font-size: 15px;
       font-weight: 800;
       letter-spacing: -0.02em;
       color: var(--text);
+      transition: color 0.45s cubic-bezier(0.32,0.72,0,1);
     }
     .nav-links {
       list-style: none;
@@ -149,7 +163,7 @@
       display: inline-flex;
       align-items: center;
       gap: 0;
-      transition: opacity 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+      transition: opacity 0.35s cubic-bezier(0.32, 0.72, 0, 1), background 0.45s cubic-bezier(0.32,0.72,0,1), color 0.45s cubic-bezier(0.32,0.72,0,1);
     }
     .nav-links li.nav-cta a::after {
       content: '↗';
@@ -886,6 +900,31 @@
       font-weight: 400;
     }
     .about-bio p + p { margin-top: 20px; }
+    .about-brands {
+      margin-top: 40px;
+      padding-top: 28px;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .about-brands-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      flex-shrink: 0;
+    }
+    .about-brands-list {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .about-brands-list span { font-size: 12px; font-weight: 600; color: var(--muted); }
+    .about-brands-list .bd { color: var(--rule); font-weight: 300; }
     .about-career { margin-top: 40px; }
     .career-row {
       display: grid;
@@ -2100,30 +2139,14 @@
         <p>I've written production code. I've run design teams of 25+. I've presented to exec boards and I've pushed pixels at 2am. Front-end engineer, IC designer, team lead, design director, co-founder. It's the reason I can walk into any room, at any altitude, and add value immediately.</p>
         <p>AI is embedded across my entire workflow. The taste is mine. The throughput is multiplied.</p>
       </div>
+      <div class="about-brands">
+        <p class="about-brands-label">Designed for</p>
+        <div class="about-brands-list">
+          <span>Careem</span><span class="bd">·</span><span>Uber</span><span class="bd">·</span><span>Kraken</span><span class="bd">·</span><span>Metro Bank</span><span class="bd">·</span><span>Almosafer</span><span class="bd">·</span><span>Momondo</span><span class="bd">·</span><span>Sopra Steria</span><span class="bd">·</span><span>RUONALIM</span>
+        </div>
+      </div>
     </div>
   </section>
-
-  <!-- Brands strip -->
-  <div class="brands-strip">
-    <span class="brands-label">Designed for</span>
-    <div class="brands-list">
-      <span>Careem</span>
-      <span class="bd">·</span>
-      <span>Uber</span>
-      <span class="bd">·</span>
-      <span>Kraken</span>
-      <span class="bd">·</span>
-      <span>Metro Bank</span>
-      <span class="bd">·</span>
-      <span>Almosafer</span>
-      <span class="bd">·</span>
-      <span>Momondo</span>
-      <span class="bd">·</span>
-      <span>Sopra Steria</span>
-      <span class="bd">·</span>
-      <span>RUONALIM</span>
-    </div>
-  </div>
 
   <!-- Writing -->
   <section id="writing">
@@ -2401,10 +2424,20 @@
     var navEl = document.querySelector('nav');
     var heroEl = document.getElementById('hero');
 
+    // Start dark over the dark hero
+    navEl.classList.add('dark-pill');
+
     function updateMetrics() {
       var scrollY = window.scrollY;
       var heroHeight = heroEl ? heroEl.offsetHeight : 0;
       var mergeThreshold = heroHeight + 20;
+
+      // Nav pill: dark at top, light once scrolled
+      if (scrollY > 40) {
+        navEl.classList.remove('dark-pill');
+      } else {
+        navEl.classList.add('dark-pill');
+      }
 
       // Minimise metrics bar early (60px in)
       if (scrollY > 60) {
