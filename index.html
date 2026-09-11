@@ -1372,6 +1372,90 @@
     .ct-cta-secondary { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; border: 1px solid var(--rule); padding: 14px 28px; border-radius: 100px; color: var(--text); transition: background 0.2s; }
     .ct-cta-secondary:hover { background: var(--bg); }
 
+    /* ─── Career Section ───────────────────────────────────────── */
+    #career {
+      background: var(--white);
+      border-bottom: 1px solid var(--rule);
+      position: relative;
+      z-index: 1;
+    }
+    .career-section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: clamp(20px, 2.5vw, 32px) var(--pad);
+      border-bottom: 1px solid var(--rule);
+    }
+    .career-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--subtle);
+    }
+    .career-count {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--subtle);
+    }
+    .career-list {}
+    .career-entry {
+      display: grid;
+      grid-template-columns: clamp(72px, 8vw, 120px) 1fr auto;
+      align-items: center;
+      gap: 0 clamp(24px, 3vw, 48px);
+      padding: clamp(20px, 2.5vw, 28px) var(--pad);
+      border-bottom: 1px solid var(--rule);
+      transition: background 0.2s;
+    }
+    .career-entry:last-child { border-bottom: none; }
+    .career-entry:hover { background: var(--bg); }
+    .ce-year {
+      font-size: clamp(36px, 5vw, 72px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: rgba(0,0,0,0.07);
+      flex-shrink: 0;
+      transition: color 0.2s;
+    }
+    .career-entry:hover .ce-year { color: rgba(0,0,0,0.14); }
+    .ce-body { min-width: 0; }
+    .ce-company {
+      font-size: clamp(16px, 2vw, 22px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      color: var(--text);
+    }
+    .ce-role {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 4px;
+      font-weight: 400;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .ce-badge {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 100px;
+      border: 1px solid var(--rule);
+      color: var(--subtle);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .ce-badge.present {
+      background: var(--black);
+      color: var(--white);
+      border-color: var(--black);
+    }
+
     /* ─── Podcast Section ──────────────────────────────────────── */
     #podcast {
       border-bottom: 1px solid var(--rule);
@@ -1486,6 +1570,9 @@
       .metric:nth-child(4) { border-top: 1px solid var(--rule); border-right: none; }
       #ai { grid-template-columns: 1fr; }
       .ai-m-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .career-entry { grid-template-columns: 56px 1fr auto; gap: 0 16px; }
+      .ce-year { font-size: clamp(28px, 7vw, 48px); }
+      .ce-role { white-space: normal; }
       .pod-inner { grid-template-columns: 1fr; }
       .pod-left { border-right: none; border-bottom: 1px solid var(--rule); }
       .pod-right { min-height: clamp(220px, 55vw, 400px); }
@@ -1646,63 +1733,116 @@
         <p>I've written production code. I've run design teams of 25+. I've presented to exec boards and I've pushed pixels at 2am. Front-end engineer, IC designer, team lead, design director, co-founder. It's the reason I can walk into any room, at any altitude, and add value immediately.</p>
         <p>AI is embedded across my entire workflow. The taste is mine. The throughput is multiplied.</p>
       </div>
-      <div class="about-career">
-        <div class="career-row reveal">
-          <span class="cr-co">Careem (Uber)</span>
-          <span class="cr-role">Head of Product Design, Growth &amp; Platform</span>
-          <span class="cr-year">2026–Present</span>
+    </div>
+  </section>
+
+  <!-- Career -->
+  <section id="career">
+    <div class="career-section-header">
+      <span class="career-eyebrow">Experience</span>
+      <span class="career-count">11 roles · 14 years</span>
+    </div>
+    <div class="career-list">
+
+      <div class="career-entry reveal">
+        <span class="ce-year">2026</span>
+        <div class="ce-body">
+          <h3 class="ce-company">Careem (Uber)</h3>
+          <p class="ce-role">Head of Product Design, Growth &amp; Platform</p>
         </div>
-        <div class="career-row reveal reveal-delay-1">
-          <span class="cr-co">Kraken</span>
-          <span class="cr-role">Sr. Staff Product Designer</span>
-          <span class="cr-year">2025</span>
-        </div>
-        <div class="career-row reveal reveal-delay-2">
-          <span class="cr-co">RUONALIM</span>
-          <span class="cr-role">Co-Founder &amp; Design Advisor</span>
-          <span class="cr-year">2023–Present</span>
-        </div>
-        <div class="career-row reveal reveal-delay-3">
-          <span class="cr-co">Careem (Uber)</span>
-          <span class="cr-role">Head of Product Design (Pay &amp; Platform)</span>
-          <span class="cr-year">2024–2025</span>
-        </div>
-        <div class="career-row reveal reveal-delay-4">
-          <span class="cr-co">Almosafer</span>
-          <span class="cr-role">Director of UX &amp; Product Design</span>
-          <span class="cr-year">2020–2023</span>
-        </div>
-        <div class="career-row reveal">
-          <span class="cr-co">Metro Bank</span>
-          <span class="cr-role">Head of Product Design &amp; UX</span>
-          <span class="cr-year">2017–2020</span>
-        </div>
-        <div class="career-row reveal">
-          <span class="cr-co">Momondo</span>
-          <span class="cr-role">Lead Product Designer</span>
-          <span class="cr-year">2015–2017</span>
-        </div>
-        <div class="career-row reveal">
-          <span class="cr-co">Sopra Steria</span>
-          <span class="cr-role">UX Designer · UK Gov Digital Transformation</span>
-          <span class="cr-year">2014–2015</span>
-        </div>
-        <div class="career-row reveal">
-          <span class="cr-co">Apperception</span>
-          <span class="cr-role">UX Designer</span>
-          <span class="cr-year">2012–2014</span>
-        </div>
-        <div class="career-row reveal">
-          <span class="cr-co">JDT Designs</span>
-          <span class="cr-role">Founder &amp; Designer</span>
-          <span class="cr-year">2009–2014</span>
-        </div>
-        <div class="career-row reveal">
-          <span class="cr-co">Digitap Media</span>
-          <span class="cr-role">Digital Designer</span>
-          <span class="cr-year">2012</span>
-        </div>
+        <span class="ce-badge present">Present</span>
       </div>
+
+      <div class="career-entry reveal">
+        <span class="ce-year">2023</span>
+        <div class="ce-body">
+          <h3 class="ce-company">RUONALIM</h3>
+          <p class="ce-role">Co-Founder &amp; Design Advisor</p>
+        </div>
+        <span class="ce-badge present">Present</span>
+      </div>
+
+      <div class="career-entry reveal">
+        <span class="ce-year">2025</span>
+        <div class="ce-body">
+          <h3 class="ce-company">Kraken</h3>
+          <p class="ce-role">Sr. Staff Product Designer</p>
+        </div>
+        <span class="ce-badge">2025</span>
+      </div>
+
+      <div class="career-entry reveal">
+        <span class="ce-year">2024</span>
+        <div class="ce-body">
+          <h3 class="ce-company">Careem (Uber)</h3>
+          <p class="ce-role">Head of Product Design, Pay &amp; Platform</p>
+        </div>
+        <span class="ce-badge">2024</span>
+      </div>
+
+      <div class="career-entry reveal">
+        <span class="ce-year">2020</span>
+        <div class="ce-body">
+          <h3 class="ce-company">Almosafer</h3>
+          <p class="ce-role">Director of UX &amp; Product Design</p>
+        </div>
+        <span class="ce-badge">2020</span>
+      </div>
+
+      <div class="career-entry reveal">
+        <span class="ce-year">2017</span>
+        <div class="ce-body">
+          <h3 class="ce-company">Metro Bank</h3>
+          <p class="ce-role">Head of Product Design &amp; UX</p>
+        </div>
+        <span class="ce-badge">2017</span>
+      </div>
+
+      <div class="career-entry reveal">
+        <span class="ce-year">2015</span>
+        <div class="ce-body">
+          <h3 class="ce-company">Momondo</h3>
+          <p class="ce-role">Lead Product Designer</p>
+        </div>
+        <span class="ce-badge">2015</span>
+      </div>
+
+      <div class="career-entry reveal">
+        <span class="ce-year">2014</span>
+        <div class="ce-body">
+          <h3 class="ce-company">Sopra Steria</h3>
+          <p class="ce-role">UX Designer · UK Gov Digital Transformation</p>
+        </div>
+        <span class="ce-badge">2014</span>
+      </div>
+
+      <div class="career-entry reveal">
+        <span class="ce-year">2012</span>
+        <div class="ce-body">
+          <h3 class="ce-company">Apperception</h3>
+          <p class="ce-role">UX Designer</p>
+        </div>
+        <span class="ce-badge">2012</span>
+      </div>
+
+      <div class="career-entry reveal">
+        <span class="ce-year">2009</span>
+        <div class="ce-body">
+          <h3 class="ce-company">JDT Designs</h3>
+          <p class="ce-role">Founder &amp; Designer</p>
+        </div>
+        <span class="ce-badge">2009</span>
+      </div>
+
+      <div class="career-entry reveal">
+        <span class="ce-year">2012</span>
+        <div class="ce-body">
+          <h3 class="ce-company">Digitap Media</h3>
+          <p class="ce-role">Digital Designer</p>
+        </div>
+        <span class="ce-badge">2012</span>
+      </div>
+
     </div>
   </section>
 
