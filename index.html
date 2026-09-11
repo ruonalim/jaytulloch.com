@@ -1052,91 +1052,77 @@
       color: rgba(255,255,255,0.35);
     }
 
-    /* ─── Case Study Modal (bottom sheet) ──────────────────────── */
+    /* ─── Case Study Modal (full screen) ───────────────────────── */
     .cs-modal {
       position: fixed;
       inset: 0;
       z-index: 500;
-      background: rgba(0,0,0,0);
       display: flex;
-      align-items: flex-end;
+      align-items: center;
+      justify-content: center;
       pointer-events: none;
-      transition: background 0.4s ease;
+      /* Frosted glass overlay */
+      background: rgba(10,10,16,0);
+      backdrop-filter: blur(0px);
+      -webkit-backdrop-filter: blur(0px);
+      transition: background 0.45s ease, backdrop-filter 0.45s ease;
     }
     .cs-modal.open {
-      background: rgba(0,0,0,0.55);
+      background: rgba(10,10,16,0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       pointer-events: all;
     }
     .cs-modal-sheet {
-      width: 100%;
-      height: calc(100% - 48px);
-      background: #fff;
-      border-radius: 14px 14px 0 0;
+      width: calc(100% - 40px);
+      max-width: 1200px;
+      height: calc(100vh - 60px);
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      border-radius: 20px;
       display: flex;
       flex-direction: column;
       overflow: hidden;
       position: relative;
-      transform: translateY(100%);
-      transition: transform 0.48s cubic-bezier(0.32, 0.72, 0, 1);
-      box-shadow: 0 -8px 48px rgba(0,0,0,0.18);
+      transform: scale(0.94) translateY(24px);
+      opacity: 0;
+      transition: transform 0.52s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+      box-shadow: 0 32px 80px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.15) inset;
     }
-    .cs-modal.open .cs-modal-sheet { transform: translateY(0); }
-    .cs-modal-bar {
-      height: 48px;
-      background: var(--bg);
-      border-bottom: 1px solid var(--rule);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
-      flex-shrink: 0;
+    .cs-modal.open .cs-modal-sheet {
+      transform: scale(1) translateY(0);
+      opacity: 1;
     }
-    .cs-modal-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--subtle);
-    }
-    .cs-modal-actions { display: flex; align-items: center; gap: 8px; }
-    .cs-modal-open {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--muted);
-      background: none;
-      border: 1px solid var(--rule);
-      padding: 5px 13px;
-      border-radius: 100px;
-      cursor: pointer;
-      transition: color 0.2s, border-color 0.2s;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .cs-modal-open:hover { color: var(--text); border-color: var(--text); }
     .cs-modal-close {
       position: absolute;
-      top: 20px;
-      right: 24px;
-      background: none;
+      top: 18px;
+      right: 22px;
+      background: rgba(0,0,0,0.06);
       border: none;
-      color: rgba(0,0,0,0.25);
-      font-size: 40px;
-      font-weight: 200;
+      color: rgba(0,0,0,0.4);
+      font-size: 18px;
+      font-weight: 400;
       line-height: 1;
       cursor: pointer;
       padding: 0;
       z-index: 10;
-      transition: color 0.2s;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, color 0.2s;
       font-family: var(--font);
     }
-    .cs-modal-close:hover { color: var(--text); }
+    .cs-modal-close:hover { background: rgba(0,0,0,0.12); color: var(--text); }
     .cs-modal iframe {
       flex: 1;
       width: 100%;
       border: none;
       background: #fff;
+      border-radius: 0 0 20px 20px;
     }
 
     /* ─── Nav stats (merge on scroll) ──────────────────────────── */
@@ -1671,6 +1657,43 @@
     .wa-arrow { font-size: 28px; color: var(--subtle); font-weight: 300; transition: transform 0.2s; }
     .writing-article:hover .wa-arrow { transform: translateX(4px); }
 
+    /* ─── Brands Strip ─────────────────────────────────────────── */
+    .brands-strip {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 16px var(--pad);
+      border-bottom: 1px solid var(--rule);
+      background: var(--white);
+      overflow: hidden;
+    }
+    .brands-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--subtle);
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+    .brands-list {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .brands-list span {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+    .brands-list .bd {
+      color: var(--rule);
+      font-weight: 300;
+    }
+
     /* ─── Career Section ───────────────────────────────────────── */
     #career {
       background: var(--white);
@@ -1698,18 +1721,26 @@
       letter-spacing: 0.06em;
       color: var(--subtle);
     }
-    .career-list {}
+    .career-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
     .career-entry {
       display: grid;
-      grid-template-columns: 52px 1fr auto;
+      grid-template-columns: 48px 1fr auto;
       align-items: center;
-      gap: 0 clamp(20px, 2.5vw, 36px);
-      padding: clamp(12px, 1.4vw, 18px) var(--pad);
+      gap: 0 16px;
+      padding: clamp(14px, 1.6vw, 20px) var(--pad);
       border-bottom: 1px solid var(--rule);
+      border-right: 1px solid var(--rule);
       transition: background 0.45s cubic-bezier(0.32, 0.72, 0, 1);
       position: relative;
       overflow: hidden;
     }
+    /* Right column: no right border */
+    .career-entry:nth-child(2n) { border-right: none; }
+    /* Last row: no bottom border */
+    .career-entry:nth-last-child(-n+2) { border-bottom: none; }
     .career-entry::before {
       content: '';
       position: absolute;
@@ -1897,8 +1928,10 @@
       .metric:nth-child(4) { border-top: 1px solid var(--rule); border-right: none; }
       #ai { grid-template-columns: 1fr; }
       .ai-m-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
-      .career-entry { grid-template-columns: 56px 1fr auto; gap: 0 16px; }
-      .ce-year { font-size: clamp(28px, 7vw, 48px); }
+      .career-list { grid-template-columns: 1fr; }
+      .career-entry { grid-template-columns: 44px 1fr auto; gap: 0 12px; border-right: none; }
+      .career-entry:nth-last-child(-n+2) { border-bottom: 1px solid var(--rule); }
+      .career-entry:last-child { border-bottom: none; }
       .ce-role { white-space: normal; }
       .pod-inner { grid-template-columns: 1fr; }
       .pod-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
@@ -2089,10 +2122,33 @@
     </div>
   </section>
 
+  <!-- Brands strip -->
+  <div class="brands-strip">
+    <span class="brands-label">Designed for</span>
+    <div class="brands-list">
+      <span>Careem</span>
+      <span class="bd">·</span>
+      <span>Uber</span>
+      <span class="bd">·</span>
+      <span>Kraken</span>
+      <span class="bd">·</span>
+      <span>Metro Bank</span>
+      <span class="bd">·</span>
+      <span>Almosafer</span>
+      <span class="bd">·</span>
+      <span>Momondo</span>
+      <span class="bd">·</span>
+      <span>Sopra Steria</span>
+      <span class="bd">·</span>
+      <span>RUONALIM</span>
+    </div>
+  </div>
+
   <!-- Career -->
   <section id="career">
     <div class="career-section-header">
       <span class="career-eyebrow">Experience</span>
+      <span class="career-eyebrow">18+ years</span>
     </div>
     <div class="career-list">
 
@@ -2102,7 +2158,7 @@
           <h3 class="ce-company">Careem (Uber)</h3>
           <p class="ce-role">Head of Product Design, Growth &amp; Platform</p>
         </div>
-        <span class="ce-badge present">Present</span>
+        <span class="ce-badge present">Now</span>
       </div>
 
       <div class="career-entry reveal">
@@ -2111,7 +2167,7 @@
           <h3 class="ce-company">RUONALIM</h3>
           <p class="ce-role">Co-Founder &amp; Design Advisor</p>
         </div>
-        <span class="ce-badge present">Present</span>
+        <span class="ce-badge present">Now</span>
       </div>
 
       <div class="career-entry reveal">
@@ -2163,36 +2219,9 @@
         <span class="ce-year">2014</span>
         <div class="ce-body">
           <h3 class="ce-company">Sopra Steria</h3>
-          <p class="ce-role">UX Designer · UK Gov Digital Transformation</p>
+          <p class="ce-role">UX Designer · Gov Digital</p>
         </div>
         <span class="ce-badge">2014</span>
-      </div>
-
-      <div class="career-entry reveal">
-        <span class="ce-year">2012</span>
-        <div class="ce-body">
-          <h3 class="ce-company">Apperception</h3>
-          <p class="ce-role">UX Designer</p>
-        </div>
-        <span class="ce-badge">2012</span>
-      </div>
-
-      <div class="career-entry reveal">
-        <span class="ce-year">2012</span>
-        <div class="ce-body">
-          <h3 class="ce-company">Digitap Media</h3>
-          <p class="ce-role">Digital Designer</p>
-        </div>
-        <span class="ce-badge">2012</span>
-      </div>
-
-      <div class="career-entry reveal">
-        <span class="ce-year">2009</span>
-        <div class="ce-body">
-          <h3 class="ce-company">JDT Designs</h3>
-          <p class="ce-role">Founder &amp; Designer</p>
-        </div>
-        <span class="ce-badge">2009</span>
       </div>
 
     </div>
