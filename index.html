@@ -1181,21 +1181,28 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       background: #fff;
+      align-items: stretch;
     }
     .writing-combined-left {
-      padding: clamp(32px, 5vw, 64px) var(--pad) clamp(48px, 7vw, 96px);
+      padding: clamp(56px, 7vw, 96px) var(--pad);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      gap: clamp(24px, 3vw, 40px);
+      justify-content: center;
+    }
+    .writing-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--subtle);
     }
     .writing-combined-right {
-      padding: clamp(32px, 5vw, 64px) var(--pad);
+      padding: clamp(56px, 7vw, 96px) var(--pad);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-    }
-    .writing-combined-footer {
-      padding-top: 32px;
+      justify-content: center;
+      border-left: 1px solid rgba(0,0,0,0.06);
     }
     .writing-eyebrow {
       font-size: 10px;
@@ -1883,12 +1890,11 @@
 
   <!-- Writing -->
   <section id="writing">
-    <div class="section-bar">
-      <h2 class="section-title">Writing</h2>
-    </div>
     <div class="writing-combined">
       <div class="writing-combined-left">
+        <span class="writing-label">Writing</span>
         <h2 class="writing-hero-title">Inside<br/>the Build.</h2>
+        <a class="writing-subscribe-btn" href="https://jaytulloch.substack.com/subscribe" target="_blank" rel="noopener">Subscribe to the newsletter</a>
       </div>
       <div class="writing-combined-right">
         <div id="writing-content-area">
@@ -1898,9 +1904,6 @@
             <div class="skeleton" style="height:20px;width:80%;margin-bottom:8px;border-radius:4px;"></div>
             <div class="skeleton" style="height:14px;width:65%;border-radius:4px;"></div>
           </div>
-        </div>
-        <div class="writing-combined-footer">
-          <a class="writing-subscribe-btn" href="https://jaytulloch.substack.com/subscribe" target="_blank" rel="noopener">Subscribe to the newsletter</a>
         </div>
       </div>
     </div>
