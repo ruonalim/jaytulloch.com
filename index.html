@@ -908,10 +908,6 @@
       margin-top: 40px;
       padding-top: 28px;
       border-top: 1px solid var(--rule);
-      display: flex;
-      align-items: baseline;
-      gap: 20px;
-      flex-wrap: wrap;
     }
     .about-brands-label {
       font-size: 9px;
@@ -919,16 +915,36 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--subtle);
-      flex-shrink: 0;
+      margin-bottom: 18px;
     }
     .about-brands-list {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       flex-wrap: wrap;
     }
-    .about-brands-list span { font-size: 12px; font-weight: 600; color: var(--muted); }
-    .about-brands-list .bd { color: var(--rule); font-weight: 300; }
+    .brand-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      padding: 6px 12px 6px 6px;
+    }
+    .brand-logo {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .brand-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+    }
     .about-career { margin-top: 40px; }
     .career-row {
       display: grid;
@@ -1047,8 +1063,7 @@
       z-index: 1;
     }
     .footer-top {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      padding: clamp(32px, 4vw, 52px) var(--pad);
       border-bottom: 1px solid rgba(255,255,255,0.1);
     }
     .footer-cta-col {
@@ -1951,8 +1966,8 @@
       .pod-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
       .pod-right { min-height: clamp(220px, 55vw, 400px); }
       .contact-hero-wrap { grid-template-columns: 1fr; min-height: auto; }
-      .ct-hero-left { border-right: none; border-bottom: 1px solid var(--rule); }
-      .ct-video-panel { height: clamp(280px, 55vw, 480px); min-height: 0; }
+      .ct-hero-left { border-right: none; border-bottom: 1px solid var(--rule); order: 2; }
+      .ct-video-panel { height: clamp(280px, 55vw, 480px); min-height: 0; order: 1; }
       .ct-contact-block { margin-top: 48px; }
       .engagement-grid { grid-template-columns: 1fr; }
       .engagement-card { border-right: none; border-bottom: 1px solid var(--rule); }
@@ -1964,9 +1979,9 @@
       .writing-header-sub { text-align: left; max-width: none; }
       .writing-combined { grid-template-columns: 1fr; }
       .writing-combined-left { border-right: none; border-bottom: 1px solid var(--rule); }
-      .ns-item { padding: 0 10px; }
-      .ns-val { font-size: 12px; }
-      .ns-lbl { display: none; }
+      .ns-item { padding: 0 8px; }
+      .ns-val { font-size: 11px; }
+      .ns-lbl { font-size: 8px; }
       .featured-inner { grid-template-columns: 1fr; gap: 24px; }
       .featured-arrow { display: none; }
       .articles-grid { grid-template-columns: 1fr; }
@@ -2013,7 +2028,7 @@
         <li><a href="#work">Work</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#writing">Writing</a></li>
-        <li class="nav-cta"><a href="#contact">Let's talk</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
       <button class="nav-hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span>
@@ -2138,7 +2153,13 @@
       <div class="about-brands">
         <p class="about-brands-label">Designed for</p>
         <div class="about-brands-list">
-          <span>Careem</span><span class="bd">·</span><span>Uber</span><span class="bd">·</span><span>Kraken</span><span class="bd">·</span><span>Metro Bank</span><span class="bd">·</span><span>Almosafer</span><span class="bd">·</span><span>Momondo</span><span class="bd">·</span><span>Sopra Steria</span><span class="bd">·</span><span>RUONALIM</span>
+          <div class="brand-item"><img src="./logo-careem.png" alt="Careem" class="brand-logo"><span class="brand-name">Careem</span></div>
+          <div class="brand-item"><img src="./logo-uber.jpg" alt="Uber" class="brand-logo"><span class="brand-name">Uber</span></div>
+          <div class="brand-item"><img src="./logo-kraken.jpg" alt="Kraken" class="brand-logo"><span class="brand-name">Kraken</span></div>
+          <div class="brand-item"><img src="./logo-metro.png" alt="Metro Bank" class="brand-logo"><span class="brand-name">Metro Bank</span></div>
+          <div class="brand-item"><img src="./logo-almosafer.png" alt="Almosafer" class="brand-logo"><span class="brand-name">Almosafer</span></div>
+          <div class="brand-item"><img src="./logo-momondo.png" alt="Momondo" class="brand-logo"><span class="brand-name">Momondo</span></div>
+          <div class="brand-item"><img src="./logo-sopra.jpg" alt="Sopra Steria" class="brand-logo"><span class="brand-name">Sopra Steria</span></div>
         </div>
       </div>
     </div>
@@ -2256,22 +2277,15 @@
   <!-- Footer -->
   <footer>
     <div class="footer-top">
-      <div class="footer-cta-col">
-        <div class="footer-cta-head">Let's work<br/>together.</div>
-        <button class="footer-email-link" onclick="copyEmail()" style="font-family:var(--font); cursor:pointer;">Get in touch →</button>
-      </div>
-      <div class="footer-right">
-        <ul class="footer-nav">
-          <li><a href="https://www.linkedin.com/in/jaytulloch/" target="_blank">LinkedIn</a></li>
-          <li><a href="https://x.com/mrjaytulloch" target="_blank">X / Twitter</a></li>
-          <li><a href="https://youtube.com/@beyondtheinterface" target="_blank">YouTube</a></li>
-          <li><a href="https://jaytulloch.substack.com" target="_blank">Substack</a></li>
-          <li><a href="https://www.beyond-the-interface.com/" target="_blank">Podcast</a></li>
-          <li><a href="#writing">Writing</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-        <p style="font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.35); margin-top: 24px;">Dubai, UAE · Available globally</p>
-      </div>
+      <ul class="footer-nav">
+        <li><a href="https://www.linkedin.com/in/jaytulloch/" target="_blank">LinkedIn</a></li>
+        <li><a href="https://x.com/mrjaytulloch" target="_blank">X / Twitter</a></li>
+        <li><a href="https://youtube.com/@beyondtheinterface" target="_blank">YouTube</a></li>
+        <li><a href="https://jaytulloch.substack.com" target="_blank">Substack</a></li>
+        <li><a href="https://www.beyond-the-interface.com/" target="_blank">Podcast</a></li>
+        <li><a href="#writing">Writing</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </div>
     <div class="footer-bottom">
       <span class="footer-copy">© 2026 Jay Tulloch. All rights reserved.</span>
