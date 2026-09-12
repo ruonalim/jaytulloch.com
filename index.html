@@ -782,47 +782,67 @@
       font-weight: 400;
     }
     .about-bio p + p { margin-top: 20px; }
-    .about-brands {
-      margin-top: 40px;
-      padding-top: 28px;
-      border-top: 1px solid var(--rule);
-    }
-    .about-brands-label {
-      font-size: 9px;
+    /* ─── About section title ──────────────────────────────────── */
+    .about-section-title {
+      font-size: 10px;
       font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--subtle);
-      margin-bottom: 18px;
+      margin-bottom: 28px;
     }
-    .about-brands-list {
+
+    /* ─── Section bar ───────────────────────────────────────────── */
+    .section-bar {
       display: flex;
       align-items: center;
-      gap: 12px;
+      justify-content: space-between;
+      padding: clamp(14px, 1.8vw, 22px) var(--pad);
+      border-bottom: 1px solid var(--rule);
+      background: var(--white);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ─── Brands ────────────────────────────────────────────────── */
+    #brands {
+      background: #06060A;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      position: relative;
+      z-index: 1;
+    }
+    .brands-inner {
+      padding: clamp(32px, 4vw, 52px) var(--pad);
+      display: flex;
+      align-items: center;
+      gap: 40px;
       flex-wrap: wrap;
     }
-    .brand-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--white);
-      border: 1px solid var(--rule);
-      border-radius: 10px;
-      padding: 6px 12px 6px 6px;
-    }
-    .brand-logo {
-      width: 28px;
-      height: 28px;
-      border-radius: 6px;
-      object-fit: cover;
+    .brands-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
       flex-shrink: 0;
-    }
-    .brand-name {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text);
       white-space: nowrap;
     }
+    .brands-row {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+    .brand-logo-item img {
+      height: 28px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+      filter: brightness(0) invert(1);
+      opacity: 0.55;
+      transition: opacity 0.3s;
+    }
+    .brand-logo-item img:hover { opacity: 0.9; }
     .about-career { margin-top: 40px; }
     .career-row {
       display: grid;
@@ -1082,72 +1102,38 @@
       border-radius: 0 0 20px 20px;
     }
 
-    /* ─── Metrics strip ─────────────────────────────────────────── */
+    /* ─── Stats ────────────────────────────────────────────────── */
     #metrics {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      border-bottom: 1px solid var(--rule);
-      background: #F5F5F7;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      transition: box-shadow 0.3s ease, max-height 0.5s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.4s ease, border-width 0.5s ease;
-      max-height: 200px;
-      overflow: hidden;
+      background: #06060A;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      position: relative;
+      z-index: 1;
     }
-    #metrics.minimized {
-      box-shadow: 0 1px 0 var(--rule), 0 2px 16px rgba(0,0,0,0.06);
-    }
-
     .metric {
-      padding: clamp(20px, 2.5vw, 36px) var(--pad);
-      border-right: 1px solid var(--rule);
-      transition: padding 0.35s cubic-bezier(0.4,0,0.2,1);
+      padding: clamp(40px, 5.5vw, 72px) var(--pad);
+      border-right: 1px solid rgba(255,255,255,0.07);
     }
     .metric:last-child { border-right: none; }
-    #metrics.minimized .metric {
-      padding: 10px var(--pad);
-    }
     .m-value {
       display: block;
-      font-size: clamp(28px, 3.5vw, 48px);
+      font-size: clamp(44px, 6.5vw, 88px);
       font-weight: 800;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.04em;
       line-height: 1;
-      color: var(--text);
-      transition: font-size 0.35s cubic-bezier(0.4,0,0.2,1);
-    }
-    #metrics.minimized .m-value {
-      font-size: clamp(14px, 1.6vw, 22px);
+      color: #ffffff;
     }
     .m-label {
       display: block;
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--muted);
-      margin-top: 6px;
-      line-height: 1.4;
-      transition: opacity 0.25s ease, max-height 0.35s ease, margin-top 0.35s ease;
-      max-height: 40px;
-      overflow: hidden;
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.35);
+      margin-top: 12px;
+      line-height: 1.5;
+      max-width: 160px;
     }
-    #metrics.minimized .m-label {
-      opacity: 0;
-      max-height: 0;
-      margin-top: 0;
-    }
-    .m-label-short {
-      display: none;
-      font-size: 10px;
-      font-weight: 500;
-      color: var(--muted);
-      line-height: 1.2;
-      margin-top: 2px;
-      white-space: nowrap;
-    }
-    #metrics.minimized .m-label-short {
-      display: block;
-    }
+    .m-label-short { display: none; }
 
     /* ─── AI Minimal — Siri Aurora ─────────────────────────────── */
     @keyframes aurora-drift-1 {
@@ -1739,6 +1725,19 @@
 
     /* ─── Responsive ────────────────────────────────────────────── */
     @media (max-width: 900px) {
+      #hero {
+        height: auto;
+        aspect-ratio: 16 / 9;
+        position: relative;
+      }
+      .hero-video-wrap::before {
+        background:
+          linear-gradient(to top, rgba(6,6,10,1) 0%, rgba(6,6,10,0.75) 28%, rgba(6,6,10,0.15) 65%, transparent 100%),
+          linear-gradient(to right, rgba(6,6,10,0.65) 0%, transparent 65%);
+      }
+      .hero-text {
+        padding-bottom: clamp(28px, 6vw, 48px);
+      }
       .hero-headline { font-size: clamp(48px, 12vw, 88px); }
       .hero-bottom { flex-direction: column; align-items: flex-start; gap: 20px; }
       .hero-scroll { display: none; }
@@ -1773,9 +1772,10 @@
       .cr-year { text-align: left; }
       .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
       #metrics { grid-template-columns: repeat(2, 1fr); }
+      .metric { border-bottom: 1px solid rgba(255,255,255,0.07); }
       .metric:nth-child(2) { border-right: none; }
-      .metric:nth-child(3) { border-top: 1px solid var(--rule); }
-      .metric:nth-child(4) { border-top: 1px solid var(--rule); border-right: none; }
+      .metric:nth-child(3) { border-bottom: none; }
+      .metric:nth-child(4) { border-right: none; border-bottom: none; }
       #ai { grid-template-columns: 1fr; }
       .ai-m-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
       .career-list { grid-template-columns: 1fr; }
@@ -1879,6 +1879,22 @@
     </div>
   </div>
 
+  <!-- Brands -->
+  <section id="brands">
+    <div class="brands-inner">
+      <p class="brands-label">Designed for</p>
+      <div class="brands-row">
+        <div class="brand-logo-item"><img src="./logo-careem.png" alt="Careem"></div>
+        <div class="brand-logo-item"><img src="./logo-uber.jpg" alt="Uber"></div>
+        <div class="brand-logo-item"><img src="./logo-kraken.jpg" alt="Kraken"></div>
+        <div class="brand-logo-item"><img src="./logo-metro.png" alt="Metro Bank"></div>
+        <div class="brand-logo-item"><img src="./logo-almosafer.png" alt="Almosafer"></div>
+        <div class="brand-logo-item"><img src="./logo-momondo.png" alt="Momondo"></div>
+        <div class="brand-logo-item"><img src="./logo-sopra.jpg" alt="Sopra Steria"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- Work -->
   <div class="work-section-bar">
     <span class="section-eyebrow">Selected Work</span>
@@ -1945,28 +1961,20 @@
       </div>
     </div>
     <div class="about-right reveal reveal-delay-1">
+      <h2 class="about-section-title">About</h2>
       <div class="about-bio">
         <p>I started building websites at 15. Got a BSc in Product Design from Brunel, then an MBA with a focus on Digital Banking from Cranfield. Somewhere in between, I stopped being a designer who understood business and became a business leader who happens to think in systems, interfaces, and user behaviour.</p>
         <p>I've written production code. I've run design teams of 25+. I've presented to exec boards and I've pushed pixels at 2am. Front-end engineer, IC designer, team lead, design director, co-founder. It's the reason I can walk into any room, at any altitude, and add value immediately.</p>
         <p>AI is embedded across my entire workflow. The taste is mine. The throughput is multiplied.</p>
-      </div>
-      <div class="about-brands">
-        <p class="about-brands-label">Designed for</p>
-        <div class="about-brands-list">
-          <div class="brand-item"><img src="./logo-careem.png" alt="Careem" class="brand-logo"><span class="brand-name">Careem</span></div>
-          <div class="brand-item"><img src="./logo-uber.jpg" alt="Uber" class="brand-logo"><span class="brand-name">Uber</span></div>
-          <div class="brand-item"><img src="./logo-kraken.jpg" alt="Kraken" class="brand-logo"><span class="brand-name">Kraken</span></div>
-          <div class="brand-item"><img src="./logo-metro.png" alt="Metro Bank" class="brand-logo"><span class="brand-name">Metro Bank</span></div>
-          <div class="brand-item"><img src="./logo-almosafer.png" alt="Almosafer" class="brand-logo"><span class="brand-name">Almosafer</span></div>
-          <div class="brand-item"><img src="./logo-momondo.png" alt="Momondo" class="brand-logo"><span class="brand-name">Momondo</span></div>
-          <div class="brand-item"><img src="./logo-sopra.jpg" alt="Sopra Steria" class="brand-logo"><span class="brand-name">Sopra Steria</span></div>
-        </div>
       </div>
     </div>
   </section>
 
   <!-- Writing -->
   <section id="writing">
+    <div class="section-bar">
+      <span class="section-eyebrow">Writing</span>
+    </div>
     <div class="writing-combined">
       <div class="writing-combined-left">
         <h2 class="writing-hero-title">Inside<br/>the Build.</h2>
@@ -2215,17 +2223,6 @@
       });
       renderArticles(items);
     }).catch(renderFeedError);
-
-    // ─── Metrics minimise on scroll ──────────────────────────────
-    var metricsEl = document.getElementById('metrics');
-    function updateMetrics() {
-      if (window.scrollY > 60) {
-        metricsEl.classList.add('minimized');
-      } else {
-        metricsEl.classList.remove('minimized');
-      }
-    }
-    window.addEventListener('scroll', updateMetrics, { passive: true });
 
     // Reveal on scroll
     var reveals = document.querySelectorAll('.reveal');
