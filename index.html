@@ -816,20 +816,16 @@
       flex-wrap: wrap;
     }
     .brand-logo-item {
-      display: flex;
-      align-items: center;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.32);
+      white-space: nowrap;
+      transition: color 0.25s;
+      cursor: default;
     }
-    .brand-logo-item img {
-      height: 22px;
-      width: auto;
-      max-width: 100px;
-      object-fit: contain;
-      display: block;
-      filter: brightness(0) invert(1);
-      opacity: 0.45;
-      transition: opacity 0.3s;
-    }
-    .brand-logo-item img:hover { opacity: 0.85; }
+    .brand-logo-item:hover { color: rgba(255,255,255,0.72); }
     .about-career { margin-top: 40px; }
     .career-row {
       display: grid;
@@ -1162,18 +1158,42 @@
       line-height: 0.94;
       color: #fff;
     }
-    .ai-m-body {
-      font-size: clamp(15px, 1.4vw, 18px);
-      color: rgba(255,255,255,0.45);
-      line-height: 1.75;
-      font-weight: 400;
+    .ai-m-right {
       align-self: center;
-      display: flex;
-      align-items: center;
       position: relative;
       z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
     }
-    .ai-m-body strong { color: rgba(255,255,255,0.8); font-weight: 600; }
+    .ai-milestone {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .ai-milestone:first-child { border-top: 1px solid rgba(255,255,255,0.07); }
+    .ai-milestone-title {
+      font-size: clamp(15px, 1.5vw, 18px);
+      font-weight: 600;
+      color: rgba(255,255,255,0.88);
+      line-height: 1.3;
+    }
+    .ai-milestone-year {
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.3);
+      white-space: nowrap;
+      letter-spacing: 0.04em;
+    }
+    .ai-m-footer {
+      margin-top: 24px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.6;
+    }
 
     /* ─── Writing Section ───────────────────────────────────────── */
     #writing { background: #F5F5F7; }
@@ -1801,13 +1821,13 @@
     <div class="brands-inner">
       <p class="brands-label">Designed for</p>
       <div class="brands-row">
-        <div class="brand-logo-item"><img src="./logo-careem.png" alt="Careem"></div>
-        <div class="brand-logo-item"><img src="./logo-uber.jpg" alt="Uber"></div>
-        <div class="brand-logo-item"><img src="./logo-kraken.jpg" alt="Kraken"></div>
-        <div class="brand-logo-item"><img src="./logo-metro.png" alt="Metro Bank"></div>
-        <div class="brand-logo-item"><img src="./logo-almosafer.png" alt="Almosafer"></div>
-        <div class="brand-logo-item"><img src="./logo-momondo.png" alt="Momondo"></div>
-        <div class="brand-logo-item"><img src="./logo-sopra.jpg" alt="Sopra Steria"></div>
+        <span class="brand-logo-item">Careem</span>
+        <span class="brand-logo-item">Uber</span>
+        <span class="brand-logo-item">Kraken</span>
+        <span class="brand-logo-item">Metro Bank</span>
+        <span class="brand-logo-item">Almosafer</span>
+        <span class="brand-logo-item">Momondo</span>
+        <span class="brand-logo-item">Sopra Steria</span>
       </div>
     </div>
   </section>
@@ -1863,7 +1883,23 @@
       <h2 class="ai-m-headline">Seven years<br/>delivering<br/>AI products.</h2>
     </div>
     <div class="ai-m-right">
-      <p class="ai-m-body">Before AI was a buzzword, I was shipping it in regulated banking. <strong>UK's first AI in retail banking</strong> (2018). <strong>LLM-powered travel search</strong> (2023). <strong>AI dineout discovery</strong> at Careem (2024). <strong>LLM design ops</strong> (2025). Six production AI case studies across fintech, travel, and super apps.</p>
+      <div class="ai-milestone">
+        <span class="ai-milestone-title">UK's first AI in retail banking</span>
+        <span class="ai-milestone-year">2018</span>
+      </div>
+      <div class="ai-milestone">
+        <span class="ai-milestone-title">LLM-powered travel search</span>
+        <span class="ai-milestone-year">2023</span>
+      </div>
+      <div class="ai-milestone">
+        <span class="ai-milestone-title">AI dineout discovery at Careem</span>
+        <span class="ai-milestone-year">2024</span>
+      </div>
+      <div class="ai-milestone">
+        <span class="ai-milestone-title">LLM design ops</span>
+        <span class="ai-milestone-year">2025</span>
+      </div>
+      <p class="ai-m-footer">Six production AI case studies across fintech, travel, and super apps — before it was a buzzword.</p>
     </div>
   </section>
 
