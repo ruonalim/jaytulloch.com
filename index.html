@@ -1690,11 +1690,15 @@
 
     /* ─── Responsive ────────────────────────────────────────────── */
     @media (max-width: 900px) {
-      /* Video: switch to contain so the full landscape frame shows.
-         The #0a0a0a hero background fills the top/bottom bars invisibly. */
+      /* Video: cover for full-screen impact; side vignettes soften the crop edges */
       .hero-video-wrap video {
-        object-fit: contain;
-        object-position: center center;
+        object-fit: cover;
+        object-position: center 20%;
+      }
+      .hero-video-wrap::before {
+        background:
+          linear-gradient(to top, rgba(6,6,10,0.88) 0%, rgba(6,6,10,0.3) 50%, transparent 100%),
+          linear-gradient(to right, #06060A 0%, rgba(6,6,10,0.55) 22%, transparent 42%, transparent 58%, rgba(6,6,10,0.55) 78%, #06060A 100%);
       }
       .hero-headline { font-size: clamp(48px, 12vw, 88px); }
       .hero-bottom { flex-direction: column; align-items: flex-start; gap: 20px; }
