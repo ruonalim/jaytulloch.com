@@ -819,44 +819,60 @@
     }
 
     /* ─── Brands ────────────────────────────────────────────────── */
+    @keyframes brands-drift {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
     #brands {
       background: var(--surface-alt);
       position: relative;
       z-index: 1;
+      overflow: hidden;
+    }
+    /* Edge fade-out */
+    #brands::before, #brands::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      width: clamp(60px, 10vw, 140px);
+      z-index: 2;
+      pointer-events: none;
+    }
+    #brands::before {
+      left: 0;
+      background: linear-gradient(to right, var(--surface-alt) 0%, transparent 100%);
+    }
+    #brands::after {
+      right: 0;
+      background: linear-gradient(to left, var(--surface-alt) 0%, transparent 100%);
     }
     .brands-inner {
-      padding: clamp(40px, 5vw, 72px) var(--pad);
+      padding: clamp(40px, 5vw, 72px) 0;
       display: flex;
       align-items: center;
-      gap: clamp(36px, 5vw, 72px);
-      flex-wrap: wrap;
-    }
-    .brands-label {
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--subtle);
-      flex-shrink: 0;
-      white-space: nowrap;
+      overflow: hidden;
     }
     .brands-row {
       display: flex;
       align-items: center;
-      gap: clamp(28px, 4.5vw, 60px);
-      flex-wrap: wrap;
+      gap: clamp(48px, 6vw, 80px);
+      white-space: nowrap;
+      flex-shrink: 0;
+      animation: brands-drift 22s linear infinite;
     }
+    #brands:hover .brands-row { animation-play-state: paused; }
     .brand-logo-item {
-      font-size: clamp(16px, 1.8vw, 22px);
+      font-size: clamp(17px, 1.9vw, 24px);
       font-weight: 600;
       letter-spacing: -0.02em;
       text-transform: none;
       color: var(--muted);
       white-space: nowrap;
-      transition: color 0.3s;
+      transition: color 0.3s, transform 0.3s;
       cursor: default;
+      flex-shrink: 0;
     }
-    .brand-logo-item:hover { color: var(--text); }
+    .brand-logo-item:hover { color: var(--text); transform: translateY(-1px); }
     .about-career { margin-top: 40px; }
     .career-row {
       display: grid;
@@ -1062,43 +1078,56 @@
       border-radius: 0 0 20px 20px;
     }
 
-    /* ─── Dark section header ──────────────────────────────────── */
+    /* ─── Stats — always dark, always dramatic ──────────────────── */
+    @keyframes stat-shine {
+      0%   { background-position: 200% center; }
+      100% { background-position: -200% center; }
+    }
     .dark-section-header {
-      background: var(--surface-alt);
-      padding: clamp(48px, 6vw, 80px) var(--pad) clamp(16px, 2vw, 28px);
+      background: #06060A;
+      padding: clamp(56px, 7vw, 96px) var(--pad) clamp(16px, 2vw, 28px);
     }
     .dark-section-title {
-      font-size: clamp(28px, 4vw, 56px);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      color: var(--text);
-      line-height: 0.94;
+      font-size: clamp(13px, 1.2vw, 16px);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      line-height: 1;
     }
-
-    /* ─── Stats ────────────────────────────────────────────────── */
     #metrics {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      background: var(--surface-alt);
-      padding-bottom: clamp(56px, 7vw, 96px);
+      background: #06060A;
+      padding-bottom: clamp(64px, 8vw, 112px);
     }
     .metric {
-      padding: clamp(24px, 3vw, 40px) var(--pad) 0;
+      padding: clamp(28px, 3.5vw, 48px) var(--pad) 0;
     }
     .m-value {
       display: block;
-      font-size: clamp(52px, 7vw, 108px);
+      font-size: clamp(56px, 8vw, 120px);
       font-weight: 800;
       letter-spacing: -0.05em;
       line-height: 1;
-      color: var(--text);
+      background: linear-gradient(90deg,
+        rgba(255,255,255,0.95) 0%,
+        rgba(255,255,255,0.45) 40%,
+        rgba(255,255,255,0.95) 55%,
+        rgba(255,255,255,0.45) 100%
+      );
+      background-size: 300% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: stat-shine 4s linear infinite;
     }
     .m-label {
       display: block;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 400;
-      color: var(--muted);
-      margin-top: 16px;
+      color: rgba(255,255,255,0.3);
+      margin-top: 18px;
       line-height: 1.5;
       max-width: 160px;
     }
@@ -1270,12 +1299,19 @@
       background-clip: text;
       animation: siri-text-glow 8s ease-in-out infinite;
     }
+    [data-theme="light"] .writing-hero-title {
+      background: linear-gradient(135deg, #0C0C0A 0%, rgba(110,50,220,0.9) 45%, rgba(40,110,240,0.85) 70%, #0C0C0A 100%);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
     .writing-subscribe-btn {
       display: inline-flex;
       align-items: center;
       gap: 0;
-      background: rgba(255,255,255,0.9);
-      color: #08080F;
+      background: var(--text);
+      color: var(--bg);
       font-family: var(--font);
       font-size: 13px;
       font-weight: 600;
@@ -1295,7 +1331,7 @@
       width: 32px;
       height: 32px;
       border-radius: 50%;
-      background: rgba(0,0,0,0.08);
+      background: rgba(128,128,128,0.15);
       margin-left: 12px;
       font-size: 13px;
       transition: transform 0.4s;
@@ -1431,6 +1467,8 @@
     .ql-value { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.85); }
     .ql-arrow { font-size: 18px; color: rgba(255,255,255,0.4); flex-shrink: 0; transition: color 0.2s; }
     .quick-link:hover .ql-arrow { color: var(--text); }
+    /* about section is always dark — keep arrow white on hover */
+    #about .quick-link:hover .ql-arrow { color: rgba(255,255,255,0.85); }
     .ct-video-panel { position: relative; overflow: hidden; min-height: 500px; }
     .ct-video-panel video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; }
     .engagements { background: transparent; }
@@ -1630,7 +1668,7 @@
 
     /* ─── Podcast Section ──────────────────────────────────────── */
     #podcast {
-      background: #08080E;
+      background: var(--surface);
       position: relative;
       z-index: 1;
     }
@@ -1658,12 +1696,12 @@
       font-weight: 800;
       letter-spacing: -0.04em;
       line-height: 0.94;
-      color: #fff;
+      color: var(--text);
       margin-bottom: 20px;
     }
     .pod-desc {
       font-size: clamp(15px, 1.4vw, 17px);
-      color: rgba(255,255,255,0.4);
+      color: var(--muted);
       line-height: 1.7;
       font-weight: 400;
       max-width: 360px;
@@ -1674,8 +1712,8 @@
       display: inline-flex;
       align-items: center;
       gap: 0;
-      background: #fff;
-      color: #08080E;
+      background: var(--text);
+      color: var(--bg);
       font-size: 13px;
       font-weight: 700;
       padding: 6px 6px 6px 20px;
@@ -1715,25 +1753,30 @@
     /* ─── Theme toggle ──────────────────────────────────────────── */
     .theme-toggle {
       position: fixed;
-      top: 20px;
-      right: 20px;
+      bottom: 28px;
+      right: 28px;
       z-index: 200;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--surface);
-      border: 1px solid var(--rule);
-      color: var(--text);
-      font-size: 15px;
+      background: var(--text);
+      color: var(--bg);
+      padding: 11px 20px 11px 16px;
+      border-radius: 100px;
+      border: none;
+      font-family: var(--font);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
       cursor: pointer;
       display: flex;
       align-items: center;
-      justify-content: center;
-      transition: background 0.3s, color 0.3s, border-color 0.3s;
-      font-family: var(--font);
-      line-height: 1;
+      gap: 9px;
+      box-shadow: 0 4px 28px rgba(0,0,0,0.28), 0 0 0 1px rgba(255,255,255,0.06);
+      transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1), box-shadow 0.3s, background 0.3s;
     }
-    .theme-toggle:hover { background: var(--surface-alt); }
+    .theme-toggle:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 36px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.08);
+    }
+    .theme-toggle .t-icon { font-size: 14px; }
 
     /* ─── Strip eyebrows, labels, dates, counts ─────────────────── */
     .writing-label, .ai-m-tag, .pod-eyebrow, .section-eyebrow,
@@ -1813,7 +1856,10 @@
 <body>
 
   <!-- Theme toggle -->
-  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">○</button>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
+    <span class="t-icon" id="t-icon">◐</span>
+    <span id="t-label">DARK</span>
+  </button>
 
   <!-- Case Study Modal -->
   <div class="cs-modal" id="cs-modal">
@@ -1852,32 +1898,41 @@
   </div>
   <div id="metrics">
     <div class="metric">
-      <span class="m-value">80M+</span>
+      <span class="m-value" data-count="80M+">80M+</span>
       <span class="m-label">People using products I've shaped</span>
       <span class="m-label-short">people reached</span>
     </div>
     <div class="metric">
-      <span class="m-value">$7M</span>
+      <span class="m-value" data-count="$7M">$7M</span>
       <span class="m-label">Revenue in 8 weeks from a 0→1 launch</span>
       <span class="m-label-short">revenue in 8 weeks</span>
     </div>
     <div class="metric">
-      <span class="m-value">150%</span>
+      <span class="m-value" data-count="150%">150%</span>
       <span class="m-label">Subscription growth on Careem Plus</span>
       <span class="m-label-short">subscription growth</span>
     </div>
     <div class="metric">
-      <span class="m-value">18+</span>
+      <span class="m-value" data-count="18+">18+</span>
       <span class="m-label">Years leading product design</span>
       <span class="m-label-short">years leading design</span>
     </div>
   </div>
 
   <!-- Brands -->
-  <section id="brands">
+  <section id="brands" aria-label="Designed for">
     <div class="brands-inner">
-      <p class="brands-label">Designed for</p>
-      <div class="brands-row">
+      <!-- Duplicate for seamless marquee -->
+      <div class="brands-row" aria-hidden="false">
+        <span class="brand-logo-item">Careem</span>
+        <span class="brand-logo-item">Uber</span>
+        <span class="brand-logo-item">Kraken</span>
+        <span class="brand-logo-item">Metro Bank</span>
+        <span class="brand-logo-item">Almosafer</span>
+        <span class="brand-logo-item">Momondo</span>
+        <span class="brand-logo-item">Sopra Steria</span>
+      </div>
+      <div class="brands-row" aria-hidden="true">
         <span class="brand-logo-item">Careem</span>
         <span class="brand-logo-item">Uber</span>
         <span class="brand-logo-item">Kraken</span>
@@ -2163,9 +2218,12 @@
       var btn  = document.getElementById('theme-toggle');
       var stored = localStorage.getItem('jt-theme') ||
                    (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      var lbl  = document.getElementById('t-label');
+      var icon = document.getElementById('t-icon');
       function apply(t) {
         root.setAttribute('data-theme', t);
-        btn.textContent = t === 'dark' ? '○' : '●';
+        lbl.textContent  = t === 'dark' ? 'DARK' : 'LIGHT';
+        icon.textContent = t === 'dark' ? '◐' : '◑';
         localStorage.setItem('jt-theme', t);
       }
       apply(stored);
@@ -2241,6 +2299,43 @@
       });
       renderArticles(items);
     }).catch(renderFeedError);
+
+    // ─── Stat count-up animation ─────────────────────────────────
+    (function() {
+      var statEls = document.querySelectorAll('.m-value[data-count]');
+      if (!statEls.length) return;
+      function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+      function animateStat(el) {
+        if (el._animated) return;
+        el._animated = true;
+        var raw     = el.getAttribute('data-count');
+        // Extract numeric part and surrounding prefix/suffix
+        var match   = raw.match(/^([^\d]*)(\d+(?:\.\d+)?)([^\d]*)$/);
+        if (!match) return; // non-numeric format, skip
+        var prefix  = match[1];
+        var target  = parseFloat(match[2]);
+        var suffix  = match[3];
+        var isInt   = Number.isInteger(target);
+        var dur     = 1600;
+        var start   = null;
+        function step(ts) {
+          if (!start) start = ts;
+          var p   = Math.min((ts - start) / dur, 1);
+          var val = target * easeOut(p);
+          var str = isInt ? Math.round(val).toString() : val.toFixed(1);
+          el.textContent = prefix + str + suffix;
+          if (p < 1) requestAnimationFrame(step);
+          else el.textContent = raw; // snap to exact final value
+        }
+        requestAnimationFrame(step);
+      }
+      var countObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) animateStat(entry.target);
+        });
+      }, { threshold: 0.4 });
+      statEls.forEach(function(el) { countObserver.observe(el); });
+    })();
 
     // Reveal on scroll
     var reveals = document.querySelectorAll('.reveal');
