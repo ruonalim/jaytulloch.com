@@ -1739,7 +1739,8 @@
     .pod-right {
       position: relative;
       overflow: hidden;
-      min-height: 400px;
+      aspect-ratio: 16/9;
+      min-height: 0;
     }
     .pod-right iframe {
       position: absolute;
@@ -1826,8 +1827,8 @@
       .ce-role { white-space: normal; }
       .pod-inner { grid-template-columns: 1fr; }
       .pod-left { order: 2; }
-      .pod-right { order: 1; min-height: clamp(240px, 55vw, 400px); }
-      .pod-right iframe { position: static; width: 100%; aspect-ratio: 16/9; height: auto; }
+      .pod-right { order: 1; aspect-ratio: 16/9; min-height: 0; }
+      .pod-right iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
       .contact-hero-wrap { grid-template-columns: 1fr; min-height: auto; }
       .ct-hero-left { order: 2; }
       .ct-video-panel { order: 1; min-height: clamp(280px, 55vw, 420px); }
