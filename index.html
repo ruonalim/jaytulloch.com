@@ -40,7 +40,7 @@
       --muted:  #6E6E73;
       --subtle: #86868B;
       --rule:   rgba(0,0,0,0.1);
-      --pad:    clamp(24px, 5vw, 80px);
+      --pad:    clamp(20px, 4vw, 64px);
       --font:   'Manrope', -apple-system, sans-serif;
       --radius: 16px;
       --shadow: 0 2px 16px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04);
@@ -115,10 +115,10 @@
       pointer-events: none;
     }
     .hero-headline {
-      font-size: clamp(64px, 9.5vw, 148px);
-      line-height: 0.92;
-      letter-spacing: -0.045em;
-      margin-bottom: clamp(20px, 2.5vw, 32px);
+      font-size: clamp(44px, 6.5vw, 96px);
+      line-height: 0.94;
+      letter-spacing: -0.04em;
+      margin-bottom: clamp(16px, 2vw, 24px);
     }
     .hl-light {
       font-weight: 300;
@@ -251,8 +251,8 @@
     .number-cell:last-child { }
     .n-value {
       display: block;
-      font-size: clamp(36px, 4.5vw, 64px);
-      font-weight: 800;
+      font-size: clamp(28px, 3.5vw, 48px);
+      font-weight: 700;
       letter-spacing: -0.03em;
       line-height: 1;
       color: var(--text);
@@ -278,15 +278,15 @@
       background: var(--white);
     }
     .intro-statement {
-      font-size: clamp(24px, 3vw, 40px);
-      font-weight: 700;
+      font-size: clamp(18px, 2.2vw, 28px);
+      font-weight: 600;
       letter-spacing: -0.02em;
-      line-height: 1.2;
-      padding: clamp(48px, 7vw, 96px) var(--pad);
+      line-height: 1.3;
+      padding: clamp(40px, 5vw, 72px) var(--pad);
       color: var(--text);
     }
     .intro-body {
-      padding: clamp(48px, 7vw, 96px) var(--pad);
+      padding: clamp(40px, 5vw, 72px) var(--pad);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -304,14 +304,14 @@
       display: flex;
       align-items: baseline;
       justify-content: space-between;
-      padding: clamp(64px, 9vw, 120px) var(--pad) clamp(32px, 4vw, 52px);
+      padding: clamp(48px, 6vw, 88px) var(--pad) clamp(24px, 3vw, 40px);
       background: #fff;
     }
     .section-title {
-      font-size: clamp(48px, 8vw, 112px);
-      font-weight: 800;
-      letter-spacing: -0.045em;
-      line-height: 0.92;
+      font-size: clamp(32px, 5vw, 72px);
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      line-height: 0.95;
       color: var(--text);
     }
     .section-count {
@@ -333,10 +333,10 @@
     /* ─── Work List ─────────────────────────────────────────────── */
     .work-row {
       display: grid;
-      grid-template-columns: 64px 1fr auto;
+      grid-template-columns: 56px 1fr auto;
       align-items: start;
-      gap: 0 clamp(20px, 3vw, 40px);
-      padding: clamp(36px, 4.5vw, 64px) var(--pad);
+      gap: 0 clamp(16px, 2.5vw, 32px);
+      padding: clamp(28px, 3.5vw, 48px) var(--pad);
       background: #fff;
       cursor: pointer;
       position: relative;
@@ -387,12 +387,12 @@
       margin-bottom: 10px;
     }
     .work-title {
-      font-size: clamp(22px, 3vw, 44px);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      line-height: 1.05;
+      font-size: clamp(18px, 2.2vw, 32px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
       color: var(--text);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     .work-desc {
       font-size: 14px;
@@ -469,8 +469,8 @@
       justify-content: flex-end;
     }
     .ai-headline {
-      font-size: clamp(32px, 4vw, 52px);
-      font-weight: 800;
+      font-size: clamp(24px, 3vw, 40px);
+      font-weight: 700;
       line-height: 1.05;
       letter-spacing: -0.03em;
       margin-bottom: 24px;
@@ -758,7 +758,7 @@
       color: #fff;
     }
     .about-right {
-      padding: clamp(56px, 8vw, 108px) var(--pad);
+      padding: clamp(40px, 5vw, 72px) var(--pad);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -772,12 +772,12 @@
     .about-bio p + p { margin-top: 22px; }
     /* ─── About section title ──────────────────────────────────── */
     .about-section-title {
-      font-size: clamp(40px, 6vw, 80px);
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 0.92;
+      font-size: clamp(28px, 4vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 0.95;
       color: #fff;
-      margin-bottom: clamp(32px, 4vw, 52px);
+      margin-bottom: clamp(24px, 3vw, 40px);
     }
 
     /* ─── Section bar ───────────────────────────────────────────── */
@@ -856,10 +856,10 @@
       grid-template-columns: 1fr 1fr;
     }
     .pod-heading {
-      font-size: clamp(40px, 5.5vw, 80px);
-      font-weight: 800;
+      font-size: clamp(28px, 3.8vw, 56px);
+      font-weight: 700;
       letter-spacing: -0.03em;
-      line-height: 1.0;
+      line-height: 1.05;
       padding: clamp(40px, 5vw, 72px) var(--pad);
     }
     .pod-header-right {
@@ -1034,12 +1034,12 @@
     /* ─── Dark section header ──────────────────────────────────── */
     .dark-section-header {
       background: #06060A;
-      padding: clamp(56px, 7vw, 96px) var(--pad) clamp(16px, 2vw, 28px);
+      padding: clamp(40px, 5vw, 72px) var(--pad) clamp(12px, 1.5vw, 20px);
     }
     .dark-section-title {
-      font-size: clamp(40px, 6vw, 80px);
-      font-weight: 800;
-      letter-spacing: -0.04em;
+      font-size: clamp(28px, 4vw, 56px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
       color: rgba(255,255,255,0.88);
       line-height: 0.94;
     }
@@ -1058,8 +1058,8 @@
     .metric:last-child { }
     .m-value {
       display: block;
-      font-size: clamp(52px, 7.5vw, 104px);
-      font-weight: 800;
+      font-size: clamp(36px, 5vw, 72px);
+      font-weight: 700;
       letter-spacing: -0.04em;
       line-height: 1;
       color: #ffffff;
@@ -1096,7 +1096,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       background: #06060A;
-      padding: clamp(56px, 7vw, 100px) var(--pad);
+      padding: clamp(40px, 5vw, 72px) var(--pad);
       gap: clamp(32px, 5vw, 80px);
       color: #fff;
       position: relative;
@@ -1152,9 +1152,9 @@
       display: block;
     }
     .ai-m-headline {
-      font-size: clamp(36px, 5.5vw, 80px);
-      font-weight: 800;
-      letter-spacing: -0.04em;
+      font-size: clamp(26px, 3.5vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
       line-height: 0.94;
       color: #fff;
     }
@@ -1204,7 +1204,7 @@
       align-items: stretch;
     }
     .writing-combined-left {
-      padding: clamp(56px, 7vw, 96px) var(--pad);
+      padding: clamp(40px, 5vw, 72px) var(--pad);
       display: flex;
       flex-direction: column;
       gap: clamp(24px, 3vw, 40px);
@@ -1218,7 +1218,7 @@
       color: var(--subtle);
     }
     .writing-combined-right {
-      padding: clamp(56px, 7vw, 96px) var(--pad);
+      padding: clamp(40px, 5vw, 72px) var(--pad);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -1232,10 +1232,10 @@
       margin-bottom: 20px;
     }
     .writing-hero-title {
-      font-size: clamp(52px, 8vw, 120px);
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 0.94;
+      font-size: clamp(32px, 5vw, 72px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 0.96;
       background: linear-gradient(135deg, #1D1D1F 0%, rgba(130,80,255,0.95) 40%, rgba(80,140,255,0.9) 65%, #1D1D1F 100%);
       background-size: 300% 300%;
       -webkit-background-clip: text;
@@ -1344,17 +1344,17 @@
       background: #fff;
     }
     .ct-hero-left {
-      padding: clamp(64px, 9vw, 120px) var(--pad) clamp(48px, 5vw, 72px);
+      padding: clamp(48px, 6vw, 88px) var(--pad) clamp(40px, 4vw, 60px);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
     .ct-hero-title {
-      font-size: clamp(52px, 7.5vw, 116px);
-      font-weight: 800;
-      letter-spacing: -0.045em;
-      line-height: 0.92;
-      margin-bottom: 24px;
+      font-size: clamp(36px, 5vw, 80px);
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      line-height: 0.95;
+      margin-bottom: 20px;
     }
     .ct-hero-title span.light { color: var(--muted); font-weight: 300; }
     .ct-hero-desc {
@@ -1714,8 +1714,8 @@
       .ai-m-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
       .pod-header { grid-template-columns: 1fr; }
       .pod-player-wrap { grid-template-columns: 1fr; }
-      .work-row { padding: 36px 20px; }
-      .work-title { font-size: clamp(18px, 5vw, 28px); }
+      .work-row { padding: 24px 20px; }
+      .work-title { font-size: clamp(16px, 4.5vw, 24px); }
       .ai-proj-row { grid-template-columns: 40px 1fr; }
       .ai-proj-meta { display: none; }
       .ai-proj-body { padding: 20px 16px; }
@@ -1773,7 +1773,7 @@
   <section id="hero">
     <div class="hero-video-wrap">
       <video autoplay muted loop playsinline>
-        <source src="./hero-reel-3.mp4" type="video/mp4" />
+        <source src="./hero-reel-4.mp4" type="video/mp4" />
       </video>
     </div>
     <div class="hero-text">
