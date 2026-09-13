@@ -741,7 +741,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       background: #000;
-      min-height: 70vh;
+      min-height: 90vh;
     }
     .about-left {
       position: relative;
@@ -773,7 +773,28 @@
       padding: clamp(40px, 5vw, 72px) var(--pad);
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: space-between;
+      gap: clamp(32px, 5vw, 56px);
+    }
+    .about-contact {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: clamp(28px, 3.5vw, 44px);
+    }
+    .about-contact-title {
+      font-size: clamp(22px, 2.8vw, 40px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 0.96;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+    .about-contact-title .light { color: rgba(255,255,255,0.3); font-weight: 300; }
+    .about-contact-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.42);
+      line-height: 1.7;
+      margin-bottom: 24px;
+      max-width: 400px;
     }
     .about-bio p {
       font-size: clamp(15px, 1.4vw, 18px);
@@ -1932,11 +1953,54 @@
       </div>
     </div>
     <div class="about-right reveal reveal-delay-1">
-      <h2 class="about-section-title">About</h2>
-      <div class="about-bio">
-        <p>I started building websites at 15. Got a BSc in Product Design from Brunel, then an MBA with a focus on Digital Banking from Cranfield. Somewhere in between, I stopped being a designer who understood business and became a business leader who happens to think in systems, interfaces, and user behaviour.</p>
-        <p>I've written production code. I've run design teams of 25+. I've presented to exec boards and I've pushed pixels at 2am. Front-end engineer, IC designer, team lead, design director, co-founder. It's the reason I can walk into any room, at any altitude, and add value immediately.</p>
-        <p>AI is embedded across my entire workflow. The taste is mine. The throughput is multiplied.</p>
+      <div>
+        <h2 class="about-section-title">About</h2>
+        <div class="about-bio">
+          <p>I started building websites at 15. Got a BSc in Product Design from Brunel, then an MBA with a focus on Digital Banking from Cranfield. Somewhere in between, I stopped being a designer who understood business and became a business leader who happens to think in systems, interfaces, and user behaviour.</p>
+          <p>I've written production code. I've run design teams of 25+. I've presented to exec boards and I've pushed pixels at 2am. Front-end engineer, IC designer, team lead, design director, co-founder. It's the reason I can walk into any room, at any altitude, and add value immediately.</p>
+          <p>AI is embedded across my entire workflow. The taste is mine. The throughput is multiplied.</p>
+        </div>
+      </div>
+      <div class="about-contact" id="contact">
+        <h3 class="about-contact-title">Let's Build<br/><span class="light">Together.</span></h3>
+        <p class="about-contact-desc">I work with founders, CPOs, and product teams that are serious about design as a business lever, not just a polish layer. Based in Dubai, available globally.</p>
+        <div class="quick-links">
+          <div class="quick-link" onclick="copyEmail()" style="cursor:pointer;">
+            <div>
+              <p class="ql-label">Email</p>
+              <p class="ql-value" id="email-text">Copy address</p>
+            </div>
+            <span class="ql-arrow" id="copy-arrow">↗</span>
+          </div>
+          <a href="https://www.linkedin.com/in/jaytulloch" target="_blank" class="quick-link">
+            <div>
+              <p class="ql-label">LinkedIn</p>
+              <p class="ql-value">linkedin.com/in/jaytulloch</p>
+            </div>
+            <span class="ql-arrow">↗</span>
+          </a>
+          <a href="https://x.com/mrjaytulloch" target="_blank" class="quick-link">
+            <div>
+              <p class="ql-label">X / Twitter</p>
+              <p class="ql-value">@mrjaytulloch</p>
+            </div>
+            <span class="ql-arrow">↗</span>
+          </a>
+          <a href="https://youtube.com/@beyondtheinterface" target="_blank" class="quick-link">
+            <div>
+              <p class="ql-label">YouTube</p>
+              <p class="ql-value">@beyondtheinterface</p>
+            </div>
+            <span class="ql-arrow">↗</span>
+          </a>
+          <a href="https://www.beyond-the-interface.com/" target="_blank" class="quick-link">
+            <div>
+              <p class="ql-label">Podcast</p>
+              <p class="ql-value">Beyond the Interface</p>
+            </div>
+            <span class="ql-arrow">↗</span>
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -1986,57 +2050,6 @@
     </div>
   </section>
 
-  <!-- Contact -->
-  <section id="contact">
-    <div class="contact-hero-wrap">
-      <div class="ct-hero-left">
-        <div>
-          <h2 class="ct-hero-title">Let's Build<br/><span class="light">Together.</span></h2>
-          <p class="ct-hero-desc">I work with founders, CPOs, and product teams that are serious about design as a business lever, not just a polish layer. Based in Dubai, available globally.</p>
-        </div>
-        <div class="ct-contact-block">
-          <div class="quick-links">
-            <div class="quick-link" onclick="copyEmail()" style="cursor:pointer;">
-              <div>
-                <p class="ql-label">Email</p>
-                <p class="ql-value" id="email-text">Copy address</p>
-              </div>
-              <span class="ql-arrow" id="copy-arrow">↗</span>
-            </div>
-            <a href="https://www.linkedin.com/in/jaytulloch" target="_blank" class="quick-link">
-              <div>
-                <p class="ql-label">LinkedIn</p>
-                <p class="ql-value">linkedin.com/in/jaytulloch</p>
-              </div>
-              <span class="ql-arrow">↗</span>
-            </a>
-            <a href="https://x.com/mrjaytulloch" target="_blank" class="quick-link">
-              <div>
-                <p class="ql-label">X / Twitter</p>
-                <p class="ql-value">@mrjaytulloch</p>
-              </div>
-              <span class="ql-arrow">↗</span>
-            </a>
-            <a href="https://youtube.com/@beyondtheinterface" target="_blank" class="quick-link">
-              <div>
-                <p class="ql-label">YouTube</p>
-                <p class="ql-value">@beyondtheinterface</p>
-              </div>
-              <span class="ql-arrow">↗</span>
-            </a>
-            <a href="https://www.beyond-the-interface.com/" target="_blank" class="quick-link">
-              <div>
-                <p class="ql-label">Podcast</p>
-                <p class="ql-value">Beyond the Interface</p>
-              </div>
-              <span class="ql-arrow">↗</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </section>
 
   <!-- Footer -->
   <footer>
