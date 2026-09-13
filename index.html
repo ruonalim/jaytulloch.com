@@ -728,7 +728,7 @@
     #about {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      background: #fff;
+      background: #000;
       min-height: 70vh;
     }
     .about-left {
@@ -766,7 +766,7 @@
     .about-bio p {
       font-size: clamp(15px, 1.4vw, 18px);
       line-height: 1.75;
-      color: var(--muted);
+      color: rgba(255,255,255,0.5);
       font-weight: 400;
     }
     .about-bio p + p { margin-top: 22px; }
@@ -776,7 +776,7 @@
       font-weight: 800;
       letter-spacing: -0.04em;
       line-height: 0.92;
-      color: var(--text);
+      color: #fff;
       margin-bottom: clamp(32px, 4vw, 52px);
     }
 
@@ -837,16 +837,16 @@
     }
     .cr-co {
       font-weight: 700;
-      color: var(--text);
+      color: rgba(255,255,255,0.88);
     }
     .cr-role {
-      color: var(--muted);
+      color: rgba(255,255,255,0.45);
       font-weight: 400;
     }
     .cr-year {
       font-size: 12px;
       font-weight: 500;
-      color: var(--subtle);
+      color: rgba(255,255,255,0.3);
       text-align: right;
     }
 
@@ -1339,9 +1339,8 @@
       background: #fff;
     }
     .contact-hero-wrap {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 80vh;
+      display: block;
+      min-height: auto;
       background: #fff;
     }
     .ct-hero-left {
@@ -2019,11 +2018,6 @@
             </a>
           </div>
         </div>
-      </div>
-      <div class="ct-video-panel">
-        <video class="lazy-video" muted loop playsinline preload="none">
-          <source src="./jay-contact-4.mp4" type="video/mp4">
-        </video>
       </div>
     </div>
 
