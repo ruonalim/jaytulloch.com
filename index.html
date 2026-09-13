@@ -32,18 +32,37 @@
   <style>
     /* ─── Reset ─────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    /* ─── Theme tokens ──────────────────────────────────────────── */
     :root {
-      --bg:     #08080F;
-      --white:  #0D0D18;
-      --black:  #1D1D1F;
-      --text:   #ECEAF5;
-      --muted:  rgba(236,234,245,0.5);
-      --subtle: rgba(236,234,245,0.28);
-      --rule:   rgba(255,255,255,0.07);
       --pad:    clamp(20px, 4vw, 64px);
       --font:   'Manrope', -apple-system, sans-serif;
       --radius: 16px;
-      --shadow: 0 2px 16px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04);
+    }
+    /* Dark (default) */
+    :root, [data-theme="dark"] {
+      --bg:          #08080F;
+      --surface:     #0D0D18;
+      --surface-alt: #06060A;
+      --text:        #ECEAF5;
+      --muted:       rgba(236,234,245,0.45);
+      --subtle:      rgba(236,234,245,0.25);
+      --rule:        rgba(255,255,255,0.06);
+      --tint:        rgba(255,255,255,0.03);
+      --white:       #0D0D18;
+      --black:       #1D1D1F;
+    }
+    /* Light */
+    [data-theme="light"] {
+      --bg:          #F7F6F2;
+      --surface:     #FFFFFF;
+      --surface-alt: #EDECEA;
+      --text:        #0C0C0A;
+      --muted:       rgba(12,12,10,0.45);
+      --subtle:      rgba(12,12,10,0.25);
+      --rule:        rgba(0,0,0,0.07);
+      --tint:        rgba(0,0,0,0.03);
+      --white:       #FFFFFF;
+      --black:       #E8E7E3;
     }
     html { scroll-behavior: smooth; }
     body {
@@ -344,7 +363,7 @@
       text-decoration: none;
       color: inherit;
     }
-    .work-row:hover { background: rgba(255,255,255,0.03); }
+    .work-row:hover { background: var(--tint); }
     .work-row::before {
       content: '';
       position: absolute;
@@ -801,15 +820,15 @@
 
     /* ─── Brands ────────────────────────────────────────────────── */
     #brands {
-      background: #06060A;
+      background: var(--surface-alt);
       position: relative;
       z-index: 1;
     }
     .brands-inner {
-      padding: clamp(40px, 5vw, 64px) var(--pad);
+      padding: clamp(40px, 5vw, 72px) var(--pad);
       display: flex;
       align-items: center;
-      gap: clamp(32px, 5vw, 64px);
+      gap: clamp(36px, 5vw, 72px);
       flex-wrap: wrap;
     }
     .brands-label {
@@ -817,27 +836,27 @@
       font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.22);
+      color: var(--subtle);
       flex-shrink: 0;
       white-space: nowrap;
     }
     .brands-row {
       display: flex;
       align-items: center;
-      gap: clamp(24px, 4vw, 48px);
+      gap: clamp(28px, 4.5vw, 60px);
       flex-wrap: wrap;
     }
     .brand-logo-item {
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.32);
+      font-size: clamp(16px, 1.8vw, 22px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      text-transform: none;
+      color: var(--muted);
       white-space: nowrap;
-      transition: color 0.25s;
+      transition: color 0.3s;
       cursor: default;
     }
-    .brand-logo-item:hover { color: rgba(255,255,255,0.72); }
+    .brand-logo-item:hover { color: var(--text); }
     .about-career { margin-top: 40px; }
     .career-row {
       display: grid;
@@ -1045,14 +1064,14 @@
 
     /* ─── Dark section header ──────────────────────────────────── */
     .dark-section-header {
-      background: #06060A;
-      padding: clamp(40px, 5vw, 72px) var(--pad) clamp(12px, 1.5vw, 20px);
+      background: var(--surface-alt);
+      padding: clamp(48px, 6vw, 80px) var(--pad) clamp(16px, 2vw, 28px);
     }
     .dark-section-title {
       font-size: clamp(28px, 4vw, 56px);
       font-weight: 700;
       letter-spacing: -0.03em;
-      color: rgba(255,255,255,0.88);
+      color: var(--text);
       line-height: 0.94;
     }
 
@@ -1060,29 +1079,28 @@
     #metrics {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      background: #06060A;
-      padding-bottom: clamp(40px, 5vw, 72px);
+      background: var(--surface-alt);
+      padding-bottom: clamp(56px, 7vw, 96px);
     }
     .metric {
-      padding: clamp(32px, 4vw, 52px) var(--pad) 0;
+      padding: clamp(24px, 3vw, 40px) var(--pad) 0;
     }
-    .metric:last-child { }
     .m-value {
       display: block;
-      font-size: clamp(36px, 5vw, 72px);
-      font-weight: 700;
-      letter-spacing: -0.04em;
+      font-size: clamp(52px, 7vw, 108px);
+      font-weight: 800;
+      letter-spacing: -0.05em;
       line-height: 1;
-      color: #ffffff;
+      color: var(--text);
     }
     .m-label {
       display: block;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 400;
-      color: rgba(255,255,255,0.32);
-      margin-top: 14px;
+      color: var(--muted);
+      margin-top: 16px;
       line-height: 1.5;
-      max-width: 140px;
+      max-width: 160px;
     }
     .m-label-short { display: none; }
 
@@ -1694,6 +1712,29 @@
       display: block;
     }
 
+    /* ─── Theme toggle ──────────────────────────────────────────── */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 200;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--rule);
+      color: var(--text);
+      font-size: 15px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s, color 0.3s, border-color 0.3s;
+      font-family: var(--font);
+      line-height: 1;
+    }
+    .theme-toggle:hover { background: var(--surface-alt); }
+
     /* ─── Strip eyebrows, labels, dates, counts ─────────────────── */
     .writing-label, .ai-m-tag, .pod-eyebrow, .section-eyebrow,
     .writing-eyebrow, .work-num, .work-co, .section-count,
@@ -1703,14 +1744,14 @@
 
     /* ─── Responsive ────────────────────────────────────────────── */
     @media (max-width: 900px) {
-      /* Mobile hero: flow layout — video on top, text directly below */
-      #hero { height: auto; min-height: 100svh; display: flex; flex-direction: column; overflow: visible; }
+      /* Mobile hero: flow layout — video on top, text directly below, no min-height gap */
+      #hero { height: auto; min-height: 0; display: flex; flex-direction: column; overflow: visible; }
       .hero-video-wrap { position: relative; inset: auto; width: 100%; height: 72vw; flex-shrink: 0; overflow: hidden; }
       .hero-video-wrap video { object-fit: cover; object-position: center 20%; }
       .hero-video-wrap::before {
         background: linear-gradient(to top, #08080F 0%, rgba(8,8,15,0.65) 18%, transparent 48%);
       }
-      .hero-text { position: relative; inset: auto; flex: 1; justify-content: flex-start; padding-top: 32px; padding-bottom: max(48px, env(safe-area-inset-bottom, 0px) + 32px); }
+      .hero-text { position: relative; inset: auto; flex: none; justify-content: flex-start; padding-top: 28px; padding-bottom: clamp(36px, 8vw, 56px); }
       .hero-headline { font-size: clamp(40px, 11vw, 80px); }
       .hero-bottom { flex-direction: column; align-items: flex-start; gap: 20px; }
       .hero-scroll { display: none; }
@@ -1733,7 +1774,9 @@
       .career-row { grid-template-columns: 1fr 1fr; }
       .cr-year { text-align: left; }
       .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
-      #metrics { grid-template-columns: repeat(2, 1fr); }
+      #metrics { grid-template-columns: repeat(2, 1fr); padding-bottom: clamp(40px, 8vw, 64px); }
+      .m-value { font-size: clamp(44px, 14vw, 80px); }
+      .m-label { font-size: 12px; margin-top: 10px; }
       .career-list { grid-template-columns: 1fr; }
       .career-entry { grid-template-columns: 44px 1fr auto; gap: 0 12px; }
       .ce-role { white-space: normal; }
@@ -1768,6 +1811,9 @@
   </style>
 </head>
 <body>
+
+  <!-- Theme toggle -->
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">○</button>
 
   <!-- Case Study Modal -->
   <div class="cs-modal" id="cs-modal">
@@ -2110,6 +2156,23 @@
         prompt('Copy email:', addr2);
       });
     }
+
+    // ─── Theme Toggle ────────────────────────────────────────────
+    (function() {
+      var root = document.documentElement;
+      var btn  = document.getElementById('theme-toggle');
+      var stored = localStorage.getItem('jt-theme') ||
+                   (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      function apply(t) {
+        root.setAttribute('data-theme', t);
+        btn.textContent = t === 'dark' ? '○' : '●';
+        localStorage.setItem('jt-theme', t);
+      }
+      apply(stored);
+      btn.addEventListener('click', function() {
+        apply(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+      });
+    })();
 
     // ─── RSS Feed ─────────────────────────────────────────────────
     var FEED_URL = '/api/feed';
