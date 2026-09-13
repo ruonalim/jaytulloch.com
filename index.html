@@ -211,8 +211,6 @@
       align-items: center;
       height: 44px;
       background: rgba(255,255,255,0.03);
-      border-top: 1px solid rgba(255,255,255,0.06);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
     .ticker-label {
       flex-shrink: 0;
@@ -249,9 +247,7 @@
     }
     .number-cell {
       padding: clamp(28px, 4vw, 48px) var(--pad);
-      border-right: 1px solid rgba(255,255,255,0.06);
     }
-    .number-cell:last-child { border-right: none; }
     .n-value {
       display: block;
       font-size: clamp(28px, 3.5vw, 48px);
@@ -279,8 +275,6 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       background: transparent;
-      border-top: 1px solid rgba(255,255,255,0.07);
-      border-bottom: 1px solid rgba(255,255,255,0.07);
     }
     .intro-statement {
       font-size: clamp(18px, 2.2vw, 28px);
@@ -311,7 +305,6 @@
       justify-content: space-between;
       padding: clamp(48px, 6vw, 88px) var(--pad) clamp(24px, 3vw, 40px);
       background: transparent;
-      border-top: 1px solid rgba(255,255,255,0.07);
     }
     .section-title {
       font-size: clamp(32px, 5vw, 72px);
@@ -344,7 +337,6 @@
       gap: 0 clamp(16px, 2.5vw, 32px);
       padding: clamp(28px, 3.5vw, 48px) var(--pad);
       background: transparent;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
       cursor: pointer;
       position: relative;
       overflow: hidden;
@@ -468,7 +460,6 @@
     }
     .ai-left {
       padding: clamp(40px, 5vw, 64px) var(--pad);
-      border-right: 1px solid rgba(255,255,255,0.08);
       position: relative;
       z-index: 1;
       display: flex;
@@ -516,12 +507,7 @@
     }
     .ai-stat {
       padding: 20px 24px;
-      border-right: 1px solid rgba(255,255,255,0.08);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
-    .ai-stat:nth-child(2) { border-right: none; }
-    .ai-stat:nth-child(3) { border-bottom: none; }
-    .ai-stat:nth-child(4) { border-bottom: none; border-right: none; }
     .ai-stat-value {
       font-size: clamp(32px, 3.5vw, 44px);
       font-weight: 800;
@@ -598,7 +584,6 @@
     /* ─── Testimonials ──────────────────────────────────────────── */
     #testimonials {
       background: transparent;
-      border-top: 1px solid rgba(255,255,255,0.07);
     }
     .t-header {
       padding: clamp(48px, 6vw, 80px) var(--pad) clamp(32px, 4vw, 48px);
@@ -621,7 +606,6 @@
       padding: clamp(32px, 4vw, 56px) var(--pad);
       display: block;
       background: transparent;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
       transition: background 0.25s;
     }
     .t-quote {
@@ -663,8 +647,6 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       background: transparent;
-      border-top: 1px solid rgba(255,255,255,0.07);
-      border-bottom: 1px solid rgba(255,255,255,0.07);
     }
     .lead-left {
       padding: clamp(48px, 6vw, 80px) var(--pad);
@@ -713,7 +695,6 @@
       grid-template-columns: 40px 1fr;
       gap: 20px;
       padding: 28px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
     .lp-num {
       font-size: 13px;
@@ -777,7 +758,6 @@
       gap: clamp(32px, 5vw, 56px);
     }
     .about-contact {
-      border-top: 1px solid rgba(255,255,255,0.08);
       padding-top: clamp(28px, 3.5vw, 44px);
     }
     .about-contact-title {
@@ -822,7 +802,6 @@
     /* ─── Brands ────────────────────────────────────────────────── */
     #brands {
       background: #06060A;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
       position: relative;
       z-index: 1;
     }
@@ -966,7 +945,6 @@
     footer {
       background: transparent;
       padding: clamp(36px, 5vw, 64px) var(--pad);
-      border-top: 1px solid rgba(255,255,255,0.07);
     }
     .footer-top {
       margin-bottom: 32px;
@@ -1083,7 +1061,6 @@
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       background: #06060A;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
       padding-bottom: clamp(40px, 5vw, 72px);
     }
     .metric {
@@ -1206,9 +1183,7 @@
       justify-content: space-between;
       gap: 24px;
       padding: 20px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
     }
-    .ai-milestone:first-child { border-top: 1px solid rgba(255,255,255,0.07); }
     .ai-milestone-title {
       font-size: clamp(15px, 1.5vw, 18px);
       font-weight: 600;
@@ -1358,7 +1333,7 @@
     .error-state { padding: clamp(40px,5vw,80px) var(--pad); text-align: center; color: var(--muted); background: transparent; }
     .error-state h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
     .error-state a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
-    .subscribe-cta { background: var(--black); color: #fff; padding: clamp(64px, 8vw, 112px) var(--pad); border-top: 1px solid rgba(255,255,255,0.08); }
+    .subscribe-cta { background: var(--black); color: #fff; padding: clamp(64px, 8vw, 112px) var(--pad); }
     .subscribe-cta-inner { display: grid; grid-template-columns: 1fr auto; gap: 60px; align-items: center; }
     .subscribe-cta h2 { font-size: clamp(36px, 5vw, 72px); font-weight: 800; letter-spacing: -0.04em; line-height: 1.0; margin-bottom: 16px; }
     .subscribe-cta p { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.65; max-width: 440px; }
@@ -1430,11 +1405,9 @@
       align-items: center;
       justify-content: space-between;
       padding: 18px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
       cursor: pointer;
       transition: padding 0.45s cubic-bezier(0.32, 0.72, 0, 1), color 0.3s;
     }
-    .quick-link:first-child { border-top: 1px solid rgba(255,255,255,0.08); }
     .quick-link:hover { padding-left: 10px; }
     .ql-label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 3px; }
     .ql-value { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.85); }
@@ -1457,7 +1430,7 @@
     .wyg-heading { font-size: clamp(36px, 5vw, 60px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.0; position: sticky; top: 72px; }
     .wyg-heading span { display: block; color: var(--muted); font-weight: 300; }
     .wyg-list-col { }
-    .wyg-item { display: grid; grid-template-columns: 52px 1fr; gap: 20px; align-items: start; padding: 28px var(--pad); transition: background 0.2s; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .wyg-item { display: grid; grid-template-columns: 52px 1fr; gap: 20px; align-items: start; padding: 28px var(--pad); transition: background 0.2s; }
     .wyg-num { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--subtle); padding-top: 3px; }
     .wyg-item h4 { font-size: 14px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 6px; }
     .wyg-item p { font-size: 13px; color: var(--muted); line-height: 1.7; font-weight: 400; }
@@ -1479,7 +1452,6 @@
       align-items: center;
       padding: clamp(28px, 3.5vw, 48px) var(--pad);
       background: transparent;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
       flex: 1;
       transition: background 0.2s;
     }
@@ -1569,7 +1541,6 @@
       align-items: center;
       justify-content: space-between;
       padding: clamp(20px, 2.5vw, 32px) var(--pad);
-      border-bottom: 1px solid rgba(255,255,255,0.07);
     }
     .career-eyebrow {
       font-size: 10px;
@@ -1594,7 +1565,6 @@
       align-items: center;
       gap: 0 16px;
       padding: clamp(14px, 1.6vw, 20px) var(--pad);
-      border-bottom: 1px solid rgba(255,255,255,0.05);
     }
     .ce-year {
       font-size: 11px;
@@ -1726,28 +1696,26 @@
 
     /* ─── Responsive ────────────────────────────────────────────── */
     @media (max-width: 900px) {
-      /* Video: contain so full landscape shows flush at top with no cropping */
-      .hero-video-wrap video {
-        object-fit: contain;
-        object-position: center top;
-      }
+      /* Mobile hero: flow layout — video on top, text directly below */
+      #hero { height: auto; min-height: 100svh; display: flex; flex-direction: column; overflow: visible; }
+      .hero-video-wrap { position: relative; inset: auto; width: 100%; height: 72vw; flex-shrink: 0; overflow: hidden; }
+      .hero-video-wrap video { object-fit: cover; object-position: center 20%; }
       .hero-video-wrap::before {
-        background:
-          linear-gradient(to top, rgba(6,6,10,0.88) 0%, rgba(6,6,10,0.3) 50%, transparent 100%);
+        background: linear-gradient(to top, #08080F 0%, rgba(8,8,15,0.65) 18%, transparent 48%);
       }
-      .hero-headline { font-size: clamp(48px, 12vw, 88px); }
+      .hero-text { position: relative; inset: auto; flex: 1; justify-content: flex-start; padding-top: 32px; padding-bottom: max(48px, env(safe-area-inset-bottom, 0px) + 32px); }
+      .hero-headline { font-size: clamp(40px, 11vw, 80px); }
       .hero-bottom { flex-direction: column; align-items: flex-start; gap: 20px; }
       .hero-scroll { display: none; }
       #numbers { grid-template-columns: repeat(2, 1fr); }
       #intro { grid-template-columns: 1fr; }
       #ai-authority { grid-template-columns: 1fr; }
-      .ai-left { border-bottom: 1px solid rgba(255,255,255,0.1); }
       .t-grid { grid-template-columns: 1fr; }
       #leadership { grid-template-columns: 1fr; }
       #about { grid-template-columns: 1fr; }
       .about-left { min-height: 360px; }
       #ai { grid-template-columns: 1fr; }
-      .ai-m-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+      .ai-m-left { border: none; }
       .pod-header { grid-template-columns: 1fr; }
       .pod-player-wrap { grid-template-columns: 1fr; }
       .work-row { padding: 24px 20px; }
@@ -1776,7 +1744,6 @@
       .writing-header-inner { grid-template-columns: 1fr; }
       .writing-header-sub { text-align: left; max-width: none; }
       .writing-combined { grid-template-columns: 1fr; }
-      .writing-combined-left { border-right: none; }
 
       .featured-inner { grid-template-columns: 1fr; gap: 24px; }
       .featured-arrow { display: none; }
@@ -1787,8 +1754,6 @@
       /* Numbers */
       .number-cell { padding: 28px 20px; }
       .stat-value { font-size: clamp(36px, 10vw, 64px); }
-      /* AI section */
-      .ai-right { border-top: 1px solid rgba(255,255,255,0.1); }
       .ai-stat { padding: 16px 20px; }
       /* Testimonials */
       .t-quote { font-size: 17px; }
