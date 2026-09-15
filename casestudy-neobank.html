@@ -294,7 +294,18 @@
       .col-heading { font-size: clamp(24px, 7vw, 36px); }
       .next-cs { padding: 48px 20px; }
     }
-    </style>
+    
+    /* ── Before / After slider ── */
+    .cs-ba { position: relative; user-select: none; -webkit-user-select: none; touch-action: pan-y; border-radius: 24px; overflow: hidden; background: #0B0B15; aspect-ratio: 2195 / 1631; cursor: ew-resize; box-shadow: 0 40px 100px -30px rgba(20,16,40,0.45); }
+    .cs-ba img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+    .cs-ba .cs-ba-after { clip-path: inset(0 0 0 var(--x, 50%)); }
+    .cs-ba-handle { position: absolute; top: 0; bottom: 0; left: var(--x, 50%); width: 2px; background: #fff; transform: translateX(-1px); box-shadow: 0 0 0 1px rgba(0,0,0,0.15); }
+    .cs-ba-handle i { position: absolute; top: 50%; left: 50%; width: 44px; height: 44px; border-radius: 50%; transform: translate(-50%,-50%); background: #fff; color: #0C0C0A; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; letter-spacing: -1px; box-shadow: 0 8px 24px rgba(0,0,0,0.25); font-style: normal; }
+    .cs-ba-tag { position: absolute; top: 16px; padding: 6px 10px; border-radius: 100px; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; background: rgba(12,12,10,0.6); color: #fff; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+    .cs-ba-tag.l { left: 16px; } .cs-ba-tag.r { right: 16px; }
+    .cs-ba-wrap { padding: 0 var(--pad, 24px) clamp(48px, 6vw, 96px); max-width: 1200px; margin: 0 auto; }
+    .cs-ba-cap { display: flex; justify-content: space-between; gap: 16px; margin-top: 14px; font-size: 10.5px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  </style>
 
 </head>
 <body>
@@ -371,6 +382,17 @@
     </div>
   </section>
 
+
+  <!-- Before / After -->
+  <div class="cs-ba-wrap">
+    <div class="cs-ba" id="cs-ba" aria-label="Drag to compare the old P2P home with the new neobank home">
+      <img src="./krak-before.png" alt="Before: the original P2P home screen">
+      <img class="cs-ba-after" src="./krak-after.png" alt="After: the redesigned neobank home screen">
+      <span class="cs-ba-tag l">Before · P2P</span><span class="cs-ba-tag r">After · Neobank</span>
+      <div class="cs-ba-handle"><i>&lt; &gt;</i></div>
+    </div>
+    <div class="cs-ba-cap"><span>Drag to compare</span><span>Home · same customer, eight weeks apart</span></div>
+  </div>
   <section class="cs-section">
     <div class="cs-section-inner">
       <p class="section-label">The Outcomes</p>
@@ -471,6 +493,19 @@
   <script>
     // Always light mode
     document.documentElement.setAttribute('data-theme', 'light');
+  </script>
+
+  <script>
+  (function(){
+    document.querySelectorAll('.cs-ba').forEach(function(ba){
+      var drag = false;
+      function setX(clientX){ var r = ba.getBoundingClientRect(); var x = Math.max(0.02, Math.min(0.98, (clientX - r.left) / r.width)); ba.style.setProperty('--x', (x * 100).toFixed(2) + '%'); }
+      ba.addEventListener('pointerdown', function(e){ drag = true; if (ba._nudge) clearInterval(ba._nudge); ba.setPointerCapture(e.pointerId); setX(e.clientX); });
+      ba.addEventListener('pointermove', function(e){ if (drag) setX(e.clientX); });
+      ba.addEventListener('pointerup', function(){ drag = false; }); ba.addEventListener('pointercancel', function(){ drag = false; });
+      var s = 50, dir = 1, n = 0; var iv = ba._nudge = setInterval(function(){ if (drag) { clearInterval(iv); return; } s += dir * 0.6; if (s > 58 || s < 42) dir *= -1; ba.style.setProperty('--x', s + '%'); if (++n > 160) clearInterval(iv); }, 16);
+    });
+  })();
   </script>
 </body>
 </html>
