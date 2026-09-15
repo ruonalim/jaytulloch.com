@@ -2358,6 +2358,39 @@
       color: rgba(255,255,255,0.28); text-align: center;
       padding: 0 0 6px; letter-spacing: 0.04em;
     }
+    /* ── Game picker (Snake vs Runner) ── */
+    .game-picker-inner { text-align: center; }
+    .gp-title {
+      font-family: var(--sans); font-size: 20px; font-weight: 800;
+      color: #fff; margin-bottom: 18px;
+    }
+    .gp-choices { display: flex; gap: 12px; justify-content: center; }
+    .gp-btn {
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 16px; padding: 16px 20px; cursor: pointer;
+      font-family: var(--sans); color: #fff; width: 108px;
+      transition: transform 0.2s, background 0.2s, border-color 0.2s;
+    }
+    .gp-btn:hover { transform: translateY(-3px); background: rgba(255,20,100,0.16); border-color: rgba(255,20,100,0.4); }
+    .gp-btn-icon { font-size: 30px; line-height: 1; height: 36px; display: flex; align-items: center; justify-content: center; }
+    .gp-btn-label { font-size: 12.5px; font-weight: 700; letter-spacing: 0.02em; }
+    .gp-btn canvas { display: block; image-rendering: pixelated; }
+    /* ── D-pad in runner mode: only jump is needed ── */
+    .snake-dpad.mode-runner .snake-dpad-row > [data-dir="LEFT"],
+    .snake-dpad.mode-runner .snake-dpad-row > [data-dir="RIGHT"],
+    .snake-dpad.mode-runner [data-dir="DOWN"] { display: none; }
+    .snake-dpad.mode-runner [data-dir="UP"] {
+      width: 100%; height: 44px; border-radius: 12px;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+    }
+    .snake-dpad.mode-runner .snake-dpad-row { display: none; }
+    .snake-switch-link {
+      background: none; border: none; color: rgba(255,255,255,0.5);
+      font-family: var(--sans); font-size: 12px; text-decoration: underline;
+      cursor: pointer; margin-top: 12px; padding: 0;
+    }
+    .snake-switch-link:hover { color: #fff; }
     /* ── Egg aurora — fills the section ── */
     #snake-aurora-strip {
       position: absolute;
@@ -2518,15 +2551,28 @@
       border-color: var(--rule) !important;
     }
 
+    /* Selected Work hover feedback was a white tint + white accent bar,
+       tuned for the dark loud palette — invisible on a light background.
+       Give it a dark equivalent so hover state is actually visible. */
+    [data-mode="quiet"] .work-row {
+      background: linear-gradient(to right, rgba(0,0,0,0.035) 0%, transparent 60%) !important;
+    }
+    [data-mode="quiet"] .work-row:hover {
+      background: linear-gradient(to right, rgba(0,0,0,0.065) 0%, transparent 70%) !important;
+    }
+    [data-mode="quiet"] .work-row::before {
+      background: linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.2)) !important;
+    }
+    [data-mode="quiet"] .work-row:hover::before {
+      background: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.5)) !important;
+    }
+    [data-mode="quiet"] .work-row:hover .work-title { color: var(--text) !important; }
+
     /* These sections are hardcoded "always dark, always dramatic" in loud
        mode — flatten them to the quiet palette so the whole page reads as
        one calm, white, static page instead of a patchwork. */
-    [data-mode="quiet"] .dark-section-header,
-    [data-mode="quiet"] #metrics,
-    [data-mode="quiet"] #ai,
     [data-mode="quiet"] #about,
     [data-mode="quiet"] .contact-hero-wrap,
-    [data-mode="quiet"] #snake-section,
     [data-mode="quiet"] .snake-modal-inner,
     [data-mode="quiet"] .snake-modal-header,
     [data-mode="quiet"] .snake-canvas-wrap,
@@ -2539,7 +2585,20 @@
       background: var(--surface) !important;
       border: 1px solid var(--rule);
       border-radius: 16px;
+      padding: clamp(20px, 3vw, 28px) !important;
     }
+
+    /* Gentle alternating bands between sections, Apple-style, instead of
+       one flat page — uses the existing --bg / --surface-alt tokens. */
+    [data-mode="quiet"] .dark-section-header,
+    [data-mode="quiet"] #metrics,
+    [data-mode="quiet"] #ai,
+    [data-mode="quiet"] #writing,
+    [data-mode="quiet"] footer,
+    [data-mode="quiet"] #snake-section {
+      background: var(--surface-alt) !important;
+    }
+    [data-mode="quiet"] #podcast { background: var(--bg) !important; }
 
     /* Typographic hierarchy for the sections above — Apple-style: a plain
        gray sweep for all copy, with headline/value elements promoted to
@@ -2591,6 +2650,26 @@
       box-shadow: none !important;
     }
     [data-mode="quiet"] .snake-egg-pill * { color: var(--bg) !important; -webkit-text-fill-color: var(--bg) !important; }
+
+    /* Modal chrome (header/dpad) flattens to the quiet palette, but its
+       text/buttons were styled white-on-dark — re-contrast them for the
+       new light background. The game canvas itself stays a dark "console"
+       regardless of mode, so overlays drawn on it are untouched. */
+    [data-mode="quiet"] .snake-modal-title,
+    [data-mode="quiet"] .snake-modal-meta,
+    [data-mode="quiet"] .snake-hint {
+      color: var(--text) !important;
+    }
+    [data-mode="quiet"] .snake-modal-close {
+      background: var(--text) !important;
+      border-color: var(--text) !important;
+      color: var(--bg) !important;
+    }
+    [data-mode="quiet"] .snake-dpad-btn {
+      background: var(--surface) !important;
+      border-color: var(--rule) !important;
+      color: var(--text) !important;
+    }
   </style>
 </head>
 <body>
@@ -2608,9 +2687,9 @@
   </nav>
 
   <!-- Mode toggle -->
-  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Quiet/Loud mode">
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Minimal/Maximal mode">
     <span class="t-icon" id="t-icon">●</span>
-    <span id="t-label">LOUD</span>
+    <span id="t-label">MAXIMAL</span>
   </button>
 
   <!-- Case Study Modal -->
@@ -2933,20 +3012,36 @@
     </div>
   </section>
 
-  <div id="snake-modal" role="dialog" aria-label="Snake Game">
+  <div id="snake-modal" role="dialog" aria-label="Game">
     <div class="snake-modal-inner">
       <div class="snake-modal-header">
-        <span class="snake-modal-title">🐍 Snake</span>
+        <span class="snake-modal-title" id="snake-modal-title">🐍 Snake</span>
         <div class="snake-modal-meta" id="snake-score-wrap">Score: <span id="snake-score">0</span></div>
         <button class="snake-modal-close" id="snake-modal-close" aria-label="Close">×</button>
       </div>
       <div class="snake-canvas-wrap">
         <canvas id="snake-canvas"></canvas>
-        <div class="snake-overlay" id="snake-overlay">
+        <div class="snake-overlay" id="game-picker">
+          <div class="game-picker-inner">
+            <div class="gp-title">Choose your game</div>
+            <div class="gp-choices">
+              <button class="gp-btn" id="gp-snake" data-game="snake">
+                <span class="gp-btn-icon">🐍</span>
+                <span class="gp-btn-label">Snake</span>
+              </button>
+              <button class="gp-btn" id="gp-runner" data-game="runner">
+                <canvas id="gp-runner-icon" width="32" height="40"></canvas>
+                <span class="gp-btn-label">Jay Run</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="snake-overlay hidden" id="snake-overlay">
           <div class="snake-overlay-inner">
             <div class="snake-over-title" id="snake-over-title">Ready?</div>
             <div class="snake-over-sub" id="snake-over-sub">Tap to start</div>
             <button class="snake-start-btn" id="snake-start-btn">▶  Start</button>
+            <div><button class="snake-switch-link" id="snake-switch-link">Choose a different game</button></div>
           </div>
         </div>
       </div>
@@ -2958,7 +3053,7 @@
           <button class="snake-dpad-btn" data-dir="RIGHT">▶</button>
         </div>
         <button class="snake-dpad-btn" data-dir="DOWN">▼</button>
-        <div class="snake-hint">Arrow keys · WASD · Swipe</div>
+        <div class="snake-hint" id="snake-hint">Arrow keys · WASD · Swipe</div>
       </div>
     </div>
   </div>
@@ -3223,7 +3318,7 @@
       var icon = document.getElementById('t-icon');
       function apply(m) {
         root.setAttribute('data-mode', m);
-        lbl.textContent  = m === 'quiet' ? 'QUIET' : 'LOUD';
+        lbl.textContent  = m === 'quiet' ? 'MINIMAL' : 'MAXIMAL';
         icon.textContent = m === 'quiet' ? '○' : '●';
         localStorage.setItem('jt-mode', m);
         // Pause/resume the hero video with the mode
@@ -3508,12 +3603,20 @@
       var closeBtn    = document.getElementById('snake-modal-close');
       var canvas      = document.getElementById('snake-canvas');
       var overlay     = document.getElementById('snake-overlay');
+      var gamePicker  = document.getElementById('game-picker');
+      var gpSnakeBtn  = document.getElementById('gp-snake');
+      var gpRunnerBtn = document.getElementById('gp-runner');
+      var switchLink  = document.getElementById('snake-switch-link');
+      var titleEl     = document.getElementById('snake-modal-title');
+      var hintEl      = document.getElementById('snake-hint');
       var startBtn    = document.getElementById('snake-start-btn');
       var scoreEl     = document.getElementById('snake-score');
       var overTitle   = document.getElementById('snake-over-title');
       var overSub     = document.getElementById('snake-over-sub');
       var dpad        = document.getElementById('snake-dpad');
       if (!egg || !canvas || !snakeSection) return;
+
+      var currentGame = null; // 'snake' | 'runner'
 
       // ── Spectacular reveal ──
       var SPARK_COLORS = ['#F24E1E','#FF7262','#A259FF','#1ABCFE','#0ACF83','#fff'];
@@ -3561,16 +3664,48 @@
       sectionObs.observe(snakeSection);
 
       // ── Open / close modal ──
+      function stopCurrentGame() {
+        snakeStop();
+        runnerStop();
+      }
+      function startCurrentGame() {
+        if (currentGame === 'snake') snakeStart();
+        else if (currentGame === 'runner') runnerStart();
+      }
+      function showPicker() {
+        stopCurrentGame();
+        overlay.classList.add('hidden');
+        gamePicker.classList.remove('hidden');
+        titleEl.textContent = '🎮 Choose a game';
+        hintEl.textContent = 'Arrow keys · WASD · Swipe';
+        dpad.classList.remove('mode-runner');
+      }
+      function selectGame(game) {
+        currentGame = game;
+        gamePicker.classList.add('hidden');
+        if (game === 'snake') {
+          titleEl.textContent = '🐍 Snake';
+          hintEl.textContent = 'Arrow keys · WASD · Swipe';
+          dpad.classList.remove('mode-runner');
+          snakeReset();
+          showOverlay('Ready?', 'Tap to start');
+        } else {
+          titleEl.textContent = '🏃 Jay Run';
+          hintEl.textContent = 'Space · Tap · Click to jump';
+          dpad.classList.add('mode-runner');
+          runnerReset();
+          showOverlay('Ready?', 'Tap to jump');
+        }
+      }
       function openSnake() {
         snakeModal.classList.add('open');
         document.body.style.overflow = 'hidden';
-        resetGame();
-        showOverlay('Ready?', 'Tap to start');
+        showPicker();
       }
       function closeSnake() {
         snakeModal.classList.remove('open');
         document.body.style.overflow = '';
-        stopGame();
+        stopCurrentGame();
       }
 
       egg.addEventListener('click', openSnake);
@@ -3578,6 +3713,9 @@
       snakeModal.addEventListener('click', function(e) {
         if (e.target === snakeModal) closeSnake();
       });
+      gpSnakeBtn.addEventListener('click', function(e) { e.stopPropagation(); selectGame('snake'); });
+      gpRunnerBtn.addEventListener('click', function(e) { e.stopPropagation(); selectGame('runner'); });
+      if (switchLink) switchLink.addEventListener('click', function(e) { e.stopPropagation(); showPicker(); });
 
       // ── Game constants ──
       var COLS = 20, ROWS = 20, CELL = 18; // px per cell
@@ -3601,7 +3739,7 @@
 
       var snake, dir, nextDir, food, score, raf, lastTime, interval, running;
 
-      function resetGame() {
+      function snakeReset() {
         snake    = [{x:10,y:10},{x:9,y:10},{x:8,y:10}];
         dir      = {x:1,y:0};
         nextDir  = {x:1,y:0};
@@ -3609,7 +3747,7 @@
         running  = false;
         updateScore(0);
         placeFood();
-        draw();
+        snakeDraw();
       }
 
       function placeFood() {
@@ -3639,30 +3777,30 @@
       }
       function hideOverlay() { overlay.classList.add('hidden'); }
 
-      function stopGame() {
+      function snakeStop() {
         running = false;
         clearTimeout(raf);
       }
 
-      function startGame() {
-        stopGame();
-        resetGame();
+      function snakeStart() {
+        snakeStop();
+        snakeReset();
         hideOverlay();
         running = true;
         lastTime = 0;
-        loop(0);
+        snakeLoop(0);
       }
 
-      function loop(ts) {
+      function snakeLoop(ts) {
         if (!running) return;
         if (!lastTime || ts - lastTime >= speedForScore(score)) {
           lastTime = ts;
-          tick();
+          snakeTick();
         }
-        raf = requestAnimationFrame(loop);
+        raf = requestAnimationFrame(snakeLoop);
       }
 
-      function tick() {
+      function snakeTick() {
         dir = nextDir;
         var head = {x: snake[0].x + dir.x, y: snake[0].y + dir.y};
 
@@ -3672,7 +3810,7 @@
 
         // Self collision
         if (snake.some(function(s){ return s.x===head.x && s.y===head.y; })) {
-          stopGame();
+          snakeStop();
           showOverlay('Game over', 'Score: ' + score);
           return;
         }
@@ -3684,7 +3822,7 @@
         } else {
           snake.pop();
         }
-        draw();
+        snakeDraw();
       }
 
       // ── Draw ──
@@ -3695,7 +3833,7 @@
       var GRID_CLR   = 'rgba(255,255,255,0.03)';
       var PIXEL_CLR  = 'rgba(255,255,255,0.55)';
 
-      function draw() {
+      function snakeDraw() {
         // Background
         ctx.fillStyle = BG_CLR;
         ctx.fillRect(0,0,canvas.width,canvas.height);
@@ -3755,11 +3893,189 @@
         })();
       }
 
-      startBtn.addEventListener('click', function(e) { e.stopPropagation(); startGame(); });
+      // ── "Jay Run" — simple endless runner, pixel-art self-portrait ──
+      var PX = 4; // pixel size for the sprite
+      var PAL = { G:'#B8B2AA', S:'#C68A5D', K:'#33343D' };
+      var BODY_ROWS = [
+        "..GGGG..",
+        ".GGGGGG.",
+        ".GSSSSG.",
+        ".SSSSSS.",
+        ".SKSSKS.",
+        ".SSKKSS.",
+        "..SKKS..",
+        "..KKKK..",
+        ".KKKKKK.",
+        "KKKKKKKK",
+        "KKKKKKKK"
+      ];
+      var LEGS = {
+        run0: [".KK.KK..", ".KK.KK.."],
+        run1: ["..KK.KK.", ".KK...KK"],
+        jump: ["..KKKK.."]
+      };
+      function drawPixelGuy(targetCtx, x, footY, scale, frame) {
+        var rows = BODY_ROWS.concat(LEGS[frame] || LEGS.run0);
+        for (var r = 0; r < rows.length; r++) {
+          var row = rows[r];
+          var top = footY - (rows.length - r) * scale;
+          for (var c = 0; c < row.length; c++) {
+            var ch = row[c];
+            if (ch === '.') continue;
+            targetCtx.fillStyle = PAL[ch];
+            targetCtx.fillRect(Math.round(x + c*scale), Math.round(top), scale, scale);
+          }
+        }
+      }
+      var PLAYER_W = 8 * PX;
+      var PLAYER_H = (BODY_ROWS.length + 2) * PX;
+
+      var R = {}; // runner state
+      var runnerRaf = null;
+      var GRAVITY = 0.85, JUMP_V = -14.5;
+
+      function runnerReset() {
+        R.groundY   = canvas.height - 46;
+        R.playerX   = 42;
+        R.footY     = R.groundY;
+        R.vy        = 0;
+        R.onGround  = true;
+        R.frame     = 'run0';
+        R.frameTimer= 0;
+        R.obstacles = [];
+        R.spawnTimer= 70;
+        R.speed     = 4.5;
+        R.distance  = 0;
+        R.running   = false;
+        updateScore(0);
+        runnerDraw();
+      }
+
+      function runnerJumpAction() {
+        if (!R.onGround) return;
+        R.vy = JUMP_V;
+        R.onGround = false;
+      }
+
+      function runnerStop() {
+        R.running = false;
+        if (runnerRaf) cancelAnimationFrame(runnerRaf);
+        runnerRaf = null;
+      }
+
+      function runnerStart() {
+        runnerStop();
+        runnerReset();
+        hideOverlay();
+        R.running = true;
+        runnerRaf = requestAnimationFrame(runnerLoop);
+      }
+
+      function runnerLoop() {
+        if (!R.running) return;
+        runnerUpdate();
+        if (!R.running) return; // may have ended this frame
+        runnerDraw();
+        runnerRaf = requestAnimationFrame(runnerLoop);
+      }
+
+      function runnerUpdate() {
+        if (!R.onGround) {
+          R.vy += GRAVITY;
+          R.footY += R.vy;
+          if (R.footY >= R.groundY) {
+            R.footY = R.groundY;
+            R.vy = 0;
+            R.onGround = true;
+          }
+        }
+        R.spawnTimer--;
+        if (R.spawnTimer <= 0) {
+          var h = 20 + Math.random() * 20;
+          R.obstacles.push({ x: canvas.width, w: 14 + Math.random() * 10, h: h });
+          R.spawnTimer = Math.max(48, 100 - R.speed * 4 - Math.random() * 20);
+        }
+        R.obstacles.forEach(function(o) { o.x -= R.speed; });
+        R.obstacles = R.obstacles.filter(function(o) { return o.x + o.w > 0; });
+        R.speed = Math.min(9.5, 4.5 + R.distance / 1400);
+        R.distance += R.speed;
+        updateScore(Math.floor(R.distance / 12));
+
+        if (R.onGround) {
+          R.frameTimer++;
+          if (R.frameTimer > 6) { R.frame = (R.frame === 'run0') ? 'run1' : 'run0'; R.frameTimer = 0; }
+        } else {
+          R.frame = 'jump';
+        }
+
+        // Collision (AABB)
+        var px1 = R.playerX, px2 = R.playerX + PLAYER_W;
+        var py2 = R.footY,   py1 = R.footY - PLAYER_H;
+        for (var i = 0; i < R.obstacles.length; i++) {
+          var o = R.obstacles[i];
+          var ox1 = o.x, ox2 = o.x + o.w, oy2 = R.groundY, oy1 = R.groundY - o.h;
+          if (px2 > ox1 && px1 < ox2 && py2 > oy1 && py1 < oy2) {
+            runnerStop();
+            showOverlay('Game over', 'Score: ' + score);
+            return;
+          }
+        }
+      }
+
+      function runnerDraw() {
+        ctx.fillStyle = BG_CLR;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        // Ground
+        ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(0, R.groundY + 2);
+        ctx.lineTo(canvas.width, R.groundY + 2);
+        ctx.stroke();
+        // Obstacles
+        ctx.fillStyle = '#FF1464';
+        R.obstacles.forEach(function(o) {
+          ctx.beginPath();
+          ctx.roundRect(o.x, R.groundY - o.h, o.w, o.h, 4);
+          ctx.fill();
+        });
+        // Player
+        drawPixelGuy(ctx, R.playerX, R.footY, PX, R.frame);
+      }
+
+      function runnerJumpOrStart() {
+        if (!R.running) runnerStart();
+        else runnerJumpAction();
+      }
+
+      // Static preview icon on the "Jay Run" picker button
+      (function() {
+        var iconCanvas = document.getElementById('gp-runner-icon');
+        if (!iconCanvas) return;
+        var ictx = iconCanvas.getContext('2d');
+        // Subtle backing so the dark clothing reads against any surface
+        ictx.fillStyle = 'rgba(255,255,255,0.1)';
+        ictx.fillRect(0, 0, iconCanvas.width, iconCanvas.height);
+        drawPixelGuy(ictx, 2, iconCanvas.height - 4, 3, 'run0');
+      })();
+
+      startBtn.addEventListener('click', function(e) { e.stopPropagation(); startCurrentGame(); });
 
       // ── Keyboard controls ──
       document.addEventListener('keydown', function(e) {
         if (!snakeModal.classList.contains('open')) return;
+        if (currentGame === 'runner') {
+          if (e.key === ' ' || e.key === 'Spacebar' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            runnerJumpOrStart();
+          }
+          if (e.key === 'Escape') closeSnake();
+          return;
+        }
+        if (currentGame !== 'snake') {
+          if (e.key === 'Escape') closeSnake();
+          return;
+        }
         var map = {
           ArrowUp:{x:0,y:-1}, ArrowDown:{x:0,y:1},
           ArrowLeft:{x:-1,y:0}, ArrowRight:{x:1,y:0},
@@ -3770,7 +4086,7 @@
         if (newDir) {
           e.preventDefault();
           if (newDir.x !== -dir.x || newDir.y !== -dir.y) nextDir = newDir;
-          if (!running && !overlay.classList.contains('hidden')) startGame();
+          if (!running && !overlay.classList.contains('hidden')) snakeStart();
         }
         if (e.key === 'Escape') closeSnake();
       });
@@ -3779,29 +4095,43 @@
       dpad.querySelectorAll('.snake-dpad-btn').forEach(function(btn) {
         var dirMap = {UP:{x:0,y:-1},DOWN:{x:0,y:1},LEFT:{x:-1,y:0},RIGHT:{x:1,y:0}};
         function press() {
+          if (currentGame === 'runner') {
+            if (btn.dataset.dir === 'UP') runnerJumpOrStart();
+            return;
+          }
+          if (currentGame !== 'snake') return;
           var newDir = dirMap[btn.dataset.dir];
           if (!newDir) return;
           if (newDir.x !== -dir.x || newDir.y !== -dir.y) nextDir = newDir;
-          if (!running) startGame();
+          if (!running) snakeStart();
         }
         btn.addEventListener('click', press);
         btn.addEventListener('touchstart', function(e) { e.preventDefault(); press(); }, {passive:false});
       });
 
-      // ── Swipe on canvas ──
+      // ── Swipe / tap / click on canvas ──
+      canvas.addEventListener('click', function() {
+        if (currentGame === 'runner') runnerJumpOrStart();
+      });
       var swipeStart = null;
       canvas.addEventListener('touchstart', function(e) {
         var t = e.touches[0];
         swipeStart = {x: t.clientX, y: t.clientY};
       }, {passive: true});
       canvas.addEventListener('touchend', function(e) {
+        if (currentGame === 'runner') {
+          swipeStart = null;
+          runnerJumpOrStart();
+          return;
+        }
+        if (currentGame !== 'snake') return;
         if (!swipeStart) return;
         var t = e.changedTouches[0];
         var dx = t.clientX - swipeStart.x, dy = t.clientY - swipeStart.y;
         swipeStart = null;
         if (Math.abs(dx) < 10 && Math.abs(dy) < 10) {
           // Tap — start game
-          if (!running) startGame();
+          if (!running) snakeStart();
           return;
         }
         var newDir;
@@ -3811,10 +4141,10 @@
           newDir = dy > 0 ? {x:0,y:1} : {x:0,y:-1};
         }
         if (newDir.x !== -dir.x || newDir.y !== -dir.y) nextDir = newDir;
-        if (!running) startGame();
+        if (!running) snakeStart();
       }, {passive: true});
 
-      resetGame();
+      snakeReset();
     })();
 
     // ─── Hero cursor spotlight ────────────────────────────────────
