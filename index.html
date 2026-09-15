@@ -2336,7 +2336,7 @@
     }
     .snake-start-btn:hover { transform: scale(1.05); box-shadow: 0 8px 32px rgba(255,20,100,0.6); }
     .snake-dpad {
-      display: none;
+      display: flex;
       flex-direction: column; align-items: center;
       padding: 10px 16px 14px;
       background: #0d0d0d;
@@ -2355,8 +2355,37 @@
       user-select: none;
     }
     .snake-dpad-btn:active { background: rgba(255,20,100,0.3); transform: scale(0.92); }
-    @media (hover: none) and (pointer: coarse) {
-      .snake-dpad { display: flex; }
+    .snake-hint {
+      font-family: var(--sans); font-size: 11px;
+      color: rgba(255,255,255,0.28); text-align: center;
+      padding: 0 0 6px; letter-spacing: 0.04em;
+    }
+    /* ── Egg aurora reveal strip ── */
+    #snake-aurora-strip {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 320px;
+      pointer-events: none;
+      z-index: 390;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      background: radial-gradient(ellipse 120% 80% at 50% 120%,
+        rgba(255,20,100,0.35) 0%, rgba(210,40,255,0.22) 35%, rgba(255,70,30,0.14) 60%, transparent 80%);
+      filter: blur(4px);
+    }
+    #snake-aurora-strip.lit { opacity: 1; }
+    /* Egg sparkles */
+    .snake-egg-sparks {
+      position: absolute; inset: -30px; pointer-events: none;
+      overflow: visible;
+    }
+    .snake-egg-spark {
+      position: absolute; width: 6px; height: 6px;
+      border-radius: 50%; opacity: 0;
+    }
+    @keyframes sparkBurst {
+      0%   { transform: translate(0,0) scale(1); opacity: 1; }
+      100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
     }
     [data-theme="light"] .snake-modal-inner { background: #1a1a2e; }
     [data-theme="light"] .snake-modal-header { background: #16162a; }
@@ -2693,8 +2722,10 @@
   </footer>
 
   <!-- ─── Snake Easter Egg ──────────────────────────────────────── -->
+  <div id="snake-aurora-strip"></div>
   <div id="snake-egg" aria-label="Play Snake">
     <div class="snake-egg-glow"></div>
+    <div class="snake-egg-sparks" id="snake-egg-sparks"></div>
     <div class="snake-egg-pill">
       <span class="snake-egg-icon">🐍</span>
       <span class="snake-egg-label">Play a game?</span>
@@ -2726,6 +2757,7 @@
           <button class="snake-dpad-btn" data-dir="RIGHT">▶</button>
         </div>
         <button class="snake-dpad-btn" data-dir="DOWN">▼</button>
+        <div class="snake-hint">Arrow keys · WASD · Swipe</div>
       </div>
     </div>
   </div>
@@ -3362,37 +3394,69 @@
 
     // ─── Snake Easter Egg ─────────────────────────────────────────
     (function() {
-      var egg       = document.getElementById('snake-egg');
-      var snakeModal= document.getElementById('snake-modal');
-      var closeBtn  = document.getElementById('snake-modal-close');
-      var canvas    = document.getElementById('snake-canvas');
-      var overlay   = document.getElementById('snake-overlay');
-      var startBtn  = document.getElementById('snake-start-btn');
-      var scoreEl   = document.getElementById('snake-score');
-      var overTitle = document.getElementById('snake-over-title');
-      var overSub   = document.getElementById('snake-over-sub');
-      var dpad      = document.getElementById('snake-dpad');
-      var footer    = document.querySelector('footer');
+      var egg         = document.getElementById('snake-egg');
+      var auroraStrip = document.getElementById('snake-aurora-strip');
+      var sparksEl    = document.getElementById('snake-egg-sparks');
+      var snakeModal  = document.getElementById('snake-modal');
+      var closeBtn    = document.getElementById('snake-modal-close');
+      var canvas      = document.getElementById('snake-canvas');
+      var overlay     = document.getElementById('snake-overlay');
+      var startBtn    = document.getElementById('snake-start-btn');
+      var scoreEl     = document.getElementById('snake-score');
+      var overTitle   = document.getElementById('snake-over-title');
+      var overSub     = document.getElementById('snake-over-sub');
+      var dpad        = document.getElementById('snake-dpad');
+      var footer      = document.querySelector('footer');
       if (!egg || !canvas || !footer) return;
 
-      // ── Egg visibility via IntersectionObserver ──
+      // ── Spectacular reveal ──
+      var SPARK_COLORS = ['#F24E1E','#FF7262','#A259FF','#1ABCFE','#0ACF83','#fff'];
+      function burstSparks() {
+        if (!sparksEl) return;
+        sparksEl.innerHTML = '';
+        for (var i = 0; i < 18; i++) {
+          var s = document.createElement('div');
+          s.className = 'snake-egg-spark';
+          var angle = (i / 18) * Math.PI * 2;
+          var dist  = 40 + Math.random() * 40;
+          s.style.cssText = [
+            'background:' + SPARK_COLORS[i % SPARK_COLORS.length],
+            '--tx:' + (Math.cos(angle)*dist).toFixed(1) + 'px',
+            '--ty:' + (Math.sin(angle)*dist).toFixed(1) + 'px',
+            'left:50%', 'top:50%',
+            'margin:-3px 0 0 -3px',
+            'animation:sparkBurst 0.7s cubic-bezier(0,0.9,0.57,1) ' + (i*18) + 'ms forwards'
+          ].join(';');
+          sparksEl.appendChild(s);
+        }
+      }
+
       var eggVisible = false;
       var footerObs = new IntersectionObserver(function(entries) {
         entries.forEach(function(e) {
           if (e.isIntersecting && !eggVisible) {
             eggVisible = true;
-            setTimeout(function() { egg.classList.add('visible'); }, 200);
+            // 1. Aurora bloom
+            if (auroraStrip) auroraStrip.classList.add('lit');
+            // 2. After 300ms — egg springs in from below
+            setTimeout(function() {
+              egg.classList.add('visible');
+              // 3. Particle burst on arrival
+              setTimeout(burstSparks, 550);
+            }, 320);
           } else if (!e.isIntersecting) {
             eggVisible = false;
             egg.classList.remove('visible');
+            if (auroraStrip) auroraStrip.classList.remove('lit');
           }
         });
-      }, { threshold: 0.25 });
+      }, { threshold: 0.2 });
       footerObs.observe(footer);
 
       // ── Open / close modal ──
       function openSnake() {
         egg.classList.remove('visible');
+        if (auroraStrip) auroraStrip.classList.remove('lit');
         snakeModal.classList.add('open');
         document.body.style.overflow = 'hidden';
         resetGame();
@@ -3557,13 +3621,34 @@
             ctx.beginPath(); ctx.arc(x+ex[1], y+ey[1], 2.2, 0, Math.PI*2); ctx.fill();
           }
         });
-        // Food — pixel cluster
-        var fx = food.x*CELL, fy = food.y*CELL, ps = 4;
-        var pixels = [[0,2],[1,1],[2,0],[3,1],[4,2],[1,3],[2,4],[3,3],[0,4],[4,4],[2,2]];
-        ctx.fillStyle = PIXEL_CLR;
-        pixels.forEach(function(p) {
-          ctx.fillRect(fx + 2 + p[0]*(ps-1), fy + 2 + p[1]*(ps-1), ps-1, ps-1);
-        });
+        // Food — Figma logo
+        (function() {
+          var fx = food.x*CELL, fy = food.y*CELL;
+          // Layout: 2px padding, 6px cols, 1px gap, 4px rows, 1px row-gap
+          var lx = fx+2, rx = fx+9;
+          var lw = 6, rw = 7;
+          var h  = 4, g  = 1;
+          var y1 = fy+2, y2 = fy+2+h+g, y3 = fy+2+(h+g)*2;
+          var r  = 2;
+          function pill(x,y,w,h,tl,tr,br,bl) {
+            ctx.beginPath();
+            ctx.moveTo(x+tl,y);
+            ctx.lineTo(x+w-tr,y); ctx.arcTo(x+w,y,x+w,y+tr,tr);
+            ctx.lineTo(x+w,y+h-br); ctx.arcTo(x+w,y+h,x+w-br,y+h,br);
+            ctx.lineTo(x+bl,y+h); ctx.arcTo(x,y+h,x,y+h-bl,bl);
+            ctx.lineTo(x,y+tl); ctx.arcTo(x,y,x+tl,y,tl);
+            ctx.closePath(); ctx.fill();
+          }
+          // Top row
+          ctx.fillStyle='#F24E1E'; pill(lx,y1,lw,h, r,0,0,r);
+          ctx.fillStyle='#FF7262'; pill(rx,y1,rw,h, 0,r,r,0);
+          // Middle row
+          ctx.fillStyle='#A259FF'; pill(lx,y2,lw,h, 0,0,r,r);
+          ctx.fillStyle='#1ABCFE';
+          ctx.beginPath(); ctx.arc(rx+rw/2, y2+h/2, rw/2, 0, Math.PI*2); ctx.fill();
+          // Bottom row
+          ctx.fillStyle='#0ACF83'; pill(lx,y3,lw,h, 0,0,r,r);
+        })();
       }
 
       startBtn.addEventListener('click', function(e) { e.stopPropagation(); startGame(); });
