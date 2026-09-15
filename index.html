@@ -3374,9 +3374,21 @@
       csPull.style.opacity    = '0';
     }
 
+    function fitIndicatorToSheet() {
+      var sheet = document.querySelector('.cs-modal-sheet'); if (!sheet) return;
+      var r = sheet.getBoundingClientRect();
+      csPull.style.left   = r.left + 'px';
+      csPull.style.width  = r.width + 'px';
+      csPull.style.right  = 'auto';
+      csPull.style.bottom = Math.max(0, window.innerHeight - r.bottom) + 'px';
+      csPull.style.borderRadius = getComputedStyle(sheet).borderRadius;
+    }
+    window.addEventListener('resize', function () { if (pullHinted) fitIndicatorToSheet(); }, { passive: true });
+
     function showHint() {
       if (pullHinted || pullNavigating) return;
       pullHinted = true;
+      fitIndicatorToSheet();
       setNextTitle();
       csPull.style.transition = 'transform 0.4s cubic-bezier(0.22,1.6,0.36,1), opacity 0.25s';
       csPull.style.transform  = 'translateY(0%)';
