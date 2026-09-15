@@ -2810,6 +2810,7 @@
       pullHinted = false;
       pullHintTime = 0;
       csPull.classList.remove('visible');
+      csPull.style.pointerEvents = 'none';
       csPull.style.transition = 'transform 0.5s cubic-bezier(0.32,0.72,0,1), opacity 0.4s';
       csPull.style.transform  = 'translateY(100%)';
       csPull.style.opacity    = '0';
@@ -2823,8 +2824,14 @@
       csPull.style.transition = 'transform 0.4s cubic-bezier(0.22,1.6,0.36,1), opacity 0.25s';
       csPull.style.transform  = 'translateY(0%)';
       csPull.style.opacity    = '1';
+      csPull.style.pointerEvents = 'auto';
       csPull.classList.add('visible');
     }
+
+    // Single click listener — attached once, not per-load
+    csPull.addEventListener('click', function() {
+      if (pullHinted && !pullNavigating) navigateToNext();
+    });
 
     function navigateToNext() {
       if (pullNavigating) return;
@@ -2918,10 +2925,6 @@
         else if (!bot && pullHinted) hideIndicator();
       };
       iwin.addEventListener('scroll', onIframeScroll, { passive: true });
-      // Tap the indicator to navigate (always intentional — no cooldown needed)
-      csPull.addEventListener('click', function() {
-        if (pullHinted && !pullNavigating) navigateToNext();
-      });
 
       // ── Pull zone touch handlers (mobile overlay, always reliable) ──
       // Pull zone just shows the hint — tap on the indicator itself navigates
