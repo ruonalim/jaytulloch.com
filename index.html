@@ -2796,20 +2796,15 @@
       if (el) el.textContent = CS_SEQUENCE[nextIdx].name;
     }
 
-    // ── Pull state ──────────────────────────────────────────────
-    // Phase 1: hint (indicator springs in when user reaches bottom)
-    // Phase 2: user does a deliberate fresh scroll down → navigate
-    // A 750ms cooldown prevents the bottom-reaching momentum from
-    // immediately triggering navigation.
-    var HINT_COOLDOWN  = 750; // ms before a fresh scroll can navigate
-    var pullHintTime   = 0;
+    // ── Next-project indicator state ─────────────────────────────
+    // Indicator springs in when the user reaches the bottom of a case
+    // study. Tapping / clicking it navigates to the next one.
     var pullNavigating = false;
     var pullHinted     = false;
     var pullListeners  = null;
 
     function hideIndicator() {
       pullHinted = false;
-      pullHintTime = 0;
       csPull.classList.remove('visible');
       csPull.style.pointerEvents = 'none';
       csPull.style.transition = 'transform 0.5s cubic-bezier(0.32,0.72,0,1), opacity 0.4s';
@@ -2819,8 +2814,7 @@
 
     function showHint() {
       if (pullHinted || pullNavigating) return;
-      pullHinted   = true;
-      pullHintTime = Date.now();
+      pullHinted = true;
       setNextTitle();
       csPull.style.transition = 'transform 0.4s cubic-bezier(0.22,1.6,0.36,1), opacity 0.25s';
       csPull.style.transform  = 'translateY(0%)';
@@ -2837,7 +2831,6 @@
     function navigateToNext() {
       if (pullNavigating) return;
       pullNavigating = true;
-      clearTimeout(pullTimer);
       var nextIdx = (csCurrentIdx + 1) % CS_SEQUENCE.length;
 
       // Hold fully visible briefly, then cross-fade sheet
