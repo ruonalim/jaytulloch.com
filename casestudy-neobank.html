@@ -12,7 +12,7 @@
   <title>Crypto Neo-Bank Launch | Jay Tulloch</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
+    :root, [data-theme="light"] {
       --bg: #FFFFFF;
       --bg-card: #FFFFFF;
       --bg-elevated: #F5F5F7;
@@ -32,8 +32,27 @@
       --gray-mid: #86868B;
       --gray-light: #6E6E73;
     }
+    [data-theme="dark"] {
+      --bg: #0D0D18;
+      --bg-card: #111120;
+      --bg-elevated: #16162A;
+      --text: #ECEAF5;
+      --text-muted: rgba(236,234,245,0.5);
+      --text-body: rgba(236,234,245,0.82);
+      --border: rgba(255,255,255,0.08);
+      --border-strong: rgba(255,255,255,0.14);
+      --tag-bg: rgba(255,255,255,0.06);
+      --accent: #ECEAF5;
+      --black: #ECEAF5;
+      --white: #0D0D18;
+      --mid: rgba(236,234,245,0.4);
+      --muted: rgba(236,234,245,0.45);
+      --gray-dark: #16162A;
+      --gray-mid: rgba(236,234,245,0.3);
+      --gray-light: rgba(236,234,245,0.45);
+    }
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 16px; line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 16px; line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; transition: background 0.4s, color 0.4s; }
     a { color: inherit; text-decoration: none; }
 
     /* ── Media showcase styles ── */
@@ -462,6 +481,23 @@
     (function() {
 if (close) close.addEventListener('click', function() { drawer.classList.remove('open'); });
       if (drawer) drawer.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { drawer.classList.remove('open'); }); });
+    })();
+  </script>
+  <script>
+    // Theme sync with parent
+    (function() {
+      var root = document.documentElement;
+      function applyTheme(t) {
+        root.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light');
+      }
+      // Read from shared localStorage (same origin as parent)
+      var stored = localStorage.getItem('jt-theme') ||
+                   (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      applyTheme(stored);
+      // Listen for live theme changes from parent frame
+      window.addEventListener('message', function(e) {
+        if (e.data && e.data.type === 'jt-theme') applyTheme(e.data.theme);
+      });
     })();
   </script>
 </body>

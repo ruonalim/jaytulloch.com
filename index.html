@@ -497,14 +497,15 @@
     .work-meta-year { display: none; }
 
     /* ─── AI Section ────────────────────────────────────────────── */
-    @keyframes ai-shimmer-sweep {
-      0%   { transform: translateX(-120%) skewX(-12deg); }
-      100% { transform: translateX(250%) skewX(-12deg); }
-    }
     @keyframes ai-glow-breathe {
-      0%, 100% { opacity: 0.4; transform: scale(1) translate(0,0); }
-      33%       { opacity: 0.7; transform: scale(1.08) translate(2%, -2%); }
-      66%       { opacity: 0.5; transform: scale(0.95) translate(-3%, 2%); }
+      0%, 100% { opacity: 0.45; transform: scale(1) translate(0,0); }
+      33%       { opacity: 0.72; transform: scale(1.08) translate(2%, -2%); }
+      66%       { opacity: 0.52; transform: scale(0.95) translate(-3%, 2%); }
+    }
+    @keyframes ai-orb-drift {
+      0%, 100% { opacity: 0.35; transform: scale(1) translate(0,0); }
+      40%       { opacity: 0.55; transform: scale(1.12) translate(-3%, 5%); }
+      70%       { opacity: 0.38; transform: scale(0.92) translate(5%, -3%); }
     }
     @keyframes ai-stat-shine {
       0%   { background-position: 200% center; }
@@ -519,36 +520,35 @@
       background: #06060B;
       color: #FFFFFF;
     }
-    /* Primary shimmer sweep */
+    /* Ambient glow — hot pink orb top-left */
     #ai-authority::before {
       content: '';
       position: absolute;
-      inset: -10%;
-      width: 40%;
-      background: linear-gradient(
-        105deg,
-        transparent 0%,
-        rgba(139,92,246,0.05) 30%,
-        rgba(167,139,250,0.10) 50%,
-        rgba(99,102,241,0.05) 70%,
-        transparent 100%
+      top: -40%; left: -15%;
+      width: 65%; height: 170%;
+      background: radial-gradient(ellipse 60% 50% at 35% 50%,
+        rgba(255,20,100,0.09) 0%,
+        rgba(210,40,255,0.05) 40%,
+        transparent 70%
       );
-      animation: ai-shimmer-sweep 5s cubic-bezier(0.4,0,0.6,1) infinite;
       pointer-events: none;
       z-index: 0;
+      animation: ai-glow-breathe 11s ease-in-out infinite;
     }
-    /* Ambient glow orb */
+    /* Ambient glow — coral orb bottom-right */
     #ai-authority::after {
       content: '';
       position: absolute;
-      top: -30%;
-      right: -10%;
-      width: 55%;
-      height: 160%;
-      background: radial-gradient(ellipse at center, rgba(99,102,241,0.08) 0%, rgba(139,92,246,0.04) 40%, transparent 70%);
+      bottom: -35%; right: -10%;
+      width: 60%; height: 150%;
+      background: radial-gradient(ellipse 55% 50% at 65% 60%,
+        rgba(255,70,30,0.07) 0%,
+        rgba(255,20,100,0.04) 40%,
+        transparent 70%
+      );
       pointer-events: none;
       z-index: 0;
-      animation: ai-glow-breathe 9s ease-in-out infinite;
+      animation: ai-orb-drift 14s ease-in-out infinite 2s;
     }
     .ai-left {
       padding: clamp(40px, 5vw, 64px) var(--pad);
@@ -1130,27 +1130,62 @@
     }
     .cs-modal-close {
       position: absolute;
-      top: 18px;
-      right: 22px;
-      background: rgba(255,255,255,0.08);
-      border: none;
-      color: rgba(255,255,255,0.5);
-      font-size: 18px;
-      font-weight: 400;
+      top: 16px;
+      right: 18px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.75);
+      font-size: 22px;
+      font-weight: 300;
       line-height: 1;
       cursor: pointer;
       padding: 0;
       z-index: 10;
-      width: 36px;
-      height: 36px;
+      width: 52px;
+      height: 52px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background 0.2s, color 0.2s;
+      transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
       font-family: var(--font);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
-    .cs-modal-close:hover { background: rgba(255,255,255,0.14); color: var(--text); }
+    .cs-modal-close:hover {
+      background: rgba(255,255,255,0.18);
+      border-color: rgba(255,255,255,0.28);
+      color: #fff;
+      transform: scale(1.08) rotate(90deg);
+    }
+    /* Spectacular close animation */
+    .cs-modal.closing .cs-modal-sheet {
+      transform: scale(1.04) translateY(-6px);
+      opacity: 0.9;
+      transition: transform 0.12s cubic-bezier(0.22,1,0.36,1), opacity 0.12s;
+    }
+    .cs-modal.collapsing .cs-modal-sheet {
+      transform: scale(0.04) translateY(60px) rotate(3deg);
+      opacity: 0;
+      transition: transform 0.52s cubic-bezier(0.55,0,1,0.45), opacity 0.38s 0.08s;
+    }
+    @keyframes cs-close-flash {
+      0%   { opacity: 0; }
+      20%  { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    .cs-close-flash {
+      position: fixed;
+      inset: 0;
+      z-index: 600;
+      pointer-events: none;
+      background: radial-gradient(ellipse at center,
+        rgba(255,20,100,0.28) 0%,
+        rgba(210,40,255,0.16) 40%,
+        transparent 70%
+      );
+      animation: cs-close-flash 0.55s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
     .cs-modal iframe {
       flex: 1;
       width: 100%;
@@ -2010,10 +2045,9 @@
     .pod-right::after {
       content: '';
       position: absolute;
-      inset: 0;
-      left: 0;
-      width: 48px;
-      background: linear-gradient(to right, var(--bg), transparent);
+      top: 0; bottom: 0; left: 0;
+      width: 22%;
+      background: linear-gradient(to right, var(--bg) 0%, transparent 100%);
       z-index: 2;
       pointer-events: none;
     }
@@ -2668,6 +2702,13 @@
     }
 
     // ── Open / Close ────────────────────────────────────────────
+    function sendThemeToIframe() {
+      try {
+        var t = document.documentElement.getAttribute('data-theme') || 'dark';
+        csIframe.contentWindow.postMessage({ type: 'jt-theme', theme: t }, '*');
+      } catch(e) {}
+    }
+
     function openCaseStudy(href) {
       var idx = CS_SEQUENCE.findIndex(function(s){ return s.src === href; });
       if (idx !== -1) csCurrentIdx = idx;
@@ -2677,22 +2718,40 @@
       requestAnimationFrame(function() {
         requestAnimationFrame(function() { csModal.classList.add('ready'); });
       });
-      csIframe.onload = attachPullListeners;
+      csIframe.onload = function() {
+        attachPullListeners();
+        sendThemeToIframe();
+      };
     }
 
     function closeCaseStudy() {
+      if (csModal.classList.contains('closing') || csModal.classList.contains('collapsing')) return;
       detachPullListeners();
       resetPull();
-      csModal.classList.remove('ready');
       document.body.style.overflow = '';
+
+      // Spawn aurora flash
+      var flash = document.createElement('div');
+      flash.className = 'cs-close-flash';
+      document.body.appendChild(flash);
+      setTimeout(function() { if (flash.parentNode) flash.parentNode.removeChild(flash); }, 620);
+
+      var sheet = document.querySelector('.cs-modal-sheet');
+      // Phase 1: breath-in (scale up slightly)
+      csModal.classList.add('closing');
       setTimeout(function() {
-        csModal.classList.remove('open');
-        csIframe.src = '';
-        var sheet = document.querySelector('.cs-modal-sheet');
-        sheet.style.transition = '';
-        sheet.style.transform  = '';
-        sheet.style.opacity    = '';
-      }, 480);
+        // Phase 2: collapse dramatically
+        csModal.classList.remove('closing');
+        csModal.classList.add('collapsing');
+        csModal.classList.remove('ready');
+        setTimeout(function() {
+          csModal.classList.remove('open', 'collapsing');
+          csIframe.src = '';
+          sheet.style.transition = '';
+          sheet.style.transform  = '';
+          sheet.style.opacity    = '';
+        }, 560);
+      }, 130);
     }
 
     document.getElementById('cs-modal-close').addEventListener('click', closeCaseStudy);
@@ -2741,6 +2800,13 @@
         lbl.textContent  = t === 'dark' ? 'DARK' : 'LIGHT';
         icon.textContent = t === 'dark' ? '◐' : '◑';
         localStorage.setItem('jt-theme', t);
+        // Sync open case study iframe
+        try {
+          var iframe = document.getElementById('cs-modal-iframe');
+          if (iframe && iframe.contentWindow) {
+            iframe.contentWindow.postMessage({ type: 'jt-theme', theme: t }, '*');
+          }
+        } catch(e) {}
       }
       apply(stored);
       btn.addEventListener('click', function() {
