@@ -2432,15 +2432,16 @@
     <div class="cs-modal-sheet">
       <iframe id="cs-modal-iframe" src="" title="Case Study"></iframe>
       <div class="cs-pull-zone" id="cs-pull-zone"></div>
-      <div class="cs-pull-indicator" id="cs-pull-indicator" role="button" aria-label="View next project">
-        <div class="cs-pull-aurora">
-          <span></span><span></span><span></span><span></span>
-        </div>
-        <div class="cs-pull-icon">→</div>
-        <span class="cs-pull-eyebrow">Up next</span>
-        <span class="cs-pull-title" id="cs-pull-title">—</span>
-        <span class="cs-pull-hint">Tap to continue</span>
+    </div>
+    <!-- Indicator lives OUTSIDE the sheet so the iframe can't eat its clicks -->
+    <div class="cs-pull-indicator" id="cs-pull-indicator" role="button" aria-label="View next project">
+      <div class="cs-pull-aurora">
+        <span></span><span></span><span></span><span></span>
       </div>
+      <div class="cs-pull-icon">→</div>
+      <span class="cs-pull-eyebrow">Up next</span>
+      <span class="cs-pull-title" id="cs-pull-title">—</span>
+      <span class="cs-pull-hint">Tap to continue</span>
     </div>
   </div>
 
