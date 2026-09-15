@@ -120,8 +120,8 @@
       --font:   'Manrope', -apple-system, sans-serif;
       --radius: 16px;
     }
-    /* Dark (default) */
-    :root, [data-theme="dark"] {
+    /* Loud (default) */
+    :root, [data-mode="loud"] {
       --bg:          #08080F;
       --surface:     #0D0D18;
       --surface-alt: #06060A;
@@ -133,18 +133,18 @@
       --white:       #0D0D18;
       --black:       #1D1D1F;
     }
-    /* Light */
-    [data-theme="light"] {
-      --bg:          #F7F6F2;
-      --surface:     #FFFFFF;
-      --surface-alt: #EDECEA;
-      --text:        #0C0C0A;
-      --muted:       rgba(12,12,10,0.65);
-      --subtle:      rgba(12,12,10,0.44);
-      --rule:        rgba(0,0,0,0.07);
-      --tint:        rgba(0,0,0,0.03);
-      --white:       #FFFFFF;
-      --black:       #E8E7E3;
+    /* Quiet — calm, static, editorial (georgeevans.co.uk-inspired) */
+    [data-mode="quiet"] {
+      --bg:          #F5F3EE;
+      --surface:     #FBFAF7;
+      --surface-alt: #EEECE5;
+      --text:        #14141A;
+      --muted:       rgba(20,20,26,0.62);
+      --subtle:      rgba(20,20,26,0.4);
+      --rule:        rgba(20,20,26,0.1);
+      --tint:        rgba(20,20,26,0.03);
+      --white:       #FBFAF7;
+      --black:       #E8E6DF;
     }
     html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
     body {
@@ -1156,31 +1156,31 @@
       position: fixed;
       top: 20px;
       right: 24px;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.18);
-      color: rgba(255,255,255,0.85);
-      font-size: 22px;
-      font-weight: 300;
+      background: #0A0A10;
+      border: 1px solid rgba(255,255,255,0.16);
+      color: #fff;
+      font-size: 24px;
+      font-weight: 400;
       line-height: 1;
       cursor: pointer;
       padding: 0;
       z-index: 600;
-      width: 52px;
-      height: 52px;
+      width: 54px;
+      height: 54px;
       border-radius: 50%;
       display: none;
       align-items: center;
       justify-content: center;
-      transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+      transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s;
       font-family: var(--font);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 10px 30px -6px rgba(0,0,0,0.55), 0 2px 10px rgba(0,0,0,0.4);
     }
     .cs-modal.open .cs-modal-close { display: flex; }
     .cs-modal-close:hover {
-      background: rgba(255,255,255,0.2);
+      background: #000;
       border-color: rgba(255,255,255,0.32);
       color: #fff;
+      box-shadow: 0 14px 36px -6px rgba(0,0,0,0.6), 0 2px 12px rgba(0,0,0,0.45);
       transform: scale(1.1) rotate(90deg);
     }
     /* Spectacular close — driven entirely by JS inline styles */
@@ -1576,13 +1576,6 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       animation: siri-text-glow 8s ease-in-out infinite;
-    }
-    [data-theme="light"] .writing-hero-title {
-      background: linear-gradient(135deg, #0C0C0A 0%, rgba(110,50,220,0.9) 45%, rgba(40,110,240,0.85) 70%, #0C0C0A 100%);
-      background-size: 300% 300%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
     }
     .writing-subscribe-btn {
       display: inline-flex;
@@ -2114,13 +2107,6 @@
       transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1), box-shadow 0.3s, background 0.3s, padding 0.4s cubic-bezier(0.32, 0.72, 0, 1), font-size 0.3s, gap 0.3s;
       text-shadow: 0 1px 4px rgba(0,0,0,0.4);
     }
-    [data-theme="light"] .theme-toggle {
-      background: rgba(0,0,0,0.42);
-      border-color: rgba(0,0,0,0.22);
-      color: #fff;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.15);
-    }
     .theme-toggle:hover {
       transform: translateX(-50%) translateY(-2px);
       box-shadow: 0 12px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.2);
@@ -2400,10 +2386,6 @@
       0%   { transform: translate(0,0) scale(1); opacity: 1; }
       100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
     }
-    [data-theme="light"] .snake-modal-inner { background: #1a1a2e; }
-    [data-theme="light"] .snake-modal-header { background: #16162a; }
-    [data-theme="light"] .snake-canvas-wrap  { background: #16162a; }
-    [data-theme="light"] .snake-dpad { background: #13132a; }
   </style>
   <style id="v2-ports">
     /* ════════════════════════════════════════════════════════════════
@@ -2445,53 +2427,12 @@
     .ai-milestone-year { display: inline-block; order: -1; font-size: 10.5px; font-weight: 600; letter-spacing: 0.14em; color: rgba(255,255,255,0.42); }
     .ai-milestone-title { font-size: clamp(15px, 1.4vw, 18px); }
 
-    /* ─── Selected work: compact stacked cards ─────────────────── */
-    #work-stack { position: relative; padding: 8px var(--pad) clamp(40px, 6vw, 80px); background: var(--bg); }
-    .work-row.wk-card {
-      position: sticky; top: clamp(72px, 9vh, 96px);
-      display: grid; grid-template-columns: 200px 1fr; gap: clamp(18px, 2.4vw, 32px); align-items: center;
-      margin-bottom: 14px; padding: 14px 16px 14px 14px; border-radius: 20px;
-      background: var(--surface); border: 1px solid var(--rule);
-      box-shadow: 0 30px 80px -30px rgba(4,3,20,0.7), inset 0 1px 0 rgba(255,255,255,0.04);
-      text-decoration: none; color: inherit; overflow: hidden; isolation: isolate;
-      transform-origin: 50% 0; will-change: transform, opacity, filter;
-      transition: border-color 0.3s;
-    }
-    .work-row.wk-card:hover { background: var(--surface); border-color: var(--hair-2, rgba(255,255,255,0.14)); }
-    .work-row.wk-card::before { content: none; }
-    .work-row.wk-card::after {
-      content: '↗'; position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
-      opacity: 0.35; font-size: 20px; font-weight: 300; color: var(--muted);
-      transition: transform 0.4s cubic-bezier(0.32,0.72,0,1), opacity 0.3s, color 0.3s;
-    }
-    .work-row.wk-card:hover::after { opacity: 1; color: var(--text); transform: translateY(-50%) translate(2px,-2px); }
-    .wk-media { position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 16 / 10; background: #0B0B15; border: 1px solid var(--rule); }
-    .wk-media video { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1s cubic-bezier(0.32,0.72,0,1); }
-    .work-row.wk-card:hover .wk-media video { transform: scale(1.04); }
-    .work-row.wk-card[data-brand="careem"] .wk-media video { transform: scale(1.18); }
-    .work-row.wk-card[data-brand="careem"]:hover .wk-media video { transform: scale(1.22); }
-    .wk-body { display: flex; flex-direction: column; gap: 7px; min-width: 0; padding-right: 44px; }
-    .wk-meta { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--subtle); }
-    .wk-title { font-size: clamp(18px, 1.8vw, 26px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.1; color: var(--text); }
-    .wk-desc { font-size: 13.5px; color: var(--muted); line-height: 1.5; max-width: 62ch; }
-    .wk-stats { display: flex; align-items: center; gap: 18px; margin-top: 4px; }
-    .wk-stats-blur { display: flex; gap: 20px; filter: blur(6px); opacity: 0.75; pointer-events: none; user-select: none; -webkit-user-select: none; }
-    .wk-stat b { display: block; font-size: 17px; font-weight: 700; letter-spacing: -0.02em; color: var(--text); font-variant-numeric: tabular-nums; }
-    .wk-stat span { font-size: 11px; color: var(--muted); white-space: nowrap; }
-    .wk-lock { font-size: 10.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--subtle); white-space: nowrap; }
-    @media (max-width: 900px) {
-      .work-row.wk-card { grid-template-columns: 1fr; position: relative; top: auto; padding: 12px; gap: 14px; margin-bottom: 12px; }
-      .wk-body { padding-right: 32px; }
-      .wk-stats { flex-wrap: wrap; gap: 12px; }
-      .wk-stats-blur { gap: 16px; }
-    }
-
     /* ─── About: word-scrub ────────────────────────────────────── */
     .about-bio .w { display: inline-block; opacity: 0.16; transition: opacity 0.3s; }
     .about-bio .w.on { opacity: 1; }
 
     /* ─── Writing / Podcast (from v2) ──────────────────────────── */
-    .writing-hero-title, [data-theme="light"] .writing-hero-title {
+    .writing-hero-title {
       background: none; -webkit-text-fill-color: var(--text); color: var(--text); animation: none;
     }
     .pod-inner { padding: clamp(48px, 6vw, 80px) var(--pad); gap: clamp(24px, 4vw, 64px); align-items: center; min-height: 0; }
@@ -2508,7 +2449,60 @@
     @media (prefers-reduced-motion: reduce) {
       .ai-milestone { opacity: 1; transform: none; filter: none; }
       .about-bio .w { opacity: 1; }
-      .work-row.wk-card { position: relative; top: auto; }
+    }
+  </style>
+  <style id="quiet-mode">
+    /* ════════════════════════════════════════════════════════════════
+       QUIET MODE · calm, static, editorial (georgeevans.co.uk-inspired)
+       Loud = the site as built. Quiet = thin type, flat, no motion.
+       ════════════════════════════════════════════════════════════════ */
+    [data-mode="quiet"] * {
+      font-weight: 300 !important;
+      text-shadow: none !important;
+      box-shadow: none !important;
+      -webkit-backdrop-filter: none !important;
+      backdrop-filter: none !important;
+      animation: none !important;
+      transition: background 0.4s ease, color 0.4s ease, opacity 0.4s ease, border-color 0.4s ease !important;
+    }
+    [data-mode="quiet"] body { background: var(--bg); color: var(--text); }
+
+    /* Kill decorative motion layers entirely */
+    [data-mode="quiet"] #ai-sky,
+    [data-mode="quiet"] .hero-video-wrap,
+    [data-mode="quiet"] .cursor-dot,
+    [data-mode="quiet"] .cursor-ring,
+    [data-mode="quiet"] .cs-pull-aurora,
+    [data-mode="quiet"] #snake-aurora-strip {
+      display: none !important;
+    }
+
+    /* Flatten glass / gradient surfaces */
+    [data-mode="quiet"] .v2-nav,
+    [data-mode="quiet"] .theme-toggle,
+    [data-mode="quiet"] .section-nav {
+      background: var(--surface) !important;
+      border: 1px solid var(--rule) !important;
+    }
+
+    /* Force scroll-linked effects to their resting, fully-revealed state */
+    [data-mode="quiet"] .hero-text { opacity: 1 !important; filter: none !important; }
+    [data-mode="quiet"] .ai-milestone { opacity: 1 !important; transform: none !important; filter: none !important; }
+    [data-mode="quiet"] .about-bio .w { opacity: 1 !important; }
+    [data-mode="quiet"] .ai-tl-line { display: none; }
+
+    /* Text accent: near-black, no gradients */
+    [data-mode="quiet"] .writing-hero-title {
+      background: none !important; -webkit-text-fill-color: var(--text) !important; color: var(--text) !important;
+    }
+
+    /* Thin hairline borders, no heavy card shadows */
+    [data-mode="quiet"] .work-row,
+    [data-mode="quiet"] .article-card,
+    [data-mode="quiet"] .pod-right,
+    [data-mode="quiet"] .about-video {
+      box-shadow: none !important;
+      border-color: var(--rule) !important;
     }
   </style>
 </head>
@@ -2526,10 +2520,10 @@
     <div class="sn-dot" data-section="about"></div>
   </nav>
 
-  <!-- Theme toggle -->
-  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
-    <span class="t-icon" id="t-icon">◐</span>
-    <span id="t-label">DARK</span>
+  <!-- Mode toggle -->
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Quiet/Loud mode">
+    <span class="t-icon" id="t-icon">●</span>
+    <span id="t-label">LOUD</span>
   </button>
 
   <!-- Case Study Modal -->
@@ -2626,70 +2620,44 @@
     <h2 class="section-title">Selected Work</h2>
     <span class="section-count">03</span>
   </div>
-  <div id="work-stack">
-    <a href="./casestudy-neobank.html" id="work" class="work-row wk-card" data-brand="kraken">
-      <div class="wk-media">
-        <video class="wk-video" muted loop playsinline preload="metadata" poster="./media/previews/kraken.jpg">
-          <source src="./media/previews/kraken.mp4" type="video/mp4" />
-        </video>
-      </div>
-      <div class="wk-body">
-        <p class="wk-meta">Kraken · Neo-Banking · Redesign · 2025</p>
-        <div class="wk-title">From P2P to Neobank</div>
-        <p class="wk-desc">Information architecture overhaul and end-to-end redesign of a global neobank.</p>
-        <div class="wk-stats">
-          <div class="wk-stats-blur" aria-hidden="true">
-            <div class="wk-stat"><b>$7M+</b><span>revenue, 8 weeks</span></div>
-            <div class="wk-stat"><b>30K+</b><span>card orders</span></div>
-            <div class="wk-stat"><b>6×</b><span>weekly transactions</span></div>
-          </div>
-          <span class="wk-lock">Open to reveal</span>
-        </div>
-      </div>
-    </a>
+  <a href="./casestudy-neobank.html" id="work" class="work-row reveal">
+    <span class="work-num">01</span>
+    <div class="work-body">
+      <p class="work-co">Kraken · Neo-Banking · Redesign · 2025</p>
+      <div class="work-title">From P2P to Neobank</div>
+      <p class="work-desc">Information architecture overhaul and end-to-end redesign of a global neobank.</p>
+    </div>
+    <div class="work-meta">
+      <span class="work-meta-co">Kraken</span>
+      <span class="work-meta-year">2025</span>
+    </div>
+  </a>
 
-    <a href="./casestudy-careem-plus.html" class="work-row wk-card" data-brand="careem">
-      <div class="wk-media">
-        <video class="wk-video" muted loop playsinline preload="metadata" poster="./media/previews/careem-plus.jpg">
-          <source src="./media/previews/careem-plus.mp4" type="video/mp4" />
-        </video>
-      </div>
-      <div class="wk-body">
-        <p class="wk-meta">Careem (Uber) · Super App · Subscriptions · 2024</p>
-        <div class="wk-title">Careem Plus: Subscription Growth</div>
-        <p class="wk-desc">Data-led subscription system that turned a declining metric into a sustained growth engine.</p>
-        <div class="wk-stats">
-          <div class="wk-stats-blur" aria-hidden="true">
-            <div class="wk-stat"><b>+150%</b><span>subscriber growth</span></div>
-            <div class="wk-stat"><b>96%</b><span>retention</span></div>
-            <div class="wk-stat"><b>4×</b><span>service usage</span></div>
-          </div>
-          <span class="wk-lock">Open to reveal</span>
-        </div>
-      </div>
-    </a>
+  <a href="./casestudy-careem-plus.html" class="work-row reveal">
+    <span class="work-num">02</span>
+    <div class="work-body">
+      <p class="work-co">Careem (Uber) · Super App · Subscriptions · 2024</p>
+      <div class="work-title">Careem Plus: Subscription Growth</div>
+      <p class="work-desc">Data-led subscription system that turned a declining metric into a sustained growth engine.</p>
+    </div>
+    <div class="work-meta">
+      <span class="work-meta-co">Careem / Uber</span>
+      <span class="work-meta-year">2024</span>
+    </div>
+  </a>
 
-    <a href="./casestudy-metro.html" class="work-row wk-card" data-brand="metro">
-      <div class="wk-media">
-        <video class="wk-video" muted loop playsinline preload="metadata" poster="./media/previews/metro.jpg">
-          <source src="./media/previews/metro.mp4" type="video/mp4" />
-        </video>
-      </div>
-      <div class="wk-body">
-        <p class="wk-meta">Metro Bank · UK Retail Banking · AI · 2018</p>
-        <div class="wk-title">UK's First AI in Retail Banking</div>
-        <p class="wk-desc">AI-powered financial insights that shifted customer behaviour at scale.</p>
-        <div class="wk-stats">
-          <div class="wk-stats-blur" aria-hidden="true">
-            <div class="wk-stat"><b>2.4M+</b><span>insights, year one</span></div>
-            <div class="wk-stat"><b>+300%</b><span>app retention</span></div>
-            <div class="wk-stat"><b>80%</b><span>feature retention</span></div>
-          </div>
-          <span class="wk-lock">Open to reveal</span>
-        </div>
-      </div>
-    </a>
-  </div>
+  <a href="./casestudy-metro.html" class="work-row reveal">
+    <span class="work-num">03</span>
+    <div class="work-body">
+      <p class="work-co">Metro Bank · UK Retail Banking · AI · 2018</p>
+      <div class="work-title">UK's First AI in Retail Banking</div>
+      <p class="work-desc">AI-powered financial insights that shifted customer behaviour at scale.</p>
+    </div>
+    <div class="work-meta">
+      <span class="work-meta-co">Metro Bank</span>
+      <span class="work-meta-year">2018</span>
+    </div>
+  </a>
 
   <!-- AI -->
   <section id="ai">
@@ -3070,13 +3038,6 @@
     }
 
     // ── Open / Close ────────────────────────────────────────────
-    function sendThemeToIframe() {
-      try {
-        var t = document.documentElement.getAttribute('data-theme') || 'dark';
-        csIframe.contentWindow.postMessage({ type: 'jt-theme', theme: t }, '*');
-      } catch(e) {}
-    }
-
     function openCaseStudy(href) {
       var idx = CS_SEQUENCE.findIndex(function(s){ return s.src === href; });
       if (idx !== -1) csCurrentIdx = idx;
@@ -3088,7 +3049,6 @@
       });
       csIframe.onload = function() {
         attachPullListeners();
-        sendThemeToIframe();
       };
     }
 
@@ -3167,30 +3127,29 @@
       });
     }
 
-    // ─── Theme Toggle ────────────────────────────────────────────
+    // ─── Quiet / Loud Mode Toggle ──────────────────────────────────
     (function() {
       var root = document.documentElement;
       var btn  = document.getElementById('theme-toggle');
-      var stored = localStorage.getItem('jt-theme') ||
-                   (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      var stored = localStorage.getItem('jt-mode') || 'loud';
       var lbl  = document.getElementById('t-label');
       var icon = document.getElementById('t-icon');
-      function apply(t) {
-        root.setAttribute('data-theme', t);
-        lbl.textContent  = t === 'dark' ? 'DARK' : 'LIGHT';
-        icon.textContent = t === 'dark' ? '◐' : '◑';
-        localStorage.setItem('jt-theme', t);
-        // Sync open case study iframe
-        try {
-          var iframe = document.getElementById('cs-modal-iframe');
-          if (iframe && iframe.contentWindow) {
-            iframe.contentWindow.postMessage({ type: 'jt-theme', theme: t }, '*');
-          }
-        } catch(e) {}
+      function apply(m) {
+        root.setAttribute('data-mode', m);
+        lbl.textContent  = m === 'quiet' ? 'QUIET' : 'LOUD';
+        icon.textContent = m === 'quiet' ? '○' : '●';
+        localStorage.setItem('jt-mode', m);
+        // Pause/resume the hero video with the mode
+        var heroVideo = document.querySelector('.hero-video-wrap video');
+        if (heroVideo) {
+          if (m === 'quiet') heroVideo.pause();
+          else heroVideo.play().catch(function() {});
+        }
+        document.dispatchEvent(new Event('jt-mode-change'));
       }
       apply(stored);
       if (btn) btn.addEventListener('click', function() {
-        apply(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+        apply(root.getAttribute('data-mode') === 'quiet' ? 'loud' : 'quiet');
       });
       // Shrink on scroll, re-enlarge when scrolling stops
       var scrollTimer;
@@ -3839,28 +3798,21 @@
       var mx = 0.5, my = 0.5, tx = 0.5, ty = 0.5;
       if (fine) host.addEventListener('pointermove', function (e) { var b = host.getBoundingClientRect(); tx = (e.clientX - b.left) / b.width; ty = 1 - (e.clientY - b.top) / b.height; }, { passive: true });
       var visible = false, running = false, t0 = performance.now();
+      function quiet() { return document.documentElement.getAttribute('data-mode') === 'quiet'; }
       function frame(now) {
-        if (!visible || document.hidden) { running = false; return; }
+        if (!visible || document.hidden || quiet()) { running = false; return; }
         resize(); mx += (tx - mx) * 0.06; my += (ty - my) * 0.06;
         gl.uniform1f(uT, reduce ? 12 : (now - t0) / 1000); gl.uniform2f(uM, mx, my);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
         if (reduce) { running = false; return; }
         requestAnimationFrame(frame);
       }
-      function start() { if (running || !visible) return; running = true; requestAnimationFrame(frame); }
+      function start() { if (running || !visible || quiet()) return; running = true; requestAnimationFrame(frame); }
       new IntersectionObserver(function (en) { visible = en[0].isIntersecting; if (visible) start(); }, { threshold: 0.02 }).observe(host);
       document.addEventListener('visibilitychange', function () { if (!document.hidden) start(); });
+      document.addEventListener('jt-mode-change', function () { start(); });
       window.addEventListener('resize', resize, { passive: true });
       resize();
-    })();
-
-    /* ── Work previews: play when in view ─────────────────────── */
-    (function () {
-      var vids = document.querySelectorAll('.wk-video'); if (!vids.length) return;
-      var io = new IntersectionObserver(function (en) {
-        en.forEach(function (e) { var v = e.target; if (e.isIntersecting) { v.play && v.play().catch(function () {}); } else { v.pause && v.pause(); } });
-      }, { threshold: 0.25 });
-      vids.forEach(function (v) { io.observe(v); });
     })();
 
     /* ── Split About bio into words ───────────────────────────── */
@@ -3873,11 +3825,9 @@
 
     /* ── Scroll engine ────────────────────────────────────────── */
     var heroText = document.querySelector('.hero-text'), heroWrap = document.querySelector('.hero-video-wrap'), hero = document.getElementById('hero');
-    var cards = Array.prototype.slice.call(document.querySelectorAll('.work-row.wk-card'));
     var bio = document.querySelector('.about-bio');
     var tlRight = document.querySelector('.ai-m-right'), tlProg = document.getElementById('ai-tl-progress');
     var milestones = Array.prototype.slice.call(document.querySelectorAll('.ai-milestone'));
-    var desktop = function () { return window.innerWidth > 900; };
     var lastBioN = -1, ticking = false;
 
     function update() {
@@ -3891,22 +3841,6 @@
         heroText.style.opacity = String(1 - p * 0.9);
         heroText.style.filter = p > 0.02 ? 'blur(' + (p * 6).toFixed(2) + 'px)' : '';
         if (heroWrap) heroWrap.style.opacity = String(1 - p * 0.6);
-      }
-
-      // Stacked cards: the card underneath recedes as the next one arrives
-      if (cards.length && !reduce) {
-        if (desktop()) {
-          var stickTop = parseFloat(getComputedStyle(cards[0]).top) || 80;
-          for (var i = 0; i < cards.length - 1; i++) {
-            var nr = cards[i + 1].getBoundingClientRect();
-            var q = clamp((vh - nr.top) / (vh - stickTop));
-            cards[i].style.transform = 'scale(' + (1 - q * 0.06).toFixed(4) + ')';
-            cards[i].style.opacity = String(1 - q * 0.55);
-            cards[i].style.filter = q > 0.02 ? 'blur(' + (q * 2).toFixed(2) + 'px)' : '';
-          }
-        } else {
-          cards.forEach(function (c) { c.style.transform = ''; c.style.opacity = ''; c.style.filter = ''; });
-        }
       }
 
       // About bio: words light up as you read
