@@ -1209,7 +1209,7 @@
       border-radius: 0 0 20px 20px;
     }
 
-    /* ─── Pull-to-next indicator ──────────────────────────────── */
+    /* ─── Tap-to-next indicator ──────────────────────────────── */
     .cs-pull-indicator {
       position: absolute;
       bottom: 0;
@@ -1224,13 +1224,24 @@
       padding-bottom: 40px;
       gap: 14px;
       pointer-events: none;
+      cursor: pointer;
       z-index: 20;
       overflow: hidden;
       transform: translateY(100%);
       opacity: 0;
+      transition: filter 0.3s;
       /* Fade to transparent — no black */
       -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 28%);
       mask-image: linear-gradient(to bottom, transparent 0%, black 28%);
+    }
+    .cs-pull-indicator.visible {
+      pointer-events: auto;
+    }
+    .cs-pull-indicator.visible:hover {
+      filter: brightness(1.15);
+    }
+    .cs-pull-indicator.visible:active {
+      filter: brightness(0.9);
     }
     /* Aurora blobs — Siri warm palette */
     .cs-pull-aurora { position: absolute; inset: 0; overflow: hidden; }
@@ -2421,14 +2432,14 @@
     <div class="cs-modal-sheet">
       <iframe id="cs-modal-iframe" src="" title="Case Study"></iframe>
       <div class="cs-pull-zone" id="cs-pull-zone"></div>
-      <div class="cs-pull-indicator" id="cs-pull-indicator">
+      <div class="cs-pull-indicator" id="cs-pull-indicator" role="button" aria-label="View next project">
         <div class="cs-pull-aurora">
           <span></span><span></span><span></span><span></span>
         </div>
-        <div class="cs-pull-icon">↑</div>
-        <span class="cs-pull-eyebrow">Next project</span>
+        <div class="cs-pull-icon">→</div>
+        <span class="cs-pull-eyebrow">Up next</span>
         <span class="cs-pull-title" id="cs-pull-title">—</span>
-        <span class="cs-pull-hint">Keep scrolling to continue</span>
+        <span class="cs-pull-hint">Tap to continue</span>
       </div>
     </div>
   </div>
@@ -2798,10 +2809,10 @@
     function hideIndicator() {
       pullHinted = false;
       pullHintTime = 0;
+      csPull.classList.remove('visible');
       csPull.style.transition = 'transform 0.5s cubic-bezier(0.32,0.72,0,1), opacity 0.4s';
       csPull.style.transform  = 'translateY(100%)';
       csPull.style.opacity    = '0';
-      csPull.classList.remove('primed');
     }
 
     function showHint() {
@@ -2812,12 +2823,7 @@
       csPull.style.transition = 'transform 0.4s cubic-bezier(0.22,1.6,0.36,1), opacity 0.25s';
       csPull.style.transform  = 'translateY(0%)';
       csPull.style.opacity    = '1';
-      csPull.classList.remove('primed');
-    }
-
-    function canNavigate() {
-      // Only allow navigation if hint has been showing long enough
-      return pullHinted && !pullNavigating && (Date.now() - pullHintTime >= HINT_COOLDOWN);
+      csPull.classList.add('visible');
     }
 
     function navigateToNext() {
@@ -2861,7 +2867,6 @@
         } catch(e) {}
         if (pullZone) {
           pullZone.removeEventListener('touchstart', pullListeners.pzStart);
-          pullZone.removeEventListener('touchmove',  pullListeners.pzMove);
           pullZone.removeEventListener('touchend',   pullListeners.pzEnd);
           pullZone.classList.remove('active');
         }
@@ -2885,34 +2890,22 @@
         } catch(e) { return false; }
       }
 
-      // ── Desktop: wheel events on iframe window ──
+      // ── Desktop: wheel — show hint when at bottom, tap/click navigates ──
       var onWheel = function(e) {
         if (pullNavigating) return;
-        if (e.deltaY > 0) {
-          if (!atBottom()) return;
-          if (!pullHinted) { showHint(); return; }
-          // Hint is showing — navigate on the next deliberate scroll (after cooldown)
-          if (canNavigate()) { e.preventDefault(); navigateToNext(); }
-        } else {
-          if (pullHinted) hideIndicator();
-        }
+        if (e.deltaY > 0 && atBottom() && !pullHinted) showHint();
+        else if (e.deltaY < 0 && pullHinted) hideIndicator();
       };
-      iwin.addEventListener('wheel', onWheel, { passive: false });
+      iwin.addEventListener('wheel', onWheel, { passive: true });
 
-      // ── Touch via iframe window ──
+      // ── Touch — show hint when at bottom, tap/click navigates ──
       var touchStartY = 0;
-      var onTouchStart = function(e) {
-        touchStartY = e.touches[0].clientY;
-      };
+      var onTouchStart = function(e) { touchStartY = e.touches[0].clientY; };
       var onTouchMove = function(e) {
         if (pullNavigating) return;
         var dy = touchStartY - e.touches[0].clientY;
-        if (dy > 0 && atBottom()) {
-          if (!pullHinted) { showHint(); return; }
-          if (canNavigate()) navigateToNext();
-        } else if (dy < 0 && pullHinted) {
-          hideIndicator();
-        }
+        if (dy > 0 && atBottom() && !pullHinted) showHint();
+        else if (dy < 0 && pullHinted) hideIndicator();
       };
       iwin.addEventListener('touchstart', onTouchStart, { passive: true });
       iwin.addEventListener('touchmove',  onTouchMove,  { passive: true });
@@ -2931,35 +2924,19 @@
       });
 
       // ── Pull zone touch handlers (mobile overlay, always reliable) ──
-      var pzStartY = 0, pzActive = false;
-      var onPZTouchStart = function(e) {
-        pzStartY = e.touches[0].clientY;
-        pzActive = true;
-      };
-      var onPZTouchMove = function(e) {
-        if (!pzActive || pullNavigating) return;
-        var dy = pzStartY - e.touches[0].clientY;
-        if (dy > 0) {
-          if (!pullHinted) { showHint(); return; }
-          if (canNavigate()) { e.preventDefault(); navigateToNext(); }
-        } else if (dy < 0 && pullHinted) {
-          hideIndicator();
-        }
-      };
-      var onPZTouchEnd = function() {
-        pzActive = false; pzStartY = 0;
-      };
+      // Pull zone just shows the hint — tap on the indicator itself navigates
+      var onPZTouchStart = function() { if (!pullHinted) showHint(); };
+      var onPZTouchEnd   = function() {};
       if (pullZone) {
         pullZone.addEventListener('touchstart', onPZTouchStart, { passive: true });
-        pullZone.addEventListener('touchmove',  onPZTouchMove,  { passive: false });
         pullZone.addEventListener('touchend',   onPZTouchEnd,   { passive: true });
       }
 
       pullListeners = {
         win: iwin,
-        wheel: onWheel, tstart: onTouchStart, tmove: onTouchMove, tend: onTouchEnd,
+        wheel: onWheel, tstart: onTouchStart, tmove: onTouchMove,
         scroll: onIframeScroll,
-        pzStart: onPZTouchStart, pzMove: onPZTouchMove, pzEnd: onPZTouchEnd
+        pzStart: onPZTouchStart, pzEnd: onPZTouchEnd
       };
     }
 
