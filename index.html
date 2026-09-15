@@ -1437,27 +1437,27 @@
       transition: transform 0.8s cubic-bezier(0.32, 0.72, 0, 1);
     }
     .ai-aurora-1 {
-      top: -40%; left: -25%;
-      width: 85%; height: 180%;
-      background: radial-gradient(ellipse 70% 56% at 38% 50%,
-        rgba(255, 90, 0,  0.68) 0%,
-        rgba(220, 20, 90, 0.40) 36%,
-        rgba(160,  0, 60, 0.14) 62%,
-        transparent 82%
+      top: -40%; left: -15%;
+      width: 120%; height: 180%;
+      background: radial-gradient(ellipse 55% 52% at 22% 50%,
+        rgba(255, 90, 0,  0.60) 0%,
+        rgba(220, 20, 90, 0.30) 40%,
+        rgba(160,  0, 60, 0.08) 68%,
+        transparent 100%
       );
-      filter: blur(2px);
+      filter: blur(3px);
       animation: aurora-drift-1 15s ease-in-out infinite;
     }
     .ai-aurora-2 {
-      bottom: -50%; right: -25%;
-      width: 80%; height: 190%;
-      background: radial-gradient(ellipse 75% 62% at 60% 60%,
-        rgba(85,  0, 200, 0.58) 0%,
-        rgba(200, 0, 160, 0.34) 36%,
-        rgba(255, 60,  0, 0.10) 66%,
-        transparent 84%
+      bottom: -50%; right: -15%;
+      width: 120%; height: 190%;
+      background: radial-gradient(ellipse 55% 58% at 78% 60%,
+        rgba(85,  0, 200, 0.52) 0%,
+        rgba(200, 0, 160, 0.28) 40%,
+        rgba(120, 0, 180, 0.06) 68%,
+        transparent 100%
       );
-      filter: blur(2px);
+      filter: blur(3px);
       animation: aurora-drift-2 20s ease-in-out infinite 3s;
     }
     .ai-m-left {
@@ -2897,27 +2897,22 @@
       iwin.addEventListener('wheel', onWheel, { passive: false });
 
       // ── Touch via iframe window ──
-      var touchStartY = 0, touchIsNew = false;
+      var touchStartY = 0;
       var onTouchStart = function(e) {
         touchStartY = e.touches[0].clientY;
-        touchIsNew  = true; // fresh gesture — user lifted and re-touched
       };
       var onTouchMove = function(e) {
         if (pullNavigating) return;
         var dy = touchStartY - e.touches[0].clientY;
         if (dy > 0 && atBottom()) {
           if (!pullHinted) { showHint(); return; }
-          // Navigate only on a fresh touch gesture after the cooldown
-          if (touchIsNew && canNavigate()) navigateToNext();
+          if (canNavigate()) navigateToNext();
         } else if (dy < 0 && pullHinted) {
           hideIndicator();
         }
-        touchIsNew = false;
       };
-      var onTouchEnd = function() { touchIsNew = false; };
       iwin.addEventListener('touchstart', onTouchStart, { passive: true });
       iwin.addEventListener('touchmove',  onTouchMove,  { passive: true });
-      iwin.addEventListener('touchend',   onTouchEnd,   { passive: true });
 
       // ── Show indicator automatically when iframe reaches bottom ──
       var onIframeScroll = function() {
@@ -2933,25 +2928,23 @@
       });
 
       // ── Pull zone touch handlers (mobile overlay, always reliable) ──
-      var pzStartY = 0, pzIsNew = false, pzActive = false;
+      var pzStartY = 0, pzActive = false;
       var onPZTouchStart = function(e) {
         pzStartY = e.touches[0].clientY;
-        pzIsNew  = true;
         pzActive = true;
       };
       var onPZTouchMove = function(e) {
         if (!pzActive || pullNavigating) return;
         var dy = pzStartY - e.touches[0].clientY;
         if (dy > 0) {
-          if (!pullHinted) { showHint(); pzIsNew = false; return; }
-          if (pzIsNew && canNavigate()) { e.preventDefault(); navigateToNext(); }
+          if (!pullHinted) { showHint(); return; }
+          if (canNavigate()) { e.preventDefault(); navigateToNext(); }
         } else if (dy < 0 && pullHinted) {
           hideIndicator();
         }
-        pzIsNew = false;
       };
       var onPZTouchEnd = function() {
-        pzActive = false; pzStartY = 0; pzIsNew = false;
+        pzActive = false; pzStartY = 0;
       };
       if (pullZone) {
         pullZone.addEventListener('touchstart', onPZTouchStart, { passive: true });
