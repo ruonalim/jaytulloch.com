@@ -2201,10 +2201,12 @@
     #snake-section {
       position: relative;
       overflow: hidden;
-      min-height: 200px;
+      min-height: 260px;
       display: flex;
       align-items: center;
       justify-content: center;
+      /* extra bottom padding so the fixed theme-toggle doesn't overlap */
+      padding: 40px 20px 100px;
       background: #06060B;
       border-top: 1px solid rgba(255,255,255,0.06);
     }
@@ -2783,8 +2785,8 @@
     // ── Pull state ──────────────────────────────────────────────
     // Phase 1: auto-hint (bounces in when user hits bottom)
     // Phase 2: active pull (user drags further to trigger navigation)
-    var HINT_Y        = 56;   // % translateY for hint peek (44% of 260px = ~114px visible)
-    var PULL_THRESHOLD = 300; // accumulated drag px to trigger navigation
+    var HINT_Y         = 0;   // indicator stays fully visible once shown
+    var PULL_THRESHOLD = 80;  // small swipe to trigger navigation
     var pullDelta      = 0;
     var pullTimer      = null;
     var pullNavigating = false;
@@ -2805,20 +2807,11 @@
       if (pullHinted || pullNavigating) return;
       pullHinted = true;
       setNextTitle();
-
-      // Instantly spring up — fast overshoot, then land
-      csPull.style.transition = 'transform 0.36s cubic-bezier(0.22,1.8,0.36,1), opacity 0.22s';
+      // Spring fully into view and stay there
+      csPull.style.transition = 'transform 0.4s cubic-bezier(0.22,1.6,0.36,1), opacity 0.25s';
       csPull.style.transform  = 'translateY(0%)';
       csPull.style.opacity    = '1';
       csPull.classList.remove('primed');
-
-      // After 1.8s settle to small hint peek (if user hasn't started pulling)
-      setTimeout(function() {
-        if (!pullNavigating && pullDelta < 20) {
-          csPull.style.transition = 'transform 1.0s cubic-bezier(0.32,0.72,0,1), opacity 0.5s';
-          csPull.style.transform  = 'translateY(' + HINT_Y + '%)';
-        }
-      }, 1800);
     }
 
     function snapBackToHint() {
@@ -2958,13 +2951,19 @@
       iwin.addEventListener('touchmove',  onTouchMove,  { passive: true  });
       iwin.addEventListener('touchend',   onTouchEnd,   { passive: true  });
 
-      // ── Mobile: activate pull zone when iframe reaches bottom ──
-      // Monitors iframe scroll; enables the transparent overlay at the bottom
-      // so iOS can capture touches even when iframe captures scroll events.
+      // ── Show indicator automatically when iframe reaches bottom ──
+      // Also activates the pull zone overlay for reliable iOS touch capture.
       var onIframeScroll = function() {
-        if (pullZone) pullZone.classList.toggle('active', atBottom());
+        var bot = atBottom();
+        if (pullZone) pullZone.classList.toggle('active', bot);
+        if (bot && !pullHinted && !pullNavigating) showHint();
+        else if (!bot && pullHinted && pullDelta < 10) hideIndicator();
       };
       iwin.addEventListener('scroll', onIframeScroll, { passive: true });
+      // Tap the indicator itself to navigate (primary mobile gesture)
+      csPull.addEventListener('click', function() {
+        if (pullHinted && !pullNavigating) navigateToNext();
+      });
 
       // ── Pull zone touch handlers (mobile-first, always-reliable) ──
       var pzStartY = 0, pzLastY = 0, pzActive = false;
