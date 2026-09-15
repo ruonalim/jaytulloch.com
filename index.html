@@ -32,6 +32,88 @@
   <style>
     /* ─── Reset ─────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ─── Custom cursor ─────────────────────────────────────────── */
+    @media (pointer: fine) {
+      * { cursor: none !important; }
+      .cursor-dot {
+        position: fixed;
+        width: 6px;
+        height: 6px;
+        background: #fff;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        mix-blend-mode: difference;
+        transform: translate(-50%, -50%);
+        will-change: transform;
+        transition: width 0.2s, height 0.2s, opacity 0.2s;
+      }
+      .cursor-ring {
+        position: fixed;
+        width: 36px;
+        height: 36px;
+        border: 1.5px solid rgba(255,255,255,0.55);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9998;
+        mix-blend-mode: difference;
+        transform: translate(-50%, -50%);
+        will-change: transform;
+        transition: width 0.35s cubic-bezier(0.32, 0.72, 0, 1),
+                    height 0.35s cubic-bezier(0.32, 0.72, 0, 1),
+                    opacity 0.25s, border-color 0.25s;
+      }
+      .cursor-ring.hovering {
+        width: 56px;
+        height: 56px;
+        border-color: rgba(255,255,255,0.85);
+      }
+      .cursor-ring.clicking {
+        width: 28px;
+        height: 28px;
+      }
+    }
+
+    /* ─── Scroll progress ───────────────────────────────────────── */
+    .scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      width: 0%;
+      background: linear-gradient(to right, rgba(255,255,255,0.4), rgba(255,255,255,0.85));
+      z-index: 9997;
+      transition: width 0.1s linear;
+      pointer-events: none;
+    }
+
+    /* ─── Section nav dots ──────────────────────────────────────── */
+    .section-nav {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 300;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+    .section-nav.visible { opacity: 1; }
+    .sn-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      transition: background 0.3s, transform 0.3s;
+      cursor: pointer;
+    }
+    .sn-dot.active {
+      background: rgba(255,255,255,0.85);
+      transform: scale(1.4);
+    }
+    @media (max-width: 900px) { .section-nav { display: none; } }
     /* ─── Theme tokens ──────────────────────────────────────────── */
     :root {
       --pad:    clamp(20px, 4vw, 64px);
@@ -104,6 +186,7 @@
     .hero-video-wrap {
       position: absolute;
       inset: 0;
+      will-change: transform;
     }
     .hero-video-wrap video {
       width: 100%;
@@ -136,6 +219,7 @@
       position: absolute;
       inset: 0;
       z-index: 2;
+      will-change: transform;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -349,17 +433,17 @@
       text-decoration: none;
       color: inherit;
     }
-    .work-row:hover { background: var(--tint); }
+    .work-row:hover { background: linear-gradient(to right, rgba(255,255,255,0.05) 0%, transparent 70%); }
     .work-row:hover .work-title { color: rgba(255,255,255,0.95); }
     .work-row::before {
       content: '';
       position: absolute;
       left: 0; top: 0; bottom: 0;
-      width: 2px;
-      background: rgba(255,255,255,0.85);
+      width: 3px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(255,255,255,0.4));
       transform: scaleY(0);
       transform-origin: top;
-      transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+      transition: transform 0.45s cubic-bezier(0.32, 0.72, 0, 1);
     }
     .work-row:hover::before { transform: scaleY(1); }
     .work-row::after {
@@ -1157,14 +1241,17 @@
       position: relative;
       overflow: hidden;
     }
-    /* Aurora blob 1: purple/indigo (top-left) */
-    #ai::before {
-      content: '';
+    /* Aurora blobs replaced by .ai-aurora-1 / .ai-aurora-2 divs for JS parallax */
+    .ai-aurora-1, .ai-aurora-2 {
       position: absolute;
-      top: -40%;
-      left: -25%;
-      width: 85%;
-      height: 180%;
+      pointer-events: none;
+      z-index: 0;
+      will-change: transform;
+      transition: transform 0.8s cubic-bezier(0.32, 0.72, 0, 1);
+    }
+    .ai-aurora-1 {
+      top: -40%; left: -25%;
+      width: 85%; height: 180%;
       background: radial-gradient(ellipse 70% 55% at 40% 50%,
         rgba(100, 50, 255, 0.40) 0%,
         rgba(168, 85, 247, 0.24) 35%,
@@ -1172,17 +1259,10 @@
         transparent 80%
       );
       animation: aurora-drift-1 15s ease-in-out infinite;
-      pointer-events: none;
-      z-index: 0;
     }
-    /* Aurora blob 2: blue/warm (bottom-right) */
-    #ai::after {
-      content: '';
-      position: absolute;
-      bottom: -50%;
-      right: -25%;
-      width: 80%;
-      height: 190%;
+    .ai-aurora-2 {
+      bottom: -50%; right: -25%;
+      width: 80%; height: 190%;
       background: radial-gradient(ellipse 75% 60% at 60% 60%,
         rgba(30, 80, 255, 0.30) 0%,
         rgba(130, 50, 230, 0.20) 35%,
@@ -1190,8 +1270,6 @@
         transparent 85%
       );
       animation: aurora-drift-2 20s ease-in-out infinite 3s;
-      pointer-events: none;
-      z-index: 0;
     }
     .ai-m-left {
       position: relative;
@@ -1875,6 +1953,18 @@
 </head>
 <body>
 
+  <div class="cursor-dot" id="cursor-dot"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+  <div class="scroll-progress" id="scroll-progress"></div>
+  <nav class="section-nav" id="section-nav" aria-label="Section navigation">
+    <div class="sn-dot active" data-section="hero"></div>
+    <div class="sn-dot" data-section="brands"></div>
+    <div class="sn-dot" data-section="metrics"></div>
+    <div class="sn-dot" data-section="ai"></div>
+    <div class="sn-dot" data-section="writing"></div>
+    <div class="sn-dot" data-section="about"></div>
+  </nav>
+
   <!-- Theme toggle -->
   <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
     <span class="t-icon" id="t-icon">◐</span>
@@ -2006,6 +2096,8 @@
 
   <!-- AI -->
   <section id="ai">
+    <div class="ai-aurora-1"></div>
+    <div class="ai-aurora-2"></div>
     <div class="ai-m-left">
       <p class="ai-m-tag">AI Track Record</p>
       <h2 class="ai-m-headline">Seven years.<br/>Seven AI<br/>products.</h2>
@@ -2384,6 +2476,143 @@
       });
     }, { threshold: 0.25 });
     lazyVideos.forEach(function(vid) { videoObserver.observe(vid); });
+
+    // ─── Custom cursor ────────────────────────────────────────────
+    (function() {
+      if (!window.matchMedia('(pointer: fine)').matches) return;
+      var dot  = document.getElementById('cursor-dot');
+      var ring = document.getElementById('cursor-ring');
+      if (!dot || !ring) return;
+      var mx = window.innerWidth / 2, my = window.innerHeight / 2;
+      var rx = mx, ry = my;
+      document.addEventListener('mousemove', function(e) { mx = e.clientX; my = e.clientY; }, { passive: true });
+      document.addEventListener('mousedown', function() { ring.classList.add('clicking'); });
+      document.addEventListener('mouseup', function() { ring.classList.remove('clicking'); });
+      // hover expansion on interactive elements
+      var interactables = 'a, button, [onclick], .work-row, .brand-logo-item, .quick-link';
+      document.querySelectorAll(interactables).forEach(function(el) {
+        el.addEventListener('mouseenter', function() { ring.classList.add('hovering'); });
+        el.addEventListener('mouseleave', function() { ring.classList.remove('hovering'); });
+      });
+      function loop() {
+        rx += (mx - rx) * 0.12;
+        ry += (my - ry) * 0.12;
+        dot.style.left  = mx + 'px';
+        dot.style.top   = my + 'px';
+        ring.style.left = rx + 'px';
+        ring.style.top  = ry + 'px';
+        requestAnimationFrame(loop);
+      }
+      loop();
+    })();
+
+    // ─── Scroll progress ──────────────────────────────────────────
+    (function() {
+      var bar = document.getElementById('scroll-progress');
+      if (!bar) return;
+      window.addEventListener('scroll', function() {
+        var scrolled = window.scrollY;
+        var total = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = (total > 0 ? (scrolled / total * 100) : 0) + '%';
+      }, { passive: true });
+    })();
+
+    // ─── Hero parallax ────────────────────────────────────────────
+    (function() {
+      var heroWrap = document.querySelector('.hero-video-wrap');
+      var heroText = document.querySelector('.hero-text');
+      if (!heroWrap) return;
+      var heroH = document.getElementById('hero').offsetHeight;
+      window.addEventListener('scroll', function() {
+        var y = window.scrollY;
+        if (y > heroH) return;
+        heroWrap.style.transform = 'translateY(' + (y * 0.28) + 'px)';
+        if (heroText) heroText.style.transform = 'translateY(' + (y * 0.08) + 'px)';
+      }, { passive: true });
+    })();
+
+    // ─── Magnetic buttons ─────────────────────────────────────────
+    (function() {
+      if (!window.matchMedia('(pointer: fine)').matches) return;
+      var magnets = document.querySelectorAll('.hero-cta, .pod-link-btn, .writing-subscribe-btn, .lead-cta, .btn-subscribe, .ct-cta-primary');
+      magnets.forEach(function(btn) {
+        btn.addEventListener('mousemove', function(e) {
+          var r = btn.getBoundingClientRect();
+          var cx = r.left + r.width / 2;
+          var cy = r.top + r.height / 2;
+          var dx = (e.clientX - cx) * 0.28;
+          var dy = (e.clientY - cy) * 0.28;
+          btn.style.transform = 'translate(' + dx + 'px, ' + dy + 'px) scale(1.015)';
+        });
+        btn.addEventListener('mouseleave', function() {
+          btn.style.transform = '';
+        });
+      });
+    })();
+
+    // ─── AI section mouse parallax ────────────────────────────────
+    (function() {
+      var section = document.getElementById('ai');
+      var blob1 = section ? section.querySelector('.ai-aurora-1') : null;
+      var blob2 = section ? section.querySelector('.ai-aurora-2') : null;
+      if (!blob1 || !blob2) return;
+      section.addEventListener('mousemove', function(e) {
+        var r = section.getBoundingClientRect();
+        var nx = (e.clientX - r.left) / r.width  - 0.5;
+        var ny = (e.clientY - r.top)  / r.height - 0.5;
+        blob1.style.transform = 'translate(' + (nx * 24) + 'px, ' + (ny * 16) + 'px)';
+        blob2.style.transform = 'translate(' + (-nx * 20) + 'px, ' + (-ny * 14) + 'px)';
+      });
+      section.addEventListener('mouseleave', function() {
+        blob1.style.transform = '';
+        blob2.style.transform = '';
+      });
+    })();
+
+    // ─── Section nav dots ─────────────────────────────────────────
+    (function() {
+      var nav  = document.getElementById('section-nav');
+      if (!nav) return;
+      var dots = nav.querySelectorAll('.sn-dot');
+      var ids  = ['hero','brands','metrics','ai','writing','about'];
+      var secs = ids.map(function(id) { return document.getElementById(id); });
+      function update() {
+        var mid = window.scrollY + window.innerHeight * 0.5;
+        var active = 0;
+        secs.forEach(function(s, i) {
+          if (s && s.offsetTop <= mid) active = i;
+        });
+        dots.forEach(function(d, i) { d.classList.toggle('active', i === active); });
+        nav.classList.toggle('visible', window.scrollY > 100);
+      }
+      window.addEventListener('scroll', update, { passive: true });
+      dots.forEach(function(d, i) {
+        d.addEventListener('click', function() {
+          if (secs[i]) secs[i].scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+      update();
+    })();
+
+    // ─── Hero cursor spotlight ────────────────────────────────────
+    (function() {
+      var hero = document.getElementById('hero');
+      if (!hero) return;
+      var overlay = hero.querySelector('.hero-video-wrap');
+      if (!overlay) return;
+      hero.addEventListener('mousemove', function(e) {
+        var r = hero.getBoundingClientRect();
+        var x = ((e.clientX - r.left) / r.width  * 100).toFixed(1);
+        var y = ((e.clientY - r.top)  / r.height * 100).toFixed(1);
+        overlay.style.setProperty('--sx', x + '%');
+        overlay.style.setProperty('--sy', y + '%');
+        overlay.style.backgroundImage =
+          'radial-gradient(ellipse 40% 35% at ' + x + '% ' + y + '%, rgba(255,255,255,0.045) 0%, transparent 70%)';
+      });
+      hero.addEventListener('mouseleave', function() {
+        overlay.style.backgroundImage = '';
+      });
+    })();
   </script>
 </body>
 </html>
