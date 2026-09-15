@@ -498,14 +498,14 @@
 
     /* ─── AI Section ────────────────────────────────────────────── */
     @keyframes ai-glow-breathe {
-      0%, 100% { opacity: 0.45; transform: scale(1) translate(0,0); }
-      33%       { opacity: 0.72; transform: scale(1.08) translate(2%, -2%); }
-      66%       { opacity: 0.52; transform: scale(0.95) translate(-3%, 2%); }
+      0%, 100% { opacity: 0.82; transform: scale(1) translate(0,0); }
+      33%       { opacity: 1;    transform: scale(1.07) translate(2%, -3%); }
+      66%       { opacity: 0.74; transform: scale(0.95) translate(-2%, 3%); }
     }
     @keyframes ai-orb-drift {
-      0%, 100% { opacity: 0.35; transform: scale(1) translate(0,0); }
-      40%       { opacity: 0.55; transform: scale(1.12) translate(-3%, 5%); }
-      70%       { opacity: 0.38; transform: scale(0.92) translate(5%, -3%); }
+      0%, 100% { opacity: 0.72; transform: scale(1) translate(0,0); }
+      40%       { opacity: 0.92; transform: scale(1.10) translate(-4%, 4%); }
+      70%       { opacity: 0.60; transform: scale(0.93) translate(5%, -3%); }
     }
     @keyframes ai-stat-shine {
       0%   { background-position: 200% center; }
@@ -520,31 +520,31 @@
       background: #06060B;
       color: #FFFFFF;
     }
-    /* Ambient glow — hot pink orb top-left */
+    /* Ambient glow — deep amber orb top-left */
     #ai-authority::before {
       content: '';
       position: absolute;
-      top: -40%; left: -15%;
-      width: 65%; height: 170%;
-      background: radial-gradient(ellipse 60% 50% at 35% 50%,
-        rgba(255,20,100,0.09) 0%,
-        rgba(210,40,255,0.05) 40%,
-        transparent 70%
+      top: -50%; left: -20%;
+      width: 75%; height: 180%;
+      background: radial-gradient(ellipse 62% 52% at 38% 52%,
+        rgba(255, 85, 0, 0.22) 0%,
+        rgba(210, 10, 80, 0.13) 42%,
+        transparent 72%
       );
       pointer-events: none;
       z-index: 0;
       animation: ai-glow-breathe 11s ease-in-out infinite;
     }
-    /* Ambient glow — coral orb bottom-right */
+    /* Ambient glow — deep violet orb bottom-right */
     #ai-authority::after {
       content: '';
       position: absolute;
-      bottom: -35%; right: -10%;
-      width: 60%; height: 150%;
-      background: radial-gradient(ellipse 55% 50% at 65% 60%,
-        rgba(255,70,30,0.07) 0%,
-        rgba(255,20,100,0.04) 40%,
-        transparent 70%
+      bottom: -40%; right: -15%;
+      width: 70%; height: 160%;
+      background: radial-gradient(ellipse 58% 52% at 62% 58%,
+        rgba(90, 0, 190, 0.18) 0%,
+        rgba(200, 0, 130, 0.09) 46%,
+        transparent 72%
       );
       pointer-events: none;
       z-index: 0;
@@ -610,7 +610,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      animation: ai-stat-shine 4s linear infinite;
+      animation: ai-stat-shine 1.6s linear 1 forwards;
     }
     .ai-stat-label {
       font-size: 11px;
@@ -1388,7 +1388,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      animation: stat-shine 4s linear 2;
+      animation: stat-shine 1.6s linear 1 forwards;
     }
     .m-label {
       display: block;
@@ -1439,23 +1439,25 @@
     .ai-aurora-1 {
       top: -40%; left: -25%;
       width: 85%; height: 180%;
-      background: radial-gradient(ellipse 70% 55% at 40% 50%,
-        rgba(255, 20, 100, 0.52) 0%,
-        rgba(240, 50, 140, 0.30) 35%,
-        rgba(200, 10, 80, 0.12) 60%,
-        transparent 80%
+      background: radial-gradient(ellipse 70% 56% at 38% 50%,
+        rgba(255, 90, 0,  0.68) 0%,
+        rgba(220, 20, 90, 0.40) 36%,
+        rgba(160,  0, 60, 0.14) 62%,
+        transparent 82%
       );
+      filter: blur(2px);
       animation: aurora-drift-1 15s ease-in-out infinite;
     }
     .ai-aurora-2 {
       bottom: -50%; right: -25%;
       width: 80%; height: 190%;
-      background: radial-gradient(ellipse 75% 60% at 60% 60%,
-        rgba(210, 40, 255, 0.42) 0%,
-        rgba(180, 20, 220, 0.24) 35%,
-        rgba(255, 60, 30, 0.12) 65%,
-        transparent 85%
+      background: radial-gradient(ellipse 75% 62% at 60% 60%,
+        rgba(85,  0, 200, 0.58) 0%,
+        rgba(200, 0, 160, 0.34) 36%,
+        rgba(255, 60,  0, 0.10) 66%,
+        transparent 84%
       );
+      filter: blur(2px);
       animation: aurora-drift-2 20s ease-in-out infinite 3s;
     }
     .ai-m-left {
