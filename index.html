@@ -2827,6 +2827,36 @@
       .wk-card { position: relative; top: auto; }
     }
 
+
+    /* ─── Round-2 fixes ────────────────────────────────────────── */
+    .v2-eyebrow { align-self: flex-start; }
+    .wk-cta { align-self: flex-start; }
+    .wk-card[data-brand="careem"] .wk-media video { transform: scale(1.42); }
+    .wk-card[data-brand="careem"]:hover .wk-media video { transform: scale(1.48); }
+    /* metrics: theme-aware gradient fill */
+    [data-theme="light"] .m-value {
+      background: linear-gradient(90deg, #0C0C0A 0%, rgba(12,12,10,0.55) 40%, #0C0C0A 55%, rgba(12,12,10,0.55) 100%);
+      background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    #brands { background: transparent; border-bottom: 1px solid var(--hair); }
+    /* about: always-dark section, explicit colours */
+    #about .about-section-title { color: rgba(255,255,255,0.45); }
+    #about .about-bio p { color: #ECEAF5; }
+    .about-right { justify-content: center; }
+    .about-contact { display: none; }
+    /* writing title: on-palette, no gradient fill */
+    .writing-hero-title, [data-theme="light"] .writing-hero-title {
+      background: none; -webkit-text-fill-color: var(--text); color: var(--text); animation: none;
+      font-size: clamp(40px, 5.6vw, 88px);
+    }
+    /* podcast: give the bezel room */
+    .pod-inner { padding: 0 var(--pad); gap: clamp(24px, 4vw, 64px); align-items: center; }
+    .pod-right { align-self: center; }
+    .pod-left { padding-left: 0; padding-right: 0; }
+    @media (max-width: 900px) { .pod-inner { padding: 0 var(--pad) 40px; } }
+    /* light mode: soften AI aurora */
+    [data-theme="light"] #ai .ai-aurora-1, [data-theme="light"] #ai .ai-aurora-2 { opacity: 0.55; }
+
     /* ─── Legacy neutralisation ────────────────────────────────── */
     #hero::after { content: none; }
     @media (max-width: 900px) { #hero { display: grid; min-height: 100dvh; overflow: hidden; } }
@@ -3130,7 +3160,7 @@
           <p>AI is embedded across my entire workflow. The taste is mine. The throughput is multiplied.</p>
         </div>
       </div>
-      <div class="about-contact" id="contact">
+      <div class="about-contact" id="about-contact-legacy">
         <h3 class="about-contact-title">Let's Build<br/><span class="light">Together.</span></h3>
         <p class="about-contact-desc">I work with founders, CPOs, and product teams that are serious about design as a business lever, not just a polish layer. Based in Dubai, available globally.</p>
         <div class="quick-links">
@@ -3230,7 +3260,7 @@
 
 
   <!-- Big CTA -->
-  <section class="v2-cta" id="hello" aria-label="Get in touch">
+  <section class="v2-cta" id="contact" aria-label="Get in touch">
     <div>
       <span class="v2-eyebrow">Available for fractional &amp; advisory work</span>
       <h2 class="v2-h2" style="margin-top:22px">Let's build<br/><span class="v2-serif">together.</span></h2>
@@ -4396,11 +4426,13 @@
       var right = document.getElementById('ai-tl-right'), prog = document.getElementById('ai-tl-progress'), counter = document.getElementById('ai-tl-counter');
       if (!right) return;
       var ms = right.querySelectorAll('.ai-ms');
-      ms.forEach(function (el) {
+      function setCounter(el) { if (counter) counter.textContent = el.getAttribute('data-year') + ' · ' + el.querySelector('.ai-ms-title').textContent; }
+      ms.forEach(function (el, i) {
         ScrollTrigger.create({
           trigger: el, start: 'top 62%', end: 'bottom 30%',
-          onEnter: function () { el.classList.add('on'); if (counter) counter.textContent = el.getAttribute('data-year') + ' · ' + el.querySelector('.ai-ms-title').textContent; },
-          onLeaveBack: function () { el.classList.remove('on'); }
+          onEnter: function () { el.classList.add('on'); setCounter(el); },
+          onEnterBack: function () { setCounter(el); },
+          onLeaveBack: function () { el.classList.remove('on'); var prev = ms[Math.max(0, i - 1)]; if (i === 0 && counter) counter.textContent = '2018 → 2025'; else setCounter(prev); }
         });
       });
       if (prog) ScrollTrigger.create({ trigger: right, start: 'top 62%', end: 'bottom 62%', scrub: 0.4, onUpdate: function (st) { prog.style.setProperty('--p', (st.progress * 100).toFixed(2) + '%'); } });
