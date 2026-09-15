@@ -2466,9 +2466,11 @@
       transition: background 0.4s ease, color 0.4s ease, opacity 0.4s ease, border-color 0.4s ease !important;
     }
     [data-mode="quiet"] body { background: var(--bg); color: var(--text); }
+    [data-mode="quiet"] #hero { background: var(--bg) !important; }
 
     /* Kill decorative motion layers entirely */
     [data-mode="quiet"] #ai-sky,
+    [data-mode="quiet"] #hero::after,
     [data-mode="quiet"] .hero-video-wrap,
     [data-mode="quiet"] .cursor-dot,
     [data-mode="quiet"] .cursor-ring,
@@ -2504,6 +2506,52 @@
       box-shadow: none !important;
       border-color: var(--rule) !important;
     }
+
+    /* These sections are hardcoded "always dark, always dramatic" in loud
+       mode — flatten them to the quiet palette so the whole page reads as
+       one calm, cream, static page instead of a patchwork. */
+    [data-mode="quiet"] .dark-section-header,
+    [data-mode="quiet"] #metrics,
+    [data-mode="quiet"] #ai,
+    [data-mode="quiet"] #about,
+    [data-mode="quiet"] .about-left,
+    [data-mode="quiet"] .contact-hero-wrap,
+    [data-mode="quiet"] #snake-section,
+    [data-mode="quiet"] .snake-modal-inner,
+    [data-mode="quiet"] .snake-modal-header,
+    [data-mode="quiet"] .snake-canvas-wrap,
+    [data-mode="quiet"] .snake-dpad {
+      background: var(--bg) !important;
+    }
+    [data-mode="quiet"] #contact {
+      background: var(--surface) !important;
+      border: 1px solid var(--rule);
+      border-radius: 16px;
+    }
+    [data-mode="quiet"] .dark-section-header *,
+    [data-mode="quiet"] #metrics *,
+    [data-mode="quiet"] #ai *,
+    [data-mode="quiet"] #about *,
+    [data-mode="quiet"] #contact *,
+    [data-mode="quiet"] #hero * {
+      color: var(--text) !important;
+      -webkit-text-fill-color: var(--text) !important;
+      background-image: none !important;
+      border-color: var(--rule) !important;
+    }
+    [data-mode="quiet"] #ai::after { display: none !important; }
+    [data-mode="quiet"] .hero-cta { background: var(--text) !important; color: var(--bg) !important; }
+    [data-mode="quiet"] .hero-cta * { color: var(--bg) !important; -webkit-text-fill-color: var(--bg) !important; }
+
+    /* Snake egg pill was translucent-white-on-dark; needs a solid,
+       high-contrast treatment against the cream background */
+    [data-mode="quiet"] .snake-egg-pill {
+      background: var(--text) !important;
+      border-color: var(--text) !important;
+      color: var(--bg) !important;
+      box-shadow: none !important;
+    }
+    [data-mode="quiet"] .snake-egg-pill * { color: var(--bg) !important; -webkit-text-fill-color: var(--bg) !important; }
   </style>
 </head>
 <body>
