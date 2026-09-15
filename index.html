@@ -2831,8 +2831,8 @@
     /* ─── Round-2 fixes ────────────────────────────────────────── */
     .v2-eyebrow { align-self: flex-start; }
     .wk-cta { align-self: flex-start; }
-    .wk-card[data-brand="careem"] .wk-media video { transform: scale(1.42); }
-    .wk-card[data-brand="careem"]:hover .wk-media video { transform: scale(1.48); }
+    .wk-card[data-brand="careem"] .wk-media video { transform: scale(1.18); }
+    .wk-card[data-brand="careem"]:hover .wk-media video { transform: scale(1.22); }
     /* metrics: theme-aware gradient fill */
     [data-theme="light"] .m-value {
       background: linear-gradient(90deg, #0C0C0A 0%, rgba(12,12,10,0.55) 40%, #0C0C0A 55%, rgba(12,12,10,0.55) 100%);
@@ -2850,10 +2850,15 @@
       font-size: clamp(40px, 5.6vw, 88px);
     }
     /* podcast: give the bezel room */
-    .pod-inner { padding: 0 var(--pad); gap: clamp(24px, 4vw, 64px); align-items: center; }
-    .pod-right { align-self: center; }
+    .pod-inner { padding: var(--sec-y) var(--pad); gap: clamp(24px, 4vw, 64px); align-items: center; min-height: 0; }
+    .pod-right { align-self: center; aspect-ratio: 16 / 9; min-height: 0; padding: 6px; }
+    .pod-right::after { content: none; }
+    .pod-right iframe { position: absolute; inset: 6px; width: calc(100% - 12px); height: calc(100% - 12px); }
+    .pod-left { padding-top: 0; padding-bottom: 0; }
+    .v2-sky-no { display: inline; }
+    @media (max-width: 480px) { .v2-sky-no { display: none; } }
     .pod-left { padding-left: 0; padding-right: 0; }
-    @media (max-width: 900px) { .pod-inner { padding: 0 var(--pad) 40px; } }
+    @media (max-width: 900px) { .pod-inner { padding: clamp(64px, 12vw, 96px) var(--pad); } .pod-right { aspect-ratio: 16 / 10; } }
     /* light mode: soften AI aurora */
     [data-theme="light"] #ai .ai-aurora-1, [data-theme="light"] #ai .ai-aurora-2 { opacity: 0.55; }
 
