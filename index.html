@@ -133,18 +133,18 @@
       --white:       #0D0D18;
       --black:       #1D1D1F;
     }
-    /* Quiet — calm, static, editorial (georgeevans.co.uk-inspired) */
+    /* Quiet — calm, static, Apple-clean editorial */
     [data-mode="quiet"] {
-      --bg:          #F5F3EE;
-      --surface:     #FBFAF7;
-      --surface-alt: #EEECE5;
-      --text:        #14141A;
-      --muted:       rgba(20,20,26,0.62);
-      --subtle:      rgba(20,20,26,0.4);
-      --rule:        rgba(20,20,26,0.1);
-      --tint:        rgba(20,20,26,0.03);
-      --white:       #FBFAF7;
-      --black:       #E8E6DF;
+      --bg:          #FBFBFD;
+      --surface:     #FFFFFF;
+      --surface-alt: #F5F5F7;
+      --text:        #1D1D1F;
+      --muted:       #4A4A4E;
+      --subtle:      #86868B;
+      --rule:        rgba(0,0,0,0.08);
+      --tint:        rgba(0,0,0,0.025);
+      --white:       #FFFFFF;
+      --black:       #E8E8ED;
     }
     html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
     body {
@@ -2472,20 +2472,31 @@
     [data-mode="quiet"] #ai-sky,
     [data-mode="quiet"] #hero::after,
     [data-mode="quiet"] .hero-video-wrap,
-    [data-mode="quiet"] .cursor-dot,
-    [data-mode="quiet"] .cursor-ring,
     [data-mode="quiet"] .cs-pull-aurora,
     [data-mode="quiet"] #snake-aurora-strip {
       display: none !important;
     }
 
+    /* Custom cursor uses mix-blend-mode: difference, which inverts against
+       whatever is beneath it — white is what makes that inversion visible
+       (a black cursor would blend transparently). Keep white, just make it
+       a touch bigger/bolder so it reads clearly against the light palette. */
+    [data-mode="quiet"] .cursor-dot { width: 9px; height: 9px; }
+    [data-mode="quiet"] .cursor-ring { border-width: 2px; border-color: rgba(255,255,255,0.85) !important; }
+
     /* Flatten glass / gradient surfaces */
     [data-mode="quiet"] .v2-nav,
-    [data-mode="quiet"] .theme-toggle,
     [data-mode="quiet"] .section-nav {
       background: var(--surface) !important;
       border: 1px solid var(--rule) !important;
     }
+    [data-mode="quiet"] .theme-toggle {
+      background: var(--text) !important;
+      border: 1px solid var(--text) !important;
+      color: var(--bg) !important;
+      text-shadow: none !important;
+    }
+    [data-mode="quiet"] .theme-toggle * { color: var(--bg) !important; -webkit-text-fill-color: var(--bg) !important; }
 
     /* Force scroll-linked effects to their resting, fully-revealed state */
     [data-mode="quiet"] .hero-text { opacity: 1 !important; filter: none !important; }
@@ -2509,12 +2520,11 @@
 
     /* These sections are hardcoded "always dark, always dramatic" in loud
        mode — flatten them to the quiet palette so the whole page reads as
-       one calm, cream, static page instead of a patchwork. */
+       one calm, white, static page instead of a patchwork. */
     [data-mode="quiet"] .dark-section-header,
     [data-mode="quiet"] #metrics,
     [data-mode="quiet"] #ai,
     [data-mode="quiet"] #about,
-    [data-mode="quiet"] .about-left,
     [data-mode="quiet"] .contact-hero-wrap,
     [data-mode="quiet"] #snake-section,
     [data-mode="quiet"] .snake-modal-inner,
@@ -2523,21 +2533,50 @@
     [data-mode="quiet"] .snake-dpad {
       background: var(--bg) !important;
     }
+    /* .about-left carries Jay's photo — leave its dark backdrop and white
+       name overlay alone, only the copy column (.about-right) flattens */
     [data-mode="quiet"] #contact {
       background: var(--surface) !important;
       border: 1px solid var(--rule);
       border-radius: 16px;
     }
+
+    /* Typographic hierarchy for the sections above — Apple-style: a plain
+       gray sweep for all copy, with headline/value elements promoted to
+       solid near-black and eyebrow/caption labels stepped down to a
+       lighter gray. Each override is prefixed with its container id so it
+       out-specifies the sweep below. */
     [data-mode="quiet"] .dark-section-header *,
     [data-mode="quiet"] #metrics *,
     [data-mode="quiet"] #ai *,
-    [data-mode="quiet"] #about *,
+    [data-mode="quiet"] #about .about-right *,
     [data-mode="quiet"] #contact *,
     [data-mode="quiet"] #hero * {
-      color: var(--text) !important;
-      -webkit-text-fill-color: var(--text) !important;
+      color: var(--muted) !important;
+      -webkit-text-fill-color: var(--muted) !important;
       background-image: none !important;
       border-color: var(--rule) !important;
+    }
+    [data-mode="quiet"] #hero .hl-bold,
+    [data-mode="quiet"] #metrics .m-value,
+    [data-mode="quiet"] #ai .ai-m-headline,
+    [data-mode="quiet"] #ai .ai-milestone-title,
+    [data-mode="quiet"] #about .about-section-title,
+    [data-mode="quiet"] #about .about-contact-title,
+    [data-mode="quiet"] #contact .about-contact-title {
+      color: var(--text) !important;
+      -webkit-text-fill-color: var(--text) !important;
+    }
+    [data-mode="quiet"] #hero .hl-light,
+    [data-mode="quiet"] #hero .hero-tagline,
+    [data-mode="quiet"] .dark-section-header .dark-section-title,
+    [data-mode="quiet"] #metrics .m-label,
+    [data-mode="quiet"] #metrics .m-label-short,
+    [data-mode="quiet"] #ai .ai-m-tag,
+    [data-mode="quiet"] #ai .ai-milestone-year,
+    [data-mode="quiet"] #contact .ql-label {
+      color: var(--subtle) !important;
+      -webkit-text-fill-color: var(--subtle) !important;
     }
     [data-mode="quiet"] #ai::after { display: none !important; }
     [data-mode="quiet"] .hero-cta { background: var(--text) !important; color: var(--bg) !important; }
