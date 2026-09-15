@@ -2782,20 +2782,19 @@
     }
 
     // ── Pull state ──────────────────────────────────────────────
-    // Phase 1: auto-hint (bounces in when user hits bottom)
-    // Phase 2: active pull (user drags further to trigger navigation)
-    var HINT_Y         = 0;   // indicator stays fully visible once shown
-    var PULL_THRESHOLD = 80;  // small swipe to trigger navigation
-    var pullDelta      = 0;
-    var pullTimer      = null;
+    // Phase 1: hint (indicator springs in when user reaches bottom)
+    // Phase 2: user does a deliberate fresh scroll down → navigate
+    // A 750ms cooldown prevents the bottom-reaching momentum from
+    // immediately triggering navigation.
+    var HINT_COOLDOWN  = 750; // ms before a fresh scroll can navigate
+    var pullHintTime   = 0;
     var pullNavigating = false;
     var pullHinted     = false;
     var pullListeners  = null;
 
     function hideIndicator() {
       pullHinted = false;
-      pullDelta  = 0;
-      clearTimeout(pullTimer);
+      pullHintTime = 0;
       csPull.style.transition = 'transform 0.5s cubic-bezier(0.32,0.72,0,1), opacity 0.4s';
       csPull.style.transform  = 'translateY(100%)';
       csPull.style.opacity    = '0';
@@ -2804,43 +2803,18 @@
 
     function showHint() {
       if (pullHinted || pullNavigating) return;
-      pullHinted = true;
+      pullHinted   = true;
+      pullHintTime = Date.now();
       setNextTitle();
-      // Spring fully into view and stay there
       csPull.style.transition = 'transform 0.4s cubic-bezier(0.22,1.6,0.36,1), opacity 0.25s';
       csPull.style.transform  = 'translateY(0%)';
       csPull.style.opacity    = '1';
       csPull.classList.remove('primed');
     }
 
-    function snapBackToHint() {
-      pullDelta = 0;
-      csPull.style.transition = 'transform 0.65s cubic-bezier(0.34,1.4,0.64,1), opacity 0.4s';
-      csPull.style.transform  = 'translateY(' + HINT_Y + '%)';
-      csPull.style.opacity    = '1';
-      csPull.classList.remove('primed');
-    }
-
-    function updatePull(delta) {
-      if (pullNavigating || !pullHinted) return;
-      pullDelta = Math.min(pullDelta + delta, PULL_THRESHOLD * 1.3);
-      if (pullDelta < 0) pullDelta = 0;
-
-      // Map pullDelta [0→PULL_THRESHOLD] to translateY [HINT_Y→0]
-      var progress   = Math.min(pullDelta / PULL_THRESHOLD, 1);
-      var translateY = HINT_Y * (1 - progress);
-
-      csPull.style.transition = 'none';
-      csPull.style.transform  = 'translateY(' + translateY + '%)';
-      csPull.classList.toggle('primed', progress >= 0.92);
-
-      // Bounce back if user stops pulling
-      clearTimeout(pullTimer);
-      pullTimer = setTimeout(function() {
-        if (!pullNavigating) snapBackToHint();
-      }, 600);
-
-      if (pullDelta >= PULL_THRESHOLD) navigateToNext();
+    function canNavigate() {
+      // Only allow navigation if hint has been showing long enough
+      return pullHinted && !pullNavigating && (Date.now() - pullHintTime >= HINT_COOLDOWN);
     }
 
     function navigateToNext() {
@@ -2914,82 +2888,70 @@
         if (e.deltaY > 0) {
           if (!atBottom()) return;
           if (!pullHinted) { showHint(); return; }
-          e.preventDefault();
-          updatePull(e.deltaY * 0.48);
+          // Hint is showing — navigate on the next deliberate scroll (after cooldown)
+          if (canNavigate()) { e.preventDefault(); navigateToNext(); }
         } else {
-          if (pullHinted && pullDelta < 30) hideIndicator();
+          if (pullHinted) hideIndicator();
         }
       };
       iwin.addEventListener('wheel', onWheel, { passive: false });
 
-      // ── Desktop: touch via iframe window (works on some platforms) ──
-      var touchStartY = 0, lastTouchY = 0;
+      // ── Touch via iframe window ──
+      var touchStartY = 0, touchIsNew = false;
       var onTouchStart = function(e) {
-        touchStartY = lastTouchY = e.touches[0].clientY;
+        touchStartY = e.touches[0].clientY;
+        touchIsNew  = true; // fresh gesture — user lifted and re-touched
       };
       var onTouchMove = function(e) {
         if (pullNavigating) return;
-        var dy  = touchStartY - e.touches[0].clientY;
-        var ddy = lastTouchY  - e.touches[0].clientY;
-        lastTouchY = e.touches[0].clientY;
+        var dy = touchStartY - e.touches[0].clientY;
         if (dy > 0 && atBottom()) {
           if (!pullHinted) { showHint(); return; }
-          updatePull(ddy * 1.1);
-        } else if (dy < 0 && pullHinted && pullDelta < 30) {
+          // Navigate only on a fresh touch gesture after the cooldown
+          if (touchIsNew && canNavigate()) navigateToNext();
+        } else if (dy < 0 && pullHinted) {
           hideIndicator();
         }
+        touchIsNew = false;
       };
-      var onTouchEnd = function() {
-        lastTouchY = 0;
-        if (!pullNavigating && pullHinted) {
-          clearTimeout(pullTimer);
-          setTimeout(function() { if (!pullNavigating) snapBackToHint(); }, 100);
-        }
-      };
-      iwin.addEventListener('touchstart', onTouchStart, { passive: true  });
-      iwin.addEventListener('touchmove',  onTouchMove,  { passive: true  });
-      iwin.addEventListener('touchend',   onTouchEnd,   { passive: true  });
+      var onTouchEnd = function() { touchIsNew = false; };
+      iwin.addEventListener('touchstart', onTouchStart, { passive: true });
+      iwin.addEventListener('touchmove',  onTouchMove,  { passive: true });
+      iwin.addEventListener('touchend',   onTouchEnd,   { passive: true });
 
       // ── Show indicator automatically when iframe reaches bottom ──
-      // Also activates the pull zone overlay for reliable iOS touch capture.
       var onIframeScroll = function() {
         var bot = atBottom();
         if (pullZone) pullZone.classList.toggle('active', bot);
         if (bot && !pullHinted && !pullNavigating) showHint();
-        else if (!bot && pullHinted && pullDelta < 10) hideIndicator();
+        else if (!bot && pullHinted) hideIndicator();
       };
       iwin.addEventListener('scroll', onIframeScroll, { passive: true });
-      // Tap the indicator itself to navigate (primary mobile gesture)
+      // Tap the indicator to navigate (always intentional — no cooldown needed)
       csPull.addEventListener('click', function() {
         if (pullHinted && !pullNavigating) navigateToNext();
       });
 
-      // ── Pull zone touch handlers (mobile-first, always-reliable) ──
-      var pzStartY = 0, pzLastY = 0, pzActive = false;
+      // ── Pull zone touch handlers (mobile overlay, always reliable) ──
+      var pzStartY = 0, pzIsNew = false, pzActive = false;
       var onPZTouchStart = function(e) {
-        pzStartY = pzLastY = e.touches[0].clientY;
+        pzStartY = e.touches[0].clientY;
+        pzIsNew  = true;
         pzActive = true;
       };
       var onPZTouchMove = function(e) {
         if (!pzActive || pullNavigating) return;
-        var dy  = pzStartY - e.touches[0].clientY;
-        var ddy = pzLastY  - e.touches[0].clientY;
-        pzLastY = e.touches[0].clientY;
+        var dy = pzStartY - e.touches[0].clientY;
         if (dy > 0) {
-          e.preventDefault(); // block page scroll while pulling
-          if (!pullHinted) { showHint(); return; }
-          updatePull(ddy * 1.4);
-        } else if (dy < 0 && pullHinted && pullDelta < 30) {
+          if (!pullHinted) { showHint(); pzIsNew = false; return; }
+          if (pzIsNew && canNavigate()) { e.preventDefault(); navigateToNext(); }
+        } else if (dy < 0 && pullHinted) {
           hideIndicator();
         }
+        pzIsNew = false;
       };
       var onPZTouchEnd = function() {
-        pzActive = false;
-        pzStartY = pzLastY = 0;
-        if (!pullNavigating && pullHinted) {
-          clearTimeout(pullTimer);
-          setTimeout(function() { if (!pullNavigating) snapBackToHint(); }, 100);
-        }
+        pzActive = false; pzStartY = 0; pzIsNew = false;
       };
       if (pullZone) {
         pullZone.addEventListener('touchstart', onPZTouchStart, { passive: true });
