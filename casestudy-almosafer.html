@@ -417,12 +417,6 @@
   })();
   </script>
 
-  <script>
-    (function() {
-if (close) close.addEventListener('click', function() { drawer.classList.remove('open'); });
-      if (drawer) drawer.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { drawer.classList.remove('open'); }); });
-    })();
-  </script>
 
   <script>
   (function(){
@@ -445,11 +439,11 @@ if (close) close.addEventListener('click', function() { drawer.classList.remove(
     document.querySelectorAll('.cs-ba').forEach(function(ba){
       var drag = false;
       function setX(clientX){ var r = ba.getBoundingClientRect(); var x = Math.max(0.02, Math.min(0.98, (clientX - r.left) / r.width)); ba.style.setProperty('--x', (x * 100).toFixed(2) + '%'); }
-      ba.addEventListener('pointerdown', function(e){ drag = true; ba.setPointerCapture(e.pointerId); setX(e.clientX); });
+      ba.addEventListener('pointerdown', function(e){ drag = true; if (ba._nudge) clearInterval(ba._nudge); ba.setPointerCapture(e.pointerId); setX(e.clientX); });
       ba.addEventListener('pointermove', function(e){ if (drag) setX(e.clientX); });
       ba.addEventListener('pointerup', function(){ drag = false; }); ba.addEventListener('pointercancel', function(){ drag = false; });
       /* gentle intro nudge */
-      var s = 50, dir = 1, n = 0; var iv = setInterval(function(){ if (drag) { clearInterval(iv); return; } s += dir * 0.6; if (s > 58 || s < 42) dir *= -1; ba.style.setProperty('--x', s + '%'); if (++n > 160) clearInterval(iv); }, 16);
+      var s = 50, dir = 1, n = 0; var iv = ba._nudge = setInterval(function(){ if (drag) { clearInterval(iv); return; } s += dir * 0.6; if (s > 58 || s < 42) dir *= -1; ba.style.setProperty('--x', s + '%'); if (++n > 160) clearInterval(iv); }, 16);
     });
   })();
   </script>
