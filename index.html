@@ -1112,7 +1112,7 @@
     .cs-modal-sheet {
       width: calc(100% - 48px);
       max-width: 1200px;
-      height: calc(100vh - 64px);
+      height: calc(100dvh - 64px);
       background: #0D0D18;
       border-radius: 20px;
       display: flex;
@@ -1123,6 +1123,27 @@
       opacity: 0;
       transition: transform 0.55s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.4s cubic-bezier(0.32, 0.72, 0, 1);
       box-shadow: 0 40px 100px rgba(0,0,0,0.45), 0 0 0 0.5px rgba(255,255,255,0.08);
+      touch-action: none;
+    }
+    /* ── Pull zone: transparent touch-capture at bottom of modal ── */
+    .cs-pull-zone {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 64px;
+      z-index: 4;
+      pointer-events: none; /* activated via JS when iframe is at bottom */
+    }
+    .cs-pull-zone.active { pointer-events: auto; }
+    /* Mobile: full-screen modal, no gutters */
+    @media (max-width: 680px) {
+      .cs-modal { align-items: flex-start; justify-content: flex-start; }
+      .cs-modal-sheet {
+        width: 100%;
+        max-width: none;
+        height: 100dvh;
+        border-radius: 0;
+      }
+      .cs-modal-close { top: 12px; right: 12px; }
     }
     .cs-modal.ready .cs-modal-sheet {
       transform: scale(1) translateY(0);
@@ -2078,11 +2099,11 @@
       text-shadow: 0 1px 4px rgba(0,0,0,0.4);
     }
     [data-theme="light"] .theme-toggle {
-      background: rgba(0,0,0,0.12);
-      border-color: rgba(0,0,0,0.14);
-      color: #000;
-      text-shadow: none;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.14), inset 0 1px 0 rgba(255,255,255,0.5);
+      background: rgba(0,0,0,0.42);
+      border-color: rgba(0,0,0,0.22);
+      color: #fff;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.15);
     }
     .theme-toggle:hover {
       transform: translateX(-50%) translateY(-2px);
@@ -2368,6 +2389,7 @@
     <button class="cs-modal-close" id="cs-modal-close" aria-label="Close">×</button>
     <div class="cs-modal-sheet">
       <iframe id="cs-modal-iframe" src="" title="Case Study"></iframe>
+      <div class="cs-pull-zone" id="cs-pull-zone"></div>
       <div class="cs-pull-indicator" id="cs-pull-indicator">
         <div class="cs-pull-aurora">
           <span></span><span></span><span></span><span></span>
@@ -2675,7 +2697,7 @@
     <div class="snake-egg-glow"></div>
     <div class="snake-egg-pill">
       <span class="snake-egg-icon">🐍</span>
-      <span class="snake-egg-label">Play</span>
+      <span class="snake-egg-label">Play a game?</span>
     </div>
   </div>
 
@@ -2836,10 +2858,19 @@
           w.removeEventListener('touchstart', pullListeners.tstart);
           w.removeEventListener('touchmove',  pullListeners.tmove);
           w.removeEventListener('touchend',   pullListeners.tend);
+          w.removeEventListener('scroll',     pullListeners.scroll);
         } catch(e) {}
+        if (pullZone) {
+          pullZone.removeEventListener('touchstart', pullListeners.pzStart);
+          pullZone.removeEventListener('touchmove',  pullListeners.pzMove);
+          pullZone.removeEventListener('touchend',   pullListeners.pzEnd);
+          pullZone.classList.remove('active');
+        }
         pullListeners = null;
       }
     }
+
+    var pullZone = document.getElementById('cs-pull-zone');
 
     function attachPullListeners() {
       detachPullListeners();
@@ -2849,10 +2880,13 @@
       if (!iwin || !idoc) return;
 
       function atBottom() {
-        var de = idoc.documentElement;
-        return de.scrollTop + de.clientHeight >= de.scrollHeight - 12;
+        try {
+          var de = idoc.documentElement;
+          return de.scrollTop + de.clientHeight >= de.scrollHeight - 16;
+        } catch(e) { return false; }
       }
 
+      // ── Desktop: wheel events on iframe window ──
       var onWheel = function(e) {
         if (pullNavigating) return;
         if (e.deltaY > 0) {
@@ -2861,18 +2895,19 @@
           e.preventDefault();
           updatePull(e.deltaY * 0.48);
         } else {
-          // Scrolling back up — hide hint if barely pulled
           if (pullHinted && pullDelta < 30) hideIndicator();
         }
       };
+      iwin.addEventListener('wheel', onWheel, { passive: false });
 
+      // ── Desktop: touch via iframe window (works on some platforms) ──
       var touchStartY = 0, lastTouchY = 0;
       var onTouchStart = function(e) {
         touchStartY = lastTouchY = e.touches[0].clientY;
       };
       var onTouchMove = function(e) {
         if (pullNavigating) return;
-        var dy  = touchStartY - e.touches[0].clientY; // positive = pulling down
+        var dy  = touchStartY - e.touches[0].clientY;
         var ddy = lastTouchY  - e.touches[0].clientY;
         lastTouchY = e.touches[0].clientY;
         if (dy > 0 && atBottom()) {
@@ -2889,13 +2924,57 @@
           setTimeout(function() { if (!pullNavigating) snapBackToHint(); }, 100);
         }
       };
-
-      iwin.addEventListener('wheel',      onWheel,      { passive: false });
       iwin.addEventListener('touchstart', onTouchStart, { passive: true  });
       iwin.addEventListener('touchmove',  onTouchMove,  { passive: true  });
       iwin.addEventListener('touchend',   onTouchEnd,   { passive: true  });
 
-      pullListeners = { win: iwin, wheel: onWheel, tstart: onTouchStart, tmove: onTouchMove, tend: onTouchEnd };
+      // ── Mobile: activate pull zone when iframe reaches bottom ──
+      // Monitors iframe scroll; enables the transparent overlay at the bottom
+      // so iOS can capture touches even when iframe captures scroll events.
+      var onIframeScroll = function() {
+        if (pullZone) pullZone.classList.toggle('active', atBottom());
+      };
+      iwin.addEventListener('scroll', onIframeScroll, { passive: true });
+
+      // ── Pull zone touch handlers (mobile-first, always-reliable) ──
+      var pzStartY = 0, pzLastY = 0, pzActive = false;
+      var onPZTouchStart = function(e) {
+        pzStartY = pzLastY = e.touches[0].clientY;
+        pzActive = true;
+      };
+      var onPZTouchMove = function(e) {
+        if (!pzActive || pullNavigating) return;
+        var dy  = pzStartY - e.touches[0].clientY;
+        var ddy = pzLastY  - e.touches[0].clientY;
+        pzLastY = e.touches[0].clientY;
+        if (dy > 0) {
+          e.preventDefault(); // block page scroll while pulling
+          if (!pullHinted) { showHint(); return; }
+          updatePull(ddy * 1.4);
+        } else if (dy < 0 && pullHinted && pullDelta < 30) {
+          hideIndicator();
+        }
+      };
+      var onPZTouchEnd = function() {
+        pzActive = false;
+        pzStartY = pzLastY = 0;
+        if (!pullNavigating && pullHinted) {
+          clearTimeout(pullTimer);
+          setTimeout(function() { if (!pullNavigating) snapBackToHint(); }, 100);
+        }
+      };
+      if (pullZone) {
+        pullZone.addEventListener('touchstart', onPZTouchStart, { passive: true });
+        pullZone.addEventListener('touchmove',  onPZTouchMove,  { passive: false });
+        pullZone.addEventListener('touchend',   onPZTouchEnd,   { passive: true });
+      }
+
+      pullListeners = {
+        win: iwin,
+        wheel: onWheel, tstart: onTouchStart, tmove: onTouchMove, tend: onTouchEnd,
+        scroll: onIframeScroll,
+        pzStart: onPZTouchStart, pzMove: onPZTouchMove, pzEnd: onPZTouchEnd
+      };
     }
 
     // ── Open / Close ────────────────────────────────────────────
@@ -2926,7 +3005,7 @@
       if (csClosing) return;
       csClosing = true;
       detachPullListeners();
-      resetPull();
+      hideIndicator();
 
       // Spawn aurora flash
       var flash = document.createElement('div');
@@ -3024,10 +3103,11 @@
       // Shrink on scroll, re-enlarge when scrolling stops
       var scrollTimer;
       window.addEventListener('scroll', function() {
+        if (!btn) return;
         if (window.scrollY > 80) btn.classList.add('scrolled');
         clearTimeout(scrollTimer);
         scrollTimer = setTimeout(function() {
-          btn.classList.remove('scrolled');
+          if (btn) btn.classList.remove('scrolled');
         }, 800);
       }, { passive: true });
     })();
@@ -3337,6 +3417,19 @@
       canvas.width  = COLS * CELL;
       canvas.height = ROWS * CELL;
       var ctx = canvas.getContext('2d');
+      // Polyfill roundRect for older Safari
+      if (!ctx.roundRect) {
+        ctx.roundRect = function(x, y, w, h, r) {
+          r = Math.min(r, w/2, h/2);
+          ctx.beginPath();
+          ctx.moveTo(x + r, y);
+          ctx.arcTo(x+w, y, x+w, y+h, r);
+          ctx.arcTo(x+w, y+h, x, y+h, r);
+          ctx.arcTo(x, y+h, x, y, r);
+          ctx.arcTo(x, y, x+w, y, r);
+          ctx.closePath();
+        };
+      }
 
       var snake, dir, nextDir, food, score, raf, lastTime, interval, running;
 
