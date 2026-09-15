@@ -1230,9 +1230,11 @@
       transform: translateY(100%);
       opacity: 0;
       transition: filter 0.3s;
-      /* Fade to transparent — no black */
-      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 28%);
-      mask-image: linear-gradient(to bottom, transparent 0%, black 28%);
+      /* Dark gradient base so the reveal reads over any case-study background,
+         fading up to transparent so it blends into the content above it */
+      background: linear-gradient(to bottom, transparent 0%, rgba(8,8,14,0.55) 35%, rgba(6,6,11,0.88) 65%, rgba(5,5,9,0.96) 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 22%);
+      mask-image: linear-gradient(to bottom, transparent 0%, black 22%);
     }
     .cs-pull-indicator.visible {
       pointer-events: auto;
@@ -3895,10 +3897,10 @@
 
       // ── "Jay Run" — simple endless runner, pixel-art self-portrait ──
       var PX = 4; // pixel size for the sprite
-      var PAL = { G:'#B8B2AA', S:'#C68A5D', K:'#33343D' };
+      var PAL = { G:'#77746F', H:'#D6D2C9', S:'#A8703F', K:'#33343D' };
       var BODY_ROWS = [
-        "..GGGG..",
-        ".GGGGGG.",
+        "..GHGG..",
+        ".GHGGHG.",
         ".GSSSSG.",
         ".SSSSSS.",
         ".SKSSKS.",
