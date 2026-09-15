@@ -2198,35 +2198,29 @@
     }
 
     /* ─── Snake Easter Egg ──────────────────────────────────────── */
+    #snake-section {
+      position: relative;
+      overflow: hidden;
+      min-height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #06060B;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
     #snake-egg {
-      position: fixed;
-      bottom: 80px; left: 50%;
-      transform: translateX(-50%) translateY(140px);
-      opacity: 0;
-      z-index: 400;
+      position: relative;
+      z-index: 2;
       cursor: pointer;
-      transition: transform 0.65s cubic-bezier(0.22,1.4,0.36,1), opacity 0.4s;
+      transform: translateY(50px);
+      opacity: 0;
+      transition: transform 0.7s cubic-bezier(0.22,1.4,0.36,1), opacity 0.45s;
       pointer-events: none;
     }
     #snake-egg.visible {
-      transform: translateX(-50%) translateY(0);
+      transform: translateY(0);
       opacity: 1;
       pointer-events: auto;
-    }
-    .snake-egg-glow {
-      position: absolute;
-      inset: -60px -80px;
-      background: radial-gradient(ellipse 70% 60% at 50% 60%,
-        rgba(255,20,100,0.22) 0%,
-        rgba(210,40,255,0.14) 40%,
-        transparent 70%);
-      filter: blur(18px);
-      animation: snakeEggGlow 3s ease-in-out infinite;
-      pointer-events: none;
-    }
-    @keyframes snakeEggGlow {
-      0%,100% { opacity: 0.7; transform: scale(1); }
-      50%     { opacity: 1;   transform: scale(1.12); }
     }
     .snake-egg-pill {
       display: flex; align-items: center; gap: 10px;
@@ -2362,18 +2356,19 @@
       color: rgba(255,255,255,0.28); text-align: center;
       padding: 0 0 6px; letter-spacing: 0.04em;
     }
-    /* ── Egg aurora reveal strip ── */
+    /* ── Egg aurora — fills the section ── */
     #snake-aurora-strip {
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      height: 320px;
+      position: absolute;
+      inset: 0;
       pointer-events: none;
-      z-index: 390;
       opacity: 0;
-      transition: opacity 0.6s ease;
-      background: radial-gradient(ellipse 120% 80% at 50% 120%,
-        rgba(255,20,100,0.35) 0%, rgba(210,40,255,0.22) 35%, rgba(255,70,30,0.14) 60%, transparent 80%);
-      filter: blur(4px);
+      transition: opacity 0.8s ease;
+      background:
+        radial-gradient(ellipse 90% 100% at 20% 80%,
+          rgba(255,85,0,0.32) 0%, rgba(210,10,80,0.18) 50%, transparent 75%),
+        radial-gradient(ellipse 80% 100% at 80% 80%,
+          rgba(85,0,200,0.28) 0%, rgba(200,0,150,0.14) 50%, transparent 75%);
+      filter: blur(6px);
     }
     #snake-aurora-strip.lit { opacity: 1; }
     /* Egg sparkles */
@@ -2724,15 +2719,16 @@
   </footer>
 
   <!-- ─── Snake Easter Egg ──────────────────────────────────────── -->
-  <div id="snake-aurora-strip"></div>
-  <div id="snake-egg" aria-label="Play Snake">
-    <div class="snake-egg-glow"></div>
-    <div class="snake-egg-sparks" id="snake-egg-sparks"></div>
-    <div class="snake-egg-pill">
-      <span class="snake-egg-icon">🐍</span>
-      <span class="snake-egg-label">Play a game?</span>
+  <section id="snake-section">
+    <div id="snake-aurora-strip"></div>
+    <div id="snake-egg" aria-label="Play Snake">
+      <div class="snake-egg-sparks" id="snake-egg-sparks"></div>
+      <div class="snake-egg-pill">
+        <span class="snake-egg-icon">🐍</span>
+        <span class="snake-egg-label">Play a game?</span>
+      </div>
     </div>
-  </div>
+  </section>
 
   <div id="snake-modal" role="dialog" aria-label="Snake Game">
     <div class="snake-modal-inner">
@@ -3399,6 +3395,7 @@
       var egg         = document.getElementById('snake-egg');
       var auroraStrip = document.getElementById('snake-aurora-strip');
       var sparksEl    = document.getElementById('snake-egg-sparks');
+      var snakeSection= document.getElementById('snake-section');
       var snakeModal  = document.getElementById('snake-modal');
       var closeBtn    = document.getElementById('snake-modal-close');
       var canvas      = document.getElementById('snake-canvas');
@@ -3408,8 +3405,7 @@
       var overTitle   = document.getElementById('snake-over-title');
       var overSub     = document.getElementById('snake-over-sub');
       var dpad        = document.getElementById('snake-dpad');
-      var footer      = document.querySelector('footer');
-      if (!egg || !canvas || !footer) return;
+      if (!egg || !canvas || !snakeSection) return;
 
       // ── Spectacular reveal ──
       var SPARK_COLORS = ['#F24E1E','#FF7262','#A259FF','#1ABCFE','#0ACF83','#fff'];
@@ -3433,32 +3429,31 @@
         }
       }
 
-      var eggVisible = false;
-      var footerObs = new IntersectionObserver(function(entries) {
+      var eggTriggered = false;
+      var sectionObs = new IntersectionObserver(function(entries) {
         entries.forEach(function(e) {
-          if (e.isIntersecting && !eggVisible) {
-            eggVisible = true;
+          if (e.isIntersecting && !eggTriggered) {
+            eggTriggered = true;
             // 1. Aurora bloom
             if (auroraStrip) auroraStrip.classList.add('lit');
-            // 2. After 300ms — egg springs in from below
+            // 2. After 300ms — egg springs up
             setTimeout(function() {
               egg.classList.add('visible');
               // 3. Particle burst on arrival
-              setTimeout(burstSparks, 550);
-            }, 320);
+              setTimeout(burstSparks, 620);
+            }, 300);
           } else if (!e.isIntersecting) {
-            eggVisible = false;
+            // Reset when fully scrolled away so it re-triggers on return
+            eggTriggered = false;
             egg.classList.remove('visible');
             if (auroraStrip) auroraStrip.classList.remove('lit');
           }
         });
-      }, { threshold: 0.2 });
-      footerObs.observe(footer);
+      }, { threshold: 0.3 });
+      sectionObs.observe(snakeSection);
 
       // ── Open / close modal ──
       function openSnake() {
-        egg.classList.remove('visible');
-        if (auroraStrip) auroraStrip.classList.remove('lit');
         snakeModal.classList.add('open');
         document.body.style.overflow = 'hidden';
         resetGame();
@@ -3468,7 +3463,6 @@
         snakeModal.classList.remove('open');
         document.body.style.overflow = '';
         stopGame();
-        if (eggVisible) egg.classList.add('visible');
       }
 
       egg.addEventListener('click', openSnake);
