@@ -1129,22 +1129,22 @@
       opacity: 1;
     }
     .cs-modal-close {
-      position: absolute;
-      top: 16px;
-      right: 18px;
+      position: fixed;
+      top: 20px;
+      right: 24px;
       background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.14);
-      color: rgba(255,255,255,0.75);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.85);
       font-size: 22px;
       font-weight: 300;
       line-height: 1;
       cursor: pointer;
       padding: 0;
-      z-index: 10;
+      z-index: 600;
       width: 52px;
       height: 52px;
       border-radius: 50%;
-      display: flex;
+      display: none;
       align-items: center;
       justify-content: center;
       transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
@@ -1152,23 +1152,14 @@
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
     }
+    .cs-modal.open .cs-modal-close { display: flex; }
     .cs-modal-close:hover {
-      background: rgba(255,255,255,0.18);
-      border-color: rgba(255,255,255,0.28);
+      background: rgba(255,255,255,0.2);
+      border-color: rgba(255,255,255,0.32);
       color: #fff;
-      transform: scale(1.08) rotate(90deg);
+      transform: scale(1.1) rotate(90deg);
     }
-    /* Spectacular close animation */
-    .cs-modal.closing .cs-modal-sheet {
-      transform: scale(1.04) translateY(-6px);
-      opacity: 0.9;
-      transition: transform 0.12s cubic-bezier(0.22,1,0.36,1), opacity 0.12s;
-    }
-    .cs-modal.collapsing .cs-modal-sheet {
-      transform: scale(0.04) translateY(60px) rotate(3deg);
-      opacity: 0;
-      transition: transform 0.52s cubic-bezier(0.55,0,1,0.45), opacity 0.38s 0.08s;
-    }
+    /* Spectacular close — driven entirely by JS inline styles */
     @keyframes cs-close-flash {
       0%   { opacity: 0; }
       20%  { opacity: 1; }
@@ -2206,8 +2197,8 @@
 
   <!-- Case Study Modal -->
   <div class="cs-modal" id="cs-modal">
+    <button class="cs-modal-close" id="cs-modal-close" aria-label="Close">×</button>
     <div class="cs-modal-sheet">
-      <button class="cs-modal-close" id="cs-modal-close">×</button>
       <iframe id="cs-modal-iframe" src="" title="Case Study"></iframe>
       <div class="cs-pull-indicator" id="cs-pull-indicator">
         <div class="cs-pull-aurora">
@@ -2724,33 +2715,45 @@
       };
     }
 
+    var csClosing = false;
     function closeCaseStudy() {
-      if (csModal.classList.contains('closing') || csModal.classList.contains('collapsing')) return;
+      if (csClosing) return;
+      csClosing = true;
       detachPullListeners();
       resetPull();
-      document.body.style.overflow = '';
 
       // Spawn aurora flash
       var flash = document.createElement('div');
       flash.className = 'cs-close-flash';
       document.body.appendChild(flash);
-      setTimeout(function() { if (flash.parentNode) flash.parentNode.removeChild(flash); }, 620);
+      setTimeout(function() { if (flash.parentNode) flash.parentNode.removeChild(flash); }, 680);
 
       var sheet = document.querySelector('.cs-modal-sheet');
-      // Phase 1: breath-in (scale up slightly)
-      csModal.classList.add('closing');
+
+      // Phase 1: inhale (scale up slightly, 0.12s)
+      sheet.style.transition = 'transform 0.12s cubic-bezier(0.22,1,0.36,1), opacity 0.12s';
+      sheet.style.transform  = 'scale(1.05) translateY(-4px)';
+      sheet.style.opacity    = '0.88';
+
       setTimeout(function() {
-        // Phase 2: collapse dramatically
-        csModal.classList.remove('closing');
-        csModal.classList.add('collapsing');
+        // Phase 2: collapse dramatically (0.52s)
+        sheet.style.transition = 'transform 0.52s cubic-bezier(0.55,0,1,0.45), opacity 0.36s 0.08s';
+        sheet.style.transform  = 'scale(0.05) translateY(48px) rotate(3deg)';
+        sheet.style.opacity    = '0';
+        // Fade backdrop
         csModal.classList.remove('ready');
+
         setTimeout(function() {
-          csModal.classList.remove('open', 'collapsing');
+          // Fully hidden
+          csModal.classList.remove('open');
+          document.body.style.overflow = '';
           csIframe.src = '';
+          // Reset for next open
           sheet.style.transition = '';
           sheet.style.transform  = '';
           sheet.style.opacity    = '';
-        }, 560);
+          csClosing = false;
+        }, 580);
       }, 130);
     }
 
@@ -2809,7 +2812,7 @@
         } catch(e) {}
       }
       apply(stored);
-      btn.addEventListener('click', function() {
+      if (btn) btn.addEventListener('click', function() {
         apply(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
       });
       // Shrink on scroll, re-enlarge when scrolling stops
