@@ -475,21 +475,8 @@ if (close) close.addEventListener('click', function() { drawer.classList.remove(
     })();
   </script>
   <script>
-    // Theme sync with parent
-    (function() {
-      var root = document.documentElement;
-      function applyTheme(t) {
-        root.setAttribute('data-theme', t === 'dark' ? 'dark' : 'light');
-      }
-      // Read from shared localStorage (same origin as parent)
-      var stored = localStorage.getItem('jt-theme') ||
-                   (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      applyTheme(stored);
-      // Listen for live theme changes from parent frame
-      window.addEventListener('message', function(e) {
-        if (e.data && e.data.type === 'jt-theme') applyTheme(e.data.theme);
-      });
-    })();
+    // Always light mode
+    document.documentElement.setAttribute('data-theme', 'light');
   </script>
 </body>
 </html>
