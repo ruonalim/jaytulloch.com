@@ -2243,9 +2243,14 @@
       btn.addEventListener('click', function() {
         apply(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
       });
-      // Shrink toggle on scroll
+      // Shrink on scroll, re-enlarge when scrolling stops
+      var scrollTimer;
       window.addEventListener('scroll', function() {
-        btn.classList.toggle('scrolled', window.scrollY > 80);
+        if (window.scrollY > 80) btn.classList.add('scrolled');
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(function() {
+          btn.classList.remove('scrolled');
+        }, 800);
       }, { passive: true });
     })();
 
