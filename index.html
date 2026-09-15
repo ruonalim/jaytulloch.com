@@ -1773,13 +1773,22 @@
       align-items: center;
       gap: 9px;
       box-shadow: 0 4px 28px rgba(0,0,0,0.28), 0 0 0 1px rgba(255,255,255,0.06);
-      transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1), box-shadow 0.3s, background 0.3s;
+      transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1), box-shadow 0.3s, background 0.3s, padding 0.4s cubic-bezier(0.32, 0.72, 0, 1), font-size 0.3s, gap 0.3s;
     }
     .theme-toggle:hover {
       transform: translateX(-50%) translateY(-2px);
       box-shadow: 0 8px 36px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.08);
     }
     .theme-toggle .t-icon { font-size: 14px; }
+    /* Shrink toggle on scroll */
+    .theme-toggle.scrolled {
+      padding: 8px 12px;
+      font-size: 0;       /* hide label text */
+      gap: 0;
+    }
+    .theme-toggle.scrolled .t-icon {
+      font-size: 16px;
+    }
 
     /* ─── Strip eyebrows, labels, dates, counts ─────────────────── */
     .writing-label, .ai-m-tag, .pod-eyebrow, .section-eyebrow,
@@ -1888,10 +1897,6 @@
         <p class="hero-tagline">18 years shaping products used by tens of millions of people.</p>
         <a href="#work" class="hero-cta">Selected work</a>
       </div>
-    </div>
-    <div class="hero-scroll">
-      <span class="hero-scroll-label">Scroll</span>
-      <div class="hero-scroll-line"></div>
     </div>
   </section>
 
@@ -2233,6 +2238,10 @@
       btn.addEventListener('click', function() {
         apply(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
       });
+      // Shrink toggle on scroll
+      window.addEventListener('scroll', function() {
+        btn.classList.toggle('scrolled', window.scrollY > 80);
+      }, { passive: true });
     })();
 
     // ─── RSS Feed ─────────────────────────────────────────────────
