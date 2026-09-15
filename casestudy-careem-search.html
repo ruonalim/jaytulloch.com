@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png"/>
   <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png"/>
   <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png"/>
@@ -23,7 +23,7 @@
       --border-strong: rgba(0,0,0,0.18);
       --tag-bg: #F5F5F7;
       --accent: #1D1D1F;
-      --font: 'Manrope', -apple-system, sans-serif;
+      --font: 'Geist', -apple-system, sans-serif;
       --black: #1D1D1F;
       --white: #FFFFFF;
       --mid: #86868B;
@@ -233,7 +233,30 @@
       .col-heading { font-size: clamp(24px, 7vw, 36px); }
       .next-cs { padding: 48px 20px; }
     }
-    </style>
+    
+    /* ── v2 case study layer ── */
+    :root { --serif: 'Instrument Serif', Georgia, serif; --mono: 'Geist Mono', ui-monospace, monospace; --ease: cubic-bezier(0.32,0.72,0,1); }
+    body { font-family: var(--font); }
+    .col-heading { font-weight: 600; letter-spacing: -0.045em; }
+    .col-heading em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -0.01em; }
+    .metric-value { font-weight: 700; letter-spacing: -0.05em; font-feature-settings: 'tnum' on; }
+    .metric-label, .cs-meta-label, .section-label, .d-num { font-family: var(--mono); letter-spacing: 0.12em; text-transform: uppercase; font-size: 10.5px; font-weight: 500; }
+    .reveal { transform: translateY(28px); filter: blur(6px); transition: opacity 0.9s var(--ease), transform 1s var(--ease), filter 0.9s var(--ease); }
+    .reveal.visible { filter: blur(0); }
+    #cs-rail { position: fixed; top: 0; left: 0; height: 2px; width: 100%; z-index: 90; pointer-events: none; transform-origin: 0 50%; transform: scaleX(0);
+      background: linear-gradient(90deg, #F26A1B, #D6237B, #6A2FF0); }
+    /* before / after */
+    .cs-ba { position: relative; user-select: none; -webkit-user-select: none; touch-action: pan-y; border-radius: 24px; overflow: hidden; background: #0B0B15; aspect-ratio: 2195 / 1631; cursor: ew-resize;
+      box-shadow: 0 40px 100px -30px rgba(20,16,40,0.45); }
+    .cs-ba img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; }
+    .cs-ba .cs-ba-after { clip-path: inset(0 0 0 var(--x, 50%)); }
+    .cs-ba-handle { position: absolute; top: 0; bottom: 0; left: var(--x, 50%); width: 2px; background: #fff; transform: translateX(-1px); box-shadow: 0 0 0 1px rgba(0,0,0,0.15); }
+    .cs-ba-handle i { position: absolute; top: 50%; left: 50%; width: 44px; height: 44px; border-radius: 50%; transform: translate(-50%,-50%); background: #fff; color: #0C0C0A; display: flex; align-items: center; justify-content: center; font-size: 14px; letter-spacing: -2px; box-shadow: 0 8px 24px rgba(0,0,0,0.25); font-family: var(--mono); }
+    .cs-ba-tag { position: absolute; top: 16px; padding: 6px 10px; border-radius: 100px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; background: rgba(12,12,10,0.6); color: #fff; backdrop-filter: blur(8px); }
+    .cs-ba-tag.l { left: 16px; } .cs-ba-tag.r { right: 16px; }
+    .cs-ba-wrap { padding: 0 var(--pad, 24px) clamp(48px, 6vw, 96px); max-width: 1200px; margin: 0 auto; }
+    .cs-ba-cap { display: flex; justify-content: space-between; gap: 16px; margin-top: 14px; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  </style>
 
 </head>
 <body>
@@ -391,6 +414,36 @@
 if (close) close.addEventListener('click', function() { drawer.classList.remove('open'); });
       if (drawer) drawer.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { drawer.classList.remove('open'); }); });
     })();
+  </script>
+
+  <script>
+  (function(){
+    /* progress rail */
+    var rail = document.createElement('div'); rail.id = 'cs-rail'; document.body.appendChild(rail);
+    var de = document.documentElement, tick = false;
+    function upd(){ var max = de.scrollHeight - de.clientHeight; rail.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, de.scrollTop / max) : 0) + ')'; tick = false; }
+    window.addEventListener('scroll', function(){ if (!tick) { tick = true; requestAnimationFrame(upd); } }, { passive: true }); upd();
+    /* metric count-up */
+    var els = document.querySelectorAll('.metric-value');
+    function ease(t){ return 1 - Math.pow(1 - t, 3); }
+    function run(el){ if (el._done) return; el._done = true; var raw = el.textContent.trim();
+      var m = raw.match(/^([^\d]*)(\d+(?:[\.,]\d+)?)(.*)$/); if (!m) return;
+      var pre = m[1], num = parseFloat(m[2].replace(',', '')), suf = m[3], dec = (m[2].split('.')[1] || '').length, t0 = null;
+      function step(ts){ if (!t0) t0 = ts; var p = Math.min((ts - t0) / 1400, 1); var v = num * ease(p);
+        el.textContent = pre + (dec ? v.toFixed(dec) : Math.round(v)) + suf; if (p < 1) requestAnimationFrame(step); else el.textContent = raw; }
+      requestAnimationFrame(step); }
+    if ('IntersectionObserver' in window) { var io = new IntersectionObserver(function(en){ en.forEach(function(e){ if (e.isIntersecting) run(e.target); }); }, { threshold: 0.5 }); els.forEach(function(el){ io.observe(el); }); }
+    /* before / after slider */
+    document.querySelectorAll('.cs-ba').forEach(function(ba){
+      var drag = false;
+      function setX(clientX){ var r = ba.getBoundingClientRect(); var x = Math.max(0.02, Math.min(0.98, (clientX - r.left) / r.width)); ba.style.setProperty('--x', (x * 100).toFixed(2) + '%'); }
+      ba.addEventListener('pointerdown', function(e){ drag = true; ba.setPointerCapture(e.pointerId); setX(e.clientX); });
+      ba.addEventListener('pointermove', function(e){ if (drag) setX(e.clientX); });
+      ba.addEventListener('pointerup', function(){ drag = false; }); ba.addEventListener('pointercancel', function(){ drag = false; });
+      /* gentle intro nudge */
+      var s = 50, dir = 1, n = 0; var iv = setInterval(function(){ if (drag) { clearInterval(iv); return; } s += dir * 0.6; if (s > 58 || s < 42) dir *= -1; ba.style.setProperty('--x', s + '%'); if (++n > 160) clearInterval(iv); }, 16);
+    });
+  })();
   </script>
 </body>
 </html>
