@@ -2495,7 +2495,7 @@
        ════════════════════════════════════════════════════════════════ */
 
     /* Minimal-only markup is hidden in loud mode */
-    .q-nav, .q-hero-eyebrow, .q-hero-actions, .q-brands-label { display: none; }
+    .q-nav, .q-hero-actions, .q-brands-label { display: none; }
 
     [data-mode="quiet"] {
       --q-max:    1180px;
@@ -2584,37 +2584,17 @@
     }
     [data-mode="quiet"] .q-nav-links a:hover { color: var(--text); }
     [data-mode="quiet"] .q-nav-links a:hover::after { transform: scaleX(1); }
-    [data-mode="quiet"] .q-nav-right { display: flex; align-items: center; gap: 10px; }
-    [data-mode="quiet"] .q-nav-cta {
-      display: inline-flex; align-items: center; gap: 8px;
-      height: 34px; padding: 0 14px 0 12px; border-radius: 100px;
-      border: 1px solid var(--rule-strong); color: var(--text); font-size: 12.5px; font-weight: 500;
-      white-space: nowrap; transition: background 0.3s var(--q-ease), border-color 0.3s var(--q-ease);
-    }
-    [data-mode="quiet"] .q-nav-cta:hover { background: var(--surface-alt); border-color: var(--text); }
-    [data-mode="quiet"] .q-dot {
-      width: 7px; height: 7px; border-radius: 50%; background: #1DB954; flex-shrink: 0;
-      box-shadow: 0 0 0 3px rgba(29,185,84,0.16) !important;
-    }
 
-    /* Mode toggle docks into the nav's right cluster in minimal mode */
+    /* Mode toggle stays fixed/floating (bottom-center) in both modes —
+       only re-skinned for the light palette here. */
     [data-mode="quiet"] .theme-toggle,
     [data-mode="quiet"] .theme-toggle.scrolled {
-      top: 13px; right: var(--q-inline); bottom: auto; left: auto;
-      transform: none;
-      height: 34px; padding: 0 14px 0 12px; gap: 8px;
-      font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
       background: var(--text) !important; border: 1px solid var(--text) !important;
       color: var(--bg) !important; text-shadow: none !important;
       -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
-      transition: background 0.3s var(--q-ease), transform 0.3s var(--q-ease), opacity 0.3s;
     }
     [data-mode="quiet"] .theme-toggle * { color: var(--bg) !important; -webkit-text-fill-color: var(--bg) !important; }
-    [data-mode="quiet"] .theme-toggle .t-icon,
-    [data-mode="quiet"] .theme-toggle.scrolled .t-icon { font-size: 12px; }
-    [data-mode="quiet"] .theme-toggle:hover { transform: translateY(-1px); background: #000 !important; }
-    /* room for the toggle at the right edge of the nav */
-    [data-mode="quiet"] .q-nav { padding-right: calc(var(--q-inline) + 118px); }
+    [data-mode="quiet"] .theme-toggle:hover { background: #000 !important; }
 
     /* ─── Hero ───────────────────────────────────────────────────── */
     [data-mode="quiet"] #hero {
@@ -2627,14 +2607,6 @@
       display: flex; flex-direction: column; justify-content: center;
       padding: 120px var(--q-inline) clamp(56px, 8vh, 96px);
       pointer-events: auto; will-change: auto;
-    }
-    [data-mode="quiet"] .q-hero-eyebrow {
-      display: flex; align-items: center; gap: 12px;
-      font-size: 12px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--subtle); margin-bottom: clamp(28px, 4vh, 44px);
-    }
-    [data-mode="quiet"] .q-hero-eyebrow::before {
-      content: ''; width: 28px; height: 1px; background: var(--rule-strong);
     }
     [data-mode="quiet"] .hero-headline {
       font-size: clamp(48px, 7.4vw, 112px);
@@ -2975,9 +2947,6 @@
     @media (max-width: 900px) {
       [data-mode="quiet"] .q-nav { height: 56px; }
       [data-mode="quiet"] .q-nav-links { display: none; }
-      [data-mode="quiet"] .q-nav-cta { display: none; }
-      [data-mode="quiet"] .q-nav { padding-right: calc(var(--q-inline) + 112px); }
-      [data-mode="quiet"] .theme-toggle, [data-mode="quiet"] .theme-toggle.scrolled { top: 11px; }
 
       [data-mode="quiet"] #hero { min-height: 88svh; }
       [data-mode="quiet"] .hero-text { padding-top: 96px; padding-bottom: 56px; justify-content: center; }
@@ -2998,8 +2967,6 @@
       [data-mode="quiet"] .work-desc { font-size: 14px; padding-right: 56px; }
       [data-mode="quiet"] .work-row::after { width: 38px; height: 38px; font-size: 15px; }
       [data-mode="quiet"] .work-co { display: block; font-size: 12px; color: var(--subtle); letter-spacing: 0.02em; margin: 0 0 8px; }
-      [data-mode="quiet"] .q-hero-eyebrow { font-size: 11px; letter-spacing: 0.1em; line-height: 1.6; }
-      [data-mode="quiet"] .q-hero-eyebrow::before { display: none; }
 
       [data-mode="quiet"] #ai, [data-mode="quiet"] #about,
       [data-mode="quiet"] .writing-combined, [data-mode="quiet"] .pod-inner {
@@ -3052,9 +3019,6 @@
       <a href="#writing">Writing</a>
       <a href="#podcast">Podcast</a>
     </nav>
-    <div class="q-nav-right">
-      <a href="#contact" class="q-nav-cta"><span class="q-dot" aria-hidden="true"></span>Available for work</a>
-    </div>
   </header>
 
   <!-- Mode toggle -->
@@ -3090,7 +3054,6 @@
       </video>
     </div>
     <div class="hero-text">
-      <p class="q-hero-eyebrow">Head of Product Design · Fintech &amp; AI · Dubai</p>
       <h1 class="hero-headline">
         <span class="hl-light">Product design</span>
         <span class="hl-bold">that delivers.</span>
