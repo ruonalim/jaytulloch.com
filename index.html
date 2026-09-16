@@ -3270,11 +3270,12 @@
       font-size: clamp(64px, 15vw, 240px);
       font-weight: 800;
       letter-spacing: -0.055em;
-      line-height: 0.82;
-      margin: 0 0 clamp(36px, 5vw, 72px) -0.03em;
+      line-height: 1.02;
+      margin: -0.1em 0 clamp(28px, 4vw, 56px) -0.03em;
       color: rgba(255,255,255,0.07);
       white-space: nowrap;
-      overflow: hidden;
+      overflow-x: clip;
+      overflow-y: visible;
       user-select: none;
       pointer-events: none;
     }
@@ -3388,38 +3389,82 @@
       .work-result-num { font-size: 24px; }
     }
 
-    /* ── Availability signal above the contact block ── */
-    .avail-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      padding: 7px 14px 7px 11px;
-      border: 1px solid rgba(255,255,255,0.16);
-      border-radius: 100px;
-      font-size: 11px;
-      font-weight: 600 !important;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.7);
-      margin-bottom: clamp(20px, 2.4vw, 28px);
+
+    /* ── Testimonials: quiet hairline grid, the quotes do the talking ── */
+    #testimonials { position: relative; background: #06060A; }
+    .t-header {
+      padding: clamp(72px, 9vw, 130px) var(--pad) clamp(36px, 4.5vw, 64px);
+      display: flex; flex-direction: column; gap: 22px;
     }
-    .avail-pill i {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: #34D399;
-      box-shadow: 0 0 0 3px rgba(52,211,153,0.18), 0 0 12px rgba(52,211,153,0.7);
-      animation: avail-pulse 2.4s ease-in-out infinite;
+    .t-eyebrow {
+      font-size: 11px; font-weight: 600 !important; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(255,255,255,0.42);
     }
-    @keyframes avail-pulse {
-      0%, 100% { box-shadow: 0 0 0 3px rgba(52,211,153,0.18), 0 0 12px rgba(52,211,153,0.7); }
-      50%      { box-shadow: 0 0 0 6px rgba(52,211,153,0.08), 0 0 18px rgba(52,211,153,0.5); }
+    .t-header-title {
+      font-size: clamp(38px, 5.4vw, 80px);
+      font-weight: 800; letter-spacing: -0.035em; line-height: 0.96; color: #fff;
     }
-    [data-mode="quiet"] .avail-pill {
-      border-color: var(--rule-strong, rgba(0,0,0,0.16));
-      color: var(--text);
-      font-weight: 500 !important;
+    .t-header-title span { color: rgba(255,255,255,0.38); font-weight: 300; }
+    .t-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid rgba(255,255,255,0.08);
     }
-    [data-mode="quiet"] .avail-pill i { background: #059669; box-shadow: 0 0 0 3px rgba(5,150,105,0.14); animation: none; }
-    @media (prefers-reduced-motion: reduce) { .avail-pill i { animation: none; } }
+    .t-card {
+      display: flex; flex-direction: column; justify-content: space-between;
+      padding: clamp(36px, 4vw, 60px) var(--pad);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      text-decoration: none; color: inherit;
+      transition: background 0.4s cubic-bezier(0.32,0.72,0,1);
+    }
+    .t-card:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.08); }
+    .t-card:hover { background: rgba(255,255,255,0.025); }
+    .t-quote {
+      font-size: clamp(19px, 1.75vw, 27px);
+      line-height: 1.38; letter-spacing: -0.015em;
+      font-weight: 300; color: rgba(255,255,255,0.82);
+      text-wrap: pretty;
+      transition: color 0.3s;
+    }
+    .t-quote::before { content: '“'; color: rgba(255,255,255,0.3); }
+    .t-quote::after  { content: '”'; color: rgba(255,255,255,0.3); }
+    .t-card:hover .t-quote { color: #fff; }
+    .t-person { display: flex; align-items: center; gap: 14px; margin-top: clamp(28px, 3vw, 40px); padding-top: 0; }
+    .t-avatar {
+      width: 44px; height: 44px; border-radius: 50%; overflow: hidden; flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.12);
+      filter: grayscale(1) contrast(1.05);
+      transition: filter 0.4s;
+    }
+    .t-card:hover .t-avatar { filter: none; }
+    .t-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .t-name { font-size: 14px; font-weight: 600; color: #fff; }
+    .t-role { font-size: 12px; color: rgba(255,255,255,0.45); margin-top: 3px; }
+    @media (max-width: 900px) {
+      .t-grid { grid-template-columns: 1fr; }
+      .t-card:nth-child(odd) { border-right: 0; }
+      .t-quote { font-size: 19px; }
+    }
+    /* Clean */
+    [data-mode="quiet"] #testimonials { background: var(--bg); border-top: 1px solid var(--rule); }
+    [data-mode="quiet"] .t-header { padding-left: var(--q-inline, var(--pad)); padding-right: var(--q-inline, var(--pad)); }
+    [data-mode="quiet"] .t-eyebrow { color: var(--subtle); font-weight: 500 !important; letter-spacing: 0.12em; font-size: 12px; }
+    [data-mode="quiet"] .t-header-title { font-weight: 300 !important; color: var(--text); letter-spacing: -0.04em; }
+    [data-mode="quiet"] .t-header-title span { color: var(--subtle); font-weight: 300 !important; }
+    [data-mode="quiet"] .t-grid { border-top-color: var(--rule); margin: 0 var(--q-inline, var(--pad)); }
+    [data-mode="quiet"] .t-card { border-bottom-color: var(--rule); padding-left: clamp(24px, 3vw, 48px); padding-right: clamp(24px, 3vw, 48px); }
+    [data-mode="quiet"] .t-card:nth-child(odd) { border-right-color: var(--rule); padding-left: 0; }
+    [data-mode="quiet"] .t-card:nth-child(even) { padding-right: 0; }
+    [data-mode="quiet"] .t-card:hover { background: transparent; }
+    [data-mode="quiet"] .t-quote { color: var(--text); font-weight: 300 !important; }
+    [data-mode="quiet"] .t-quote::before, [data-mode="quiet"] .t-quote::after { color: var(--subtle); }
+    [data-mode="quiet"] .t-avatar { border-color: var(--rule); filter: none; }
+    [data-mode="quiet"] .t-name { color: var(--text); font-weight: 500 !important; }
+    [data-mode="quiet"] .t-role { color: var(--subtle); }
+    @media (max-width: 900px) {
+      [data-mode="quiet"] .t-card:nth-child(odd) { border-right: 0; }
+      [data-mode="quiet"] .t-card { padding-left: 0 !important; padding-right: 0 !important; }
+    }
 
     /* ── Footer index ── */
     .footer-index {
@@ -3528,7 +3573,6 @@
     </div>
     <!-- Clean mode: at-a-glance meta (desktop) -->
     <aside class="q-hero-meta" aria-label="At a glance">
-      <div class="q-meta-row"><span class="q-meta-k">Availability</span><span class="q-meta-v">Fractional &amp; advisory work</span></div>
       <div class="q-meta-row"><span class="q-meta-k">Based</span><span class="q-meta-v">Dubai, available globally</span></div>
       <div class="q-meta-row"><span class="q-meta-k">Local time</span><span class="q-meta-v" id="q-local-time">—</span></div>
     </aside>
@@ -3689,6 +3733,56 @@
     </div>
   </section>
 
+  <!-- Testimonials: from the people who were in the room -->
+  <section id="testimonials" aria-label="Testimonials">
+    <div class="t-header">
+      <p class="t-eyebrow">From those who were there</p>
+      <h2 class="t-header-title">Don't take<br/><span>my word for it.</span></h2>
+    </div>
+    <div class="t-grid">
+      <a href="https://www.linkedin.com/in/jaytulloch/" target="_blank" rel="noopener" class="t-card reveal">
+        <p class="t-quote">Few leaders inspire enough confidence to follow them from one company to another. Jay is incredible at making sense of business chaos for his design team.</p>
+        <div class="t-person">
+          <div class="t-avatar"><img src="./media/testimonials/Hakeeb.jpeg" alt="Hakeeb Bashorun" loading="lazy" width="44" height="44"></div>
+          <div>
+            <p class="t-name">Hakeeb Bashorun</p>
+            <p class="t-role">Lead Product Designer · Careem &amp; Almosafer</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/jaytulloch/" target="_blank" rel="noopener" class="t-card reveal">
+        <p class="t-quote">What sets Jay apart is his rare combination of creative vision and practical execution.</p>
+        <div class="t-person">
+          <div class="t-avatar"><img src="./media/testimonials/Sam.jpeg" alt="Sam Rapp" loading="lazy" width="44" height="44"></div>
+          <div>
+            <p class="t-name">Sam Rapp</p>
+            <p class="t-role">Sr. Director of Product Design · Careem</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/jaytulloch/" target="_blank" rel="noopener" class="t-card reveal">
+        <p class="t-quote">He is a role model for any design team, not only for his professional impact but for the way he leads with empathy and purpose.</p>
+        <div class="t-person">
+          <div class="t-avatar"><img src="./media/testimonials/Samantha.jpeg" alt="Samantha Hamadeh" loading="lazy" width="44" height="44"></div>
+          <div>
+            <p class="t-name">Samantha Hamadeh</p>
+            <p class="t-role">Product Marketing Manager · Careem</p>
+          </div>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/jaytulloch/" target="_blank" rel="noopener" class="t-card reveal">
+        <p class="t-quote">If you get the chance to work with him, take it. You won't just improve, you'll level up.</p>
+        <div class="t-person">
+          <div class="t-avatar"><img src="./media/testimonials/Khusan.jpeg" alt="Khussan Djabbarov" loading="lazy" width="44" height="44"></div>
+          <div>
+            <p class="t-name">Khussan Djabbarov</p>
+            <p class="t-role">Product Designer · Careem</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </section>
+
   <!-- About -->
   <section id="about">
     <div class="about-left reveal">
@@ -3709,7 +3803,6 @@
         </div>
       </div>
       <div class="about-contact" id="contact">
-        <p class="avail-pill"><i aria-hidden="true"></i>Available for fractional &amp; advisory work</p>
         <h3 class="about-contact-title">Let's Build<br/><span class="light">Together.</span></h3>
         <p class="about-contact-desc">I work with founders, CPOs, and product teams that are serious about design as a business lever, not just a polish layer. Based in Dubai, available globally.</p>
         <div class="quick-links">
@@ -3839,13 +3932,12 @@
       </div>
       <div class="footer-col">
         <p class="footer-col-label">Location</p>
-        <p class="footer-loc">Dubai, UAE<br/>Available globally</p>
+        <p class="footer-loc">Dubai, UAE</p>
         <a href="#hero" class="footer-up">Back to top <span aria-hidden="true">↑</span></a>
       </div>
     </div>
     <div class="footer-bottom">
       <span class="footer-copy">© 2026 Jay Tulloch. All rights reserved.</span>
-      <span class="footer-copy">Available for fractional &amp; advisory work</span>
     </div>
   </footer>
 
