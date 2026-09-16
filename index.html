@@ -1209,8 +1209,8 @@
        so they stay locked together frame-for-frame. Where View Transitions
        aren't supported the rim still fires and the mode switches instantly. */
     :root {
-      --mode-dur: 1.05s;
-      --mode-ease: cubic-bezier(0.33, 1, 0.68, 1);
+      --mode-dur: 1.15s;
+      --mode-ease: cubic-bezier(0.42, 0, 0.12, 1);
     }
     /* Two layers make the edge:
        · .mode-edge — the bright LIP. A plain (unnamed) element living in the
@@ -1232,6 +1232,7 @@
       width: calc(var(--tr, 150vmax) * 2);
       height: calc(var(--tr, 150vmax) * 2);
       z-index: 9997;
+      will-change: transform;
       background: radial-gradient(circle closest-side,
         transparent 90%,
         var(--rim-b, rgba(99,102,241,0.55)) 96%,
@@ -1246,17 +1247,15 @@
       z-index: 9998;
     }
     .mode-shock > div { position: absolute; inset: 0; border-radius: 50%; }
-    .mode-shock .glow {
-      background: radial-gradient(circle closest-side,
-        transparent 84%,
-        var(--rim-glow, rgba(56,189,248,0.38)) 88%,
-        transparent 100%);
-    }
-    .mode-shock .core {
+    /* Epicentre flash + spill ahead of the edge, in one gradient */
+    .mode-shock .spill {
       background: radial-gradient(circle closest-side,
         rgba(255,255,255,0.95) 0%,
         var(--rim-glow, rgba(56,189,248,0.38)) 4.5%,
-        transparent 10%);
+        transparent 10%,
+        transparent 84%,
+        var(--rim-glow, rgba(56,189,248,0.38)) 88%,
+        transparent 100%);
     }
     @keyframes mode-edge-burst {
       0%   { transform: translate(-50%,-50%) scale(0); opacity: 1; }
@@ -1270,8 +1269,9 @@
     }
     /* The lip starts when the transition is ready (JS adds .go), so it shares
        the wipe's start frame as well as its duration and easing */
-    .mode-edge.go {
-      animation: mode-edge-burst var(--mode-dur) var(--mode-ease) forwards;
+    .mode-edge.go,
+    [data-mode="quiet"] .mode-edge.go {
+      animation: mode-edge-burst var(--mode-dur) var(--mode-ease) forwards !important;
     }
     /* Fallback path (no View Transitions): the spill animates in place */
     .mode-shock:not(.vt-shock) { transform: translate(-50%,-50%) scale(1); }
@@ -1297,8 +1297,8 @@
     }
     /* The page being left recedes */
     @keyframes mode-old-recede {
-      from { transform: scale(1);     filter: blur(0) saturate(1) brightness(1); }
-      to   { transform: scale(1.045); filter: blur(14px) saturate(0.5) brightness(var(--old-bright, 1)); }
+      from { transform: scale(1);    filter: saturate(1)    brightness(1); }
+      to   { transform: scale(1.04); filter: saturate(0.55) brightness(var(--old-bright, 1)); }
     }
     ::view-transition-old(root) {
       animation: mode-old-recede var(--mode-dur) var(--mode-ease) forwards;
@@ -4251,11 +4251,13 @@
         lbl.textContent  = m === 'quiet' ? 'Go bold?' : 'Go clean?';
         icon.textContent = m === 'quiet' ? '○' : '●';
         localStorage.setItem('jt-mode', m);
-        // Pause/resume the hero video with the mode
+        // Pause/resume the hero video with the mode. When animating, the
+        // resume waits for the transition to finish so decoding doesn't
+        // compete with the wipe for the GPU (a still frame shows meanwhile).
         var heroVideo = document.querySelector('.hero-video-wrap video');
         if (heroVideo) {
           if (m === 'quiet') heroVideo.pause();
-          else heroVideo.play().catch(function() {});
+          else if (!animate) heroVideo.play().catch(function() {});
         }
         // Mobile browser chrome follows the mode
         var tc = document.getElementById('theme-color');
@@ -4323,7 +4325,7 @@
         edge.className = 'mode-edge';
         var shock = document.createElement('div');
         shock.className = 'mode-shock' + (isVT ? ' vt-shock' : '');
-        shock.innerHTML = '<div class="glow"></div><div class="core"></div>';
+        shock.innerHTML = '<div class="spill"></div>';
         [edge, shock].forEach(function(n) {
           n.style.setProperty('--tx', x + 'px');
           n.style.setProperty('--ty', y + 'px');
@@ -4333,6 +4335,12 @@
           [edge, shock].forEach(function(n) { if (n.parentNode) n.parentNode.removeChild(n); });
         }, 1300);
         return edge;
+      }
+
+      function resumeVideo(m) {
+        if (m !== 'loud') return;
+        var v = document.querySelector('.hero-video-wrap video');
+        if (v) v.play().catch(function() {});
       }
 
       var busy = false;
@@ -4367,6 +4375,7 @@
           // (top layer, above the wipe); the lip is plain DOM inside the new
           // page and starts on the transition's first frame.
           busy = true;
+          root.setAttribute('data-transitioning', ''); // pauses the WebGL sky for the duration
           var edge = null;
           var transition = document.startViewTransition(function() {
             apply(next, true);
@@ -4375,11 +4384,16 @@
           transition.ready.then(function() { if (edge) edge.classList.add('go'); }).catch(function() {
             if (edge) edge.classList.add('go');
           });
-          transition.finished.catch(function() {}).then(function() { busy = false; });
+          transition.finished.catch(function() {}).then(function() {
+            busy = false;
+            root.removeAttribute('data-transitioning');
+            resumeVideo(next);
+          });
         } else {
           var edgeNow = spawnShock(x, y, false);
           if (edgeNow) edgeNow.classList.add('go');
           apply(next, true);
+          resumeVideo(next);
         }
       });
       // Shrink on scroll, re-enlarge when scrolling stops
@@ -5268,6 +5282,7 @@
       function quiet() { return document.documentElement.getAttribute('data-mode') === 'quiet'; }
       function frame(now) {
         if (!visible || document.hidden || quiet()) { running = false; return; }
+        if (document.documentElement.hasAttribute('data-transitioning')) { requestAnimationFrame(frame); return; }
         resize(); mx += (tx - mx) * 0.06; my += (ty - my) * 0.06;
         gl.uniform1f(uT, reduce ? 12 : (now - t0) / 1000); gl.uniform2f(uM, mx, my);
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
