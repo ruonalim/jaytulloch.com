@@ -1193,149 +1193,141 @@
       animation: cs-close-flash 0.55s cubic-bezier(0.22,1,0.36,1) forwards;
     }
 
-    /* ─── Spectacular mode transition ───────────────────────────
-       A rainbow shockwave ring bursts from the toggle, plus (where
-       supported) the browser cross-fades the two modes as a circular
-       wipe expanding from the same point via the View Transitions API. */
-    @keyframes mode-shock-ring {
-      0%   { transform: scale(0);    opacity: 0.95; }
-      55%  { opacity: 0.6; }
-      100% { transform: scale(1);    opacity: 0; }
+    /* ─── Mode transition: "Ignition / Exposure" ──────────────────
+       Direction-aware, and physical rather than decorative:
+         · The page you're leaving RECEDES — drifts back, softens, loses
+           saturation, and dims (ink) or brightens (light) depending on
+           where you're headed — instead of simply being covered.
+         · The new mode floods in as a circle from the toggle. One luminous
+           rim rides exactly on the wipe edge: electric indigo/cyan when
+           igniting Bold, warm white light when exposing Clean.
+         · The toggle stays live at the epicentre — squash, overshoot,
+           settle — while its label cross-fades to the new question.
+         · Hero copy re-lands in the new mode with a soft staggered rise.
+       The rim and wipe share one duration + easing (--mode-dur/--mode-ease)
+       so they stay locked together frame-for-frame. Where View Transitions
+       aren't supported the rim still fires and the mode switches instantly. */
+    :root {
+      --mode-dur: 1.05s;
+      --mode-ease: cubic-bezier(0.33, 1, 0.68, 1);
     }
-    @keyframes mode-shock-ring2 {
-      0%   { transform: scale(0);    opacity: 0.85; }
-      60%  { opacity: 0.48; }
-      100% { transform: scale(1);    opacity: 0; }
-    }
-    @keyframes mode-shock-ring3 {
-      0%   { transform: scale(0);    opacity: 0.7; }
-      65%  { opacity: 0.36; }
-      100% { transform: scale(1);    opacity: 0; }
-    }
-    @keyframes mode-shock-core {
-      0%   { transform: scale(0);    opacity: 1; }
-      100% { transform: scale(1);    opacity: 0; }
-    }
-    @keyframes mode-shock-bloom {
-      0%   { transform: scale(0);    opacity: 0.55; }
-      100% { transform: scale(1);    opacity: 0; }
-    }
-    .mode-shock {
+    /* Two layers make the edge:
+       · .mode-edge — the bright LIP. A plain (unnamed) element living in the
+         new page, so it is clipped by the very same circular wipe. Its rim
+         sits at exactly 100% of its radius (= the wipe radius) and feathers
+         inward, so registration with the edge is perfect by construction.
+       · .mode-shock — the soft SPILL of light ahead of the edge plus the
+         epicentre flash. Named, so it renders in the transition's top layer
+         above the wipe. Deliberately soft: a frame of render lag can't show. */
+    .mode-edge, .mode-shock {
       position: fixed;
       left: var(--tx, 50%);
       top: var(--ty, 50%);
-      width: var(--mf-size, 220vmax);
-      height: var(--mf-size, 220vmax);
       border-radius: 50%;
       pointer-events: none;
+      transform: translate(-50%,-50%) scale(0);
+    }
+    .mode-edge {
+      width: calc(var(--tr, 150vmax) * 2);
+      height: calc(var(--tr, 150vmax) * 2);
+      z-index: 9997;
+      background: radial-gradient(circle closest-side,
+        transparent 90%,
+        var(--rim-b, rgba(99,102,241,0.55)) 96%,
+        var(--rim-a, #C7D2FE) 98.7%,
+        var(--rim-a, #C7D2FE) 100%);
+    }
+    .mode-shock {
+      /* Radius = 1.15 × the wipe's final radius; the spill peaks just
+         outside 86.95% of closest-side, i.e. just beyond the wipe edge */
+      width: calc(var(--tr, 150vmax) * 2.3);
+      height: calc(var(--tr, 150vmax) * 2.3);
       z-index: 9998;
-      mix-blend-mode: screen;
-      transform: translate(-50%,-50%);
     }
-    /* Soft wide colour bloom underneath the rings for extra punch */
-    .mode-shock .bloom {
-      position: absolute; inset: 0; border-radius: 50%;
-      background: radial-gradient(circle,
-        rgba(255,255,255,0.5) 0%, rgba(99,102,241,0.3) 7%,
-        rgba(56,189,248,0.18) 12%, transparent 21%);
-      animation: mode-shock-bloom 0.95s cubic-bezier(0.22,1,0.36,1) forwards;
-    }
-    /* Three concentric rings rippling outward in an electric indigo → blue →
-       cyan duotone sweep (a cool tech spectrum, not a full rainbow) */
-    .mode-shock .ring {
-      position: absolute; inset: 0; border-radius: 50%;
-      background: conic-gradient(from 0deg,
-        #6366F1, #3B82F6, #22D3EE, #3B82F6, #6366F1);
-      -webkit-mask: radial-gradient(circle, transparent 58.5%, #000 60%, #000 63%, transparent 65%);
-      mask: radial-gradient(circle, transparent 58.5%, #000 60%, #000 63%, transparent 65%);
-      filter: blur(1px);
-      animation: mode-shock-ring 0.95s cubic-bezier(0.16,1,0.3,1) forwards;
-    }
-    .mode-shock .ring2 {
-      position: absolute; inset: 0; border-radius: 50%;
-      background: conic-gradient(from 55deg,
-        #22D3EE, #3B82F6, #6366F1, #3B82F6, #22D3EE);
-      -webkit-mask: radial-gradient(circle, transparent 41%, #000 43.5%, #000 46%, transparent 48.5%);
-      mask: radial-gradient(circle, transparent 41%, #000 43.5%, #000 46%, transparent 48.5%);
-      filter: blur(1px);
-      animation: mode-shock-ring2 0.95s cubic-bezier(0.16,1,0.3,1) forwards;
-      animation-delay: 0.06s;
-    }
-    .mode-shock .ring3 {
-      position: absolute; inset: 0; border-radius: 50%;
-      background: conic-gradient(from 110deg,
-        #3B82F6, #6366F1, #22D3EE, #6366F1, #3B82F6);
-      -webkit-mask: radial-gradient(circle, transparent 25%, #000 27.5%, #000 30%, transparent 32.5%);
-      mask: radial-gradient(circle, transparent 25%, #000 27.5%, #000 30%, transparent 32.5%);
-      filter: blur(1px);
-      animation: mode-shock-ring3 0.95s cubic-bezier(0.16,1,0.3,1) forwards;
-      animation-delay: 0.12s;
+    .mode-shock > div { position: absolute; inset: 0; border-radius: 50%; }
+    .mode-shock .glow {
+      background: radial-gradient(circle closest-side,
+        transparent 84%,
+        var(--rim-glow, rgba(56,189,248,0.38)) 88%,
+        transparent 100%);
     }
     .mode-shock .core {
-      position: absolute; inset: 0; border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(99,102,241,0.4) 6%, transparent 13%);
-      animation: mode-shock-core 0.45s cubic-bezier(0.22,1,0.36,1) forwards;
+      background: radial-gradient(circle closest-side,
+        rgba(255,255,255,0.95) 0%,
+        var(--rim-glow, rgba(56,189,248,0.38)) 4.5%,
+        transparent 10%);
     }
-    @media (prefers-reduced-motion: reduce) {
-      .mode-shock { display: none; }
-    }
-    /* When the browser supports View Transitions, the whole page (including
-       any regular fixed/absolute element) is painted into a special "top
-       layer" during the transition — our shockwave would otherwise be
-       invisible underneath it. Giving it its own view-transition-name pulls
-       it into that same top layer so the rainbow ring rides ON TOP of the
-       circular wipe instead of being hidden by it. */
-    .mode-shock.vt-shock {
-      view-transition-name: mode-shock;
-    }
-    .mode-shock.vt-shock .ring,
-    .mode-shock.vt-shock .ring2,
-    .mode-shock.vt-shock .ring3,
-    .mode-shock.vt-shock .core,
-    .mode-shock.vt-shock .bloom {
-      animation: none;
-      opacity: 1;
-      transform: none;
-    }
-    ::view-transition-group(mode-shock) { z-index: 3; animation-duration: 0.95s; }
-    ::view-transition-group(root) { z-index: 1; }
-    ::view-transition-old(mode-shock) { display: none; }
-    ::view-transition-new(mode-shock) {
-      mix-blend-mode: screen;
-      animation: mode-shock-burst 0.95s cubic-bezier(0.16,1,0.3,1) forwards;
+    @keyframes mode-edge-burst {
+      0%   { transform: translate(-50%,-50%) scale(0); opacity: 1; }
+      78%  { opacity: 1; }
+      100% { transform: translate(-50%,-50%) scale(1); opacity: 0; }
     }
     @keyframes mode-shock-burst {
-      0%   { transform: scale(0); opacity: 0.95; }
-      55%  { opacity: 0.6; }
+      0%   { transform: scale(0); opacity: 1; }
+      72%  { opacity: 1; }
       100% { transform: scale(1); opacity: 0; }
     }
-    /* A little celebratory spin+pop on the toggle icon once the new mode lands */
-    @keyframes icon-pop {
-      0%   { transform: scale(1)    rotate(0deg); }
-      40%  { transform: scale(1.4)  rotate(190deg); }
-      70%  { transform: scale(0.88) rotate(330deg); }
-      100% { transform: scale(1)    rotate(360deg); }
+    /* The lip starts when the transition is ready (JS adds .go), so it shares
+       the wipe's start frame as well as its duration and easing */
+    .mode-edge.go {
+      animation: mode-edge-burst var(--mode-dur) var(--mode-ease) forwards;
     }
-    .t-icon.icon-pop { animation: icon-pop 0.6s cubic-bezier(0.34,1.56,0.64,1); }
+    /* Fallback path (no View Transitions): the spill animates in place */
+    .mode-shock:not(.vt-shock) { transform: translate(-50%,-50%) scale(1); }
+    .mode-shock:not(.vt-shock) > div {
+      animation: mode-shock-burst var(--mode-dur) var(--mode-ease) forwards;
+    }
     @media (prefers-reduced-motion: reduce) {
-      .t-icon.icon-pop { animation: none; }
+      .mode-shock, .mode-edge { display: none; }
     }
-    /* Circular reveal wipe (Chromium/Safari with View Transitions support) */
+    /* With View Transitions, the whole page is painted into a special top
+       layer during the transition; a regular fixed element would be hidden
+       underneath. Naming the spill pulls it into that same layer so it rides
+       ON TOP of the wipe. It's spawned inside the transition callback so it
+       only exists in the "new" state (an entering element). */
+    .mode-shock.vt-shock { view-transition-name: mode-shock; transform: translate(-50%,-50%) scale(1); }
+    .theme-toggle        { view-transition-name: mode-toggle; }
+    ::view-transition-group(root)        { z-index: 1; }
+    ::view-transition-group(mode-shock)  { z-index: 3; }
+    ::view-transition-group(mode-toggle) { z-index: 6; }
+    ::view-transition-old(mode-shock) { display: none; }
+    ::view-transition-new(mode-shock) {
+      animation: mode-shock-burst var(--mode-dur) var(--mode-ease) forwards;
+    }
+    /* The page being left recedes */
+    @keyframes mode-old-recede {
+      from { transform: scale(1);     filter: blur(0) saturate(1) brightness(1); }
+      to   { transform: scale(1.045); filter: blur(14px) saturate(0.5) brightness(var(--old-bright, 1)); }
+    }
+    ::view-transition-old(root) {
+      animation: mode-old-recede var(--mode-dur) var(--mode-ease) forwards;
+      mix-blend-mode: normal;
+    }
+    /* The new mode: circular reveal from the toggle */
     @keyframes mode-reveal-wipe {
       from { clip-path: circle(0px at var(--tx, 50%) var(--ty, 50%)); }
       to   { clip-path: circle(var(--tr, 150%) at var(--tx, 50%) var(--ty, 50%)); }
     }
-    ::view-transition-old(root) {
-      animation: none;
+    ::view-transition-new(root) {
+      animation: mode-reveal-wipe var(--mode-dur) var(--mode-ease) forwards;
       mix-blend-mode: normal;
     }
-    ::view-transition-new(root) {
-      animation: mode-reveal-wipe 0.85s cubic-bezier(0.65,0,0.35,1) forwards;
-      mix-blend-mode: normal;
+    /* The toggle at the epicentre: squash → overshoot → settle, while the
+       browser cross-fades its old/new label underneath */
+    @keyframes toggle-kick {
+      0%   { transform: scale(1); }
+      16%  { transform: scale(0.86); }
+      52%  { transform: scale(1.12); }
+      100% { transform: scale(1); }
+    }
+    ::view-transition-image-pair(mode-toggle) {
+      animation: toggle-kick 0.9s cubic-bezier(0.34, 1.4, 0.64, 1);
     }
     @media (prefers-reduced-motion: reduce) {
-      ::view-transition-new(root) { animation: none; }
-      ::view-transition-new(mode-shock) { animation: none; }
+      ::view-transition-old(root),
+      ::view-transition-new(root),
+      ::view-transition-new(mode-shock),
+      ::view-transition-image-pair(mode-toggle) { animation: none; }
     }
     .cs-modal iframe {
       flex: 1;
@@ -2266,6 +2258,11 @@
     .theme-toggle:hover {
       transform: translateX(-50%) translateY(-2px);
       box-shadow: 0 12px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+    }
+    /* Anticipation: a quick squash on press before the mode ignites */
+    .theme-toggle:active {
+      transform: translateX(-50%) translateY(0) scale(0.92);
+      transition-duration: 0.1s;
     }
     .theme-toggle .t-icon { font-size: 14px; }
     /* Shrink toggle on scroll */
@@ -3808,7 +3805,7 @@
       var stored = localStorage.getItem('jt-mode') || 'loud';
       var lbl  = document.getElementById('t-label');
       var icon = document.getElementById('t-icon');
-      function apply(m) {
+      function apply(m, animate) {
         root.setAttribute('data-mode', m);
         lbl.textContent  = m === 'quiet' ? 'Go bold?' : 'Go clean?';
         icon.textContent = m === 'quiet' ? '○' : '●';
@@ -3820,56 +3817,98 @@
           else heroVideo.play().catch(function() {});
         }
         document.dispatchEvent(new Event('jt-mode-change'));
+        if (animate) landHero(m);
       }
       apply(stored);
 
       var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var LAND_EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';
 
+      // The new mode "lands": hero copy (and the Clean nav) re-enter with a
+      // soft staggered rise. Uses the Web Animations API so it layers on top
+      // of the existing CSS entrance animations without disturbing them.
+      function landHero(m) {
+        if (reduceMotion || !('animate' in Element.prototype)) return;
+        var rise = [{ opacity: 0, transform: 'translateY(18px)' }, { opacity: 1, transform: 'translateY(0)' }];
+        [['.hl-light', 140], ['.hl-bold', 240], ['.hero-bottom', 340], ['.q-hero-actions', 440]].forEach(function(pair) {
+          var el = document.querySelector(pair[0]);
+          if (el) el.animate(rise, { duration: 900, delay: pair[1], easing: LAND_EASE, fill: 'backwards' });
+        });
+        var nav = document.querySelector('.q-nav');
+        if (nav && m === 'quiet') {
+          nav.animate([{ opacity: 0, transform: 'translateY(-100%)' }, { opacity: 1, transform: 'translateY(0)' }],
+            { duration: 800, delay: 280, easing: LAND_EASE, fill: 'backwards' });
+        }
+      }
+
+      // Spawns the edge layers. Returns the lip element so the caller can
+      // start its animation on the exact frame the transition begins.
       function spawnShock(x, y, isVT) {
-        if (reduceMotion) return;
-        var existing = document.querySelector('.mode-shock');
-        if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
+        if (reduceMotion) return null;
+        document.querySelectorAll('.mode-shock, .mode-edge').forEach(function(n) {
+          if (n.parentNode) n.parentNode.removeChild(n);
+        });
+        var edge = document.createElement('div');
+        edge.className = 'mode-edge';
         var shock = document.createElement('div');
         shock.className = 'mode-shock' + (isVT ? ' vt-shock' : '');
-        shock.style.setProperty('--tx', x + 'px');
-        shock.style.setProperty('--ty', y + 'px');
-        shock.innerHTML = '<div class="bloom"></div><div class="ring"></div><div class="ring2"></div><div class="ring3"></div><div class="core"></div>';
-        document.body.appendChild(shock);
-        setTimeout(function() { if (shock.parentNode) shock.parentNode.removeChild(shock); }, 1000);
+        shock.innerHTML = '<div class="glow"></div><div class="core"></div>';
+        [edge, shock].forEach(function(n) {
+          n.style.setProperty('--tx', x + 'px');
+          n.style.setProperty('--ty', y + 'px');
+          document.body.appendChild(n);
+        });
+        setTimeout(function() {
+          [edge, shock].forEach(function(n) { if (n.parentNode) n.parentNode.removeChild(n); });
+        }, 1300);
+        return edge;
       }
 
-      function popIcon() {
-        icon.classList.remove('icon-pop');
-        void icon.offsetWidth; // restart the animation on repeat clicks
-        icon.classList.add('icon-pop');
-      }
-
+      var busy = false;
       if (btn) btn.addEventListener('click', function(e) {
-        var next = root.getAttribute('data-mode') === 'quiet' ? 'loud' : 'quiet';
+        if (busy) return;
+        var next   = root.getAttribute('data-mode') === 'quiet' ? 'loud' : 'quiet';
+        var toBold = next === 'loud';
         var r = btn.getBoundingClientRect();
         var x = (e.clientX || (r.left + r.width / 2));
         var y = (e.clientY || (r.top + r.height / 2));
-        var tr = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y)) + 20;
+        var tr = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y)) + 24;
         root.style.setProperty('--tx', x + 'px');
         root.style.setProperty('--ty', y + 'px');
         root.style.setProperty('--tr', tr + 'px');
+        // Direction-aware palette. Igniting Bold: electric indigo / cyan.
+        // Exposing Clean: warm white light. The page being left dims under
+        // ink or brightens under light accordingly.
+        // Lip (inside the edge, over the NEW page) / spill (outside, over the
+        // OLD page). Bold: pale indigo lip on the dark page, cyan spill over
+        // the light one. Clean: warm amber lip on the light page, white spill
+        // over the dark one.
+        root.style.setProperty('--rim-a',      toBold ? '#C7D2FE'               : '#FFC77A');
+        root.style.setProperty('--rim-b',      toBold ? 'rgba(99,102,241,0.6)'  : 'rgba(255,184,96,0.5)');
+        root.style.setProperty('--rim-glow',   toBold ? 'rgba(56,189,248,0.38)' : 'rgba(255,255,255,0.4)');
+        root.style.setProperty('--old-bright', toBold ? '0.6'                   : '1.4');
 
         var useVT = !reduceMotion && !!document.startViewTransition;
 
         if (useVT) {
-          // Spawn the shockwave inside the transition callback so it only
-          // exists in the "new" DOM state — the browser then renders it as
-          // an entering element in the same top layer as the circular wipe,
-          // riding above it instead of being hidden underneath it.
+          // Spawned inside the transition callback so the layers only exist
+          // in the "new" DOM state. The spill is an entering named element
+          // (top layer, above the wipe); the lip is plain DOM inside the new
+          // page and starts on the transition's first frame.
+          busy = true;
+          var edge = null;
           var transition = document.startViewTransition(function() {
-            apply(next);
-            spawnShock(x, y, true);
+            apply(next, true);
+            edge = spawnShock(x, y, true);
           });
-          transition.finished.then(popIcon).catch(function() {});
+          transition.ready.then(function() { if (edge) edge.classList.add('go'); }).catch(function() {
+            if (edge) edge.classList.add('go');
+          });
+          transition.finished.catch(function() {}).then(function() { busy = false; });
         } else {
-          spawnShock(x, y, false);
-          apply(next);
-          popIcon();
+          var edgeNow = spawnShock(x, y, false);
+          if (edgeNow) edgeNow.classList.add('go');
+          apply(next, true);
         }
       });
       // Shrink on scroll, re-enlarge when scrolling stops
