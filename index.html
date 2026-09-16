@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" id="theme-color" content="#06060A" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -3154,6 +3155,157 @@
       [data-mode="quiet"] .q-btn-ghost { justify-content: center; }
     }
   </style>
+  <style id="final-polish">
+    /* ═══════════════════════════════════════════════════════════════
+       Final polish — both modes. Loaded last so it can refine either.
+       Bold = html:not([data-mode="quiet"]) (the attribute is set by JS,
+       so this also covers the first paint before it lands).
+       ═══════════════════════════════════════════════════════════════ */
+
+    /* ── Keyboard focus: one consistent, visible ring in both modes ── */
+    :focus { outline: none; }
+    :focus-visible {
+      outline: 2px solid rgba(255,255,255,0.9);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+    [data-mode="quiet"] :focus-visible { outline-color: var(--text); }
+
+    /* ── Text selection + native chrome follow the mode ── */
+    html:not([data-mode="quiet"]) { color-scheme: dark; scrollbar-color: rgba(255,255,255,0.22) transparent; }
+    html[data-mode="quiet"]       { color-scheme: light; scrollbar-color: rgba(0,0,0,0.28) transparent; }
+    html:not([data-mode="quiet"]) ::selection { background: rgba(255,255,255,0.92); color: #06060A; }
+
+    /* ── Anchors land clear of the Clean nav ── */
+    html[data-mode="quiet"] { scroll-padding-top: 76px; }
+
+    /* ── Bold hero: guarantee legibility over any frame of the video ── */
+    html:not([data-mode="quiet"]) .hero-video-wrap::before {
+      background:
+        linear-gradient(to top, rgba(6,6,10,0.94) 0%, rgba(6,6,10,0.62) 34%, rgba(6,6,10,0.18) 66%, transparent 100%),
+        linear-gradient(to right, rgba(6,6,10,0.62) 0%, rgba(6,6,10,0.22) 42%, transparent 72%);
+    }
+    html:not([data-mode="quiet"]) .hero-headline { text-shadow: 0 2px 28px rgba(0,0,0,0.5); }
+    html:not([data-mode="quiet"]) .hero-tagline  { text-shadow: 0 1px 14px rgba(0,0,0,0.6); color: rgba(255,255,255,0.68); }
+    @media (max-width: 900px) {
+      html:not([data-mode="quiet"]) .hero-video-wrap::before {
+        background: linear-gradient(to top, #08080F 0%, rgba(8,8,15,0.65) 18%, transparent 48%);
+      }
+    }
+
+    /* ── Bold: discreet wordmark, top-left, retreats once you scroll ── */
+    .b-brand {
+      position: fixed;
+      top: 26px;
+      left: clamp(28px, 5vw, 72px); /* aligns with the hero copy */
+      z-index: 210;
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: rgba(255,255,255,0.9);
+      text-decoration: none;
+      text-shadow: 0 1px 10px rgba(0,0,0,0.55);
+      transition: opacity 0.45s cubic-bezier(0.32,0.72,0,1), transform 0.45s cubic-bezier(0.32,0.72,0,1);
+    }
+    .b-brand.hidden { opacity: 0; transform: translateY(-8px); pointer-events: none; }
+    [data-mode="quiet"] .b-brand { display: none; }
+    @media (max-width: 900px) { .b-brand { top: 18px; } }
+
+    /* ── Bold: metric captions were too faint ── */
+    html:not([data-mode="quiet"]) .m-label { color: rgba(255,255,255,0.52); }
+
+    /* ── Bold: Selected Work rows answer the hover with motion, not just colour ── */
+    html:not([data-mode="quiet"]) .work-title { transition: color 0.3s, transform 0.5s cubic-bezier(0.32,0.72,0,1); }
+    html:not([data-mode="quiet"]) .work-desc  { transition: color 0.3s, transform 0.5s cubic-bezier(0.32,0.72,0,1) 0.03s; }
+    html:not([data-mode="quiet"]) .work-row:hover .work-title,
+    html:not([data-mode="quiet"]) .work-row:hover .work-desc  { transform: translateX(8px); }
+    html:not([data-mode="quiet"]) .work-row:hover .work-desc  { color: rgba(255,255,255,0.78); }
+
+    /* ── Clean hero: at-a-glance meta fills the right column (desktop) ── */
+    .q-hero-meta { display: none; }
+    [data-mode="quiet"] .q-hero-meta {
+      display: grid;
+      gap: 18px;
+      position: absolute;
+      right: var(--q-inline, var(--pad));
+      top: 50%;
+      /* hero copy is centred within padding 120px top / ~96px bottom, so
+         its optical middle sits ~12px below the hero's — match it */
+      transform: translateY(calc(-50% + 12px));
+      z-index: 2;
+      min-width: 260px;
+    }
+    .q-meta-row {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 16px;
+      align-items: baseline;
+      padding-top: 12px;
+      border-top: 1px solid var(--rule);
+    }
+    .q-meta-k {
+      font-size: 11px; font-weight: 500 !important;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--subtle);
+    }
+    .q-meta-v {
+      font-size: 14px; font-weight: 400 !important;
+      color: var(--text);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    @media (max-width: 1100px) { [data-mode="quiet"] .q-hero-meta { display: none; } }
+
+    /* ── Clean mobile nav: keep the two links that matter ── */
+    @media (max-width: 900px) {
+      [data-mode="quiet"] .q-nav-links { display: flex; gap: 20px; }
+      [data-mode="quiet"] .q-nav-links a:nth-child(2),
+      [data-mode="quiet"] .q-nav-links a:nth-child(4),
+      [data-mode="quiet"] .q-nav-links a:nth-child(5) { display: none; }
+    }
+
+    /* ── Footer: a closing signature + a way back up ── */
+    .footer-sig {
+      font-size: clamp(64px, 15vw, 240px);
+      font-weight: 800;
+      letter-spacing: -0.055em;
+      line-height: 0.82;
+      margin: 0 0 clamp(36px, 5vw, 72px) -0.03em;
+      color: rgba(255,255,255,0.07);
+      white-space: nowrap;
+      overflow: hidden;
+      user-select: none;
+      pointer-events: none;
+    }
+    [data-mode="quiet"] .footer-sig {
+      font-weight: 300 !important;
+      letter-spacing: -0.04em;
+      color: rgba(0,0,0,0.07);
+    }
+    .footer-top { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .footer-up {
+      font-size: 13px; font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+    .footer-up span { display: inline-block; transition: transform 0.35s cubic-bezier(0.32,0.72,0,1); }
+    .footer-up:hover { color: var(--text); }
+    .footer-up:hover span { transform: translateY(-3px); }
+    [data-mode="quiet"] .footer-up { font-size: 14px; font-weight: 400 !important; }
+
+    /* ── Reduced motion: strip the extra motion added above ── */
+    @media (prefers-reduced-motion: reduce) {
+      .b-brand, .footer-up span,
+      html:not([data-mode="quiet"]) .work-title,
+      html:not([data-mode="quiet"]) .work-desc { transition: none; }
+      html:not([data-mode="quiet"]) .work-row:hover .work-title,
+      html:not([data-mode="quiet"]) .work-row:hover .work-desc { transform: none; }
+    }
+  </style>
 </head>
 <body>
 
@@ -3180,6 +3332,9 @@
       <a href="#podcast">Podcast</a>
     </nav>
   </header>
+
+  <!-- Bold mode: discreet wordmark (Clean has it in the nav) -->
+  <a href="#hero" class="b-brand" id="b-brand" aria-label="Jay Tulloch — back to top">Jay Tulloch</a>
 
   <!-- Mode toggle -->
   <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Clean/Bold mode">
@@ -3226,6 +3381,12 @@
         <a href="#contact" class="q-btn q-btn-ghost">Get in touch</a>
       </div>
     </div>
+    <!-- Clean mode: at-a-glance meta (desktop) -->
+    <aside class="q-hero-meta" aria-label="At a glance">
+      <div class="q-meta-row"><span class="q-meta-k">Availability</span><span class="q-meta-v">Fractional &amp; advisory work</span></div>
+      <div class="q-meta-row"><span class="q-meta-k">Based</span><span class="q-meta-v">Dubai, available globally</span></div>
+      <div class="q-meta-row"><span class="q-meta-k">Local time</span><span class="q-meta-v" id="q-local-time">—</span></div>
+    </aside>
   </section>
 
   <!-- Metrics -->
@@ -3486,13 +3647,15 @@
 
   <!-- Footer -->
   <footer>
+    <div class="footer-sig" aria-hidden="true">Jay Tulloch</div>
     <div class="footer-top">
       <ul class="footer-nav">
-        <li><a href="https://www.linkedin.com/in/jaytulloch/" target="_blank">LinkedIn</a></li>
-        <li><a href="https://x.com/mrjaytulloch" target="_blank">X / Twitter</a></li>
-        <li><a href="https://youtube.com/@beyondtheinterface" target="_blank">YouTube</a></li>
-        <li><a href="https://jaytulloch.substack.com" target="_blank">Substack</a></li>
+        <li><a href="https://www.linkedin.com/in/jaytulloch/" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://x.com/mrjaytulloch" target="_blank" rel="noopener">X / Twitter</a></li>
+        <li><a href="https://youtube.com/@beyondtheinterface" target="_blank" rel="noopener">YouTube</a></li>
+        <li><a href="https://jaytulloch.substack.com" target="_blank" rel="noopener">Substack</a></li>
       </ul>
+      <a href="#hero" class="footer-up">Back to top <span aria-hidden="true">↑</span></a>
     </div>
     <div class="footer-bottom">
       <span class="footer-copy">© 2026 Jay Tulloch. All rights reserved.</span>
@@ -3816,10 +3979,40 @@
           if (m === 'quiet') heroVideo.pause();
           else heroVideo.play().catch(function() {});
         }
+        // Mobile browser chrome follows the mode
+        var tc = document.getElementById('theme-color');
+        if (tc) tc.setAttribute('content', m === 'quiet' ? '#FBFBFD' : '#06060A');
         document.dispatchEvent(new Event('jt-mode-change'));
         if (animate) landHero(m);
       }
       apply(stored);
+
+      // Clean hero: live local time (Dubai, GST)
+      (function() {
+        var el = document.getElementById('q-local-time');
+        if (!el) return;
+        var fmt = null;
+        try { fmt = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Asia/Dubai' }); } catch (e) {}
+        function tick() {
+          if (!fmt) return;
+          el.textContent = fmt.format(new Date()) + ' GST';
+        }
+        tick();
+        setInterval(tick, 15000);
+      })();
+
+      // Bold wordmark retreats once you've scrolled into the page
+      (function() {
+        var brand = document.getElementById('b-brand');
+        if (!brand) return;
+        var shown = true;
+        function check() {
+          var want = window.scrollY < 140;
+          if (want !== shown) { shown = want; brand.classList.toggle('hidden', !want); }
+        }
+        check();
+        window.addEventListener('scroll', check, { passive: true });
+      })();
 
       var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var LAND_EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';
