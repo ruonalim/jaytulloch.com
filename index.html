@@ -1112,20 +1112,20 @@
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
     }
+    .cs-modal { align-items: flex-start; justify-content: flex-start; }
     .cs-modal-sheet {
-      width: calc(100% - 48px);
-      max-width: 1200px;
-      height: calc(100dvh - 64px);
+      width: 100%;
+      max-width: none;
+      height: 100dvh;
       background: #0D0D18;
-      border-radius: 20px;
+      border-radius: 0;
       display: flex;
       flex-direction: column;
       overflow: hidden;
       position: relative;
-      transform: scale(0.93) translateY(28px);
+      transform: translateY(0);
       opacity: 0;
-      transition: transform 0.55s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.4s cubic-bezier(0.32, 0.72, 0, 1);
-      box-shadow: 0 40px 100px rgba(0,0,0,0.45), 0 0 0 0.5px rgba(255,255,255,0.08);
+      transition: opacity 0.4s cubic-bezier(0.32, 0.72, 0, 1);
       touch-action: none;
     }
     /* ── Pull zone: transparent touch-capture at bottom of modal ── */
@@ -1137,19 +1137,10 @@
       pointer-events: none; /* activated via JS when iframe is at bottom */
     }
     .cs-pull-zone.active { pointer-events: auto; }
-    /* Mobile: full-screen modal, no gutters */
     @media (max-width: 680px) {
-      .cs-modal { align-items: flex-start; justify-content: flex-start; }
-      .cs-modal-sheet {
-        width: 100%;
-        max-width: none;
-        height: 100dvh;
-        border-radius: 0;
-      }
       .cs-modal-close { top: 12px; right: 12px; }
     }
     .cs-modal.ready .cs-modal-sheet {
-      transform: scale(1) translateY(0);
       opacity: 1;
     }
     .cs-modal-close {
@@ -1206,7 +1197,7 @@
       width: 100%;
       border: none;
       background: #0D0D18;
-      border-radius: 0 0 20px 20px;
+      border-radius: 0;
     }
 
     /* ─── Tap-to-next indicator ──────────────────────────────── */
@@ -1216,7 +1207,7 @@
       left: 0;
       right: 0;
       height: 50vh;
-      border-radius: 0 0 20px 20px;
+      border-radius: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -3470,14 +3461,12 @@
 
       var sheet = document.querySelector('.cs-modal-sheet');
       setTimeout(function() {
-        sheet.style.transition = 'transform 0.4s cubic-bezier(0.32,0.72,0,1), opacity 0.35s';
-        sheet.style.transform  = 'scale(0.95) translateY(28px)';
+        sheet.style.transition = 'opacity 0.35s';
         sheet.style.opacity    = '0.12';
         setTimeout(function() {
           csCurrentIdx = nextIdx;
           csIframe.src = CS_SEQUENCE[nextIdx].src;
-          sheet.style.transition = 'transform 0.6s cubic-bezier(0.32,0.72,0,1), opacity 0.5s';
-          sheet.style.transform  = 'scale(1) translateY(0)';
+          sheet.style.transition = 'opacity 0.5s';
           sheet.style.opacity    = '1';
           pullNavigating = false;
           hideIndicator();
@@ -3597,31 +3586,22 @@
 
       var sheet = document.querySelector('.cs-modal-sheet');
 
-      // Phase 1: inhale (scale up slightly, 0.12s)
-      sheet.style.transition = 'transform 0.12s cubic-bezier(0.22,1,0.36,1), opacity 0.12s';
-      sheet.style.transform  = 'scale(1.05) translateY(-4px)';
-      sheet.style.opacity    = '0.88';
+      // Simple full-screen fade-out
+      sheet.style.transition = 'opacity 0.4s cubic-bezier(0.32,0.72,0,1)';
+      sheet.style.opacity    = '0';
+      // Fade backdrop
+      csModal.classList.remove('ready');
 
       setTimeout(function() {
-        // Phase 2: collapse dramatically (0.52s)
-        sheet.style.transition = 'transform 0.52s cubic-bezier(0.55,0,1,0.45), opacity 0.36s 0.08s';
-        sheet.style.transform  = 'scale(0.05) translateY(48px) rotate(3deg)';
-        sheet.style.opacity    = '0';
-        // Fade backdrop
-        csModal.classList.remove('ready');
-
-        setTimeout(function() {
-          // Fully hidden
-          csModal.classList.remove('open');
-          document.body.style.overflow = '';
-          csIframe.src = '';
-          // Reset for next open
-          sheet.style.transition = '';
-          sheet.style.transform  = '';
-          sheet.style.opacity    = '';
-          csClosing = false;
-        }, 580);
-      }, 130);
+        // Fully hidden
+        csModal.classList.remove('open');
+        document.body.style.overflow = '';
+        csIframe.src = '';
+        // Reset for next open
+        sheet.style.transition = '';
+        sheet.style.opacity    = '';
+        csClosing = false;
+      }, 420);
     }
 
     document.getElementById('cs-modal-close').addEventListener('click', closeCaseStudy);
