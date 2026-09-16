@@ -1192,6 +1192,93 @@
       );
       animation: cs-close-flash 0.55s cubic-bezier(0.22,1,0.36,1) forwards;
     }
+
+    /* ─── Spectacular mode transition ───────────────────────────
+       A rainbow shockwave ring bursts from the toggle, plus (where
+       supported) the browser cross-fades the two modes as a circular
+       wipe expanding from the same point via the View Transitions API. */
+    @keyframes mode-shock-ring {
+      0%   { transform: scale(0);    opacity: 0.95; }
+      55%  { opacity: 0.65; }
+      100% { transform: scale(1);    opacity: 0; }
+    }
+    @keyframes mode-shock-core {
+      0%   { transform: scale(0);    opacity: 1; }
+      100% { transform: scale(1);    opacity: 0; }
+    }
+    .mode-shock {
+      position: fixed;
+      left: var(--tx, 50%);
+      top: var(--ty, 50%);
+      width: var(--mf-size, 220vmax);
+      height: var(--mf-size, 220vmax);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      mix-blend-mode: screen;
+      transform: translate(-50%,-50%);
+    }
+    .mode-shock .ring {
+      position: absolute; inset: 0; border-radius: 50%;
+      background: conic-gradient(from 0deg,
+        #8B5CF6, #EC4899, #F97316, #A3E635, #14B8A6, #3B82F6, #8B5CF6);
+      -webkit-mask: radial-gradient(circle, transparent 58.5%, #000 60%, #000 63%, transparent 65%);
+      mask: radial-gradient(circle, transparent 58.5%, #000 60%, #000 63%, transparent 65%);
+      filter: blur(1px);
+      animation: mode-shock-ring 0.85s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+    .mode-shock .core {
+      position: absolute; inset: 0; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(139,92,246,0.35) 8%, transparent 16%);
+      animation: mode-shock-core 0.5s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .mode-shock { display: none; }
+    }
+    /* When the browser supports View Transitions, the whole page (including
+       any regular fixed/absolute element) is painted into a special "top
+       layer" during the transition — our shockwave would otherwise be
+       invisible underneath it. Giving it its own view-transition-name pulls
+       it into that same top layer so the rainbow ring rides ON TOP of the
+       circular wipe instead of being hidden by it. */
+    .mode-shock.vt-shock {
+      view-transition-name: mode-shock;
+    }
+    .mode-shock.vt-shock .ring,
+    .mode-shock.vt-shock .core {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+    ::view-transition-group(mode-shock) { z-index: 3; animation-duration: 0.85s; }
+    ::view-transition-group(root) { z-index: 1; }
+    ::view-transition-old(mode-shock) { display: none; }
+    ::view-transition-new(mode-shock) {
+      mix-blend-mode: screen;
+      animation: mode-shock-burst 0.85s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+    @keyframes mode-shock-burst {
+      0%   { transform: scale(0); opacity: 0.95; }
+      55%  { opacity: 0.65; }
+      100% { transform: scale(1); opacity: 0; }
+    }
+    /* Circular reveal wipe (Chromium/Safari with View Transitions support) */
+    @keyframes mode-reveal-wipe {
+      from { clip-path: circle(0px at var(--tx, 50%) var(--ty, 50%)); }
+      to   { clip-path: circle(var(--tr, 150%) at var(--tx, 50%) var(--ty, 50%)); }
+    }
+    ::view-transition-old(root) {
+      animation: none;
+      mix-blend-mode: normal;
+    }
+    ::view-transition-new(root) {
+      animation: mode-reveal-wipe 0.85s cubic-bezier(0.65,0,0.35,1) forwards;
+      mix-blend-mode: normal;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      ::view-transition-new(root) { animation: none; }
+      ::view-transition-new(mode-shock) { animation: none; }
+    }
     .cs-modal iframe {
       flex: 1;
       width: 100%;
@@ -3029,7 +3116,7 @@
   <!-- Mode toggle -->
   <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Clean/Bold mode">
     <span class="t-icon" id="t-icon">●</span>
-    <span id="t-label">BOLD</span>
+    <span id="t-label">GO CLEAN</span>
   </button>
 
   <!-- Case Study Modal -->
@@ -3652,7 +3739,7 @@
       var icon = document.getElementById('t-icon');
       function apply(m) {
         root.setAttribute('data-mode', m);
-        lbl.textContent  = m === 'quiet' ? 'CLEAN' : 'BOLD';
+        lbl.textContent  = m === 'quiet' ? 'GO BOLD' : 'GO CLEAN';
         icon.textContent = m === 'quiet' ? '○' : '●';
         localStorage.setItem('jt-mode', m);
         // Pause/resume the hero video with the mode
@@ -3664,8 +3751,47 @@
         document.dispatchEvent(new Event('jt-mode-change'));
       }
       apply(stored);
-      if (btn) btn.addEventListener('click', function() {
-        apply(root.getAttribute('data-mode') === 'quiet' ? 'loud' : 'quiet');
+
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function spawnShock(x, y, isVT) {
+        if (reduceMotion) return;
+        var existing = document.querySelector('.mode-shock');
+        if (existing && existing.parentNode) existing.parentNode.removeChild(existing);
+        var shock = document.createElement('div');
+        shock.className = 'mode-shock' + (isVT ? ' vt-shock' : '');
+        shock.style.setProperty('--tx', x + 'px');
+        shock.style.setProperty('--ty', y + 'px');
+        shock.innerHTML = '<div class="ring"></div><div class="core"></div>';
+        document.body.appendChild(shock);
+        setTimeout(function() { if (shock.parentNode) shock.parentNode.removeChild(shock); }, 900);
+      }
+
+      if (btn) btn.addEventListener('click', function(e) {
+        var next = root.getAttribute('data-mode') === 'quiet' ? 'loud' : 'quiet';
+        var r = btn.getBoundingClientRect();
+        var x = (e.clientX || (r.left + r.width / 2));
+        var y = (e.clientY || (r.top + r.height / 2));
+        var tr = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y)) + 20;
+        root.style.setProperty('--tx', x + 'px');
+        root.style.setProperty('--ty', y + 'px');
+        root.style.setProperty('--tr', tr + 'px');
+
+        var useVT = !reduceMotion && !!document.startViewTransition;
+
+        if (useVT) {
+          // Spawn the shockwave inside the transition callback so it only
+          // exists in the "new" DOM state — the browser then renders it as
+          // an entering element in the same top layer as the circular wipe,
+          // riding above it instead of being hidden underneath it.
+          document.startViewTransition(function() {
+            apply(next);
+            spawnShock(x, y, true);
+          });
+        } else {
+          spawnShock(x, y, false);
+          apply(next);
+        }
       });
       // Shrink on scroll, re-enlarge when scrolling stops
       var scrollTimer;
