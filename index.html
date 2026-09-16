@@ -1308,11 +1308,24 @@
       transform: translateY(100%);
       opacity: 0;
       transition: filter 0.3s;
-      /* Dark gradient base so the reveal reads over any case-study background,
-         fading up to transparent so it blends into the content above it */
-      background: linear-gradient(to bottom, transparent 0%, rgba(8,8,14,0.55) 35%, rgba(6,6,11,0.88) 65%, rgba(5,5,9,0.96) 100%);
-      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 22%);
-      mask-image: linear-gradient(to bottom, transparent 0%, black 22%);
+      /* Top of the reveal stays fully transparent (no tint) over a longer
+         run, then eases into a frosted blur + gentle dark wash so the
+         background image is softened rather than flattened by a hard tint,
+         only darkening enough near the bottom to keep the title legible */
+      background: linear-gradient(to bottom, transparent 0%, rgba(6,6,11,0.28) 55%, rgba(6,6,11,0.62) 80%, rgba(5,5,9,0.9) 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 48%);
+      mask-image: linear-gradient(to bottom, transparent 0%, black 48%);
+    }
+    .cs-pull-indicator::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 55%);
+      mask-image: linear-gradient(to bottom, transparent 0%, black 55%);
+      pointer-events: none;
+      z-index: 0;
     }
     .cs-pull-indicator.visible {
       pointer-events: auto;
