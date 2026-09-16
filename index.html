@@ -1199,11 +1199,25 @@
        wipe expanding from the same point via the View Transitions API. */
     @keyframes mode-shock-ring {
       0%   { transform: scale(0);    opacity: 0.95; }
-      55%  { opacity: 0.65; }
+      55%  { opacity: 0.6; }
+      100% { transform: scale(1);    opacity: 0; }
+    }
+    @keyframes mode-shock-ring2 {
+      0%   { transform: scale(0);    opacity: 0.85; }
+      60%  { opacity: 0.48; }
+      100% { transform: scale(1);    opacity: 0; }
+    }
+    @keyframes mode-shock-ring3 {
+      0%   { transform: scale(0);    opacity: 0.7; }
+      65%  { opacity: 0.36; }
       100% { transform: scale(1);    opacity: 0; }
     }
     @keyframes mode-shock-core {
       0%   { transform: scale(0);    opacity: 1; }
+      100% { transform: scale(1);    opacity: 0; }
+    }
+    @keyframes mode-shock-bloom {
+      0%   { transform: scale(0);    opacity: 0.55; }
       100% { transform: scale(1);    opacity: 0; }
     }
     .mode-shock {
@@ -1218,6 +1232,15 @@
       mix-blend-mode: screen;
       transform: translate(-50%,-50%);
     }
+    /* Soft wide colour bloom underneath the rings for extra punch */
+    .mode-shock .bloom {
+      position: absolute; inset: 0; border-radius: 50%;
+      background: radial-gradient(circle,
+        rgba(255,255,255,0.5) 0%, rgba(139,92,246,0.3) 7%,
+        rgba(236,72,153,0.18) 12%, transparent 21%);
+      animation: mode-shock-bloom 0.95s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
+    /* Three concentric rainbow rings rippling outward in quick succession */
     .mode-shock .ring {
       position: absolute; inset: 0; border-radius: 50%;
       background: conic-gradient(from 0deg,
@@ -1225,12 +1248,32 @@
       -webkit-mask: radial-gradient(circle, transparent 58.5%, #000 60%, #000 63%, transparent 65%);
       mask: radial-gradient(circle, transparent 58.5%, #000 60%, #000 63%, transparent 65%);
       filter: blur(1px);
-      animation: mode-shock-ring 0.85s cubic-bezier(0.16,1,0.3,1) forwards;
+      animation: mode-shock-ring 0.95s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+    .mode-shock .ring2 {
+      position: absolute; inset: 0; border-radius: 50%;
+      background: conic-gradient(from 55deg,
+        #3B82F6, #14B8A6, #A3E635, #F97316, #EC4899, #8B5CF6, #3B82F6);
+      -webkit-mask: radial-gradient(circle, transparent 41%, #000 43.5%, #000 46%, transparent 48.5%);
+      mask: radial-gradient(circle, transparent 41%, #000 43.5%, #000 46%, transparent 48.5%);
+      filter: blur(1px);
+      animation: mode-shock-ring2 0.95s cubic-bezier(0.16,1,0.3,1) forwards;
+      animation-delay: 0.06s;
+    }
+    .mode-shock .ring3 {
+      position: absolute; inset: 0; border-radius: 50%;
+      background: conic-gradient(from 110deg,
+        #EC4899, #8B5CF6, #3B82F6, #14B8A6, #A3E635, #F97316, #EC4899);
+      -webkit-mask: radial-gradient(circle, transparent 25%, #000 27.5%, #000 30%, transparent 32.5%);
+      mask: radial-gradient(circle, transparent 25%, #000 27.5%, #000 30%, transparent 32.5%);
+      filter: blur(1px);
+      animation: mode-shock-ring3 0.95s cubic-bezier(0.16,1,0.3,1) forwards;
+      animation-delay: 0.12s;
     }
     .mode-shock .core {
       position: absolute; inset: 0; border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(139,92,246,0.35) 8%, transparent 16%);
-      animation: mode-shock-core 0.5s cubic-bezier(0.22,1,0.36,1) forwards;
+      background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(139,92,246,0.4) 6%, transparent 13%);
+      animation: mode-shock-core 0.45s cubic-bezier(0.22,1,0.36,1) forwards;
     }
     @media (prefers-reduced-motion: reduce) {
       .mode-shock { display: none; }
@@ -1245,22 +1288,36 @@
       view-transition-name: mode-shock;
     }
     .mode-shock.vt-shock .ring,
-    .mode-shock.vt-shock .core {
+    .mode-shock.vt-shock .ring2,
+    .mode-shock.vt-shock .ring3,
+    .mode-shock.vt-shock .core,
+    .mode-shock.vt-shock .bloom {
       animation: none;
       opacity: 1;
       transform: none;
     }
-    ::view-transition-group(mode-shock) { z-index: 3; animation-duration: 0.85s; }
+    ::view-transition-group(mode-shock) { z-index: 3; animation-duration: 0.95s; }
     ::view-transition-group(root) { z-index: 1; }
     ::view-transition-old(mode-shock) { display: none; }
     ::view-transition-new(mode-shock) {
       mix-blend-mode: screen;
-      animation: mode-shock-burst 0.85s cubic-bezier(0.16,1,0.3,1) forwards;
+      animation: mode-shock-burst 0.95s cubic-bezier(0.16,1,0.3,1) forwards;
     }
     @keyframes mode-shock-burst {
       0%   { transform: scale(0); opacity: 0.95; }
-      55%  { opacity: 0.65; }
+      55%  { opacity: 0.6; }
       100% { transform: scale(1); opacity: 0; }
+    }
+    /* A little celebratory spin+pop on the toggle icon once the new mode lands */
+    @keyframes icon-pop {
+      0%   { transform: scale(1)    rotate(0deg); }
+      40%  { transform: scale(1.4)  rotate(190deg); }
+      70%  { transform: scale(0.88) rotate(330deg); }
+      100% { transform: scale(1)    rotate(360deg); }
+    }
+    .t-icon.icon-pop { animation: icon-pop 0.6s cubic-bezier(0.34,1.56,0.64,1); }
+    @media (prefers-reduced-motion: reduce) {
+      .t-icon.icon-pop { animation: none; }
     }
     /* Circular reveal wipe (Chromium/Safari with View Transitions support) */
     @keyframes mode-reveal-wipe {
@@ -3775,9 +3832,15 @@
         shock.className = 'mode-shock' + (isVT ? ' vt-shock' : '');
         shock.style.setProperty('--tx', x + 'px');
         shock.style.setProperty('--ty', y + 'px');
-        shock.innerHTML = '<div class="ring"></div><div class="core"></div>';
+        shock.innerHTML = '<div class="bloom"></div><div class="ring"></div><div class="ring2"></div><div class="ring3"></div><div class="core"></div>';
         document.body.appendChild(shock);
-        setTimeout(function() { if (shock.parentNode) shock.parentNode.removeChild(shock); }, 900);
+        setTimeout(function() { if (shock.parentNode) shock.parentNode.removeChild(shock); }, 1000);
+      }
+
+      function popIcon() {
+        icon.classList.remove('icon-pop');
+        void icon.offsetWidth; // restart the animation on repeat clicks
+        icon.classList.add('icon-pop');
       }
 
       if (btn) btn.addEventListener('click', function(e) {
@@ -3797,13 +3860,15 @@
           // exists in the "new" DOM state — the browser then renders it as
           // an entering element in the same top layer as the circular wipe,
           // riding above it instead of being hidden underneath it.
-          document.startViewTransition(function() {
+          var transition = document.startViewTransition(function() {
             apply(next);
             spawnShock(x, y, true);
           });
+          transition.finished.then(popIcon).catch(function() {});
         } else {
           spawnShock(x, y, false);
           apply(next);
+          popIcon();
         }
       });
       // Shrink on scroll, re-enlarge when scrolling stops
