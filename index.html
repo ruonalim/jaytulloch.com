@@ -3305,6 +3305,151 @@
       html:not([data-mode="quiet"]) .work-row:hover .work-title,
       html:not([data-mode="quiet"]) .work-row:hover .work-desc { transform: none; }
     }
+
+    /* ═══════════════════════════════════════════════════════════════
+       Narrative layer — the page tells a story, not just a list.
+       Hero (claim) → numbers (proof) → thesis (voice) → who trusts him →
+       work framed as problem → outcome → one number → the AI thread →
+       the person → the conversation.
+       ═══════════════════════════════════════════════════════════════ */
+
+    /* ── Thesis band ── */
+    #thesis {
+      padding: clamp(72px, 10vw, 150px) var(--pad);
+      background: #06060A;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .thesis-text {
+      max-width: 1180px;
+      margin: 0 auto;
+      font-size: clamp(26px, 3.6vw, 56px);
+      font-weight: 300;
+      line-height: 1.16;
+      letter-spacing: -0.03em;
+      color: rgba(255,255,255,0.55);
+      text-wrap: balance;
+    }
+    .thesis-text em { font-style: normal; font-weight: 700; color: #fff; }
+    [data-mode="quiet"] #thesis {
+      background: var(--bg);
+      border-top: 1px solid var(--rule);
+      padding: clamp(72px, 9vw, 140px) var(--q-inline, var(--pad));
+    }
+    [data-mode="quiet"] .thesis-text {
+      max-width: var(--q-max, 1180px);
+      margin: 0;
+      color: var(--subtle);
+      font-weight: 300 !important;
+    }
+    [data-mode="quiet"] .thesis-text em { font-weight: 300 !important; color: var(--text); }
+
+    /* ── Work rows: problem → outcome → one number ── */
+    .work-result {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-top: clamp(16px, 1.8vw, 24px);
+    }
+    .work-result-num {
+      font-size: clamp(22px, 2.4vw, 34px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: var(--text);
+      font-variant-numeric: tabular-nums;
+    }
+    .work-result-label {
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: -0.005em;
+    }
+    html:not([data-mode="quiet"]) .work-desc { max-width: 640px; color: rgba(255,255,255,0.6); }
+    /* Bold strips eyebrows site-wide; the case line (company · role · scale)
+       is the one that carries the story, so it comes back — quietly */
+    html:not([data-mode="quiet"]) .work-row .work-co {
+      display: block;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(255,255,255,0.42);
+      margin-bottom: 12px;
+    }
+    html:not([data-mode="quiet"]) .work-row:hover .work-result { transform: translateX(8px); }
+    html:not([data-mode="quiet"]) .work-result { transition: transform 0.5s cubic-bezier(0.32,0.72,0,1) 0.06s; }
+    [data-mode="quiet"] .work-result-num { font-weight: 300 !important; font-size: clamp(26px, 2.6vw, 38px); }
+    [data-mode="quiet"] .work-result-label { font-size: 14px; color: var(--subtle); }
+    [data-mode="quiet"] .work-co {
+      display: block !important;
+      font-size: 11px; font-weight: 500 !important; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--subtle); margin-bottom: 14px;
+    }
+    /* the eyebrow now names the company, so the right-hand index keeps just the year */
+    [data-mode="quiet"] .work-meta-co { display: none !important; }
+    @media (max-width: 900px) {
+      .work-result { margin-top: 14px; }
+      .work-result-num { font-size: 24px; }
+    }
+
+    /* ── Availability signal above the contact block ── */
+    .avail-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 14px 7px 11px;
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600 !important;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: clamp(20px, 2.4vw, 28px);
+    }
+    .avail-pill i {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #34D399;
+      box-shadow: 0 0 0 3px rgba(52,211,153,0.18), 0 0 12px rgba(52,211,153,0.7);
+      animation: avail-pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes avail-pulse {
+      0%, 100% { box-shadow: 0 0 0 3px rgba(52,211,153,0.18), 0 0 12px rgba(52,211,153,0.7); }
+      50%      { box-shadow: 0 0 0 6px rgba(52,211,153,0.08), 0 0 18px rgba(52,211,153,0.5); }
+    }
+    [data-mode="quiet"] .avail-pill {
+      border-color: var(--rule-strong, rgba(0,0,0,0.16));
+      color: var(--text);
+      font-weight: 500 !important;
+    }
+    [data-mode="quiet"] .avail-pill i { background: #059669; box-shadow: 0 0 0 3px rgba(5,150,105,0.14); animation: none; }
+    @media (prefers-reduced-motion: reduce) { .avail-pill i { animation: none; } }
+
+    /* ── Footer index ── */
+    .footer-index {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 32px 40px;
+      padding-bottom: clamp(32px, 4vw, 48px);
+      margin-bottom: clamp(24px, 3vw, 36px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .footer-col-label {
+      font-size: 10px; font-weight: 700 !important;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--subtle);
+      margin-bottom: 16px;
+    }
+    .footer-nav-col { flex-direction: column; gap: 10px; }
+    .footer-nav-col a { font-size: 14px; font-weight: 500; }
+    .footer-loc { font-size: 14px; color: var(--muted); line-height: 1.6; margin-bottom: 20px; }
+    .footer-index .footer-up { margin-top: 4px; }
+    [data-mode="quiet"] .footer-index { border-bottom-color: var(--rule); }
+    [data-mode="quiet"] .footer-col-label { font-weight: 500 !important; color: var(--subtle); }
+    [data-mode="quiet"] .footer-nav-col a { font-weight: 400 !important; color: var(--muted); }
+    [data-mode="quiet"] .footer-nav-col a:hover { color: var(--text); }
+    @media (max-width: 900px) {
+      .footer-index { grid-template-columns: 1fr 1fr; gap: 28px 24px; }
+    }
+    @media (max-width: 520px) {
+      .footer-index { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -3416,6 +3561,11 @@
     </div>
   </div>
 
+  <!-- Thesis: the one sentence that explains the person before the work -->
+  <section id="thesis" aria-label="Point of view">
+    <p class="thesis-text reveal">I stopped being a designer who understood business and became a business leader who happens to think in <em>systems, interfaces, and user behaviour.</em></p>
+  </section>
+
   <!-- Brands -->
   <section id="brands" aria-label="Designed for">
     <div class="brands-inner">
@@ -3450,9 +3600,13 @@
   <a href="./casestudy-neobank.html" id="work" class="work-row reveal">
     <span class="work-num">01</span>
     <div class="work-body">
-      <p class="work-co">Kraken · Neo-Banking · Redesign · 2025</p>
+      <p class="work-co">Kraken · Sr. Staff Product Designer · 0→1 across 5 markets</p>
       <div class="work-title">From P2P to Neobank</div>
-      <p class="work-desc">Information architecture overhaul and end-to-end redesign of a global neobank.</p>
+      <p class="work-desc">A top 10 global crypto exchange wanted to move beyond trading and build a bank for a new generation of wealth builders. Blank canvas to global launch.</p>
+      <div class="work-result">
+        <span class="work-result-num">30K+</span>
+        <span class="work-result-label">card orders at launch</span>
+      </div>
     </div>
     <div class="work-meta">
       <span class="work-meta-co">Kraken</span>
@@ -3463,9 +3617,13 @@
   <a href="./casestudy-careem-plus.html" class="work-row reveal">
     <span class="work-num">02</span>
     <div class="work-body">
-      <p class="work-co">Careem (Uber) · Super App · Subscriptions · 2024</p>
+      <p class="work-co">Careem (Uber) · Head of Design, Platform · Super app</p>
       <div class="work-title">Careem Plus: Subscription Growth</div>
-      <p class="work-desc">Data-led subscription system that turned a declining metric into a sustained growth engine.</p>
+      <p class="work-desc">Subscriptions were in freefall. Churn was climbing. Most customers didn't even know Careem Plus existed. Not a rebrand — a complete behavioural shift.</p>
+      <div class="work-result">
+        <span class="work-result-num">96%</span>
+        <span class="work-result-label">subscriber retention</span>
+      </div>
     </div>
     <div class="work-meta">
       <span class="work-meta-co">Careem / Uber</span>
@@ -3476,9 +3634,13 @@
   <a href="./casestudy-metro.html" class="work-row reveal">
     <span class="work-num">03</span>
     <div class="work-body">
-      <p class="work-co">Metro Bank · UK Retail Banking · AI · 2018</p>
+      <p class="work-co">Metro Bank · Head of Product Design · 2M+ customers</p>
       <div class="work-title">UK's First AI in Retail Banking</div>
-      <p class="work-desc">AI-powered financial insights that shifted customer behaviour at scale.</p>
+      <p class="work-desc">Predictive insights that analysed spending patterns and nudged better financial behaviour — shifting the average customer balance from negative to positive.</p>
+      <div class="work-result">
+        <span class="work-result-num">300%</span>
+        <span class="work-result-label">increase in app retention</span>
+      </div>
     </div>
     <div class="work-meta">
       <span class="work-meta-co">Metro Bank</span>
@@ -3547,6 +3709,7 @@
         </div>
       </div>
       <div class="about-contact" id="contact">
+        <p class="avail-pill"><i aria-hidden="true"></i>Available for fractional &amp; advisory work</p>
         <h3 class="about-contact-title">Let's Build<br/><span class="light">Together.</span></h3>
         <p class="about-contact-desc">I work with founders, CPOs, and product teams that are serious about design as a business lever, not just a polish layer. Based in Dubai, available globally.</p>
         <div class="quick-links">
@@ -3648,14 +3811,37 @@
   <!-- Footer -->
   <footer>
     <div class="footer-sig" aria-hidden="true">Jay Tulloch</div>
-    <div class="footer-top">
-      <ul class="footer-nav">
-        <li><a href="https://www.linkedin.com/in/jaytulloch/" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li><a href="https://x.com/mrjaytulloch" target="_blank" rel="noopener">X / Twitter</a></li>
-        <li><a href="https://youtube.com/@beyondtheinterface" target="_blank" rel="noopener">YouTube</a></li>
-        <li><a href="https://jaytulloch.substack.com" target="_blank" rel="noopener">Substack</a></li>
-      </ul>
-      <a href="#hero" class="footer-up">Back to top <span aria-hidden="true">↑</span></a>
+    <div class="footer-index">
+      <div class="footer-col">
+        <p class="footer-col-label">Case studies</p>
+        <ul class="footer-nav footer-nav-col">
+          <li><a href="./casestudy-neobank.html" class="footer-cs">From P2P to Neobank</a></li>
+          <li><a href="./casestudy-careem-plus.html" class="footer-cs">Careem Plus: Subscription Growth</a></li>
+          <li><a href="./casestudy-metro.html" class="footer-cs">UK's First AI in Retail Banking</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-label">Thinking</p>
+        <ul class="footer-nav footer-nav-col">
+          <li><a href="#writing">Writing</a></li>
+          <li><a href="#podcast">Beyond the Interface</a></li>
+          <li><a href="#ai">AI track record</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-label">Elsewhere</p>
+        <ul class="footer-nav footer-nav-col">
+          <li><a href="https://www.linkedin.com/in/jaytulloch/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://x.com/mrjaytulloch" target="_blank" rel="noopener">X / Twitter</a></li>
+          <li><a href="https://youtube.com/@beyondtheinterface" target="_blank" rel="noopener">YouTube</a></li>
+          <li><a href="https://jaytulloch.substack.com" target="_blank" rel="noopener">Substack</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-label">Location</p>
+        <p class="footer-loc">Dubai, UAE<br/>Available globally</p>
+        <a href="#hero" class="footer-up">Back to top <span aria-hidden="true">↑</span></a>
+      </div>
     </div>
     <div class="footer-bottom">
       <span class="footer-copy">© 2026 Jay Tulloch. All rights reserved.</span>
@@ -3937,7 +4123,7 @@
     });
 
     // Intercept work-row clicks
-    document.querySelectorAll('.work-row, .ai-proj-row').forEach(function(el) {
+    document.querySelectorAll('.work-row, .ai-proj-row, .footer-cs').forEach(function(el) {
       el.addEventListener('click', function(e) {
         var href = el.getAttribute('href');
         if (href && href !== '#') {
