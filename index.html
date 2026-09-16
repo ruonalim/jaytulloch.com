@@ -1236,15 +1236,16 @@
     .mode-shock .bloom {
       position: absolute; inset: 0; border-radius: 50%;
       background: radial-gradient(circle,
-        rgba(255,255,255,0.5) 0%, rgba(139,92,246,0.3) 7%,
-        rgba(236,72,153,0.18) 12%, transparent 21%);
+        rgba(255,255,255,0.5) 0%, rgba(99,102,241,0.3) 7%,
+        rgba(56,189,248,0.18) 12%, transparent 21%);
       animation: mode-shock-bloom 0.95s cubic-bezier(0.22,1,0.36,1) forwards;
     }
-    /* Three concentric rainbow rings rippling outward in quick succession */
+    /* Three concentric rings rippling outward in an electric indigo → blue →
+       cyan duotone sweep (a cool tech spectrum, not a full rainbow) */
     .mode-shock .ring {
       position: absolute; inset: 0; border-radius: 50%;
       background: conic-gradient(from 0deg,
-        #8B5CF6, #EC4899, #F97316, #A3E635, #14B8A6, #3B82F6, #8B5CF6);
+        #6366F1, #3B82F6, #22D3EE, #3B82F6, #6366F1);
       -webkit-mask: radial-gradient(circle, transparent 58.5%, #000 60%, #000 63%, transparent 65%);
       mask: radial-gradient(circle, transparent 58.5%, #000 60%, #000 63%, transparent 65%);
       filter: blur(1px);
@@ -1253,7 +1254,7 @@
     .mode-shock .ring2 {
       position: absolute; inset: 0; border-radius: 50%;
       background: conic-gradient(from 55deg,
-        #3B82F6, #14B8A6, #A3E635, #F97316, #EC4899, #8B5CF6, #3B82F6);
+        #22D3EE, #3B82F6, #6366F1, #3B82F6, #22D3EE);
       -webkit-mask: radial-gradient(circle, transparent 41%, #000 43.5%, #000 46%, transparent 48.5%);
       mask: radial-gradient(circle, transparent 41%, #000 43.5%, #000 46%, transparent 48.5%);
       filter: blur(1px);
@@ -1263,7 +1264,7 @@
     .mode-shock .ring3 {
       position: absolute; inset: 0; border-radius: 50%;
       background: conic-gradient(from 110deg,
-        #EC4899, #8B5CF6, #3B82F6, #14B8A6, #A3E635, #F97316, #EC4899);
+        #3B82F6, #6366F1, #22D3EE, #6366F1, #3B82F6);
       -webkit-mask: radial-gradient(circle, transparent 25%, #000 27.5%, #000 30%, transparent 32.5%);
       mask: radial-gradient(circle, transparent 25%, #000 27.5%, #000 30%, transparent 32.5%);
       filter: blur(1px);
@@ -1272,7 +1273,7 @@
     }
     .mode-shock .core {
       position: absolute; inset: 0; border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(139,92,246,0.4) 6%, transparent 13%);
+      background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(99,102,241,0.4) 6%, transparent 13%);
       animation: mode-shock-core 0.45s cubic-bezier(0.22,1,0.36,1) forwards;
     }
     @media (prefers-reduced-motion: reduce) {
@@ -3186,7 +3187,7 @@
   <!-- Mode toggle -->
   <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Clean/Bold mode">
     <span class="t-icon" id="t-icon">●</span>
-    <span id="t-label">GO CLEAN</span>
+    <span id="t-label">Go clean?</span>
   </button>
 
   <!-- Case Study Modal -->
@@ -3809,7 +3810,7 @@
       var icon = document.getElementById('t-icon');
       function apply(m) {
         root.setAttribute('data-mode', m);
-        lbl.textContent  = m === 'quiet' ? 'GO BOLD' : 'GO CLEAN';
+        lbl.textContent  = m === 'quiet' ? 'Go bold?' : 'Go clean?';
         icon.textContent = m === 'quiet' ? '○' : '●';
         localStorage.setItem('jt-mode', m);
         // Pause/resume the hero video with the mode
