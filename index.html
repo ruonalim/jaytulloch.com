@@ -3710,6 +3710,12 @@
       .footer-index { grid-template-columns: 1fr; }
     }
   </style>
+  <style id="hero-two-line">
+    .hero-headline .hl-light, .hero-headline .hl-bold { white-space: nowrap; }
+    @media (max-width: 900px) {
+      html .hero-headline, html[data-mode="quiet"] .hero-headline { font-size: min(8.6vw, 80px) !important; }
+    }
+  </style>
   <!-- Vercel Web Analytics -->
   <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
   <script defer src="/_vercel/insights/script.js"></script>
