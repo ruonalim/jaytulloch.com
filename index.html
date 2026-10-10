@@ -3837,6 +3837,25 @@
     html:not([data-mode="quiet"]) .work-row::before { top: 22px; bottom: 22px; left: 10px; width: 2px; border-radius: 2px; }
     html[data-mode="quiet"] .work-row { grid-template-columns: 1fr auto !important; }
     html[data-mode="quiet"] .work-row > .work-num { display: none !important; }
+    /* breathing room around elevated surfaces */
+    .work-row { margin-block: 7px; }
+    .work-row:last-of-type, .work-row:last-child { margin-bottom: clamp(72px, 9vw, 140px); }
+    #testimonials { padding-bottom: clamp(72px, 9vw, 140px) !important; }
+    .t-grid { gap: clamp(14px, 1.6vw, 24px) !important; }
+    html[data-mode="quiet"] .t-grid { gap: clamp(14px, 1.6vw, 24px) !important; }
+    .work-row { margin-top: 0; margin-bottom: clamp(16px, 1.8vw, 24px); }
+    .work-row:last-of-type, .work-row:last-child { margin-bottom: clamp(72px, 9vw, 140px); }
+    @media (min-width: 701px) {
+      html[data-mode="quiet"] .work-row {
+        margin-inline: max(10px, calc(var(--q-inline, var(--pad)) - 40px)) !important;
+        padding-left: 40px !important; padding-right: 40px !important;
+      }
+      html[data-mode="quiet"] .t-grid {
+        padding-left: max(10px, calc(var(--q-inline, var(--pad)) - 44px)) !important;
+        padding-right: max(10px, calc(var(--q-inline, var(--pad)) - 44px)) !important;
+      }
+      html[data-mode="quiet"] .t-card { padding: 44px !important; }
+    }
     @media (max-width: 700px) {
       .work-row { margin-inline: 10px; padding-left: 18px !important; padding-right: 18px !important; border-radius: 18px; }
       .t-grid { padding-inline: 10px !important; }
