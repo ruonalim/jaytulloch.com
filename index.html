@@ -4889,6 +4889,12 @@
       setTimeout(function(){ if (!csLoaded) { csLoaded = true; csMaybeReveal(); } }, 2800);
     }
 
+    // Case studies ask to be closed from inside the iframe ("Go back")
+    window.addEventListener('message', function(e) {
+      if (!e.data || e.data.type !== 'jt-close-cs') return;
+      if (e.source !== csIframe.contentWindow) return;
+      closeCaseStudy();
+    });
     var csClosing = false;
     function closeCaseStudy() {
       if (csClosing) return;
