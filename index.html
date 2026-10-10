@@ -4109,6 +4109,48 @@
     .theme-toggle:active { transform: translateX(-50%) scale(.95) !important; }
     @media (prefers-reduced-motion: reduce) { .theme-toggle::before { animation: none; } }
   </style>
+  <style id="cs-morph">
+    /* ── Case study open: the row you tapped becomes the page.
+       Compositor-only (transform + opacity): the sheet starts as the row's
+       rectangle and expands to full screen with a luminous rim; a title card
+       sits outside the sheet so it never distorts; the study fades in once
+       it has loaded. Close reverses back into the row if it's still on screen. */
+    .cs-modal { --cs-bg: #0D0D18; --cs-rim-a: rgba(120,95,255,.5); --cs-rim-b: rgba(70,210,255,.26); --cs-dim: rgba(6,6,10,.62); }
+    html[data-mode="quiet"] .cs-modal { --cs-bg: #101012; --cs-rim-a: rgba(17,17,17,.3); --cs-rim-b: rgba(17,17,17,.12); --cs-dim: rgba(255,255,255,.6); }
+    .cs-modal.ready { background: var(--cs-dim) !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+    .cs-modal-sheet { transform-origin: 0 0; will-change: transform, opacity; background: var(--cs-bg) !important; }
+    html .cs-modal.morphing .cs-modal-sheet {
+      box-shadow: 0 0 0 1px rgba(255,255,255,.16), 0 0 0 12px var(--cs-rim-b), 0 0 140px var(--cs-rim-a), 0 60px 160px -40px rgba(0,0,0,.85) !important;
+    }
+    .cs-cover {
+      position: absolute; inset: 0; z-index: 5; background: var(--cs-bg);
+      opacity: 0; pointer-events: none; transition: opacity .5s var(--mode-ease);
+    }
+    .cs-cover::before {
+      content: ''; position: absolute; inset: 0; opacity: .6;
+      background: radial-gradient(120% 90% at 18% 100%, var(--cs-rim-a), transparent 62%),
+                  radial-gradient(80% 60% at 92% 0%, var(--cs-rim-b), transparent 60%);
+    }
+    .cs-cover.show { opacity: 1; }
+    .cs-cover.fast { transition-duration: .16s; }
+    .cs-cover-text {
+      position: fixed; left: var(--pad); right: var(--pad); bottom: clamp(56px, 9vh, 104px); z-index: 7;
+      pointer-events: none; color: #fff; opacity: 0; transform: translateY(16px);
+      transition: opacity .55s var(--mode-ease), transform .7s var(--mode-ease);
+    }
+    .cs-cover-text.in  { opacity: 1; transform: none; }
+    .cs-cover-text.out { opacity: 0; transform: translateY(-10px); transition-duration: .32s, .4s; }
+    .cs-cover-co { display: block; font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-bottom: 16px; }
+    .cs-cover-title { display: block; font-size: clamp(34px, 5.8vw, 88px); font-weight: 700; letter-spacing: -0.04em; line-height: .98; max-width: 14ch; text-wrap: balance; }
+    .cs-cover-line { display: block; width: 0; height: 1px; margin-top: 26px; background: rgba(255,255,255,.4); transition: width 1.1s var(--mode-ease) .12s; }
+    .cs-cover-text.in .cs-cover-line { width: min(360px, 42vw); }
+    .cs-modal:not(.ready) .cs-modal-close { opacity: 0; transform: scale(.8); }
+    .cs-modal.ready .cs-modal-close:not(:hover) { opacity: 1; transform: none; }
+    .cs-modal-close { transition: opacity .35s var(--mode-ease) .35s, transform .5s var(--mode-ease) .35s, background .25s, color .25s, border-color .25s, box-shadow .25s !important; }
+    .work-row.pressed { transform: scale(.985) !important; transition-duration: .12s !important; }
+    html[data-mode="quiet"] .cs-close-flash { background: radial-gradient(ellipse at center, rgba(17,17,17,.12) 0%, rgba(17,17,17,.05) 40%, transparent 70%); }
+    @media (max-width: 700px) { .cs-cover-title { font-size: clamp(30px, 9vw, 44px); } .cs-cover-text { bottom: 72px; } }
+  </style>
   <!-- Vercel Web Analytics -->
   <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
   <script defer src="/_vercel/insights/script.js"></script>
@@ -4154,6 +4196,12 @@
     <div class="cs-modal-sheet">
       <iframe id="cs-modal-iframe" src="" title="Case Study"></iframe>
       <div class="cs-pull-zone" id="cs-pull-zone"></div>
+      <div class="cs-cover" id="cs-cover" aria-hidden="true"></div>
+    </div>
+    <div class="cs-cover-text" id="cs-cover-text" aria-hidden="true">
+      <span class="cs-cover-co" id="cs-cover-co"></span>
+      <span class="cs-cover-title" id="cs-cover-title"></span>
+      <span class="cs-cover-line"></span>
     </div>
     <!-- Indicator lives OUTSIDE the sheet so the iframe can't eat its clicks -->
     <div class="cs-pull-indicator" id="cs-pull-indicator" role="button" aria-label="View next project">
@@ -4772,57 +4820,123 @@
     }
 
     // ── Open / Close ────────────────────────────────────────────
-    function openCaseStudy(href) {
+    var csOriginEl = null, csOpenedAt = 0, csLoaded = false, csRevealTimer = null;
+    function csReduce() { return window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches; }
+    function csRect(el) {
+      if (!el || !el.getBoundingClientRect) return null;
+      var r = el.getBoundingClientRect();
+      if (r.width < 40 || r.height < 40) return null;
+      return r;
+    }
+    function csSheetToRect(sheet, r) {
+      var sx = r.width / innerWidth, sy = r.height / innerHeight;
+      sheet.style.transform = 'translate(' + r.left + 'px,' + r.top + 'px) scale(' + sx + ',' + sy + ')';
+      sheet.style.borderRadius = (24 / sx) + 'px / ' + (24 / sy) + 'px';
+    }
+    function csMaybeReveal() {
+      if (!csLoaded) return;
+      if (performance.now() - csOpenedAt < 1100) return;
+      document.getElementById('cs-cover-text').classList.add('out');
+      document.getElementById('cs-cover').classList.remove('show');
+    }
+    function openCaseStudy(href, originEl) {
       var idx = CS_SEQUENCE.findIndex(function(s){ return s.src === href; });
       if (idx !== -1) csCurrentIdx = idx;
-      csIframe.src = href;
-      csModal.classList.add('open');
+      var sheet = document.querySelector('.cs-modal-sheet');
+      var cover = document.getElementById('cs-cover');
+      var text  = document.getElementById('cs-cover-text');
+      csOriginEl = originEl || null; csLoaded = false; csOpenedAt = performance.now();
+
+      // Title card copy comes from the thing you tapped
+      var tEl = originEl && originEl.querySelector && originEl.querySelector('.work-title, .ai-proj-title');
+      var title = (tEl ? tEl.textContent : (originEl ? originEl.textContent : '')).replace(/\s+/g, ' ').trim();
+      var coEl = originEl && originEl.querySelector && originEl.querySelector('.work-co');
+      document.getElementById('cs-cover-title').textContent = title;
+      document.getElementById('cs-cover-co').textContent = coEl ? coEl.textContent.replace(/\s+/g, ' ').trim() : 'Case study';
+
+      if (originEl && originEl.classList) {
+        originEl.classList.add('pressed');
+        setTimeout(function(){ originEl.classList.remove('pressed'); }, 180);
+      }
+
+      var r = csReduce() ? null : csRect(originEl);
+      sheet.style.transition = 'none';
+      sheet.style.opacity = '1';
+      if (r) csSheetToRect(sheet, r);
+      else { sheet.style.transform = 'translate(0,' + Math.round(innerHeight * 0.06) + 'px) scale(.96)'; sheet.style.borderRadius = '28px'; sheet.style.opacity = '0'; }
+
+      cover.classList.remove('fast'); cover.classList.add('show');
+      text.classList.remove('in', 'out');
+      csModal.classList.add('open', 'morphing');
       document.body.style.overflow = 'hidden';
+
+      csIframe.onload = function() { csLoaded = true; attachPullListeners(); csMaybeReveal(); };
+      csIframe.src = href;
+
+      void sheet.offsetWidth;
       requestAnimationFrame(function() {
-        requestAnimationFrame(function() { csModal.classList.add('ready'); });
+        sheet.style.transition = 'transform .72s var(--mode-ease), border-radius .72s var(--mode-ease), opacity .45s var(--mode-ease)';
+        sheet.style.transform = 'translate(0,0) scale(1,1)';
+        sheet.style.borderRadius = '0';
+        sheet.style.opacity = '1';
+        csModal.classList.add('ready');
+        setTimeout(function(){ text.classList.add('in'); }, 240);
+        setTimeout(function(){ csModal.classList.remove('morphing'); }, 820);
       });
-      csIframe.onload = function() {
-        attachPullListeners();
-      };
+
+      clearTimeout(csRevealTimer);
+      csRevealTimer = setTimeout(csMaybeReveal, 1150);
+      setTimeout(function(){ if (!csLoaded) { csLoaded = true; csMaybeReveal(); } }, 2800);
     }
 
-    // Case studies ask to be closed from inside the iframe ("Go back")
-    window.addEventListener('message', function(e) {
-      if (!e.data || e.data.type !== 'jt-close-cs') return;
-      if (e.source !== csIframe.contentWindow) return;
-      closeCaseStudy();
-    });
     var csClosing = false;
     function closeCaseStudy() {
       if (csClosing) return;
       csClosing = true;
       detachPullListeners();
       hideIndicator();
+      clearTimeout(csRevealTimer);
 
-      // Spawn aurora flash
+      // Aurora flash
       var flash = document.createElement('div');
       flash.className = 'cs-close-flash';
       document.body.appendChild(flash);
       setTimeout(function() { if (flash.parentNode) flash.parentNode.removeChild(flash); }, 680);
 
       var sheet = document.querySelector('.cs-modal-sheet');
+      var cover = document.getElementById('cs-cover');
+      var text  = document.getElementById('cs-cover-text');
+      var r = csReduce() ? null : csRect(csOriginEl);
+      var onscreen = !!(r && r.bottom > 0 && r.top < innerHeight);
 
-      // Simple full-screen fade-out
-      sheet.style.transition = 'opacity 0.4s cubic-bezier(0.32,0.72,0,1)';
-      sheet.style.opacity    = '0';
-      // Fade backdrop
+      // Hide the study under a solid surface, then send the sheet home
+      text.classList.remove('in'); text.classList.add('out');
+      cover.classList.add('fast', 'show');
+      csModal.classList.add('morphing');
       csModal.classList.remove('ready');
 
+      var shrink = onscreen ? 560 : 420;
       setTimeout(function() {
-        // Fully hidden
-        csModal.classList.remove('open');
+        if (onscreen) {
+          sheet.style.transition = 'transform .56s var(--mode-ease), border-radius .56s var(--mode-ease), opacity .28s ease .3s';
+          csSheetToRect(sheet, r);
+          sheet.style.opacity = '0';
+        } else {
+          sheet.style.transition = 'transform .42s var(--mode-ease), opacity .4s var(--mode-ease)';
+          sheet.style.transform = 'translate(0,' + Math.round(innerHeight * 0.04) + 'px) scale(.97)';
+          sheet.style.opacity = '0';
+        }
+      }, 140);
+
+      setTimeout(function() {
+        csModal.classList.remove('open', 'morphing');
         document.body.style.overflow = '';
         csIframe.src = '';
-        // Reset for next open
-        sheet.style.transition = '';
-        sheet.style.opacity    = '';
+        sheet.style.transition = ''; sheet.style.transform = ''; sheet.style.borderRadius = ''; sheet.style.opacity = '';
+        cover.classList.remove('show', 'fast');
+        text.classList.remove('in', 'out');
         csClosing = false;
-      }, 420);
+      }, 140 + shrink + 40);
     }
 
     document.getElementById('cs-modal-close').addEventListener('click', closeCaseStudy);
@@ -4839,7 +4953,7 @@
         var href = el.getAttribute('href');
         if (href && href !== '#') {
           e.preventDefault();
-          openCaseStudy(href);
+          openCaseStudy(href, el);
         }
       });
     });
