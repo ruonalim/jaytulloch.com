@@ -3864,6 +3864,20 @@
     @media (prefers-reduced-motion: reduce) { .work-row, .t-card { transition: none !important; transform: none !important; } }
   </style>
   <style id="depth-fix">
+    /* Game picker: solid backdrop (no game bleeding through), matched icons, aligned labels */
+    #game-picker { background: #0b0b0d !important; }
+    #game-picker .gp-title { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 22px; color: #fff; }
+    #game-picker .gp-choices { gap: 16px; align-items: stretch; }
+    #game-picker .gp-btn {
+      width: 132px; padding: 24px 16px 20px; gap: 16px; border-radius: 20px;
+      justify-content: flex-start;
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border: 1px solid rgba(255,255,255,.1);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 14px 30px -18px rgba(0,0,0,.9);
+    }
+    #game-picker .gp-btn:hover { transform: translateY(-3px); background: linear-gradient(180deg, rgba(255,255,255,.1), rgba(255,255,255,.035)); border-color: rgba(255,255,255,.22); }
+    #game-picker .gp-btn canvas { width: 48px; height: 60px; image-rendering: pixelated; margin: 0; }
+    #game-picker .gp-btn-label { font-size: 13px; font-weight: 600; letter-spacing: 0; color: rgba(255,255,255,.92); }
     html[data-mode="quiet"] .hero-headline { font-size: clamp(40px, 5.6vw, 92px) !important; line-height: 1.02 !important; letter-spacing: -0.035em !important; }
     html[data-mode="quiet"] .hero-headline .hl-light, html[data-mode="quiet"] .hero-headline .hl-bold { font-weight: 600 !important; letter-spacing: -0.035em !important; }
     html[data-mode="quiet"] .hero-headline .hl-light { color: #3A3A3C !important; font-weight: 500 !important; }
@@ -4357,7 +4371,7 @@
             <div class="gp-title">Choose your game</div>
             <div class="gp-choices">
               <button class="gp-btn" id="gp-snake" data-game="snake">
-                <span class="gp-btn-icon">🐍</span>
+                <canvas id="gp-snake-icon" width="32" height="40" aria-hidden="true"></canvas>
                 <span class="gp-btn-label">Snake</span>
               </button>
               <button class="gp-btn" id="gp-runner" data-game="runner">
@@ -5535,9 +5549,17 @@
         if (!iconCanvas) return;
         var ictx = iconCanvas.getContext('2d');
         // Subtle backing so the dark clothing reads against any surface
-        ictx.fillStyle = 'rgba(255,255,255,0.1)';
-        ictx.fillRect(0, 0, iconCanvas.width, iconCanvas.height);
         drawPixelGuy(ictx, 2, iconCanvas.height - 4, 3, 'run0');
+      })();
+      // Matching pixel-art snake icon for the picker
+      (function() {
+        var c = document.getElementById('gp-snake-icon');
+        if (!c) return;
+        var g = c.getContext('2d'), u = 4, ox = 0, oy = 10;
+        var body = [[6,0],[5,0],[4,0],[3,0],[2,0],[2,1],[2,2],[3,2],[4,2],[5,2],[6,2],[6,3],[6,4],[5,4],[4,4],[3,4],[2,4]];
+        body.forEach(function(p, i) { g.fillStyle = i === 0 ? '#86efac' : (i % 2 ? '#22c55e' : '#16a34a'); g.fillRect(ox + p[0]*u, oy + p[1]*u, u, u); });
+        g.fillStyle = '#0b0b0d'; g.fillRect(ox + 6*u + 2, oy + 1, 2, 2);
+        g.fillStyle = '#ff2d6f'; g.fillRect(ox + 7*u, oy + 1, u, 2);
       })();
 
       startBtn.addEventListener('click', function(e) { e.stopPropagation(); startCurrentGame(); });
