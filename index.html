@@ -3527,6 +3527,69 @@
     [data-mode="quiet"] .theme-toggle.scrolled { background: #111 !important; border-color: #111 !important; }
     [data-mode="quiet"] .q-nav { background: rgba(255,255,255,0.86); }
 
+    /* ═══════════════════════════════════════════════════════════════
+       Clean · strip the tells. No eyebrows, no counters, no hairline
+       dividers, no decorative circles or arrows, no ghost signature.
+       Hierarchy comes from type and whitespace only.
+       ═══════════════════════════════════════════════════════════════ */
+    [data-mode="quiet"] .q-hero-meta,
+    [data-mode="quiet"] .q-brands-label,
+    [data-mode="quiet"] .about-section-title,
+    [data-mode="quiet"] .ai-m-tag,
+    [data-mode="quiet"] .t-eyebrow,
+    [data-mode="quiet"] .footer-col-label,
+    [data-mode="quiet"] .work-co,
+    [data-mode="quiet"] .work-num,
+    [data-mode="quiet"] .section-count,
+    [data-mode="quiet"] .work-meta,
+    [data-mode="quiet"] .work-row::after,
+    [data-mode="quiet"] .work-row::before,
+    [data-mode="quiet"] .q-btn-ico,
+    [data-mode="quiet"] .footer-sig,
+    [data-mode="quiet"] .ql-arrow,
+    [data-mode="quiet"] .wa-arrow,
+    [data-mode="quiet"] .pod-stat-div,
+    [data-mode="quiet"] .footer-up span,
+    [data-mode="quiet"] .ai-tl-line,
+    [data-mode="quiet"] .footer-bottom .footer-copy:last-child:not(:first-child) { display: none !important; }
+    [data-mode="quiet"] .q-btn-primary { padding-right: 20px; }
+    [data-mode="quiet"] .work-row { grid-template-columns: 1fr !important; }
+    [data-mode="quiet"] .work-body { grid-column: 1 !important; }
+
+    /* Dividers off everywhere in Clean */
+    [data-mode="quiet"] #thesis, [data-mode="quiet"] #brands, [data-mode="quiet"] #about,
+    [data-mode="quiet"] #contact, [data-mode="quiet"] #writing, [data-mode="quiet"] #podcast,
+    [data-mode="quiet"] #testimonials, [data-mode="quiet"] footer, [data-mode="quiet"] #ai,
+    [data-mode="quiet"] .q-nav, [data-mode="quiet"] .work-section-bar, [data-mode="quiet"] .work-row,
+    [data-mode="quiet"] .t-grid, [data-mode="quiet"] .t-card, [data-mode="quiet"] .metric,
+    [data-mode="quiet"] .ai-m-right, [data-mode="quiet"] .ai-milestone, [data-mode="quiet"] .quick-links,
+    [data-mode="quiet"] .quick-link, [data-mode="quiet"] .footer-index, [data-mode="quiet"] .footer-top,
+    [data-mode="quiet"] .q-meta-row, [data-mode="quiet"] .dark-section-header, [data-mode="quiet"] #metrics,
+    [data-mode="quiet"] .about-left, [data-mode="quiet"] .pod-left, [data-mode="quiet"] .t-avatar {
+      border: 0 !important; box-shadow: none !important;
+    }
+    [data-mode="quiet"] #writing, [data-mode="quiet"] #snake-section,
+    [data-mode="quiet"] .writing-article, [data-mode="quiet"] .error-state { background: var(--bg) !important; border: 0 !important; }
+    [data-mode="quiet"] .q-nav { background: rgba(255,255,255,0.92); }
+    /* Whitespace does the separating now */
+    [data-mode="quiet"] .work-row { padding-top: clamp(20px, 2.4vw, 32px); padding-bottom: clamp(36px, 4vw, 56px); }
+    [data-mode="quiet"] .t-card { padding-left: 0 !important; padding-right: clamp(32px, 4vw, 64px) !important; }
+    [data-mode="quiet"] .t-grid { gap: 0 clamp(24px, 3vw, 48px); }
+    [data-mode="quiet"] .footer-index { padding-bottom: clamp(40px, 5vw, 64px); }
+    /* Remaining tells: the metrics eyebrow + its rule, the Writing label,
+       arrow circles on CTAs, and the alternating grey bands */
+    [data-mode="quiet"] .dark-section-title,
+    [data-mode="quiet"] .writing-label,
+    [data-mode="quiet"] .writing-subscribe-btn::after,
+    [data-mode="quiet"] .pod-link-btn::after { display: none !important; }
+    [data-mode="quiet"] .dark-section-header { padding-top: 0 !important; }
+    [data-mode="quiet"] #metrics { padding-top: clamp(64px, 8vw, 110px) !important; }
+    [data-mode="quiet"] .writing-subscribe-btn, [data-mode="quiet"] .pod-link-btn { padding-right: 22px !important; }
+    [data-mode="quiet"] #metrics, [data-mode="quiet"] .dark-section-header, [data-mode="quiet"] #ai,
+    [data-mode="quiet"] footer, [data-mode="quiet"] #snake-section, [data-mode="quiet"] #thesis,
+    [data-mode="quiet"] #brands, [data-mode="quiet"] #podcast, [data-mode="quiet"] #testimonials,
+    [data-mode="quiet"] .work-row, [data-mode="quiet"] .work-row:hover { background: var(--bg) !important; }
+
     /* ── Footer index ── */
     .footer-index {
       display: grid;
