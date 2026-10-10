@@ -3466,6 +3466,67 @@
       [data-mode="quiet"] .t-card { padding-left: 0 !important; padding-right: 0 !important; }
     }
 
+    /* ═══════════════════════════════════════════════════════════════
+       Clean · typographic reset to the reference: pure white canvas,
+       near-black heavy display type set tight, and small wide-tracked
+       uppercase captions. Layout untouched; only colour, weight, tracking.
+       ═══════════════════════════════════════════════════════════════ */
+    [data-mode="quiet"] {
+      --bg: #FFFFFF; --surface: #FFFFFF; --surface-alt: #F7F7F8;
+      --text: #111111; --muted: #3A3A3C; --subtle: #6E6E73;
+      --rule: rgba(0,0,0,0.09); --rule-strong: rgba(0,0,0,0.18);
+    }
+    /* Display: heavy, tight, one colour */
+    [data-mode="quiet"] .hero-headline,
+    [data-mode="quiet"] .hl-light, [data-mode="quiet"] .hl-bold,
+    [data-mode="quiet"] .section-title, [data-mode="quiet"] .dark-section-title,
+    [data-mode="quiet"] .ai-m-headline, [data-mode="quiet"] .writing-hero-title,
+    [data-mode="quiet"] .pod-title, [data-mode="quiet"] .about-contact-title,
+    [data-mode="quiet"] .t-header-title, [data-mode="quiet"] .wa-title,
+    [data-mode="quiet"] .m-value, [data-mode="quiet"] .work-result-num,
+    [data-mode="quiet"] .footer-sig {
+      font-weight: 800 !important;
+      letter-spacing: -0.045em;
+      color: var(--text);
+    }
+    [data-mode="quiet"] .hero-headline { line-height: 0.94; }
+    [data-mode="quiet"] .hl-light { color: var(--text); }
+    /* Two-tone titles keep their second line, but in the same weight */
+    [data-mode="quiet"] .about-contact-title .light,
+    [data-mode="quiet"] .t-header-title span,
+    [data-mode="quiet"] .writing-hero-title span,
+    [data-mode="quiet"] .pod-title span { color: var(--subtle); font-weight: 800 !important; }
+    [data-mode="quiet"] .work-title { font-weight: 700 !important; letter-spacing: -0.035em; color: var(--text); }
+    [data-mode="quiet"] .ai-milestone-title { font-weight: 600 !important; letter-spacing: -0.02em; color: var(--text); }
+    [data-mode="quiet"] .footer-sig { color: rgba(0,0,0,0.05); letter-spacing: -0.055em; }
+    /* The hero's second line becomes the tracked caption from the reference */
+    [data-mode="quiet"] .hero-tagline {
+      font-size: 12px !important; line-height: 1.6 !important;
+      letter-spacing: 0.2em !important; text-transform: uppercase;
+      font-weight: 500 !important; color: var(--subtle);
+      margin-top: 6px;
+    }
+    /* Captions: small, wide, uppercase, mid-grey */
+    [data-mode="quiet"] .q-meta-k, [data-mode="quiet"] .q-brands-label,
+    [data-mode="quiet"] .about-section-title, [data-mode="quiet"] .ai-m-tag,
+    [data-mode="quiet"] .t-eyebrow, [data-mode="quiet"] .footer-col-label,
+    [data-mode="quiet"] .work-co, [data-mode="quiet"] .ql-label,
+    [data-mode="quiet"] .pod-stat-label, [data-mode="quiet"] .writing-eyebrow,
+    [data-mode="quiet"] .section-count, [data-mode="quiet"] .work-num {
+      letter-spacing: 0.18em !important; text-transform: uppercase;
+      font-weight: 500 !important; color: var(--subtle) !important;
+    }
+    /* Thesis: black, not grey */
+    [data-mode="quiet"] .thesis-text { color: var(--text); font-weight: 500 !important; letter-spacing: -0.03em; }
+    [data-mode="quiet"] .thesis-text em { font-weight: 800 !important; }
+    /* Body copy a touch darker for the white canvas */
+    [data-mode="quiet"] .about-bio p, [data-mode="quiet"] .t-quote { color: var(--text) !important; font-weight: 400 !important; }
+    [data-mode="quiet"] .work-desc, [data-mode="quiet"] .m-label { color: var(--muted) !important; }
+    /* Buttons and nav stay ink-black on white */
+    [data-mode="quiet"] .q-btn-primary, [data-mode="quiet"] .theme-toggle,
+    [data-mode="quiet"] .theme-toggle.scrolled { background: #111 !important; border-color: #111 !important; }
+    [data-mode="quiet"] .q-nav { background: rgba(255,255,255,0.86); }
+
     /* ── Footer index ── */
     .footer-index {
       display: grid;
