@@ -3602,10 +3602,32 @@
     [data-mode="quiet"] .ai-m-right { padding-top: 0; }
     [data-mode="quiet"] .ai-milestone:first-of-type { padding-top: 0; }
 
-    /* Podcast frame: one even bezel all round, in both modes */
-    .pod-right { padding: 12px !important; border-radius: 26px !important; background: #0E0E12 !important; border: 0 !important; box-sizing: content-box !important; width: calc(100% - 24px); aspect-ratio: 16 / 9 !important; }
-    .pod-right iframe { position: absolute; inset: 12px !important; width: calc(100% - 24px) !important; height: calc(100% - 24px) !important; border-radius: 16px !important; }
-    [data-mode="quiet"] .pod-right { background: #111 !important; box-shadow: none !important; }
+    /* Podcast: a still of the episode, one play affordance. The embed is
+       created on click (user gesture → plays with sound, from 9:00). */
+    .pod-right {
+      padding: 0 !important; border: 0 !important; box-shadow: none !important; background: transparent !important;
+      border-radius: 18px !important; overflow: hidden; aspect-ratio: 16 / 9 !important; box-sizing: border-box !important; width: 100%;
+      align-self: center;
+    }
+    .pod-poster { position: absolute; inset: 0; width: 100%; height: 100%; display: block; padding: 0; margin: 0; border: 0; background: #000; cursor: pointer; }
+    /* The channel thumbnail is loud; the site isn't. Hold it in mono until it plays. */
+    .pod-poster img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(1) contrast(1.05) brightness(0.72); transition: transform 0.8s cubic-bezier(0.32,0.72,0,1), filter 0.5s; }
+    .pod-poster:hover img { filter: grayscale(1) contrast(1.05) brightness(0.82); }
+    [data-mode="quiet"] .pod-poster img { filter: grayscale(1) contrast(1.02) brightness(0.96); }
+    [data-mode="quiet"] .pod-poster:hover img { filter: grayscale(1) contrast(1.02) brightness(1); }
+    .pod-poster:hover img { transform: scale(1.025); }
+    .pod-play-ico {
+      position: absolute; left: 50%; top: 50%; width: 76px; height: 76px; margin: -38px 0 0 -38px;
+      border-radius: 50%; background: rgba(255,255,255,0.96); color: #111;
+      display: flex; align-items: center; justify-content: center; padding-left: 4px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.28);
+      transition: transform 0.4s cubic-bezier(0.34,1.4,0.64,1), background 0.3s;
+    }
+    .pod-poster:hover .pod-play-ico { transform: scale(1.08); }
+    .pod-poster:active .pod-play-ico { transform: scale(0.96); }
+    .pod-right iframe { position: absolute; inset: 0 !important; width: 100% !important; height: 100% !important; border: 0; border-radius: 0 !important; }
+    [data-mode="quiet"] .pod-right { border-radius: 18px !important; }
+    [data-mode="quiet"] .pod-play-ico { background: #111; color: #fff; box-shadow: none; }
 
     /* Clean: sections defined by subtle shifts in hue, not lines */
     [data-mode="quiet"] #hero, [data-mode="quiet"] .q-nav { background: #FFFFFF !important; }
@@ -4051,14 +4073,11 @@
   <!-- Podcast -->
   <section id="podcast">
     <div class="pod-inner">
-      <div class="pod-right">
-        <iframe
-          id="pod-iframe"
-          src="https://www.youtube.com/embed/ojBxx_muPW8?start=540&autoplay=1&mute=1&controls=1&rel=0&modestbranding=1&color=white"
-          title="Beyond the Interface Podcast"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
+      <div class="pod-right" id="pod-media">
+        <button class="pod-poster" id="pod-play" type="button" aria-label="Play the latest episode">
+          <img src="./media/podcast-poster.jpg" alt="" width="1280" height="720" loading="lazy">
+          <span class="pod-play-ico" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></span>
+        </button>
       </div>
       <div class="pod-left">
         <h2 class="pod-title">Beyond the<br/>Interface.</h2>
@@ -4405,6 +4424,21 @@
         }
       });
     });
+
+    // ─── Podcast: load the embed on demand ─────────────────────────
+    (function() {
+      var btn = document.getElementById('pod-play'), host = document.getElementById('pod-media');
+      if (!btn || !host) return;
+      btn.addEventListener('click', function() {
+        var f = document.createElement('iframe');
+        f.id = 'pod-iframe';
+        f.src = 'https://www.youtube.com/embed/ojBxx_muPW8?start=540&autoplay=1&controls=1&rel=0&modestbranding=1&color=white';
+        f.title = 'Beyond the Interface Podcast';
+        f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+        f.setAttribute('allowfullscreen', '');
+        host.replaceChild(f, btn);
+      });
+    })();
 
     // ─── Copy Email ───────────────────────────────────────────────
     function copyEmail() {
