@@ -3943,8 +3943,8 @@
   <!-- About -->
   <section id="about">
     <div class="about-left reveal">
-      <video class="about-video lazy-video" muted playsinline preload="none">
-        <source src="./jay-about-new.mp4" type="video/mp4">
+      <video class="about-video lazy-video" muted playsinline preload="none" data-src-loud="./jay-about-bold.mp4" data-src-quiet="./jay-about-clean.mp4">
+        <source src="./jay-about-bold.mp4" type="video/mp4">
       </video>
       <div class="about-name-overlay">
         <h2 class="about-name">Jay<br/>Tulloch</h2>
@@ -4419,6 +4419,17 @@
         // Mobile browser chrome follows the mode
         var tc = document.getElementById('theme-color');
         if (tc) tc.setAttribute('content', m === 'quiet' ? '#FBFBFD' : '#06060A');
+        // About portrait: a different clip per mode
+        var av = document.querySelector('.about-video');
+        if (av) {
+          av.loop = true; // both clips are short generated loops
+          var want = av.getAttribute(m === 'quiet' ? 'data-src-quiet' : 'data-src-loud');
+          var srcEl = av.querySelector('source');
+          if (want && srcEl && srcEl.getAttribute('src') !== want) {
+            srcEl.setAttribute('src', want);
+            if (av.readyState > 0) { av.load(); av.play().catch(function() {}); }
+          }
+        }
         document.dispatchEvent(new Event('jt-mode-change'));
         if (animate) landHero(m);
       }
