@@ -3864,6 +3864,10 @@
     @media (prefers-reduced-motion: reduce) { .work-row, .t-card { transition: none !important; transform: none !important; } }
   </style>
   <style id="depth-fix">
+    html[data-mode="quiet"] .hero-headline { font-size: clamp(40px, 5.6vw, 92px) !important; line-height: 1.02 !important; letter-spacing: -0.035em !important; }
+    html[data-mode="quiet"] .hero-headline .hl-light, html[data-mode="quiet"] .hero-headline .hl-bold { font-weight: 600 !important; letter-spacing: -0.035em !important; }
+    html[data-mode="quiet"] .hero-headline .hl-light { color: #3A3A3C !important; font-weight: 500 !important; }
+    @media (max-width: 900px) { html[data-mode="quiet"] .hero-headline { font-size: min(7.4vw, 56px) !important; } }
     html[data-mode="quiet"] .about-name-overlay { display: none !important; }
     /* Clean: cards live in a centred column that matches the headings (no %-in-custom-property maths) */
     @media (min-width: 701px) {
