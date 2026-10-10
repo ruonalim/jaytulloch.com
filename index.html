@@ -4055,6 +4055,60 @@
     @media (max-width: 900px) { html[data-mode="quiet"] .hero-text { padding-bottom: 112px !important; } }
     @media (prefers-reduced-motion: reduce) { html:not([data-mode="quiet"]) body::after { display: none; } }
   </style>
+  <style id="toggle-pass">
+    /* ── Mode toggle: the site's signature control, so it reads as one.
+       Solid, inverted against each theme, label always visible, a half-filled
+       disc that swaps sides, and three soft halo pulses after load. ── */
+    .theme-toggle, .theme-toggle.scrolled {
+      height: 50px; padding: 0 22px 0 14px !important; gap: 11px !important;
+      font-size: 13.5px !important; font-weight: 600 !important; letter-spacing: -0.005em !important;
+      text-shadow: none !important; -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+      bottom: max(28px, calc(env(safe-area-inset-bottom, 0px) + 18px));
+      isolation: isolate;
+    }
+    .theme-toggle .t-icon, .theme-toggle.scrolled .t-icon {
+      font-size: 0 !important; line-height: 0; width: 18px; height: 18px; flex: none;
+      border-radius: 50%; border: 1.5px solid currentColor; box-sizing: border-box;
+      position: relative; overflow: hidden; display: inline-block;
+    }
+    .theme-toggle .t-icon::after {
+      content: ''; position: absolute; top: -1px; bottom: -1px; left: -1px; width: calc(50% + 1px);
+      background: currentColor; transition: transform .55s var(--ease-out);
+    }
+    html[data-mode="quiet"] .theme-toggle .t-icon::after { transform: translateX(100%); }
+    .theme-toggle::before {
+      content: ''; position: absolute; inset: -1px; border-radius: inherit; pointer-events: none; z-index: -1;
+      box-shadow: 0 0 0 0 var(--halo);
+      animation: tg-halo 2.4s cubic-bezier(.2,.6,.2,1) 1.4s 3 both;
+    }
+    @keyframes tg-halo {
+      0%   { box-shadow: 0 0 0 0 var(--halo); }
+      70%  { box-shadow: 0 0 0 16px transparent; }
+      100% { box-shadow: 0 0 0 16px transparent; }
+    }
+    /* Bold: a white pill on black */
+    html:not([data-mode="quiet"]) .theme-toggle, html:not([data-mode="quiet"]) .theme-toggle.scrolled {
+      --halo: rgba(255,255,255,.42);
+      background: #fff !important; color: #0A0A0C !important; border: 1px solid #fff !important;
+      box-shadow: 0 1px 2px rgba(0,0,0,.45), 0 18px 44px -12px rgba(0,0,0,.9), 0 0 0 1px rgba(255,255,255,.1), 0 0 0 7px rgba(255,255,255,.05) !important;
+    }
+    html:not([data-mode="quiet"]) .theme-toggle:hover {
+      transform: translateX(-50%) translateY(-2px);
+      box-shadow: 0 1px 2px rgba(0,0,0,.45), 0 24px 56px -14px rgba(0,0,0,.95), 0 0 0 1px rgba(255,255,255,.14), 0 0 0 9px rgba(255,255,255,.07) !important;
+    }
+    /* Clean: a black pill on white */
+    html[data-mode="quiet"] .theme-toggle, html[data-mode="quiet"] .theme-toggle.scrolled {
+      --halo: rgba(17,17,17,.3);
+      background: #111 !important; color: #fff !important; border: 1px solid #111 !important;
+      box-shadow: 0 1px 2px rgba(17,17,17,.3), 0 18px 40px -12px rgba(17,17,17,.55), 0 0 0 7px rgba(17,17,17,.045) !important;
+    }
+    html[data-mode="quiet"] .theme-toggle:hover {
+      transform: translateX(-50%) translateY(-2px);
+      box-shadow: 0 1px 2px rgba(17,17,17,.3), 0 24px 52px -14px rgba(17,17,17,.6), 0 0 0 9px rgba(17,17,17,.06) !important;
+    }
+    .theme-toggle:active { transform: translateX(-50%) scale(.95) !important; }
+    @media (prefers-reduced-motion: reduce) { .theme-toggle::before { animation: none; } }
+  </style>
   <!-- Vercel Web Analytics -->
   <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
   <script defer src="/_vercel/insights/script.js"></script>
