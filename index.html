@@ -4043,6 +4043,17 @@
       html[data-mode="quiet"] .section-title { font-size: clamp(30px, 8.6vw, 40px) !important; }
       html[data-mode="quiet"] .q-btn { height: 46px; }
     }
+    /* Hero subtext never runs full width; CTAs stay side by side on phones */
+    .hero-tagline { max-width: 60% !important; }
+    @media (max-width: 900px) { .hero-tagline { max-width: 68% !important; } }
+    html[data-mode="quiet"] .hero-tagline { max-width: 60% !important; }
+    @media (max-width: 480px) {
+      html[data-mode="quiet"] .q-hero-actions { display: flex !important; flex-wrap: nowrap !important; gap: 10px !important; }
+      html[data-mode="quiet"] .q-hero-actions .q-btn { width: auto !important; flex: 1 1 0; min-width: 0; justify-content: center !important; padding-left: 14px !important; padding-right: 14px !important; font-size: 14px; white-space: nowrap; }
+      html[data-mode="quiet"] .q-hero-actions .q-btn-primary { flex-grow: 1.25; }
+    }
+    /* keep the mode toggle clear of the hero CTAs on phones */
+    @media (max-width: 900px) { html[data-mode="quiet"] .hero-text { padding-bottom: 112px !important; } }
     @media (prefers-reduced-motion: reduce) { html:not([data-mode="quiet"]) body::after { display: none; } }
   </style>
   <!-- Vercel Web Analytics -->
