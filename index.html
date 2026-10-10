@@ -3863,6 +3863,25 @@
     }
     @media (prefers-reduced-motion: reduce) { .work-row, .t-card { transition: none !important; transform: none !important; } }
   </style>
+  <style id="depth-fix">
+    html[data-mode="quiet"] .about-name-overlay { display: none !important; }
+    /* Clean: cards live in a centred column that matches the headings (no %-in-custom-property maths) */
+    @media (min-width: 701px) {
+      html[data-mode="quiet"] .work-row {
+        box-sizing: border-box;
+        width: min(calc(100% - 2 * max(10px, calc(var(--pad) - 40px))), calc(var(--q-max, 1180px) + 80px)) !important;
+        max-width: none !important;
+        margin-left: auto !important; margin-right: auto !important;
+        padding-left: 40px !important; padding-right: 40px !important;
+      }
+      html[data-mode="quiet"] .t-grid {
+        box-sizing: border-box;
+        width: min(calc(100% - 2 * max(10px, calc(var(--pad) - 44px))), calc(var(--q-max, 1180px) + 88px)) !important;
+        margin-left: auto !important; margin-right: auto !important;
+        padding-left: 0 !important; padding-right: 0 !important;
+      }
+    }
+  </style>
   <!-- Vercel Web Analytics -->
   <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
   <script defer src="/_vercel/insights/script.js"></script>
